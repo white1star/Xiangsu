@@ -1,0 +1,7 @@
+[
+  {"id":"ccteg","name":"中国煤科电子采购平台","access":"anonymous","required":true,"line":"煤炭智能干选设备","keywords":["智能干选","干选机","XRT"],"listingUrl":"https://cg.ccteg.cn/cms/channel/ywgg4hw/index.htm"},
+  {"id":"chnenergy","name":"国能e招","access":"anonymous","required":true,"line":"煤炭智能干选设备","keywords":["智能干选","干选机","XRT"],"listingUrl":"https://www.chnenergybidding.com.cn/"},
+  {"id":"zmzb","name":"中煤招标与采购网","access":"anonymous","required":true,"line":"煤炭智能干选设备","keywords":["智能干选","干选机","XRT"],"listingUrl":"https://www.zmzb.com/"},
+  {"id":"gsei","name":"甘肃经济信息网","access":"anonymous","required":true,"line":"煤炭智能干选设备","keywords":["智能干选","干选机","XRT"],"listingUrl":"https://www.gsei.com.cn/"},
+  {"id":"hbcoal","name":"淮北矿业电子招标采购平台","access":"registered","required":false,"line":"煤炭智能干选设备","keywords":["智能干选","干选机"],"listingUrl":"https://zbcg.hbcoal.com/"}
+]
