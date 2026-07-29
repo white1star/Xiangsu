@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "test:sites": "node --test tests/sites-worker.test.mjs",
     "test:weekly": "node --test tests/weekly-run.test.mjs",
+    "test:pages": "node --test tests/github-pages-base.test.mjs",
     "update:intelligence": "node scripts/weekly-run.mjs"
   },
   "dependencies": {
