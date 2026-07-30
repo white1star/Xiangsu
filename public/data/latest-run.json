@@ -12,31 +12,17 @@
     "missing": []
   },
   "bidOpenAudit": {
-    "generatedAt": "2026-07-30T02:55:08.243Z",
+    "generatedAt": "2026-07-30T03:20:13.393Z",
     "today": "2026-07-30",
-    "backfilledOpenDates": 1,
+    "backfilledOpenDates": 0,
     "summary": {
-      "total": 12,
+      "total": 9,
       "opened": 6,
-      "upcoming": 1,
-      "undisclosed": 5,
+      "upcoming": 0,
+      "undisclosed": 3,
       "resultGap": 1
     },
     "entries": [
-      {
-        "title": "坪上煤业TDS智能干选设备技术服务询比采购",
-        "publishDate": "2026-07-24",
-        "bidOpenDate": "2026-08-03",
-        "openStatus": "待开标",
-        "resultGap": false
-      },
-      {
-        "title": "山西潞安环保能源开发股份有限公司漳村煤矿选矸车间2号智能干选机维保项目（第三次）",
-        "publishDate": "2026-07-09",
-        "bidOpenDate": null,
-        "openStatus": "未披露",
-        "resultGap": false
-      },
       {
         "title": "山东黄金矿业（玲珑）有限公司光电智能分选机采购项目招标公告",
         "publishDate": "2026-07-08",
@@ -47,13 +33,6 @@
       {
         "title": "胜利能源坑下干选系统移设改造工程项目（第2次）招标",
         "publishDate": "2026-06-02",
-        "bidOpenDate": null,
-        "openStatus": "未披露",
-        "resultGap": false
-      },
-      {
-        "title": "淮北矿业涡北选煤厂干选机及配件公开招标（第2次）",
-        "publishDate": "2026-05-27",
         "bidOpenDate": null,
         "openStatus": "未披露",
         "resultGap": false
