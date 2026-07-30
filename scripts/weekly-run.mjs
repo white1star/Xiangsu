@@ -6,6 +6,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sourceFile = path.join(root, 'config', 'public-sources.json');
 const dataFile = path.join(root, 'src', 'data', 'intelligence.json');
 const reportFile = path.join(root, 'public', 'data', 'latest-run.json');
+export const MINIMUM_PUBLISH_DATE = '2026-01-01';
 
 export function evaluateCoverage(sources, checks) {
   const required = sources.filter(source => source.required);
@@ -19,6 +20,7 @@ export function validateCandidate(candidate) {
   const missing = required.filter(key => !candidate[key]);
   if (missing.length) return { valid: false, reason: `缺少${missing.join('、')}` };
   if (candidate.sourceAuthority !== 'official') return { valid: false, reason: '缺少官方原文验证，聚合来源只能作为线索' };
+  if (candidate.publishDate < MINIMUM_PUBLISH_DATE) return { valid: false, reason: `发布日期早于${MINIMUM_PUBLISH_DATE}` };
   if (candidate.evidence.replace(/\s/g, '').length < 16) return { valid: false, reason: '原文证据摘录过短' };
   if (!['招标中', '中标候选人', '已中标'].includes(candidate.bidStatus)) return { valid: false, reason: '不是允许入库的招投标状态' };
   return { valid: true };

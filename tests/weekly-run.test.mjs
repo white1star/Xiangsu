@@ -37,6 +37,16 @@ test('accepts a complete official bidding record with traceable evidence', () =>
   assert.equal(result.valid, true);
 });
 
+test('rejects intelligence published before the 2026 scope boundary', () => {
+  const result = validateCandidate({
+    url: 'https://official.example/notice/old', title: '智能干选机中标公告', source: '官方采购平台',
+    publishDate: '2025-12-31', bidStatus: '已中标', sourceAuthority: 'official',
+    evidence: '中标人：某设备有限公司；中标价格：100万元。', evidenceCapturedAt: '2026-01-01T01:00:00Z',
+  });
+  assert.equal(result.valid, false);
+  assert.match(result.reason, /2026-01-01/);
+});
+
 test('merges only evidence-complete bidding candidates and prevents duplicate source links', () => {
   const existing = [{ id: 'old', url: 'https://example.com/a', title: '旧项目' }];
   const candidates = [
