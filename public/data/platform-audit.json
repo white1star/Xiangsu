@@ -1,0 +1,378 @@
+{
+  "checkedAt": "2026-07-30T00:47:25.077Z",
+  "total": 40,
+  "reachable": 31,
+  "unavailable": [
+    "中国华能集团电子商务平台",
+    "中国华电集团电子商务平台",
+    "大唐煤炭电子购销平台",
+    "山东能源集团交易平台",
+    "河南省公共资源交易中心",
+    "河北省公共资源交易服务平台",
+    "甘肃省公共资源交易网",
+    "中国采购与招标网",
+    "付费招标数据库"
+  ],
+  "results": [
+    {
+      "id": "national-ggzy",
+      "name": "全国公共资源交易平台",
+      "access": "anonymous",
+      "entryUrl": "https://www.ggzy.gov.cn/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:46:52.434Z"
+    },
+    {
+      "id": "ceb-public",
+      "name": "中国招标投标公共服务平台",
+      "access": "anonymous",
+      "entryUrl": "https://www.cebpubservice.com/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:46:52.563Z"
+    },
+    {
+      "id": "ccgp",
+      "name": "中国政府采购网",
+      "access": "anonymous",
+      "entryUrl": "https://www.ccgp.gov.cn/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:46:52.728Z"
+    },
+    {
+      "id": "ccteg",
+      "name": "中国煤科电子采购平台",
+      "access": "anonymous",
+      "entryUrl": "https://cg.ccteg.cn/cms/index.htm",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:46:52.846Z"
+    },
+    {
+      "id": "chnenergy",
+      "name": "国能e招",
+      "access": "anonymous",
+      "entryUrl": "https://www.chnenergybidding.com.cn/bidweb/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:46:53.098Z"
+    },
+    {
+      "id": "zmzb",
+      "name": "中煤招标与采购网",
+      "access": "anonymous",
+      "entryUrl": "https://www.zmzb.com/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:46:53.457Z"
+    },
+    {
+      "id": "ego-chinacoal",
+      "name": "中煤易购采购一体化平台",
+      "access": "anonymous",
+      "entryUrl": "https://ego.chinacoal.com/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:46:53.591Z"
+    },
+    {
+      "id": "spic-ebid",
+      "name": "国家电投电能易购招标采购平台",
+      "access": "anonymous",
+      "entryUrl": "https://ebid.espic.com.cn/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:46:53.733Z"
+    },
+    {
+      "id": "powerchina",
+      "name": "中国电建采购招标数智化平台",
+      "access": "anonymous",
+      "entryUrl": "https://bid.powerchina.cn/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:46:53.969Z"
+    },
+    {
+      "id": "ceec",
+      "name": "中国能建电子采购平台",
+      "access": "anonymous",
+      "entryUrl": "https://ec.ceec.net.cn/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:46:54.177Z"
+    },
+    {
+      "id": "huaneng",
+      "name": "中国华能集团电子商务平台",
+      "access": "anonymous",
+      "entryUrl": "https://ec.chng.com.cn/",
+      "status": 412,
+      "reachable": false,
+      "checkedAt": "2026-07-30T00:46:54.451Z"
+    },
+    {
+      "id": "huadian",
+      "name": "中国华电集团电子商务平台",
+      "access": "anonymous",
+      "entryUrl": "https://www.chdtp.com/",
+      "status": 412,
+      "reachable": false,
+      "checkedAt": "2026-07-30T00:46:54.650Z"
+    },
+    {
+      "id": "datang",
+      "name": "中国大唐电子商务平台",
+      "access": "anonymous",
+      "entryUrl": "https://www.cdt-ec.com/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:46:54.779Z"
+    },
+    {
+      "id": "datang-coal",
+      "name": "大唐煤炭电子购销平台",
+      "access": "anonymous",
+      "entryUrl": "https://www.dtrlcg.com/",
+      "reachable": false,
+      "error": "fetch failed",
+      "checkedAt": "2026-07-30T00:46:55.026Z"
+    },
+    {
+      "id": "qin-yuan",
+      "name": "秦源招标电子招标平台（陕煤）",
+      "access": "anonymous",
+      "entryUrl": "https://qyzb.shccmg.com/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:46:57.245Z"
+    },
+    {
+      "id": "shandong-energy",
+      "name": "山东能源集团交易平台",
+      "access": "anonymous",
+      "entryUrl": "https://www.snjtds.com/",
+      "reachable": false,
+      "error": "fetch failed",
+      "checkedAt": "2026-07-30T00:46:57.461Z"
+    },
+    {
+      "id": "shandong-inquiry",
+      "name": "山东能源在线询比价平台",
+      "access": "anonymous",
+      "entryUrl": "https://snxy.minegoods.com/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:46:58.017Z"
+    },
+    {
+      "id": "huaihe",
+      "name": "淮河能源采购网",
+      "access": "anonymous",
+      "entryUrl": "https://www.hhnycg.com/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:46:58.182Z"
+    },
+    {
+      "id": "huaibei",
+      "name": "淮北矿业电子招标采购平台",
+      "access": "anonymous",
+      "entryUrl": "https://zbcg.hbcoal.com/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:46:58.325Z"
+    },
+    {
+      "id": "mtzbw",
+      "name": "中国煤炭招标网",
+      "access": "anonymous",
+      "entryUrl": "https://www.mtzbw.cn/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:47:01.312Z"
+    },
+    {
+      "id": "shanxi-ggzy",
+      "name": "山西省公共资源交易平台",
+      "access": "anonymous",
+      "entryUrl": "https://prec.sxzwfw.gov.cn/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:47:03.351Z"
+    },
+    {
+      "id": "shaanxi-ggzy",
+      "name": "全国公共资源交易平台（陕西省）",
+      "access": "anonymous",
+      "entryUrl": "https://www.sxggzyjy.cn/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:47:03.798Z"
+    },
+    {
+      "id": "inner-mongolia-ggzy",
+      "name": "内蒙古自治区公共资源交易网",
+      "access": "anonymous",
+      "entryUrl": "https://ggzyjy.nmg.gov.cn/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:47:03.960Z"
+    },
+    {
+      "id": "xinjiang-ggzy",
+      "name": "新疆公共资源交易网",
+      "access": "anonymous",
+      "entryUrl": "https://ggzy.xinjiang.gov.cn/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:47:04.365Z"
+    },
+    {
+      "id": "anhui-ggzy",
+      "name": "安徽省公共资源交易集团",
+      "access": "anonymous",
+      "entryUrl": "https://www.ahggzyjy.cn/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:47:04.738Z"
+    },
+    {
+      "id": "shandong-ggzy",
+      "name": "山东省公共资源交易中心",
+      "access": "anonymous",
+      "entryUrl": "https://ggzyjy.shandong.gov.cn/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:47:04.936Z"
+    },
+    {
+      "id": "henan-ggzy",
+      "name": "河南省公共资源交易中心",
+      "access": "anonymous",
+      "entryUrl": "https://hnsggzyjy.henan.gov.cn/",
+      "reachable": false,
+      "error": "fetch failed",
+      "checkedAt": "2026-07-30T00:47:05.175Z"
+    },
+    {
+      "id": "hebei-ggzy",
+      "name": "河北省公共资源交易服务平台",
+      "access": "anonymous",
+      "entryUrl": "https://www.hebpr.cn/",
+      "reachable": false,
+      "error": "fetch failed",
+      "checkedAt": "2026-07-30T00:47:05.490Z"
+    },
+    {
+      "id": "guizhou-ggzy",
+      "name": "贵州省公共资源交易中心",
+      "access": "anonymous",
+      "entryUrl": "https://ggzy.guizhou.gov.cn/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:47:16.065Z"
+    },
+    {
+      "id": "gansu-ggzy",
+      "name": "甘肃省公共资源交易网",
+      "access": "anonymous",
+      "entryUrl": "https://ggzyjy.gansu.gov.cn/",
+      "status": 412,
+      "reachable": false,
+      "checkedAt": "2026-07-30T00:47:16.515Z"
+    },
+    {
+      "id": "ningxia-ggzy",
+      "name": "宁夏回族自治区公共资源交易网",
+      "access": "anonymous",
+      "entryUrl": "https://www.nxggzyjy.org/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:47:16.648Z"
+    },
+    {
+      "id": "heilongjiang-ggzy",
+      "name": "黑龙江省公共资源交易网",
+      "access": "anonymous",
+      "entryUrl": "https://ggzyjyw.hlj.gov.cn/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:47:17.508Z"
+    },
+    {
+      "id": "yunnan-ggzy",
+      "name": "云南省公共资源交易信息网",
+      "access": "anonymous",
+      "entryUrl": "https://ggzy.yn.gov.cn/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:47:17.942Z"
+    },
+    {
+      "id": "sichuan-ggzy",
+      "name": "全国公共资源交易平台（四川省）",
+      "access": "anonymous",
+      "entryUrl": "https://ggzyjy.sc.gov.cn/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:47:18.147Z"
+    },
+    {
+      "id": "liaoning-ggzy",
+      "name": "辽宁省公共资源交易平台",
+      "access": "anonymous",
+      "entryUrl": "https://ggzy.ln.gov.cn/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:47:18.353Z"
+    },
+    {
+      "id": "qinghai-ggzy",
+      "name": "青海省公共资源交易网",
+      "access": "anonymous",
+      "entryUrl": "https://www.qhggzyjy.gov.cn/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:47:18.652Z"
+    },
+    {
+      "id": "qcc",
+      "name": "企查查",
+      "access": "login_required",
+      "entryUrl": "https://www.qcc.com/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:47:19.060Z"
+    },
+    {
+      "id": "tianyancha",
+      "name": "天眼查",
+      "access": "login_required",
+      "entryUrl": "https://www.tianyancha.com/",
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-07-30T00:47:19.286Z"
+    },
+    {
+      "id": "chinabidding-commercial",
+      "name": "中国采购与招标网",
+      "access": "login_required",
+      "entryUrl": "https://www.chinabidding.com/",
+      "status": 521,
+      "reachable": false,
+      "checkedAt": "2026-07-30T00:47:19.484Z"
+    },
+    {
+      "id": "bid-database",
+      "name": "付费招标数据库",
+      "access": "login_required",
+      "entryUrl": "https://www.ztb8.com/",
+      "reachable": false,
+      "error": "fetch failed",
+      "checkedAt": "2026-07-30T00:47:19.568Z"
+    }
+  ]
+}

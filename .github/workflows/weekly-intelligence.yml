@@ -20,12 +20,15 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run test:weekly
+      - run: npm run test:platforms
+      - name: 复审平台入口可达性
+        run: npm run audit:platforms
       - name: 抓取匿名公开来源并执行覆盖率校验
         run: npm run update:intelligence
       - name: 提交本周台账与抓取报告
         run: |
           git config user.name "pixel-intelligence-bot"
           git config user.email "pixel-intelligence-bot@users.noreply.github.com"
-          git add src/data/intelligence.json public/data/latest-run.json
+          git add src/data/intelligence.json public/data/latest-run.json public/data/platform-audit.json
           git diff --cached --quiet || git commit -m "data: weekly intelligence update"
           git push
