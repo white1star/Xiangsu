@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-30T04:31:52.275Z",
+  "generatedAt": "2026-07-30T05:42:06.778Z",
   "mode": "backfill",
   "window": {
     "from": "2026-01-01",
@@ -12,14 +12,14 @@
     "missing": []
   },
   "bidOpenAudit": {
-    "generatedAt": "2026-07-30T04:31:52.275Z",
+    "generatedAt": "2026-07-30T05:42:06.778Z",
     "today": "2026-07-30",
     "backfilledOpenDates": 0,
     "summary": {
-      "total": 9,
+      "total": 11,
       "opened": 6,
       "upcoming": 0,
-      "undisclosed": 3,
+      "undisclosed": 5,
       "resultGap": 1
     },
     "entries": [
@@ -29,6 +29,13 @@
         "bidOpenDate": "2026-07-28",
         "openStatus": "已开标",
         "resultGap": true
+      },
+      {
+        "title": "铁煤集团2026年度第98批集中招标（智能选矸系统、集成供液系统）招标公告",
+        "publishDate": "2026-06-25",
+        "bidOpenDate": null,
+        "openStatus": "未披露",
+        "resultGap": false
       },
       {
         "title": "胜利能源坑下干选系统移设改造工程项目（第2次）招标",
@@ -85,6 +92,13 @@
         "bidOpenDate": null,
         "openStatus": "未披露",
         "resultGap": false
+      },
+      {
+        "title": "【华能煤业公司华亭煤业公司山寨煤矿末煤干选设备租赁委外运营（框架协议3年）】招标公告",
+        "publishDate": "2026-04-26",
+        "bidOpenDate": null,
+        "openStatus": "未披露",
+        "resultGap": false
       }
     ]
   },
@@ -93,12 +107,12 @@
       "id": "national-ggzy",
       "name": "全国公共资源交易平台",
       "status": "ok",
-      "pagesScanned": 6,
-      "discovered": 64,
-      "accepted": 0,
+      "pagesScanned": 18,
+      "discovered": 77,
+      "accepted": 2,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-07-30T04:30:08.888Z"
+      "checkedAt": "2026-07-30T05:40:20.954Z"
     },
     {
       "id": "ccteg-goods",
@@ -109,7 +123,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-07-30T04:31:17.528Z"
+      "checkedAt": "2026-07-30T05:41:08.594Z"
     },
     {
       "id": "ccteg-all",
@@ -120,7 +134,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-07-30T04:31:26.608Z"
+      "checkedAt": "2026-07-30T05:41:17.861Z"
     },
     {
       "id": "gsei-results",
@@ -131,7 +145,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-07-30T04:31:37.781Z"
+      "checkedAt": "2026-07-30T05:41:29.130Z"
     },
     {
       "id": "chnenergy-home",
@@ -144,7 +158,7 @@
       "notes": [
         "栏目列表页需 JS 渲染（直接访问 404），当前仅能扫描入口页最新公告；深页覆盖待接入授权采集。"
       ],
-      "checkedAt": "2026-07-30T04:31:43.658Z"
+      "checkedAt": "2026-07-30T05:41:34.460Z"
     },
     {
       "id": "zmzb-home",
@@ -157,7 +171,7 @@
       "notes": [
         "首页含大量最新公告链接，可匿名浅扫；栏目分页地址探测 500，暂无法深扫。"
       ],
-      "checkedAt": "2026-07-30T04:31:44.113Z"
+      "checkedAt": "2026-07-30T05:41:34.755Z"
     },
     {
       "id": "mtzbw-leads",
@@ -170,7 +184,7 @@
       "notes": [
         "行业聚合站，只产出待复核线索，必须反查官方原文后才能入高置信台账。"
       ],
-      "checkedAt": "2026-07-30T04:31:48.706Z"
+      "checkedAt": "2026-07-30T05:41:39.032Z"
     },
     {
       "id": "ccgp-search",
@@ -181,7 +195,7 @@
       "accepted": 0,
       "failReason": "平台反爬拦截（频繁访问/验证提示），未绕过，等待下次重试",
       "notes": [],
-      "checkedAt": "2026-07-30T04:31:49.947Z"
+      "checkedAt": "2026-07-30T05:41:41.624Z"
     }
   ],
   "coveredByNational": [
@@ -203,11 +217,12 @@
     "qinghai-ggzy"
   ],
   "totals": {
-    "discovered": 64,
-    "accepted": 0,
-    "acceptedWithAmount": 0,
+    "discovered": 77,
+    "accepted": 2,
+    "acceptedWithAmount": 1,
     "pendingReviewAdded": 0,
-    "rejected": 45
+    "rejected": 55,
+    "reEnriched": 31
   },
   "rejected": [
     {
@@ -477,6 +492,66 @@
     {
       "title": "（谈判采购）【西南院眉山公司催化剂视屏智能分选项目/0747-2660SCCZK020】采购公告",
       "url": "https://www.ggzy.gov.cn/information/deal/html/b/0067/0101/20260224/0067af1ca5cd834c4707bfab66f9e9f565cf.html",
+      "source": "全国公共资源交易平台（央企招投标）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "雷波县小沟磷矿采选工程光电分选机（第二次） (项目名称)设备采购光电分选机标段定标结果公示",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/510000/0104/20260429/00514415f600c48b4c4ea43e9b83d01ac35e.html",
+      "source": "全国公共资源交易平台（四川省公共资源电子招投标交易平台）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "雷波县小沟磷矿采选工程光电分选机（第二次） (项目名称)设备采购光电分选机标段",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/510000/0104/20260424/005189fcfe3fa79a4a1f9954858b6d2c4de2.html",
+      "source": "全国公共资源交易平台（四川省公共资源电子招投标交易平台）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "雷波县小沟磷矿采选工程光电分选机（第二次） (项目名称)设备采购光电分选机标段",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/510000/0104/20260424/0051dd67d2cb770c4c7ab045778f9ecb1aa5.html",
+      "source": "全国公共资源交易平台（四川省公共资源电子招投标交易平台）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "雷波县小沟磷矿采选工程光电分选机（第二次）光电分选机开标记录",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/510000/0102/20260422/0051ca51fb63711942e58b8be1a800d60493.html",
+      "source": "全国公共资源交易平台（四川省公共资源电子招投标交易平台）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "雷波县小沟磷矿采选工程光电分选机（第二次）的招标文件",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/510000/0105/20260410/00511fedc186b8e7476ab301d94def127618.html",
+      "source": "全国公共资源交易平台（四川省公共资源电子招投标交易平台）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "雷波县小沟磷矿采选工程光电分选机（第二次）",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/510000/0101/20260401/00515ae40106f83d4895966d7fc128f050fa.html",
+      "source": "全国公共资源交易平台（四川省公共资源电子招投标交易平台）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "雷波县小沟磷矿采选工程（光电分选机）",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/510000/0104/20260331/005129e4fced4b9846efbcbf03a9beb43d1d.html",
+      "source": "全国公共资源交易平台（四川省公共资源电子招投标交易平台）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "雷波县小沟磷矿采选工程光电分选机光电分选机开标记录",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/510000/0102/20260330/0051f9ff1a45fda84c2b8252f6fd4f4d1743.html",
+      "source": "全国公共资源交易平台（四川省公共资源电子招投标交易平台）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "雷波县小沟磷矿采选工程光电分选机",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/510000/0101/20260309/00511cf9ae48aa94459da7896176313606dc.html",
+      "source": "全国公共资源交易平台（四川省公共资源电子招投标交易平台）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "中铝物资有限公司河南分公司中铝郑州有色金属研究院有限公司2025年再生铝保级回收工业试验项目LIBS光电分选仪设备采购",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/0067/0102/20260121/0067d4dbd17ae78943728b59c7acafbd4e9a.html",
       "source": "全国公共资源交易平台（央企招投标）",
       "reason": "与两类设备无关或命中排除规则"
     }

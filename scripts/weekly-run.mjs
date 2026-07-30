@@ -56,6 +56,9 @@ export function mergeCandidates(existing, candidates) {
       competitor: candidate.competitor || '未披露',
       region: candidate.region || '待核实',
       amount: candidate.amount || '未披露',
+      budget: candidate.budget || null,
+      buyer: candidate.buyer || null,
+      procurement: candidate.procurement || null,
       bidOpenDate: candidate.bidOpenDate || null,
       bid: candidate.bidStatus,
       bidStatus: candidate.bidStatus,
@@ -136,6 +139,33 @@ async function backfillBidOpenDates(records, limit = 30) {
   return done;
 }
 
+// 对台账中字段缺失（尤其金额/中标单位未披露、或招标公告缺预算/采购人）的已有记录，
+// 用增强后的详情抽取逻辑重新抓取官方原文补全，最大化减少“未披露”。
+async function reEnrichUndisclosed(records, limit = 80) {
+  let done = 0;
+  for (const r of records) {
+    if (done >= limit) break;
+    const needsAmount = !r.amount || r.amount === '未披露';
+    const needsBudget = !r.budget;
+    const needsComp = (!r.competitor || r.competitor === '未披露') && (r.bid === '中标候选人' || r.bid === '已中标');
+    const needsBuyer = !r.buyer;
+    const needsProc = !r.procurement;
+    if (!r.url || (!needsAmount && !needsBudget && !needsComp && !needsBuyer && !needsProc)) continue;
+    try {
+      const cand = await enrichFromOfficialDetail({ url: r.url, bidStatus: r.bid, line: r.line }, r.url);
+      if (cand.amount && cand.amount !== '未披露' && (!r.amount || r.amount === '未披露')) r.amount = cand.amount;
+      if (cand.budget && !r.budget) r.budget = cand.budget;
+      if (cand.competitor && cand.competitor !== '未披露' && (!r.competitor || r.competitor === '未披露')) r.competitor = cand.competitor;
+      if (cand.buyer && !r.buyer) r.buyer = cand.buyer;
+      if (cand.procurement && !r.procurement) r.procurement = cand.procurement;
+      if (cand.bidOpenDate && !r.bidOpenDate) r.bidOpenDate = cand.bidOpenDate;
+    } catch { /* 抓取失败保留原值 */ }
+    done += 1;
+    await sleep(600);
+  }
+  return done;
+}
+
 async function readJson(file, fallback) {
   try { return JSON.parse(await readFile(file, 'utf8')); } catch { return fallback; }
 }
@@ -145,7 +175,7 @@ async function runRule(rule, window, mode) {
   const adapter = ADAPTERS[rule.adapter];
   if (!adapter) return { sourceId: rule.id, name: rule.name, status: 'failed', checkedAt: startedAt, error: `未知适配器 ${rule.adapter}`, pagesScanned: 0, discovered: 0, candidates: [], notes: [] };
   try {
-    const limits = mode === 'backfill' ? { maxPages: rule.maxPages ?? 10, maxDetails: 120 } : { maxPages: Math.min(rule.maxPages ?? 3, 3), maxDetails: 30 };
+    const limits = mode === 'backfill' ? { maxPages: rule.maxPages ?? 10, maxDetails: 250 } : { maxPages: Math.min(rule.maxPages ?? 3, 3), maxDetails: 30 };
     const output = await adapter(rule, window, limits);
     return { sourceId: rule.id, name: rule.name, status: 'ok', checkedAt: startedAt, pagesScanned: output.pagesScanned, discovered: output.discovered, candidates: output.candidates, notes: output.notes || [] };
   } catch (error) {
@@ -188,6 +218,8 @@ async function main() {
 
   // 核对开标日期：补全缺失开标日期并派生“已开标/待开标”状态。
   const backfilled = await backfillBidOpenDates(merged.records);
+  // 对已有记录用增强后的抽取逻辑重新补全未披露字段（金额/预算/采购人/采购内容/中标单位）。
+  const reEnriched = await reEnrichUndisclosed(merged.records);
   const audited = auditBidOpen(merged.records, window.to);
   merged.records = audited.records;
 
@@ -227,6 +259,7 @@ async function main() {
       acceptedWithAmount: merged.added.filter(record => record.amount && record.amount !== '未披露').length,
       pendingReviewAdded: pending.added.length,
       rejected: allRejected.length,
+      reEnriched,
     },
     rejected: allRejected,
   };

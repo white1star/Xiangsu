@@ -93,7 +93,61 @@ export function extractWinner(text) {
   return null;
 }
 
-// 从招标公告原文抽取“开标时间/开标日期”。优先“开标时间/开标日期”锚点，
+// 抽取招标阶段的预算/控制价/最高限价（与成交价区分，单独成字段）。
+export function extractBudget(text) {
+  if (!text) return null;
+  const patterns = [
+    [/(?:招标控制价|控制价|最高投标限价|最高限价|投标最高限价|拦标价)[^。；：\n]{0,16}?(?:价格?|金额|总价)?[（(]?[^：:为\d]{0,8}[：:为]?\s*(?:人民币|￥|¥)?\s*([\d,，]+(?:\.\d+)?)\s*(万元|元)/, 2],
+    [/(?:采购预算|预算金额|项目预算|预算价|预算)[^。；：\n]{0,12}?(?:价格?|金额|总价)?[（(]?[^：:为\d]{0,8}[：:为]?\s*(?:人民币|￥|¥)?\s*([\d,，]+(?:\.\d+)?)\s*(万元|元)/, 2],
+    [/(?:控制价|最高限价|预算)[：:为]\s*(?:人民币|￥|¥)?\s*([\d,，]{4,}(?:\.\d+)?)\s*(万元|元)/, 2],
+  ];
+  for (const [pattern, unitIndex] of patterns) {
+    const match = text.match(pattern);
+    if (!match) continue;
+    const value = Number(match[1].replace(/[,，]/g, ''));
+    if (!Number.isFinite(value) || value <= 0) continue;
+    const unit = unitIndex ? match[unitIndex] : '元';
+    if (unit === '元' && value < 10000) continue;
+    const wan = unit === '万元' ? value : value / 10000;
+    return { display: `${wan.toFixed(2)}万元`, raw: match[0].slice(0, 80) };
+  }
+  return null;
+}
+
+// 抽取招标人/采购人/建设单位（招标公告中的采购方）。
+export function extractBuyer(text) {
+  if (!text) return null;
+  const patterns = [
+    /(?:招标人|采购人|建设单位)[^。；\n]{0,4}?[：:为]\s*([^，。；、\s<]{4,42}?(?:公司|集团|厂|研究院|研究所|中心|局|矿|能源|煤业|矿业|有限责任公司|股份有限公司))/,
+    /(招标人|采购人|建设单位)[^。；\n]{0,4}?\s*([^，。；、\s<]{4,42}?(?:公司|集团|厂|研究院|研究所|中心|局|矿|能源|煤业|矿业|有限责任公司|股份有限公司))/,
+    /([^，。；、\s<]{4,42}?(?:招标有限责任公司|咨询有限公司|采购代理机构))/,
+  ];
+  for (const pattern of patterns) {
+    const match = text.match(pattern);
+    if (!match) continue;
+    const name = (match[2] || match[1]).replace(/^(?:招标人|采购人|建设单位)[*＊：:]?/, '').trim();
+    if (name.length >= 4) return name;
+  }
+  return null;
+}
+
+// 抽取采购内容/设备型号/数量摘要（如“采购N台智能干选机”）。
+export function extractProcurement(text) {
+  if (!text) return null;
+  const patterns = [
+    /(?:采购内容|采购范围|招标范围|建设内容|项目内容)[^。；\n]{0,6}?[：:为]?\s*([^。；\n]{4,120}?(?:智能干选|干选机|XRT|分选机|选矸|分选系统|干选系统|干选设备)[^。；\n]{0,40})/,
+    /([^。；\n]{0,30}?(?:智能干选|干选机|XRT|分选机|选矸|智能分选系统|干选系统)[^。；\n]{0,60})/,
+  ];
+  for (const pattern of patterns) {
+    const match = text.match(pattern);
+    if (!match) continue;
+    const s = (match[1] || '').trim();
+    if (s.length >= 6) return s.slice(0, 120);
+  }
+  return null;
+}
+
+// 从招标公告原文抽取"开标时间/开标日期"。优先"开标时间/开标日期"锚点，
 // 兜底“投标/投标文件递交截止时间”。归一到 YYYY-MM-DD（忽略时分）。
 export function extractBidOpenDate(text) {
   if (!text) return null;
@@ -189,16 +243,26 @@ export async function enrichFromOfficialDetail(candidate, detailUrl) {
     const body = htmlToText(text);
     candidate.evidence = excerptEvidence(body);
     candidate.evidenceCapturedAt = new Date().toISOString();
-    // 金额与供应商只在结果类公告中提取，避免把招标阶段的控制价/保证金误当成交金额。
+    // 无论招标/结果，都尽力抽取预算、采购人、采购内容，减少“未披露”。
+    const amount = extractAmount(body);
+    const budget = extractBudget(body);
+    const buyer = extractBuyer(body);
+    const procurement = extractProcurement(body);
     if (candidate.bidStatus === '已中标' || candidate.bidStatus === '中标候选人') {
-      const amount = extractAmount(body);
-      const winner = extractWinner(body);
+      // 结果类优先填成交价；拿不到成交价但有控制价时回退，避免空着。
       if (amount) candidate.amount = amount.display;
+      else if (budget) candidate.amount = budget.display;
+      const winner = extractWinner(body);
       if (winner) candidate.competitor = candidate.bidStatus === '中标候选人' ? `${winner}（第一候选人）` : winner;
     } else if (candidate.bidStatus === '招标公告') {
-      // 招标公告：抽取开标日期，用于与当前日期核对（已开标/待开标）。
+      // 招标公告无成交价，金额填控制价/预算（若有），并抽取开标日期。
+      if (amount) candidate.amount = amount.display;
+      else if (budget) candidate.amount = budget.display;
       candidate.bidOpenDate = extractBidOpenDate(body) || null;
     }
+    if (budget) candidate.budget = budget.display;
+    if (buyer) candidate.buyer = buyer;
+    if (procurement) candidate.procurement = procurement;
     return candidate;
   } catch {
     return candidate;

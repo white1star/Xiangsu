@@ -8,9 +8,9 @@
     "required": true,
     "entryUrl": "https://www.ggzy.gov.cn/",
     "searchEndpoint": "https://www.ggzy.gov.cn/information/pubTradingInfo/getTradList",
-    "keywords": ["智能干选", "干选机", "XRT", "智能分选", "X射线分选"],
+    "keywords": ["智能干选", "干选机", "XRT", "智能分选", "X射线分选", "智能选矸", "选矸", "矿石分选", "光电分选", "干选系统", "XRT分选", "射线智能分选", "矿石智能分选", "光电分选机", "X射线智能分选", "干选设备", "智能干选系统"],
     "columns": "交易公开检索（招标/资审公告、交易结果公示等全部类型）",
-    "maxPages": 5,
+    "maxPages": 10,
     "coverNote": "国家级官方检索接口，按关键词×时间窗×分页扫描；命中记录回取 /html/b/ 官方全文提取金额与中标人。",
     "covers": ["shanxi-ggzy", "shaanxi-ggzy", "inner-mongolia-ggzy", "xinjiang-ggzy", "anhui-ggzy", "shandong-ggzy", "henan-ggzy", "hebei-ggzy", "guizhou-ggzy", "gansu-ggzy", "ningxia-ggzy", "heilongjiang-ggzy", "yunnan-ggzy", "sichuan-ggzy", "liaoning-ggzy", "qinghai-ggzy"]
   },
