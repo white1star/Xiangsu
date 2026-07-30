@@ -14,16 +14,25 @@ export function evaluateCoverage(sources, checks) {
   return { publishable: missing.length === 0, checked: successful.size, required: required.length, missing };
 }
 
+export function validateCandidate(candidate) {
+  const required = ['url', 'title', 'source', 'publishDate', 'bidStatus', 'evidence', 'evidenceCapturedAt'];
+  const missing = required.filter(key => !candidate[key]);
+  if (missing.length) return { valid: false, reason: `缺少${missing.join('、')}` };
+  if (candidate.sourceAuthority !== 'official') return { valid: false, reason: '缺少官方原文验证，聚合来源只能作为线索' };
+  if (candidate.evidence.replace(/\s/g, '').length < 16) return { valid: false, reason: '原文证据摘录过短' };
+  if (!['招标中', '中标候选人', '已中标'].includes(candidate.bidStatus)) return { valid: false, reason: '不是允许入库的招投标状态' };
+  return { valid: true };
+}
+
 export function mergeCandidates(existing, candidates) {
   const knownUrls = new Set(existing.map(record => record.url));
   const added = []; const rejected = [];
   for (const candidate of candidates) {
-    if (!candidate.url || !candidate.title || !candidate.source || !candidate.publishDate || !candidate.bidStatus) {
-      rejected.push({ ...candidate, reason: '缺少原始链接、标题、来源、发布日期或中标情况' }); continue;
-    }
+    const validation = validateCandidate(candidate);
+    if (!validation.valid) { rejected.push({ ...candidate, reason: validation.reason }); continue; }
     if (knownUrls.has(candidate.url)) continue;
     knownUrls.add(candidate.url);
-    added.push({ id: `auto-${Buffer.from(candidate.url).toString('base64url').slice(0, 14)}`, line: candidate.line || '待核实', competitor: candidate.competitor || '待核实', region: candidate.region || '待核实', amount: candidate.amount || '未披露', confidence: '中', evidence: '自动发现，待人工复核原文。', ...candidate, date: candidate.publishDate });
+    added.push({ id: `auto-${Buffer.from(candidate.url).toString('base64url').slice(0, 14)}`, line: candidate.line || '待核实', competitor: candidate.competitor || '待核实', region: candidate.region || '待核实', amount: candidate.amount || '未披露', confidence: '高', ...candidate, date: candidate.publishDate });
   }
   return { records: [...existing, ...added], added, rejected };
 }
