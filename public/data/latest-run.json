@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-30T05:42:06.778Z",
+  "generatedAt": "2026-07-30T06:15:17.690Z",
   "mode": "backfill",
   "window": {
     "from": "2026-01-01",
@@ -12,7 +12,7 @@
     "missing": []
   },
   "bidOpenAudit": {
-    "generatedAt": "2026-07-30T05:42:06.778Z",
+    "generatedAt": "2026-07-30T06:15:17.690Z",
     "today": "2026-07-30",
     "backfilledOpenDates": 0,
     "summary": {
@@ -73,6 +73,13 @@
         "resultGap": false
       },
       {
+        "title": "【华能煤业公司华亭煤业公司山寨煤矿末煤干选设备租赁委外运营（框架协议3年）】招标公告",
+        "publishDate": "2026-04-26",
+        "bidOpenDate": null,
+        "openStatus": "未披露",
+        "resultGap": false
+      },
+      {
         "title": "甘肃省景泰县安家岭能源有限公司郭家台二号煤矿选煤厂TDS智能干选机设备采购项目招标公告",
         "publishDate": "2026-04-17",
         "bidOpenDate": "2026-05-11",
@@ -92,13 +99,6 @@
         "bidOpenDate": null,
         "openStatus": "未披露",
         "resultGap": false
-      },
-      {
-        "title": "【华能煤业公司华亭煤业公司山寨煤矿末煤干选设备租赁委外运营（框架协议3年）】招标公告",
-        "publishDate": "2026-04-26",
-        "bidOpenDate": null,
-        "openStatus": "未披露",
-        "resultGap": false
       }
     ]
   },
@@ -109,10 +109,10 @@
       "status": "ok",
       "pagesScanned": 18,
       "discovered": 77,
-      "accepted": 2,
+      "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-07-30T05:40:20.954Z"
+      "checkedAt": "2026-07-30T06:13:32.825Z"
     },
     {
       "id": "ccteg-goods",
@@ -123,7 +123,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-07-30T05:41:08.594Z"
+      "checkedAt": "2026-07-30T06:14:16.242Z"
     },
     {
       "id": "ccteg-all",
@@ -134,7 +134,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-07-30T05:41:17.861Z"
+      "checkedAt": "2026-07-30T06:14:25.821Z"
     },
     {
       "id": "gsei-results",
@@ -145,33 +145,29 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-07-30T05:41:29.130Z"
+      "checkedAt": "2026-07-30T06:14:37.185Z"
     },
     {
-      "id": "chnenergy-home",
-      "name": "国能e招（入口页浅扫）",
+      "id": "chnenergy-zbgg",
+      "name": "国能e招（招标公告栏目）",
       "status": "ok",
       "pagesScanned": 1,
       "discovered": 0,
       "accepted": 0,
       "failReason": null,
-      "notes": [
-        "栏目列表页需 JS 渲染（直接访问 404），当前仅能扫描入口页最新公告；深页覆盖待接入授权采集。"
-      ],
-      "checkedAt": "2026-07-30T05:41:34.460Z"
+      "notes": [],
+      "checkedAt": "2026-07-30T06:14:42.741Z"
     },
     {
-      "id": "zmzb-home",
-      "name": "中煤招标与采购网（入口页浅扫）",
+      "id": "zmzb-hw",
+      "name": "中煤招标与采购网（货物招标栏目）",
       "status": "ok",
-      "pagesScanned": 1,
+      "pagesScanned": 3,
       "discovered": 0,
       "accepted": 0,
       "failReason": null,
-      "notes": [
-        "首页含大量最新公告链接，可匿名浅扫；栏目分页地址探测 500，暂无法深扫。"
-      ],
-      "checkedAt": "2026-07-30T05:41:34.755Z"
+      "notes": [],
+      "checkedAt": "2026-07-30T06:14:45.019Z"
     },
     {
       "id": "mtzbw-leads",
@@ -184,7 +180,7 @@
       "notes": [
         "行业聚合站，只产出待复核线索，必须反查官方原文后才能入高置信台账。"
       ],
-      "checkedAt": "2026-07-30T05:41:39.032Z"
+      "checkedAt": "2026-07-30T06:14:49.522Z"
     },
     {
       "id": "ccgp-search",
@@ -195,7 +191,7 @@
       "accepted": 0,
       "failReason": "平台反爬拦截（频繁访问/验证提示），未绕过，等待下次重试",
       "notes": [],
-      "checkedAt": "2026-07-30T05:41:41.624Z"
+      "checkedAt": "2026-07-30T06:14:51.310Z"
     }
   ],
   "coveredByNational": [
@@ -218,8 +214,8 @@
   ],
   "totals": {
     "discovered": 77,
-    "accepted": 2,
-    "acceptedWithAmount": 1,
+    "accepted": 0,
+    "acceptedWithAmount": 0,
     "pendingReviewAdded": 0,
     "rejected": 55,
     "reEnriched": 31
