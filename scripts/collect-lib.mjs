@@ -43,7 +43,7 @@ export function mapBidStatus(title, typeText = '') {
   if (/招标文件|资格预审文件|澄清|答疑|开标记录|开标一览/.test(title)) return null;
   if (/候选人/.test(text)) return '中标候选人';
   if (/中标(结果|公告|公示)|成交(结果|公告|公示)|结果(公示|公告)|直接采购[^，。]{0,12}公示|单一来源[^，。]{0,12}(公示|结果)/.test(text)) return '已中标';
-  if (/招标|采购公告|询价|询比|竞争性谈判|竞价|磋商|比选|征集/.test(text)) return '招标中';
+  if (/招标|采购公告|询价|询比|竞争性谈判|竞价|磋商|比选|征集/.test(text)) return '招标公告';
   return null;
 }
 

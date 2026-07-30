@@ -1,7 +1,7 @@
 {
   "national-ggzy": {
     "name": "全国公共资源交易平台",
-    "lastScanAt": "2026-07-30T01:55:59.682Z",
+    "lastScanAt": "2026-07-30T02:29:58.803Z",
     "lastStatus": "ok",
     "pagesScanned": 6,
     "discovered": 64,
@@ -10,7 +10,7 @@
   },
   "ccteg-goods": {
     "name": "中国煤科电子采购平台",
-    "lastScanAt": "2026-07-30T01:56:22.532Z",
+    "lastScanAt": "2026-07-30T02:30:45.357Z",
     "lastStatus": "ok",
     "pagesScanned": 6,
     "discovered": 0,
@@ -19,7 +19,7 @@
   },
   "ccteg-all": {
     "name": "中国煤科电子采购平台（全部结果公告）",
-    "lastScanAt": "2026-07-30T01:56:31.133Z",
+    "lastScanAt": "2026-07-30T02:30:54.101Z",
     "lastStatus": "ok",
     "pagesScanned": 8,
     "discovered": 0,
@@ -28,7 +28,7 @@
   },
   "gsei-results": {
     "name": "甘肃经济信息网（中标结果栏目）",
-    "lastScanAt": "2026-07-30T01:56:42.150Z",
+    "lastScanAt": "2026-07-30T02:31:04.990Z",
     "lastStatus": "ok",
     "pagesScanned": 6,
     "discovered": 1,
@@ -37,7 +37,7 @@
   },
   "chnenergy-home": {
     "name": "国能e招（入口页浅扫）",
-    "lastScanAt": "2026-07-30T01:56:48.128Z",
+    "lastScanAt": "2026-07-30T02:31:11.167Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -48,7 +48,7 @@
   },
   "zmzb-home": {
     "name": "中煤招标与采购网（入口页浅扫）",
-    "lastScanAt": "2026-07-30T01:56:48.613Z",
+    "lastScanAt": "2026-07-30T02:31:11.577Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -59,7 +59,7 @@
   },
   "mtzbw-leads": {
     "name": "中国煤炭招标网（聚合线索）",
-    "lastScanAt": "2026-07-30T01:56:52.838Z",
+    "lastScanAt": "2026-07-30T02:31:16.222Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -70,7 +70,7 @@
   },
   "ccgp-search": {
     "name": "中国政府采购网",
-    "lastScanAt": "2026-07-30T01:56:54.097Z",
+    "lastScanAt": "2026-07-30T02:31:17.598Z",
     "lastStatus": "failed",
     "pagesScanned": 0,
     "discovered": 0,

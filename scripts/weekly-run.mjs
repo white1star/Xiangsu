@@ -34,7 +34,7 @@ export function validateCandidate(candidate) {
   if (candidate.sourceAuthority !== 'official') return { valid: false, reason: '缺少官方原文验证，聚合来源只能作为线索' };
   if (candidate.publishDate < MINIMUM_PUBLISH_DATE) return { valid: false, reason: `发布日期早于${MINIMUM_PUBLISH_DATE}` };
   if (candidate.evidence.replace(/\s/g, '').length < 16) return { valid: false, reason: '原文证据摘录过短' };
-  if (!['招标中', '中标候选人', '已中标'].includes(candidate.bidStatus)) return { valid: false, reason: '不是允许入库的招投标状态' };
+  if (!['招标公告', '中标候选人', '已中标'].includes(candidate.bidStatus)) return { valid: false, reason: '不是允许入库的招投标状态' };
   if (!candidate.line) return { valid: false, reason: '与XRT矿石分选/煤炭智能干选设备无关' };
   return { valid: true };
 }
@@ -53,7 +53,7 @@ export function mergeCandidates(existing, candidates) {
       id: `auto-${Buffer.from(candidate.url).toString('base64url').slice(0, 14)}`,
       title: candidate.title,
       line: candidate.line || '待核实',
-      competitor: candidate.competitor || (candidate.bidStatus === '招标中' ? '待开标' : '未披露'),
+      competitor: candidate.competitor || '未披露',
       region: candidate.region || '待核实',
       amount: candidate.amount || '未披露',
       bid: candidate.bidStatus,

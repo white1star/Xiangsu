@@ -23,7 +23,7 @@ test('mapBidStatus prioritises result notices and rejects failed tenders', () =>
   assert.equal(mapBidStatus('智能干选机采购项目中标候选人公示'), '中标候选人');
   assert.equal(mapBidStatus('智能干选机采购项目中标结果公告'), '已中标');
   assert.equal(mapBidStatus('TDS智能干选机配件直接采购公示'), '已中标');
-  assert.equal(mapBidStatus('智能干选机维保技术服务询比采购公告'), '招标中');
+  assert.equal(mapBidStatus('智能干选机维保技术服务询比采购公告'), '招标公告');
   assert.equal(mapBidStatus('智能干选机采购项目流标公告'), null);
   assert.equal(mapBidStatus('智能干选机第一标段招标文件[20260511]'), null, '招标文件附件不入台账');
   assert.equal(mapBidStatus('TDS智能干选机设备采购项目开标记录'), null);

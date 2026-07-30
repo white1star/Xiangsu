@@ -81,6 +81,16 @@ test('auto-added ledger records carry UI-compatible bid fields and amount defaul
   assert.equal(added[0].date, '2026-07-02');
 });
 
+test('tender announcements are labelled 招标公告 with 未披露 competitor (not 招标中/待开标)', () => {
+  const { added } = mergeCandidates([], [
+    { url: 'https://example.com/e', title: '干选机设备采购项目招标公告', source: '官方平台', publishDate: '2026-03-15', bidStatus: '招标公告', sourceAuthority: 'official', line: '煤炭智能干选设备', evidence: '发布招标公告，投标截止详见正文。', evidenceCapturedAt: '2026-07-02T01:00:00Z' },
+  ]);
+  assert.equal(added.length, 1);
+  assert.equal(added[0].bid, '招标公告');
+  assert.equal(added[0].bidStatus, '招标公告');
+  assert.equal(added[0].competitor, '未披露');
+});
+
 test('deduplicates same notice appearing on two official platforms by title and date', () => {
   const existing = [{ id: 'old', url: 'https://province.example/x', title: '某矿干选机中标结果公告', publishDate: '2026-06-01' }];
   const result = mergeCandidates(existing, [
