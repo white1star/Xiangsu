@@ -145,7 +145,7 @@ async function runRule(rule, window, mode) {
   const adapter = ADAPTERS[rule.adapter];
   if (!adapter) return { sourceId: rule.id, name: rule.name, status: 'failed', checkedAt: startedAt, error: `未知适配器 ${rule.adapter}`, pagesScanned: 0, discovered: 0, candidates: [], notes: [] };
   try {
-    const limits = mode === 'backfill' ? { maxPages: rule.maxPages ?? 5, maxDetails: 60 } : { maxPages: Math.min(rule.maxPages ?? 3, 3), maxDetails: 30 };
+    const limits = mode === 'backfill' ? { maxPages: rule.maxPages ?? 10, maxDetails: 120 } : { maxPages: Math.min(rule.maxPages ?? 3, 3), maxDetails: 30 };
     const output = await adapter(rule, window, limits);
     return { sourceId: rule.id, name: rule.name, status: 'ok', checkedAt: startedAt, pagesScanned: output.pagesScanned, discovered: output.discovered, candidates: output.candidates, notes: output.notes || [] };
   } catch (error) {

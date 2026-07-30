@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-30T02:48:30.851Z",
+  "generatedAt": "2026-07-30T04:31:52.275Z",
   "mode": "backfill",
   "window": {
     "from": "2026-01-01",
@@ -12,7 +12,7 @@
     "missing": []
   },
   "bidOpenAudit": {
-    "generatedAt": "2026-07-30T03:34:12.738Z",
+    "generatedAt": "2026-07-30T04:31:52.275Z",
     "today": "2026-07-30",
     "backfilledOpenDates": 0,
     "summary": {
@@ -98,7 +98,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-07-30T02:47:25.796Z"
+      "checkedAt": "2026-07-30T04:30:08.888Z"
     },
     {
       "id": "ccteg-goods",
@@ -109,7 +109,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-07-30T02:47:49.978Z"
+      "checkedAt": "2026-07-30T04:31:17.528Z"
     },
     {
       "id": "ccteg-all",
@@ -120,18 +120,18 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-07-30T02:47:58.716Z"
+      "checkedAt": "2026-07-30T04:31:26.608Z"
     },
     {
       "id": "gsei-results",
       "name": "甘肃经济信息网（中标结果栏目）",
       "status": "ok",
       "pagesScanned": 6,
-      "discovered": 1,
+      "discovered": 0,
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-07-30T02:48:09.636Z"
+      "checkedAt": "2026-07-30T04:31:37.781Z"
     },
     {
       "id": "chnenergy-home",
@@ -144,7 +144,7 @@
       "notes": [
         "栏目列表页需 JS 渲染（直接访问 404），当前仅能扫描入口页最新公告；深页覆盖待接入授权采集。"
       ],
-      "checkedAt": "2026-07-30T02:48:16.327Z"
+      "checkedAt": "2026-07-30T04:31:43.658Z"
     },
     {
       "id": "zmzb-home",
@@ -157,7 +157,7 @@
       "notes": [
         "首页含大量最新公告链接，可匿名浅扫；栏目分页地址探测 500，暂无法深扫。"
       ],
-      "checkedAt": "2026-07-30T02:48:16.737Z"
+      "checkedAt": "2026-07-30T04:31:44.113Z"
     },
     {
       "id": "mtzbw-leads",
@@ -170,7 +170,7 @@
       "notes": [
         "行业聚合站，只产出待复核线索，必须反查官方原文后才能入高置信台账。"
       ],
-      "checkedAt": "2026-07-30T02:48:21.308Z"
+      "checkedAt": "2026-07-30T04:31:48.706Z"
     },
     {
       "id": "ccgp-search",
@@ -181,7 +181,7 @@
       "accepted": 0,
       "failReason": "平台反爬拦截（频繁访问/验证提示），未绕过，等待下次重试",
       "notes": [],
-      "checkedAt": "2026-07-30T02:48:22.513Z"
+      "checkedAt": "2026-07-30T04:31:49.947Z"
     }
   ],
   "coveredByNational": [
@@ -203,7 +203,7 @@
     "qinghai-ggzy"
   ],
   "totals": {
-    "discovered": 65,
+    "discovered": 64,
     "accepted": 0,
     "acceptedWithAmount": 0,
     "pendingReviewAdded": 0,
