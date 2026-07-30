@@ -7,6 +7,8 @@ import './intelligence.css';
 import './platform-library.css';
 
 const icons = ['▣', '◉', '◌'];
+const PAGE_SIZE = 10;
+const PHASE_OPTIONS = ['全部', '待开标', '已开标', '未披露', '中标候选人', '已中标'];
 
 function openCell(item) {
   if (item.bid !== '招标公告') return item.bidOpenDate || '—';
@@ -14,24 +16,37 @@ function openCell(item) {
   return `${item.bidOpenDate} ${item.openStatus === '已开标' ? '·已开标' : '·待开标'}`;
 }
 
+// 招标公告按开标核对派生状态；结果类按公告类型。供“招标状态”筛选。
+function phaseOf(item) {
+  if (item.bid === '招标公告') return item.openStatus || '未披露';
+  return item.bid;
+}
+
 export default function App() {
   const [line, setLine] = useState('全部');
   const [competitor, setCompetitor] = useState('全部');
   const [region, setRegion] = useState('全部');
   const [confidence, setConfidence] = useState('全部');
+  const [phase, setPhase] = useState('全部');
   const [page, setPage] = useState('情报台账');
+  const [pageNum, setPageNum] = useState(1);
   const [selected, setSelected] = useState(null);
-  const filtered = useMemo(() => rows.filter(item => (line === '全部' || item.line === line) && (competitor === '全部' || item.competitor === competitor) && (region === '全部' || item.region === region) && (confidence === '全部' || item.confidence === confidence)), [line, competitor, region, confidence]);
+  const filtered = useMemo(() => rows.filter(item => (line === '全部' || item.line === line) && (competitor === '全部' || item.competitor === competitor) && (region === '全部' || item.region === region) && (confidence === '全部' || item.confidence === confidence) && (phase === '全部' || phaseOf(item) === phase)), [line, competitor, region, confidence, phase]);
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const current = Math.min(Math.max(1, pageNum), totalPages);
+  const pageRows = filtered.slice((current - 1) * PAGE_SIZE, current * PAGE_SIZE);
+  const resetPage = fn => event => { fn(event.target.value); setPageNum(1); };
   const options = key => ['全部', ...new Set(rows.map(item => item[key]))];
-  const select = (value, setter, key) => <select value={value} onChange={event => setter(event.target.value)}>{options(key).map(item => <option key={item}>{item}</option>)}</select>;
+  const select = (value, setter, key) => <select value={value} onChange={resetPage(setter)}>{options(key).map(item => <option key={item}>{item}</option>)}</select>;
+  const phaseSelect = <select value={phase} onChange={resetPage(setPhase)}>{PHASE_OPTIONS.map(item => <option key={item}>{item}</option>)}</select>;
 
   return <main className="shell">
     <aside><div className="brand"><div className="mark">◈</div><b>唐山像素智能</b></div><nav>{['情报台账', '来源分类', '平台清单'].map((item, index) => <button className={page === item ? 'active' : ''} onClick={() => setPage(item)} key={item}><i>{icons[index]}</i>{item}</button>)}</nav></aside>
     <section className="workspace"><header><h1>{page === '情报台账' ? '公开情报台账' : page}</h1><div><button className="export" onClick={() => window.print()}>导出 / 打印</button></div></header>
       {page === '情报台账' ? <>
-        <div className="filters"><label>产品线{select(line, setLine, 'line')}</label><label>竞品{select(competitor, setCompetitor, 'competitor')}</label><label>地区{select(region, setRegion, 'region')}</label><label>置信度{select(confidence, setConfidence, 'confidence')}</label></div>
-        <div className="tablebox"><table><thead><tr>{['情报标题', '产品线', '竞品', '地区', '金额', '中标情况', '开标', '来源', '置信度', '发布日期'].map(item => <th key={item}>{item}</th>)}</tr></thead><tbody>{filtered.map(item => <tr key={item.url} onClick={() => setSelected(item)}>{[item.title, item.line, item.competitor, item.region, item.amount, item.bid, openCell(item), <a href={item.url} target="_blank" rel="noreferrer" onClick={event => event.stopPropagation()}>{item.source} ↗</a>, item.confidence, item.date].map((value, index) => <td className={index === 5 ? `bid ${item.bid}` : index === 8 ? `confidence ${item.confidence}` : ''} key={index}>{value}</td>)}</tr>)}</tbody></table></div>
-        <footer><span>共 {filtered.length} 条　|　最近更新：2026-07-30</span><span>点击任意记录查看证据摘要</span></footer>
+        <div className="filters"><label>产品线{select(line, setLine, 'line')}</label><label>竞品{select(competitor, setCompetitor, 'competitor')}</label><label>地区{select(region, setRegion, 'region')}</label><label>置信度{select(confidence, setConfidence, 'confidence')}</label><label>招标状态{phaseSelect}</label></div>
+        <div className="tablebox"><table><thead><tr>{['情报标题', '产品线', '竞品', '地区', '金额', '中标情况', '开标', '来源', '置信度', '发布日期'].map(item => <th key={item}>{item}</th>)}</tr></thead><tbody>{pageRows.map(item => <tr key={item.url} onClick={() => setSelected(item)}>{[item.title, item.line, item.competitor, item.region, item.amount, item.bid, openCell(item), <a href={item.url} target="_blank" rel="noreferrer" onClick={event => event.stopPropagation()}>{item.source} ↗</a>, item.confidence, item.date].map((value, index) => <td className={index === 5 ? `bid ${item.bid}` : index === 8 ? `confidence ${item.confidence}` : ''} key={index}>{value}</td>)}</tr>)}</tbody></table></div>
+        <footer><span>共 {filtered.length} 条　|　第 {current}/{totalPages} 页</span><span className="pager"><button disabled={current <= 1} onClick={() => setPageNum(current - 1)}>上一页</button><button disabled={current >= totalPages} onClick={() => setPageNum(current + 1)}>下一页</button></span><span>点击任意记录查看证据摘要</span></footer>
         {selected && <Detail item={selected} onClose={() => setSelected(null)} />}
       </> : <SourcePage type={page} />}
     </section>
