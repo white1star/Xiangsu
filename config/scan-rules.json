@@ -61,30 +61,34 @@
     "coverNote": "官方背景信息网中标结果栏目，静态分页可匿名浏览。"
   },
   {
-    "id": "chnenergy-home",
+    "id": "chnenergy-zbgg",
     "platformId": "chnenergy",
-    "name": "国能e招（入口页浅扫）",
-    "adapter": "home-scan",
+    "name": "国能e招（招标公告栏目）",
+    "adapter": "html-list",
     "access": "anonymous",
     "required": true,
     "entryUrl": "https://www.chnenergybidding.com.cn/bidweb/",
-    "listingUrl": "https://www.chnenergybidding.com.cn/bidweb/",
-    "keywords": ["干选", "智能分选", "XRT"],
-    "columns": "首页滚动公告（栏目深页为 JS 渲染，暂不可匿名分页）",
-    "coverNote": "栏目列表页需 JS 渲染（直接访问 404），当前仅能扫描入口页最新公告；深页覆盖待接入授权采集。"
+    "listingUrl": "https://www.chnenergybidding.com.cn/bidweb/001/001002/moreinfo.html",
+    "pageTemplate": "https://www.chnenergybidding.com.cn/bidweb/001/001002/moreinfo_{n}.html",
+    "keywords": ["干选", "智能分选", "XRT", "分选机", "智能选矸", "选矸"],
+    "columns": "招标公告（001002 栏目，公开 .jspx/.html 列表）",
+    "maxPages": 3,
+    "coverNote": "公开 JSP 列表页（实测 .jspx/fullsearch.html 均 200 可匿名访问，无需登录）；后端搜索接口 RowCount:0，2026 平台暂无干选/XRT 招标记录。"
   },
   {
-    "id": "zmzb-home",
+    "id": "zmzb-hw",
     "platformId": "zmzb",
-    "name": "中煤招标与采购网（入口页浅扫）",
-    "adapter": "home-scan",
+    "name": "中煤招标与采购网（货物招标栏目）",
+    "adapter": "html-list",
     "access": "anonymous",
     "required": true,
     "entryUrl": "https://www.zmzb.com/",
-    "listingUrl": "https://www.zmzb.com/cms/index.htm",
-    "keywords": ["干选", "智能分选", "XRT"],
-    "columns": "首页公告聚合（栏目深页地址未开放匿名访问）",
-    "coverNote": "首页含大量最新公告链接，可匿名浅扫；栏目分页地址探测 500，暂无法深扫。"
+    "listingUrl": "https://www.zmzb.com/cms/channel/ywgg1hw/index.htm",
+    "pageTemplate": "https://www.zmzb.com/cms/channel/ywgg1hw/index_{n}.htm",
+    "keywords": ["干选", "智能分选", "XRT", "分选机", "智能选矸", "选矸"],
+    "columns": "业务公告-货物（ywgg1hw~ywgg6hw 六栏目）",
+    "maxPages": 3,
+    "coverNote": "公开 CMS 静态列表页（实测 200 可匿名访问，无需登录）；2026 上半年实测无干选/XRT 命中。"
   },
   {
     "id": "mtzbw-leads",
