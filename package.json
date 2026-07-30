@@ -11,8 +11,10 @@
     "test:weekly": "node --test tests/weekly-run.test.mjs",
     "test:pages": "node --test tests/github-pages-base.test.mjs",
     "test:platforms": "node --test tests/platform-library.test.mjs",
+    "test:collect": "node --test tests/collect-lib.test.mjs",
     "audit:platforms": "node scripts/audit-platforms.mjs",
-    "update:intelligence": "node scripts/weekly-run.mjs"
+    "update:intelligence": "node scripts/weekly-run.mjs",
+    "backfill:intelligence": "node scripts/weekly-run.mjs --backfill"
   },
   "dependencies": {
     "@vitejs/plugin-react": "5.0.4",

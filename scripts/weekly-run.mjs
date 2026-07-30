@@ -1,12 +1,24 @@
+// 竞品公开情报采集编排器。
+// 用法：node scripts/weekly-run.mjs            —— 每周增量（近14天窗口）
+//       node scripts/weekly-run.mjs --backfill —— 2026 年历史补抓（2026-01-01 起）
+// 产物：src/data/intelligence.json（高置信台账，仅官方原文）
+//       src/data/pending-review.json（聚合线索待复核队列）
+//       public/data/latest-run.json（本次覆盖报告）
+//       public/data/scan-state.json（每平台最近扫描状态）
+
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { ADAPTERS, buildWindow, MINIMUM_PUBLISH_DATE as MIN_DATE } from './collect-lib.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const sourceFile = path.join(root, 'config', 'public-sources.json');
+const rulesFile = path.join(root, 'config', 'scan-rules.json');
 const dataFile = path.join(root, 'src', 'data', 'intelligence.json');
+const pendingFile = path.join(root, 'src', 'data', 'pending-review.json');
 const reportFile = path.join(root, 'public', 'data', 'latest-run.json');
-export const MINIMUM_PUBLISH_DATE = '2026-01-01';
+const stateFile = path.join(root, 'public', 'data', 'scan-state.json');
+
+export const MINIMUM_PUBLISH_DATE = MIN_DATE;
 
 export function evaluateCoverage(sources, checks) {
   const required = sources.filter(source => source.required);
@@ -23,61 +35,154 @@ export function validateCandidate(candidate) {
   if (candidate.publishDate < MINIMUM_PUBLISH_DATE) return { valid: false, reason: `发布日期早于${MINIMUM_PUBLISH_DATE}` };
   if (candidate.evidence.replace(/\s/g, '').length < 16) return { valid: false, reason: '原文证据摘录过短' };
   if (!['招标中', '中标候选人', '已中标'].includes(candidate.bidStatus)) return { valid: false, reason: '不是允许入库的招投标状态' };
+  if (!candidate.line) return { valid: false, reason: '与XRT矿石分选/煤炭智能干选设备无关' };
   return { valid: true };
 }
 
 export function mergeCandidates(existing, candidates) {
   const knownUrls = new Set(existing.map(record => record.url));
+  const knownKeys = new Set(existing.map(record => `${record.title}|${record.publishDate || record.date}`));
   const added = []; const rejected = [];
   for (const candidate of candidates) {
     const validation = validateCandidate(candidate);
-    if (!validation.valid) { rejected.push({ ...candidate, reason: validation.reason }); continue; }
-    if (knownUrls.has(candidate.url)) continue;
-    knownUrls.add(candidate.url);
-    added.push({ id: `auto-${Buffer.from(candidate.url).toString('base64url').slice(0, 14)}`, line: candidate.line || '待核实', competitor: candidate.competitor || '待核实', region: candidate.region || '待核实', amount: candidate.amount || '未披露', confidence: '高', ...candidate, date: candidate.publishDate });
+    if (!validation.valid) { rejected.push({ title: candidate.title, url: candidate.url, source: candidate.source, reason: validation.reason }); continue; }
+    const key = `${candidate.title}|${candidate.publishDate}`;
+    if (knownUrls.has(candidate.url) || knownKeys.has(key)) continue;
+    knownUrls.add(candidate.url); knownKeys.add(key);
+    const record = {
+      id: `auto-${Buffer.from(candidate.url).toString('base64url').slice(0, 14)}`,
+      title: candidate.title,
+      line: candidate.line || '待核实',
+      competitor: candidate.competitor || (candidate.bidStatus === '招标中' ? '待开标' : '未披露'),
+      region: candidate.region || '待核实',
+      amount: candidate.amount || '未披露',
+      bid: candidate.bidStatus,
+      bidStatus: candidate.bidStatus,
+      source: candidate.source,
+      date: candidate.publishDate,
+      publishDate: candidate.publishDate,
+      confidence: '高',
+      url: candidate.url,
+      evidence: candidate.evidence,
+    };
+    added.push(record);
   }
   return { records: [...existing, ...added], added, rejected };
 }
 
-function absoluteUrl(href, base) { try { return new URL(href, base).href; } catch { return null; } }
-
-function discoverFromHtml(html, source) {
-  const matches = [...html.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)];
-  const keyword = new RegExp(source.keywords.join('|'), 'i');
-  const candidates = [];
-  for (const match of matches) {
-    const title = match[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
-    if (!keyword.test(title)) continue;
-    const context = html.slice(Math.max(0, match.index - 240), match.index + match[0].length + 240);
-    const date = context.match(/20\d{2}[-/.年]\d{1,2}[-/.月]\d{1,2}/)?.[0]?.replace(/[年/.]/g, '-').replace('月-', '-');
-    candidates.push({ title, url: absoluteUrl(match[1], source.listingUrl), source: source.name, publishDate: date, bidStatus: /候选人/.test(title) ? '中标候选人' : /中标/.test(title) ? '已中标' : '招标中', line: source.line });
+export function mergePendingLeads(existingLeads, ledger, leads) {
+  const known = new Set([...existingLeads.map(item => item.url), ...ledger.map(item => item.url)]);
+  const added = [];
+  for (const lead of leads) {
+    if (!lead.line || !lead.bidStatus || !lead.url || known.has(lead.url)) continue;
+    if (!lead.publishDate || lead.publishDate < MINIMUM_PUBLISH_DATE) continue;
+    known.add(lead.url);
+    added.push({
+      title: lead.title, line: lead.line, bidStatus: lead.bidStatus, source: lead.source,
+      publishDate: lead.publishDate, url: lead.url, confidence: '中',
+      status: '待复核', note: '仅公开聚合索引，须反查官方原文后才能入高置信台账',
+      firstSeenAt: new Date().toISOString(),
+    });
   }
-  return candidates;
+  return { leads: [...existingLeads, ...added], added };
 }
 
-async function checkSource(source) {
+async function readJson(file, fallback) {
+  try { return JSON.parse(await readFile(file, 'utf8')); } catch { return fallback; }
+}
+
+async function runRule(rule, window, mode) {
   const startedAt = new Date().toISOString();
+  const adapter = ADAPTERS[rule.adapter];
+  if (!adapter) return { sourceId: rule.id, name: rule.name, status: 'failed', checkedAt: startedAt, error: `未知适配器 ${rule.adapter}`, pagesScanned: 0, discovered: 0, candidates: [], notes: [] };
   try {
-    const response = await fetch(source.listingUrl, { headers: { 'user-agent': 'Pixel-Intelligence-Monitor/1.0 (public-source-check)' }, signal: AbortSignal.timeout(30000) });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const html = await response.text();
-    return { sourceId: source.id, status: 'ok', checkedAt: startedAt, httpStatus: response.status, candidates: discoverFromHtml(html, source) };
-  } catch (error) { return { sourceId: source.id, status: 'failed', checkedAt: startedAt, error: error.message, candidates: [] }; }
+    const limits = mode === 'backfill' ? { maxPages: rule.maxPages ?? 5, maxDetails: 60 } : { maxPages: Math.min(rule.maxPages ?? 3, 3), maxDetails: 30 };
+    const output = await adapter(rule, window, limits);
+    return { sourceId: rule.id, name: rule.name, status: 'ok', checkedAt: startedAt, pagesScanned: output.pagesScanned, discovered: output.discovered, candidates: output.candidates, notes: output.notes || [] };
+  } catch (error) {
+    return { sourceId: rule.id, name: rule.name, status: 'failed', checkedAt: startedAt, error: error.message, pagesScanned: 0, discovered: 0, candidates: [], notes: [] };
+  }
 }
 
 async function main() {
-  const sources = JSON.parse(await readFile(sourceFile, 'utf8'));
-  const existing = JSON.parse(await readFile(dataFile, 'utf8'));
-  const checks = await Promise.all(sources.filter(source => source.access === 'anonymous').map(checkSource));
-  const coverage = evaluateCoverage(sources.filter(source => source.access === 'anonymous'), checks);
-  const candidates = checks.flatMap(check => check.candidates);
-  const merged = mergeCandidates(existing, candidates);
-  const report = { generatedAt: new Date().toISOString(), coverage, checks: checks.map(({ candidates: ignored, ...check }) => ({ ...check, discovered: checks.find(item => item.sourceId === check.sourceId).candidates.length })), discovered: candidates.length, added: merged.added.length, rejected: merged.rejected.length };
+  const mode = process.argv.includes('--backfill') ? 'backfill' : 'weekly';
+  const window = buildWindow(mode);
+  const rules = await readJson(rulesFile, []);
+  const existing = await readJson(dataFile, []);
+  const existingPending = await readJson(pendingFile, []);
+  const previousState = await readJson(stateFile, {});
+
+  console.log(`模式：${mode}，时间窗：${window.from} ~ ${window.to}，规则数：${rules.length}`);
+  const checks = [];
+  for (const rule of rules) {
+    console.log(`扫描 ${rule.name} …`);
+    const check = await runRule(rule, window, mode);
+    console.log(`  → ${check.status}，页数 ${check.pagesScanned}，发现 ${check.discovered}${check.error ? '，失败原因：' + check.error : ''}`);
+    checks.push(check);
+  }
+
+  const officialCandidates = [];
+  const aggregatorLeads = [];
+  for (const check of checks) {
+    const rule = rules.find(item => item.id === check.sourceId);
+    for (const candidate of check.candidates) {
+      if ((rule.sourceAuthority || 'official') === 'official' && candidate.sourceAuthority === 'official') officialCandidates.push(candidate);
+      else aggregatorLeads.push(candidate);
+    }
+  }
+
+  const merged = mergeCandidates(existing, officialCandidates.filter(candidate => candidate.line && candidate.bidStatus));
+  const scopeRejected = officialCandidates
+    .filter(candidate => !candidate.line || !candidate.bidStatus)
+    .map(candidate => ({ title: candidate.title, url: candidate.url, source: candidate.source, reason: !candidate.line ? '与两类设备无关或命中排除规则' : '公告类型不在收录范围（如流标/废标/资格预审）' }));
+  const pending = mergePendingLeads(existingPending, merged.records, aggregatorLeads);
+
+  const coverage = evaluateCoverage(rules, checks);
+  const allRejected = [...merged.rejected, ...scopeRejected];
+  const scanState = { ...previousState };
+  for (const check of checks) {
+    scanState[check.sourceId] = {
+      name: check.name, lastScanAt: check.checkedAt, lastStatus: check.status,
+      pagesScanned: check.pagesScanned, discovered: check.discovered,
+      failReason: check.error || null, notes: check.notes,
+    };
+  }
+
+  const report = {
+    generatedAt: new Date().toISOString(),
+    mode,
+    window,
+    coverage,
+    platforms: checks.map(check => ({
+      id: check.sourceId, name: check.name, status: check.status,
+      pagesScanned: check.pagesScanned, discovered: check.discovered,
+      accepted: merged.added.filter(record => check.candidates.some(candidate => candidate.url === record.url)).length,
+      failReason: check.error || null, notes: check.notes, checkedAt: check.checkedAt,
+    })),
+    coveredByNational: rules.find(rule => rule.id === 'national-ggzy')?.covers || [],
+    totals: {
+      discovered: checks.reduce((sum, check) => sum + check.discovered, 0),
+      accepted: merged.added.length,
+      acceptedWithAmount: merged.added.filter(record => record.amount && record.amount !== '未披露').length,
+      pendingReviewAdded: pending.added.length,
+      rejected: allRejected.length,
+    },
+    rejected: allRejected,
+  };
+
   await mkdir(path.dirname(reportFile), { recursive: true });
-  await writeFile(reportFile, JSON.stringify(report, null, 2));
-  if (!coverage.publishable) { console.error(`覆盖率不达标：${coverage.missing.join('、')}`); process.exitCode = 2; return; }
+  await writeFile(reportFile, JSON.stringify(report, null, 2) + '\n');
+  await writeFile(stateFile, JSON.stringify(scanState, null, 2) + '\n');
+
+  if (!coverage.publishable) {
+    console.error(`覆盖率不达标，缺少必查平台成功记录：${coverage.missing.join('、')}`);
+    process.exitCode = 2;
+    return;
+  }
+  merged.records.sort((a, b) => String(b.publishDate || b.date).localeCompare(String(a.publishDate || a.date)));
   await writeFile(dataFile, JSON.stringify(merged.records, null, 2) + '\n');
-  console.log(JSON.stringify(report));
+  await writeFile(pendingFile, JSON.stringify(pending.leads, null, 2) + '\n');
+  console.log(JSON.stringify(report.totals));
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) main();

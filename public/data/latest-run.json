@@ -1,0 +1,407 @@
+{
+  "generatedAt": "2026-07-30T01:56:54.164Z",
+  "mode": "backfill",
+  "window": {
+    "from": "2026-01-01",
+    "to": "2026-07-30"
+  },
+  "coverage": {
+    "publishable": true,
+    "checked": 7,
+    "required": 5,
+    "missing": []
+  },
+  "platforms": [
+    {
+      "id": "national-ggzy",
+      "name": "全国公共资源交易平台",
+      "status": "ok",
+      "pagesScanned": 6,
+      "discovered": 64,
+      "accepted": 19,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-07-30T01:55:59.682Z"
+    },
+    {
+      "id": "ccteg-goods",
+      "name": "中国煤科电子采购平台",
+      "status": "ok",
+      "pagesScanned": 6,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-07-30T01:56:22.532Z"
+    },
+    {
+      "id": "ccteg-all",
+      "name": "中国煤科电子采购平台（全部结果公告）",
+      "status": "ok",
+      "pagesScanned": 8,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-07-30T01:56:31.133Z"
+    },
+    {
+      "id": "gsei-results",
+      "name": "甘肃经济信息网（中标结果栏目）",
+      "status": "ok",
+      "pagesScanned": 6,
+      "discovered": 1,
+      "accepted": 1,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-07-30T01:56:42.150Z"
+    },
+    {
+      "id": "chnenergy-home",
+      "name": "国能e招（入口页浅扫）",
+      "status": "ok",
+      "pagesScanned": 1,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [
+        "栏目列表页需 JS 渲染（直接访问 404），当前仅能扫描入口页最新公告；深页覆盖待接入授权采集。"
+      ],
+      "checkedAt": "2026-07-30T01:56:48.128Z"
+    },
+    {
+      "id": "zmzb-home",
+      "name": "中煤招标与采购网（入口页浅扫）",
+      "status": "ok",
+      "pagesScanned": 1,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [
+        "首页含大量最新公告链接，可匿名浅扫；栏目分页地址探测 500，暂无法深扫。"
+      ],
+      "checkedAt": "2026-07-30T01:56:48.613Z"
+    },
+    {
+      "id": "mtzbw-leads",
+      "name": "中国煤炭招标网（聚合线索）",
+      "status": "ok",
+      "pagesScanned": 1,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [
+        "行业聚合站，只产出待复核线索，必须反查官方原文后才能入高置信台账。"
+      ],
+      "checkedAt": "2026-07-30T01:56:52.838Z"
+    },
+    {
+      "id": "ccgp-search",
+      "name": "中国政府采购网",
+      "status": "failed",
+      "pagesScanned": 0,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": "平台反爬拦截（频繁访问/验证提示），未绕过，等待下次重试",
+      "notes": [],
+      "checkedAt": "2026-07-30T01:56:54.097Z"
+    }
+  ],
+  "coveredByNational": [
+    "shanxi-ggzy",
+    "shaanxi-ggzy",
+    "inner-mongolia-ggzy",
+    "xinjiang-ggzy",
+    "anhui-ggzy",
+    "shandong-ggzy",
+    "henan-ggzy",
+    "hebei-ggzy",
+    "guizhou-ggzy",
+    "gansu-ggzy",
+    "ningxia-ggzy",
+    "heilongjiang-ggzy",
+    "yunnan-ggzy",
+    "sichuan-ggzy",
+    "liaoning-ggzy",
+    "qinghai-ggzy"
+  ],
+  "totals": {
+    "discovered": 65,
+    "accepted": 20,
+    "acceptedWithAmount": 5,
+    "pendingReviewAdded": 0,
+    "rejected": 45
+  },
+  "rejected": [
+    {
+      "title": "山西阳泉矿区泊里煤矿项目井下智能分选系统智能干选机[标段：第一标段]于2026060109:00:00开标",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/140000/0102/20260601/0014671db214c74f4751b3814df27ebbb0a3.html",
+      "source": "全国公共资源交易平台（山西省）",
+      "reason": "公告类型不在收录范围（如流标/废标/资格预审）"
+    },
+    {
+      "title": "山西阳泉矿区泊里煤矿项目井下智能分选系统智能干选机第一标段招标文件[20260511]",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/140000/0105/20260511/00142c4876085ccd4ab3a5e562d6df77ba69.html",
+      "source": "全国公共资源交易平台（山西省）",
+      "reason": "公告类型不在收录范围（如流标/废标/资格预审）"
+    },
+    {
+      "title": "甘肃省景泰县安家岭能源有限公司郭家台二号煤矿选煤厂TDS智能干选机设备采购项目开标记录",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/620000/0102/20260511/00623bd87a6324ed4beba3ee0ef8377b8f4a.html",
+      "source": "全国公共资源交易平台（甘肃省公共资源交易平台）",
+      "reason": "公告类型不在收录范围（如流标/废标/资格预审）"
+    },
+    {
+      "title": "甘肃省景泰县安家岭能源有限公司郭家台二号煤矿选煤厂TDS智能干选机设备采购项目-E6200000600060230001001Z01-招标文件",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/620000/0105/20260417/006272092f62d7214fa689bbd959a297d9f4.html",
+      "source": "全国公共资源交易平台（甘肃省公共资源交易平台）",
+      "reason": "公告类型不在收录范围（如流标/废标/资格预审）"
+    },
+    {
+      "title": "河北钢铁集团矿业有限公司司家营铁矿南区采选工程田兴铁矿旋转磁场干选机设备采购中标候选人公示",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/130000/0104/20260326/0013115526137444427d92ad9d4c4ba9c021.html",
+      "source": "全国公共资源交易平台（河北省公共资源交易中心网站）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "河北钢铁集团矿业有限公司司家营铁矿南区采选工程田兴铁矿旋转磁场干选机设备采购",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/130000/0102/20260324/00137c1bcc8d200f462daa9aebca23a14725.html",
+      "source": "全国公共资源交易平台（河北省公共资源交易中心网站）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "河北钢铁集团矿业有限公司司家营铁矿南区采选工程田兴铁矿旋转磁场干选机设备采购",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/130000/0101/20260228/00132e64a554adb64ad299fcc3b88ad0ddaa.html",
+      "source": "全国公共资源交易平台（河北省公共资源交易中心网站）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "广西润腾工程咨询有限公司关于宾阳县2025年度国土变更调查技术服务（项目编号：NNZC2026-C3-260064-GXRT）成交结果公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/450000/0202/20260527/00451c07e35e99954abc95c2949e537daa1c.html",
+      "source": "全国公共资源交易平台（南宁市公共资源交易中心）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "JXRT20260413002",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/360000/0203/20260508/2c8382aa9d322406019e05d8ac6c7bfe-177.html",
+      "source": "全国公共资源交易平台（江西省）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "广西润腾工程咨询有限公司关于扶绥县城区9个污水提升泵站托管运维项目（CZZC2026-C3-210028-GXRT）成交公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/450000/0202/20260424/00458e064aac77b74cd4b8b289578c600cd2.html",
+      "source": "全国公共资源交易平台（崇左市电子招投标交易平台）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "广西润腾工程咨询有限公司关于宁潭河重点支流西岭河水生态环境保护项目（YLZC2026-C2-230039-GXRT）成交结果公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/450000/0202/20260421/00456d321faf159b421292a7ec2bac967522.html",
+      "source": "全国公共资源交易平台（玉林市公共资源交易中心）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "广西荣泰建筑设计有限责任公司关于象州县2025年国土变更调查日常变更与年度变更及森林草原湿地荒漠调查监测工作（LBZC2026-C3-220010-GXRT）成交公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/450000/0202/20260401/0045d5f3c2dc045b4805bff1d48fa01a4a87.html",
+      "source": "全国公共资源交易平台（来宾市公共资源交易服务平台）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "广西荣泰建筑设计有限责任公司关于象州县2025年国土变更调查日常变更与年度变更及森林草原湿地荒漠调查监测工作（LBZC2026-C3-220010-GXRT）成交公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/450000/0202/20260401/0045c7278efcd013443aab966a741d662e32.html",
+      "source": "全国公共资源交易平台（广西壮族自治区公共资源电子交易系统）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "YXRT2026ZC-02",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/620000/0203/20260323/cb941b04-346e-4c34-a995-d8951e04311e.html",
+      "source": "全国公共资源交易平台（甘肃省）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "YXRT2026ZC-02",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/620000/0203/20260323/c40600ea-2a8f-4b90-a459-d7b65c86d5b2.html",
+      "source": "全国公共资源交易平台（甘肃省）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "YXRT2026ZC-01",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/620000/0203/20260323/83c8e349-6486-4585-91ec-3e3c7b0b144c.html",
+      "source": "全国公共资源交易平台（甘肃省）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "：YXRT2026ZC-01",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/620000/0203/20260323/4ef1816b-e052-4293-b5cd-b8529aad7884.html",
+      "source": "全国公共资源交易平台（甘肃省）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "广西荣泰建筑设计有限责任公司关于象州县2025年国土变更调查日常变更与年度变更及森林草原湿地荒漠调查监测工作（LBZC2026-C3-220010-GXRT ）的竞争性磋商公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/450000/0201/20260320/004580b53f4b8a8a4d3eb8d0f581d45649e9.html",
+      "source": "全国公共资源交易平台（来宾市公共资源交易服务平台）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "广西荣泰建筑设计有限责任公司关于象州县2025年国土变更调查日常变更与年度变更及森林草原湿地荒漠调查监测工作（LBZC2026-C3-220010-GXRT ）的竞争性磋商公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/450000/0201/20260320/c1832c4d802471e69717716f2737365f.html",
+      "source": "全国公共资源交易平台（广西壮族自治区）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "广西荣泰建筑设计有限责任公司关于象州县2025年国土变更调查日常变更与年度变更及森林草原湿地荒漠调查监测工作（LBZC2026-C3-220010-GXRT ）的竞争性磋商公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/450000/0201/20260320/0045ce1b9989375942e5a0712d706abf95b1.html",
+      "source": "全国公共资源交易平台（广西壮族自治区公共资源电子交易系统）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "广西润腾工程咨询有限公司关于S303环江川山（都川）至下南公路边坡治理工程（采购项目编号：GXRTZB-2026-01）竞争性磋商公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/450000/0201/20260312/0045722b211b854e44989f5b726d827fb933.html",
+      "source": "全国公共资源交易平台（河池市公共资源交易中心）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "河池市环江毛南族自治县长美乡平治铁矿废弃场（历史遗留固体废物）综合治理项目效果评估（项目编号：GXRTZC-2025-21）成交结果公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/450000/0202/20260121/00453fb8ff6951274d00a78def3fb05752e6.html",
+      "source": "全国公共资源交易平台（河池市公共资源交易中心）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "中国电信中卫分公司2025年NXRTKJGFYXGS全自动送餐采购项目（第三次）询比公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/0067/0101/20260107/00676fad1de7d5bb4efb9ff353425e0f6338.html",
+      "source": "全国公共资源交易平台（中国电信阳光采购网电子招投标交易平台）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "山西阳泉矿区泊里煤矿项目井下智能分选系统带式输送机（第二次）",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/140000/0105/20260729/0014af96521d928c472e8b362caf536bee85.html",
+      "source": "全国公共资源交易平台（山西省）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "山西阳泉矿区泊里煤矿项目井下智能分选系统带式输送机（第二次）",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/140000/0105/20260729/001437db3072e21a47ae91f4ebea899bc25f.html",
+      "source": "全国公共资源交易平台（山西省）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "G1306342600102011智能分选打包物流云仓中心EPC总承包中标候选人公示",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/130000/0104/20260727/00137f7dca2aa7d7407e9d38e21f4acd623a.html",
+      "source": "全国公共资源交易平台（保定市公共资源交易中心）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "智能分选打包物流云仓中心EPC总承包",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/130000/0102/20260724/001365feb22192954804996440e9429671b2.html",
+      "source": "全国公共资源交易平台（保定市公共资源交易中心）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "山西阳泉矿区泊里煤矿项目井下智能分选系统带式输送机（第二次）",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/140000/0105/20260716/0014f45b104582c64966bb63d7f6809dc360.html",
+      "source": "全国公共资源交易平台（山西省）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "山西阳泉矿区泊里煤矿项目井下智能分选系统带式输送机（第二次）招标公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/140000/0101/20260716/0014cf47bfa0eb9f4d90947a0e6082ae92fd.html",
+      "source": "全国公共资源交易平台（山西省）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "山西阳泉矿区泊里煤矿项目井下智能分选系统带式输送机招标终止公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/140000/0101/20260715/0014e3b290c85d4f4782a11cdcb2ba3e4c4d.html",
+      "source": "全国公共资源交易平台（山西省）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "智能分选打包物流云仓中心EPC总承包(二次）招标公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/130000/0101/20260702/00133ffcfb852a964b59875f41a8858c3cc9.html",
+      "source": "全国公共资源交易平台（保定市公共资源交易中心）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "智能分选打包物流云仓中心EPC总承包",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/130000/0105/20260702/001351cdbec490634cfba5d68b2bdd6b9279.html",
+      "source": "全国公共资源交易平台（保定市公共资源交易中心）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "谢岗镇生活垃圾智能分选处置及分类引导项目招标公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/440000/0201/20260611/4a9abbdb2e91e49136aec261f076836d.html",
+      "source": "全国公共资源交易平台（广东省）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "谢岗镇生活垃圾智能分选处置及分类引导项目招标公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/440000/0201/20260611/0044cf0bcd79a7a1490b8d4f8d2fafc17be3.html",
+      "source": "全国公共资源交易平台（广东省）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "阳泉市南庄煤炭集团有限责任公司西上庄煤矿121508工作面巷道工程、井下智能分选及矸石处置系统工程开标记录",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/140000/0102/20260611/00145a9fa431d6734428a20ded93c099d099.html",
+      "source": "全国公共资源交易平台（山西省）",
+      "reason": "公告类型不在收录范围（如流标/废标/资格预审）"
+    },
+    {
+      "title": "智能分选打包物流云仓中心EPC总承包招标公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/130000/0101/20260610/0013eb93c786fb5e40adb01ea8f721bd0d99.html",
+      "source": "全国公共资源交易平台（保定市公共资源交易中心）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "智能分选打包物流云仓中心EPC总承包",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/130000/0105/20260610/00132706d8dd48fe470db3d03b3f9d7d3932.html",
+      "source": "全国公共资源交易平台（保定市公共资源交易中心）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "阳泉市南庄煤炭集团有限责任公司西上庄煤矿121508工作面巷道工程、井下智能分选及矸石处置系统工程澄清",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/140000/0105/20260603/0014788efa709be04656bc35f6bc20979289.html",
+      "source": "全国公共资源交易平台（山西省）",
+      "reason": "公告类型不在收录范围（如流标/废标/资格预审）"
+    },
+    {
+      "title": "阳泉市南庄煤炭集团有限责任公司西上庄煤矿121508工作面巷道工程、井下智能分选及矸石处置系统工程澄清",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/140000/0105/20260529/00144fa3c9f600b34d94a88b8ca4bc58b509.html",
+      "source": "全国公共资源交易平台（山西省）",
+      "reason": "公告类型不在收录范围（如流标/废标/资格预审）"
+    },
+    {
+      "title": "阳泉市南庄煤炭集团有限责任公司西上庄煤矿121508工作面巷道工程、井下智能分选及矸石处置系统工程澄清",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/140000/0105/20260526/00145724b3aa6dbb419fab0475faf22ce9b4.html",
+      "source": "全国公共资源交易平台（山西省）",
+      "reason": "公告类型不在收录范围（如流标/废标/资格预审）"
+    },
+    {
+      "title": "阳泉市南庄煤炭集团有限责任公司西上庄煤矿121508工作面巷道工程、井下智能分选及矸石处置系统工程澄清",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/140000/0105/20260526/00147a22d111b2814d4fb36c78eb039b8b61.html",
+      "source": "全国公共资源交易平台（山西省）",
+      "reason": "公告类型不在收录范围（如流标/废标/资格预审）"
+    },
+    {
+      "title": "山西阳泉矿区泊里煤矿项目井下智能分选系统带式输送机招标公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/140000/0101/20260525/0014278761c98de14f90b9f9b297b804e086.html",
+      "source": "全国公共资源交易平台（山西省）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "山西阳泉矿区泊里煤矿项目井下智能分选系统带式输送机第一标段招标文件[20260525]",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/140000/0105/20260525/001421e238bd07cd4f81a5426db9dc74b5f3.html",
+      "source": "全国公共资源交易平台（山西省）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "山西潞安矿业（集团）有限责任公司古城煤矿井下矸石智能分选系统和不可利用矸石充填系统工程（阶段一）设备安装开标记录",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/140000/0102/20260313/00145cca8f69406e43f2b3c9dd6461cd0b2a.html",
+      "source": "全国公共资源交易平台（山西省）",
+      "reason": "公告类型不在收录范围（如流标/废标/资格预审）"
+    },
+    {
+      "title": "（谈判采购）【西南院眉山公司催化剂视屏智能分选项目/0747-2660SCCZK020】采购公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/0067/0101/20260224/0067af1ca5cd834c4707bfab66f9e9f565cf.html",
+      "source": "全国公共资源交易平台（央企招投标）",
+      "reason": "与两类设备无关或命中排除规则"
+    }
+  ]
+}

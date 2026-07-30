@@ -20,6 +20,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run test:weekly
+      - run: npm run test:collect
       - run: npm run test:platforms
       - name: 复审平台入口可达性
         run: npm run audit:platforms
@@ -29,6 +30,6 @@ jobs:
         run: |
           git config user.name "pixel-intelligence-bot"
           git config user.email "pixel-intelligence-bot@users.noreply.github.com"
-          git add src/data/intelligence.json public/data/latest-run.json public/data/platform-audit.json
+          git add src/data/intelligence.json src/data/pending-review.json public/data/latest-run.json public/data/scan-state.json public/data/platform-audit.json
           git diff --cached --quiet || git commit -m "data: weekly intelligence update"
           git push
