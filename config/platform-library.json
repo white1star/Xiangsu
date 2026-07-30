@@ -1,55 +1,461 @@
 [
-  {"id":"national-ggzy","name":"全国公共资源交易平台","entryUrl":"https://www.ggzy.gov.cn/","category":"national","access":"anonymous","coverage":"全国工程、货物、矿业权及部分企业采购公告和结果","auditNote":"官方聚合入口；正式入账须保留原公告链接。"},
-  {"id":"ceb-public","name":"中国招标投标公共服务平台","entryUrl":"https://www.cebpubservice.com/","category":"national","access":"anonymous","coverage":"依法必须招标项目公告、中标候选人和结果","auditNote":"官方公告服务平台；以原公告链接为最终证据。"},
-  {"id":"ccgp","name":"中国政府采购网","entryUrl":"https://www.ccgp.gov.cn/","category":"national","access":"anonymous","coverage":"政府采购公告、成交和中标结果","auditNote":"政府及事业单位设备采购补充来源。"},
-  {"id":"cgs-procurement","name":"中国地质调查局政府采购与中标信息","entryUrl":"https://www.cgs.gov.cn/tzgg/zfcg_5637/","category":"national","access":"anonymous","coverage":"地质调查、矿产综合利用、选矿及科研设备采购和中标信息","auditNote":"XRT矿石分选设备的官方补充来源。"},
-  {"id":"mtzbw","name":"中国煤炭招标网","entryUrl":"https://www.mtzbw.cn/","category":"coal_owner","access":"anonymous","coverage":"煤炭行业招标、中标和项目线索","auditNote":"仅作公开聚合线索；正式入账必须回到官方原文。"},
-  {"id":"shanxi-ggzy","name":"山西省公共资源交易平台","entryUrl":"https://prec.sxzwfw.gov.cn/","category":"province","access":"anonymous","coverage":"山西煤矿、矿业权、工程和设备招标","auditNote":"产煤核心省份官方平台。"},
-  {"id":"shaanxi-ggzy","name":"全国公共资源交易平台（陕西省）","entryUrl":"https://www.sxggzyjy.cn/","category":"province","access":"anonymous","coverage":"陕西煤矿、矿业工程、设备招标","auditNote":"产煤核心省份官方平台。"},
-  {"id":"inner-mongolia-ggzy","name":"内蒙古自治区公共资源交易网","entryUrl":"https://ggzyjy.nmg.gov.cn/","category":"province","access":"anonymous","coverage":"内蒙古煤矿、选煤厂、矿业权和设备招标","auditNote":"产煤核心自治区官方平台。"},
-  {"id":"xinjiang-ggzy","name":"新疆公共资源交易网","entryUrl":"https://ggzy.xinjiang.gov.cn/","category":"province","access":"anonymous","coverage":"新疆煤矿、矿业工程和设备招标","auditNote":"产煤核心自治区官方平台。"},
-  {"id":"anhui-ggzy","name":"安徽省公共资源交易集团","entryUrl":"https://www.ahggzyjy.cn/","category":"province","access":"anonymous","coverage":"安徽煤矿、选煤、设备采购招标","auditNote":"淮北、淮南矿区的重要官方补充。"},
-  {"id":"shandong-ggzy","name":"山东省公共资源交易中心","entryUrl":"https://ggzyjy.shandong.gov.cn/","category":"province","access":"anonymous","coverage":"山东矿业、设备和工程招标","auditNote":"山东能源项目的官方补充。"},
-  {"id":"henan-ggzy","name":"河南省公共资源交易中心","entryUrl":"https://hnsggzyjy.henan.gov.cn/","category":"province","access":"anonymous","coverage":"河南煤矿、矿业权、设备和工程招标","auditNote":"公开公告可浏览。"},
-  {"id":"hebei-ggzy","name":"河北省公共资源交易服务平台","entryUrl":"https://www.hebpr.cn/","category":"province","access":"anonymous","coverage":"河北煤矿、矿业和装备项目招标","auditNote":"开滦等区域项目的官方补充。"},
-  {"id":"guizhou-ggzy","name":"贵州省公共资源交易中心","entryUrl":"https://ggzy.guizhou.gov.cn/","category":"province","access":"anonymous","coverage":"贵州煤矿、磷矿及矿业设备项目","auditNote":"煤炭与矿石分选双覆盖省份。"},
-  {"id":"gansu-ggzy","name":"甘肃省公共资源交易网","entryUrl":"https://ggzyjy.gansu.gov.cn/","category":"province","access":"anonymous","coverage":"甘肃煤矿、矿业工程和设备采购","auditNote":"金河、景泰等区域项目官方补充。"},
-  {"id":"gsei","name":"甘肃经济信息网","entryUrl":"https://www.gsei.com.cn/","category":"province","access":"anonymous","coverage":"甘肃工程、设备采购、中标候选人和中标结果公告","auditNote":"甘肃能源和矿业项目的公开结果补充来源。"},
-  {"id":"ningxia-ggzy","name":"宁夏回族自治区公共资源交易网","entryUrl":"https://www.nxggzyjy.org/","category":"province","access":"anonymous","coverage":"宁夏煤业、煤矿及设备项目","auditNote":"汝箕沟等区域项目官方补充。"},
-  {"id":"heilongjiang-ggzy","name":"黑龙江省公共资源交易网","entryUrl":"https://ggzyjyw.hlj.gov.cn/","category":"province","access":"anonymous","coverage":"龙煤矿业、煤矿改造及设备项目","auditNote":"东北煤炭项目官方补充。"},
-  {"id":"yunnan-ggzy","name":"云南省公共资源交易信息网","entryUrl":"https://ggzy.yn.gov.cn/","category":"province","access":"anonymous","coverage":"有色、非金属矿和矿石分选项目","auditNote":"XRT 矿石分选重点补充省份。"},
-  {"id":"sichuan-ggzy","name":"全国公共资源交易平台（四川省）","entryUrl":"https://ggzyjy.sc.gov.cn/","category":"province","access":"anonymous","coverage":"磷矿、有色矿及矿业设备项目","auditNote":"XRT 矿石分选重点补充省份。"},
-  {"id":"liaoning-ggzy","name":"辽宁省公共资源交易平台","entryUrl":"https://ggzy.ln.gov.cn/","category":"province","access":"anonymous","coverage":"铁矿、有色矿及矿山装备项目","auditNote":"东北矿石分选重点补充省份。"},
-  {"id":"qinghai-ggzy","name":"青海省公共资源交易网","entryUrl":"https://www.qhggzyjy.gov.cn/","category":"province","access":"anonymous","coverage":"盐湖、金属矿及矿业设备项目","auditNote":"矿石分选补充省份。"},
-
-  {"id":"ccteg","name":"中国煤科电子采购平台","entryUrl":"https://cg.ccteg.cn/cms/index.htm","category":"energy_owner","access":"registration_required","coverage":"煤炭洗选、设计院、装备采购和中标公告","auditNote":"公告可公开查阅；下载文件、报名和投标需供应商注册。"},
-  {"id":"chnenergy","name":"国能 e 招","entryUrl":"https://www.chnenergybidding.com.cn/bidweb/","category":"energy_owner","access":"registration_required","coverage":"国家能源集团煤矿、选煤厂、设备采购及中标公告","auditNote":"公告公开；供应商注册及 CA 是参与、下载和完整业务操作的前提。"},
-  {"id":"zmzb","name":"中煤招标与采购网","entryUrl":"https://www.zmzb.com/","category":"energy_owner","access":"registration_required","coverage":"中国中煤及所属矿井设备采购、中标公告","auditNote":"公告可见；业务已接入易购平台，报名、下载和投标需登录。"},
-  {"id":"ego-chinacoal","name":"中煤易购采购一体化平台","entryUrl":"https://ego.chinacoal.com/","category":"energy_owner","access":"registration_required","coverage":"中国中煤询价、采购文件和公开结果线索","auditNote":"采购参与、文件下载和完整历史检索需注册登录。"},
-  {"id":"spic-ebid","name":"国家电投电能易购招标采购平台","entryUrl":"https://ebid.espic.com.cn/","category":"energy_owner","access":"registration_required","coverage":"国家电投及内蒙古能源煤炭相关招标公告","auditNote":"公告入口公开；下载文件和投标需注册登录。"},
-  {"id":"powerchina","name":"中国电建采购招标数智化平台","entryUrl":"https://bid.powerchina.cn/","category":"energy_owner","access":"registration_required","coverage":"矿山、选矿和工程总包设备采购公告","auditNote":"查询部分公告公开；供应商注册、审核后才能取得完整文件。"},
-  {"id":"ceec","name":"中国能建电子采购平台","entryUrl":"https://ec.ceec.net.cn/","category":"energy_owner","access":"registration_required","coverage":"煤电、矿山工程及设备采购公告","auditNote":"下载文件和参与交易需注册登录。"},
-  {"id":"huaneng","name":"中国华能集团电子商务平台","entryUrl":"https://ec.chng.com.cn/","category":"energy_owner","access":"registration_required","coverage":"煤业、煤电、选煤相关设备及工程采购","auditNote":"公告可见；购买/下载文件和投标须登录。"},
-  {"id":"huadian","name":"中国华电集团电子商务平台","entryUrl":"https://www.chdtp.com/","category":"energy_owner","access":"registration_required","coverage":"煤炭、火电及相关设备采购","auditNote":"业务查询、文件取得和投标需账号。"},
-  {"id":"datang","name":"中国大唐电子商务平台","entryUrl":"https://www.cdt-ec.com/","category":"energy_owner","access":"registration_required","coverage":"煤电、燃料和设备采购公告","auditNote":"完整交易信息和文件下载需注册登录。"},
-  {"id":"datang-coal","name":"大唐煤炭电子购销平台","entryUrl":"https://www.dtrlcg.com/","category":"energy_owner","access":"registration_required","coverage":"煤炭采购、交易公告和燃料线索","auditNote":"煤炭业务深入查询及参与交易需账号。"},
-  {"id":"qin-yuan","name":"秦源招标电子招标平台（陕煤）","entryUrl":"https://qyzb.shccmg.com/","category":"coal_owner","access":"registration_required","coverage":"陕煤集团及所属矿业单位设备采购、中标公告","auditNote":"公告入口公开；文件下载、报名、投标需供应商注册。"},
-  {"id":"shandong-energy","name":"山东能源集团交易平台","entryUrl":"https://www.snjtds.com/","category":"coal_owner","access":"registration_required","coverage":"山东能源煤矿、洗选、装备采购和结果","auditNote":"未注册用户不能获得完整采购文件；平台使用及下载需登录。"},
-  {"id":"shandong-inquiry","name":"山东能源在线询比价平台","entryUrl":"https://snxy.minegoods.com/","category":"coal_owner","access":"registration_required","coverage":"询比价、物资采购和结果线索","auditNote":"完整询报价内容和参与交易需账号。"},
-  {"id":"huaihe","name":"淮河能源采购网","entryUrl":"https://www.hhnycg.com/","category":"coal_owner","access":"registration_required","coverage":"淮南矿业/淮河能源设备采购和中标公告","auditNote":"公告公开；正式文件、报名和投标需登录。"},
-  {"id":"huaibei","name":"淮北矿业电子招标采购平台","entryUrl":"https://zbcg.hbcoal.com/","category":"coal_owner","access":"registration_required","coverage":"淮北矿业干选机及配件采购公告","auditNote":"查看公告公开；正式文件及投标需注册。"},
-
-  {"id":"qcc","name":"企查查","entryUrl":"https://www.qcc.com/","category":"authentication","access":"login_required","coverage":"工商、司法、融资、招投标聚合","auditNote":"深度字段、批量导出和监控需要登录/会员；不绕过鉴权。"},
-  {"id":"tianyancha","name":"天眼查","entryUrl":"https://www.tianyancha.com/","category":"authentication","access":"login_required","coverage":"工商、司法、融资、招投标聚合","auditNote":"深度字段、批量导出和监控需要登录/会员；不绕过鉴权。"},
-  {"id":"aiqicha","name":"爱企查","entryUrl":"https://aiqicha.baidu.com/","category":"authentication","access":"login_required","coverage":"企业关系、风险和招投标信息","auditNote":"完整企业信息、消息和部分服务需百度账号登录。"},
-  {"id":"qixin","name":"启信宝","entryUrl":"https://www.qixin.com/home","category":"authentication","access":"login_required","coverage":"企业信用、关系、招投标和风险信息","auditNote":"深度查询、企业版功能及接口需登录或授权。"},
-  {"id":"chinabidding-commercial","name":"中国采购与招标网","entryUrl":"https://www.chinabidding.com/","category":"authentication","access":"login_required","coverage":"商业招投标聚合和订阅","auditNote":"完整检索、历史库和订阅通常需要登录/付费。"},
-  {"id":"qianlima","name":"千里马招标网","entryUrl":"https://www.qianlima.com/","category":"authentication","access":"login_required","coverage":"全国招标、中标、拟在建项目和订阅","auditNote":"完整历史招标公告及高级检索受账户/会员限制。"},
-  {"id":"jianyu","name":"剑鱼标讯","entryUrl":"https://www.jianyu360.cn/","category":"authentication","access":"login_required","coverage":"招标、中标、业主监控和企业投标画像","auditNote":"检索、订阅、监控及完整详情需要验证码登录/会员。"},
-  {"id":"xunbiaobao","name":"寻标宝","entryUrl":"https://xunbiaobao.baidu.com/s","category":"authentication","access":"login_required","coverage":"全国招投标信息查询和项目订阅","auditNote":"平台明确提供登录/注册；完整使用应在用户会话中进行。"},
-  {"id":"bidcenter","name":"中国招标网","entryUrl":"https://www.bidcenter.com.cn/","category":"authentication","access":"login_required","coverage":"招标公告、中标结果和项目订阅","auditNote":"高级查询、订阅和部分详情受账户/会员限制。"},
-  {"id":"ebnew","name":"必联网","entryUrl":"https://www.ebnew.com/","category":"authentication","access":"login_required","coverage":"招标采购、国际招标和中标信息","auditNote":"深度检索、订阅及业务功能需登录。"},
-  {"id":"yfbzb","name":"乙方宝招标网","entryUrl":"https://www.yfbzb.com/","category":"authentication","access":"login_required","coverage":"招标、中标、采购商及项目线索","auditNote":"完整信息、项目订阅和联系方式通常需要登录/会员。"},
-  {"id":"bibenet","name":"比比网","entryUrl":"https://www.bibenet.com/","category":"authentication","access":"login_required","coverage":"招投标信息、企业商机和项目监控","auditNote":"完整详情、导出和订阅受账户/会员限制。"},
-  {"id":"ztb8","name":"招投标信息网","entryUrl":"https://www.ztb8.com/","category":"authentication","access":"login_required","coverage":"跨平台历史招标信息聚合","auditNote":"完整历史库和订阅需要登录/付费；仅作线索，不作为最终证据。"}
+  {
+    "id": "national-ggzy",
+    "name": "全国公共资源交易平台",
+    "entryUrl": "https://www.ggzy.gov.cn/",
+    "category": "national",
+    "access": "anonymous",
+    "coverage": "全国工程、货物、矿业权及部分企业采购公告和结果",
+    "auditNote": "官方聚合入口；正式入账须保留原公告链接。"
+  },
+  {
+    "id": "ceb-public",
+    "name": "中国招标投标公共服务平台",
+    "entryUrl": "https://www.cebpubservice.com/",
+    "category": "national",
+    "access": "anonymous",
+    "coverage": "依法必须招标项目公告、中标候选人和结果",
+    "auditNote": "官方公告服务平台；以原公告链接为最终证据。"
+  },
+  {
+    "id": "ccgp",
+    "name": "中国政府采购网",
+    "entryUrl": "https://www.ccgp.gov.cn/",
+    "category": "national",
+    "access": "anonymous",
+    "coverage": "政府采购公告、成交和中标结果",
+    "auditNote": "政府及事业单位设备采购补充来源。"
+  },
+  {
+    "id": "cgs-procurement",
+    "name": "中国地质调查局政府采购与中标信息",
+    "entryUrl": "https://www.cgs.gov.cn/tzgg/zfcg_5637/",
+    "category": "national",
+    "access": "anonymous",
+    "coverage": "地质调查、矿产综合利用、选矿及科研设备采购和中标信息",
+    "auditNote": "XRT矿石分选设备的官方补充来源。"
+  },
+  {
+    "id": "mtzbw",
+    "name": "中国煤炭招标网",
+    "entryUrl": "https://www.mtzbw.cn/",
+    "category": "coal_owner",
+    "access": "anonymous",
+    "coverage": "煤炭行业招标、中标和项目线索",
+    "auditNote": "仅作公开聚合线索；正式入账必须回到官方原文。"
+  },
+  {
+    "id": "shanxi-ggzy",
+    "name": "山西省公共资源交易平台",
+    "entryUrl": "https://prec.sxzwfw.gov.cn/",
+    "category": "province",
+    "access": "anonymous",
+    "coverage": "山西煤矿、矿业权、工程和设备招标",
+    "auditNote": "产煤核心省份官方平台。"
+  },
+  {
+    "id": "shaanxi-ggzy",
+    "name": "全国公共资源交易平台（陕西省）",
+    "entryUrl": "https://www.sxggzyjy.cn/",
+    "category": "province",
+    "access": "anonymous",
+    "coverage": "陕西煤矿、矿业工程、设备招标",
+    "auditNote": "产煤核心省份官方平台。"
+  },
+  {
+    "id": "inner-mongolia-ggzy",
+    "name": "内蒙古自治区公共资源交易网",
+    "entryUrl": "https://ggzyjy.nmg.gov.cn/",
+    "category": "province",
+    "access": "anonymous",
+    "coverage": "内蒙古煤矿、选煤厂、矿业权和设备招标",
+    "auditNote": "产煤核心自治区官方平台。"
+  },
+  {
+    "id": "xinjiang-ggzy",
+    "name": "新疆公共资源交易网",
+    "entryUrl": "https://ggzy.xinjiang.gov.cn/",
+    "category": "province",
+    "access": "anonymous",
+    "coverage": "新疆煤矿、矿业工程和设备招标",
+    "auditNote": "产煤核心自治区官方平台。"
+  },
+  {
+    "id": "anhui-ggzy",
+    "name": "安徽省公共资源交易集团",
+    "entryUrl": "https://www.ahggzyjy.cn/",
+    "category": "province",
+    "access": "anonymous",
+    "coverage": "安徽煤矿、选煤、设备采购招标",
+    "auditNote": "淮北、淮南矿区的重要官方补充。"
+  },
+  {
+    "id": "shandong-ggzy",
+    "name": "山东省公共资源交易中心",
+    "entryUrl": "https://ggzyjy.shandong.gov.cn/",
+    "category": "province",
+    "access": "anonymous",
+    "coverage": "山东矿业、设备和工程招标",
+    "auditNote": "山东能源项目的官方补充。"
+  },
+  {
+    "id": "henan-ggzy",
+    "name": "河南省公共资源交易中心",
+    "entryUrl": "https://hnsggzyjy.henan.gov.cn/",
+    "category": "province",
+    "access": "anonymous",
+    "coverage": "河南煤矿、矿业权、设备和工程招标",
+    "auditNote": "公开公告可浏览。"
+  },
+  {
+    "id": "hebei-ggzy",
+    "name": "河北省公共资源交易服务平台",
+    "entryUrl": "https://www.hebpr.cn/",
+    "category": "province",
+    "access": "anonymous",
+    "coverage": "河北煤矿、矿业和装备项目招标",
+    "auditNote": "开滦等区域项目的官方补充。"
+  },
+  {
+    "id": "guizhou-ggzy",
+    "name": "贵州省公共资源交易中心",
+    "entryUrl": "https://ggzy.guizhou.gov.cn/",
+    "category": "province",
+    "access": "anonymous",
+    "coverage": "贵州煤矿、磷矿及矿业设备项目",
+    "auditNote": "煤炭与矿石分选双覆盖省份。"
+  },
+  {
+    "id": "gansu-ggzy",
+    "name": "甘肃省公共资源交易网",
+    "entryUrl": "https://ggzyjy.gansu.gov.cn/",
+    "category": "province",
+    "access": "anonymous",
+    "coverage": "甘肃煤矿、矿业工程和设备采购",
+    "auditNote": "金河、景泰等区域项目官方补充。"
+  },
+  {
+    "id": "gsei",
+    "name": "甘肃经济信息网",
+    "entryUrl": "https://www.gsei.com.cn/",
+    "category": "province",
+    "access": "anonymous",
+    "coverage": "甘肃工程、设备采购、中标候选人和中标结果公告",
+    "auditNote": "甘肃能源和矿业项目的公开结果补充来源。"
+  },
+  {
+    "id": "ningxia-ggzy",
+    "name": "宁夏回族自治区公共资源交易网",
+    "entryUrl": "https://www.nxggzyjy.org/",
+    "category": "province",
+    "access": "anonymous",
+    "coverage": "宁夏煤业、煤矿及设备项目",
+    "auditNote": "汝箕沟等区域项目官方补充。"
+  },
+  {
+    "id": "heilongjiang-ggzy",
+    "name": "黑龙江省公共资源交易网",
+    "entryUrl": "https://ggzyjyw.hlj.gov.cn/",
+    "category": "province",
+    "access": "anonymous",
+    "coverage": "龙煤矿业、煤矿改造及设备项目",
+    "auditNote": "东北煤炭项目官方补充。"
+  },
+  {
+    "id": "yunnan-ggzy",
+    "name": "云南省公共资源交易信息网",
+    "entryUrl": "https://ggzy.yn.gov.cn/",
+    "category": "province",
+    "access": "anonymous",
+    "coverage": "有色、非金属矿和矿石分选项目",
+    "auditNote": "XRT 矿石分选重点补充省份。"
+  },
+  {
+    "id": "sichuan-ggzy",
+    "name": "全国公共资源交易平台（四川省）",
+    "entryUrl": "https://ggzyjy.sc.gov.cn/",
+    "category": "province",
+    "access": "anonymous",
+    "coverage": "磷矿、有色矿及矿业设备项目",
+    "auditNote": "XRT 矿石分选重点补充省份。"
+  },
+  {
+    "id": "liaoning-ggzy",
+    "name": "辽宁省公共资源交易平台",
+    "entryUrl": "https://ggzy.ln.gov.cn/",
+    "category": "province",
+    "access": "anonymous",
+    "coverage": "铁矿、有色矿及矿山装备项目",
+    "auditNote": "东北矿石分选重点补充省份。"
+  },
+  {
+    "id": "qinghai-ggzy",
+    "name": "青海省公共资源交易网",
+    "entryUrl": "https://www.qhggzyjy.gov.cn/",
+    "category": "province",
+    "access": "anonymous",
+    "coverage": "盐湖、金属矿及矿业设备项目",
+    "auditNote": "矿石分选补充省份。"
+  },
+  {
+    "id": "ccteg",
+    "name": "中国煤科电子采购平台",
+    "entryUrl": "https://cg.ccteg.cn/cms/index.htm",
+    "category": "energy_owner",
+    "access": "public_listing",
+    "coverage": "煤炭洗选、设计院、装备采购和中标公告",
+    "auditNote": "公告可公开查阅（实测入口200、含招标公告列表）；下载文件、报名和投标需供应商注册。"
+  },
+  {
+    "id": "chnenergy",
+    "name": "国能 e 招",
+    "entryUrl": "https://www.chnenergybidding.com.cn/bidweb/",
+    "category": "energy_owner",
+    "access": "public_listing",
+    "coverage": "国家能源集团煤矿、选煤厂、设备采购及中标公告",
+    "auditNote": "公告公开可匿名浏览（实测入口200、含公告列表）；供应商注册及CA是下载和投标的前提。"
+  },
+  {
+    "id": "zmzb",
+    "name": "中煤招标与采购网",
+    "entryUrl": "https://www.zmzb.com/",
+    "category": "energy_owner",
+    "access": "anonymous",
+    "coverage": "中国中煤及所属矿井设备采购、中标公告",
+    "auditNote": "公告列表页（/cms/channel/ywggNhw/index.htm）公开可匿名浏览；报名、下载和投标需登录。"
+  },
+  {
+    "id": "ego-chinacoal",
+    "name": "中煤易购采购一体化平台",
+    "entryUrl": "https://ego.chinacoal.com/",
+    "category": "energy_owner",
+    "access": "login_required",
+    "coverage": "中国中煤询价、采购文件和公开结果线索",
+    "auditNote": "列表接口返回401（实测），公告浏览需登录；采购参与、文件下载需注册。"
+  },
+  {
+    "id": "spic-ebid",
+    "name": "国家电投电能易购招标采购平台",
+    "entryUrl": "https://ebid.espic.com.cn/",
+    "category": "energy_owner",
+    "access": "login_required",
+    "coverage": "国家电投及内蒙古能源煤炭相关招标公告",
+    "auditNote": "入口为SPA动态加载（实测560字节空壳），公告列表需前端会话；下载和投标需注册登录。"
+  },
+  {
+    "id": "powerchina",
+    "name": "中国电建采购招标数智化平台",
+    "entryUrl": "https://bid.powerchina.cn/",
+    "category": "energy_owner",
+    "access": "login_required",
+    "coverage": "矿山、选矿和工程总包设备采购公告",
+    "auditNote": "公告列表路径404（实测），入口为SPA；供应商注册审核后才能取得完整文件。"
+  },
+  {
+    "id": "ceec",
+    "name": "中国能建电子采购平台",
+    "entryUrl": "https://ec.ceec.net.cn/",
+    "category": "energy_owner",
+    "access": "login_required",
+    "coverage": "煤电、矿山工程及设备采购公告",
+    "auditNote": "入口可达但公告列表为SPA动态加载（实测）；下载文件和参与交易需注册登录。"
+  },
+  {
+    "id": "huaneng",
+    "name": "中国华能集团电子商务平台",
+    "entryUrl": "https://ec.chng.com.cn/",
+    "category": "energy_owner",
+    "access": "login_required",
+    "coverage": "煤业、煤电、选煤相关设备及工程采购",
+    "auditNote": "访问返回412（WAF反爬，实测），匿名无法稳定浏览；下载和投标需登录。"
+  },
+  {
+    "id": "huadian",
+    "name": "中国华电集团电子商务平台",
+    "entryUrl": "https://www.chdtp.com/",
+    "category": "energy_owner",
+    "access": "login_required",
+    "coverage": "煤炭、火电及相关设备采购",
+    "auditNote": "访问返回412（WAF反爬，实测），匿名无法稳定浏览；业务查询需账号。"
+  },
+  {
+    "id": "datang",
+    "name": "中国大唐电子商务平台",
+    "entryUrl": "https://www.cdt-ec.com/",
+    "category": "energy_owner",
+    "access": "login_required",
+    "coverage": "煤电、燃料和设备采购公告",
+    "auditNote": "公告列表路径404（实测），入口为SPA；完整交易信息和文件下载需注册登录。"
+  },
+  {
+    "id": "datang-coal",
+    "name": "大唐煤炭电子购销平台",
+    "entryUrl": "https://www.dtrlcg.com/",
+    "category": "energy_owner",
+    "access": "login_required",
+    "coverage": "煤炭采购、交易公告和燃料线索",
+    "auditNote": "连接失败（实测）；煤炭业务深入查询及参与交易需账号。"
+  },
+  {
+    "id": "qin-yuan",
+    "name": "秦源招标电子招标平台（陕煤）",
+    "entryUrl": "https://qyzb.shccmg.com/",
+    "category": "coal_owner",
+    "access": "anonymous",
+    "coverage": "陕煤集团及所属矿业单位设备采购、中标公告",
+    "auditNote": "公告入口公开可匿名浏览；文件下载、报名和投标需供应商注册。"
+  },
+  {
+    "id": "shandong-energy",
+    "name": "山东能源集团交易平台",
+    "entryUrl": "https://www.snjtds.com/",
+    "category": "coal_owner",
+    "access": "login_required",
+    "coverage": "山东能源煤矿、洗选、装备采购和结果",
+    "auditNote": "连接失败（实测，可能SSL/网络限制）；未注册用户不能获得完整采购文件。"
+  },
+  {
+    "id": "shandong-inquiry",
+    "name": "山东能源在线询比价平台",
+    "entryUrl": "https://snxy.minegoods.com/",
+    "category": "coal_owner",
+    "access": "public_listing",
+    "coverage": "询比价、物资采购和结果线索",
+    "auditNote": "询比价公告可匿名浏览（实测入口200）；完整询报价内容和参与交易需账号。"
+  },
+  {
+    "id": "huaihe",
+    "name": "淮河能源采购网",
+    "entryUrl": "https://www.hhnycg.com/",
+    "category": "coal_owner",
+    "access": "login_required",
+    "coverage": "淮南矿业/淮河能源设备采购和中标公告",
+    "auditNote": "入口为SPA空壳（实测1166字节），公告需前端会话加载；正式文件、报名和投标需登录。"
+  },
+  {
+    "id": "huaibei",
+    "name": "淮北矿业电子招标采购平台",
+    "entryUrl": "https://zbcg.hbcoal.com/",
+    "category": "coal_owner",
+    "access": "login_required",
+    "coverage": "淮北矿业干选机及配件采购公告",
+    "auditNote": "公告详情页可匿名访问（如涡北中标），但列表页需JS动态加载（实测空壳）；正式文件及投标需注册。"
+  },
+  {
+    "id": "qcc",
+    "name": "企查查",
+    "entryUrl": "https://www.qcc.com/",
+    "category": "authentication",
+    "access": "login_required",
+    "coverage": "工商、司法、融资、招投标聚合",
+    "auditNote": "入口可达但招标聚合为SPA动态加载（实测）；深度字段、批量导出和监控需登录/会员。"
+  },
+  {
+    "id": "tianyancha",
+    "name": "天眼查",
+    "entryUrl": "https://www.tianyancha.com/",
+    "category": "authentication",
+    "access": "login_required",
+    "coverage": "工商、司法、融资、招投标聚合",
+    "auditNote": "招标聚合为SPA动态加载（实测）；深度字段、批量导出和监控需登录/会员。"
+  },
+  {
+    "id": "aiqicha",
+    "name": "爱企查",
+    "entryUrl": "https://aiqicha.baidu.com/",
+    "category": "authentication",
+    "access": "login_required",
+    "coverage": "企业关系、风险和招投标信息",
+    "auditNote": "企业信息为SPA动态加载（实测）；完整企业信息需百度账号登录。"
+  },
+  {
+    "id": "qixin",
+    "name": "启信宝",
+    "entryUrl": "https://www.qixin.com/home",
+    "category": "authentication",
+    "access": "login_required",
+    "coverage": "企业信用、关系、招投标和风险信息",
+    "auditNote": "信息为SPA动态加载（实测）；深度查询、企业版功能及接口需登录或授权。"
+  },
+  {
+    "id": "chinabidding-commercial",
+    "name": "中国采购与招标网",
+    "entryUrl": "https://www.chinabidding.com/",
+    "category": "authentication",
+    "access": "login_required",
+    "coverage": "商业招投标聚合和订阅",
+    "auditNote": "访问返回521（源站拒绝，实测）；完整检索、历史库和订阅通常需登录/付费。"
+  },
+  {
+    "id": "qianlima",
+    "name": "千里马招标网",
+    "entryUrl": "https://www.qianlima.com/",
+    "category": "authentication",
+    "access": "login_required",
+    "coverage": "全国招标、中标、拟在建项目和订阅",
+    "auditNote": "入口可达但历史招标为SPA（实测）；完整历史招标公告及高级检索受账户/会员限制。"
+  },
+  {
+    "id": "jianyu",
+    "name": "剑鱼标讯",
+    "entryUrl": "https://www.jianyu360.cn/",
+    "category": "authentication",
+    "access": "public_listing",
+    "coverage": "招标、中标、业主监控和企业投标画像",
+    "auditNote": "招标/中标公告可匿名浏览；订阅、监控和���整详情需登录/会员。"
+  },
+  {
+    "id": "xunbiaobao",
+    "name": "寻标宝",
+    "entryUrl": "https://xunbiaobao.baidu.com/s",
+    "category": "authentication",
+    "access": "anonymous",
+    "coverage": "全国招投标信息查询和项目订阅",
+    "auditNote": "招标信息可匿名检索浏览；订阅和完整详情需登录。"
+  },
+  {
+    "id": "bidcenter",
+    "name": "中国招标网",
+    "entryUrl": "https://www.bidcenter.com.cn/",
+    "category": "authentication",
+    "access": "public_listing",
+    "coverage": "招标公告、中标结果和项目订阅",
+    "auditNote": "公告可匿名浏览；高级查询、订阅和部分详情受账户/会员限制。"
+  },
+  {
+    "id": "ebnew",
+    "name": "必联网",
+    "entryUrl": "https://www.ebnew.com/",
+    "category": "authentication",
+    "access": "public_listing",
+    "coverage": "招标采购、国际招标和中标信息",
+    "auditNote": "公告可匿名浏览；深度检索、订阅及业务功能需登录。"
+  },
+  {
+    "id": "yfbzb",
+    "name": "乙方宝招标网",
+    "entryUrl": "https://www.yfbzb.com/",
+    "category": "authentication",
+    "access": "public_listing",
+    "coverage": "招标、中标、采购商及项目线索",
+    "auditNote": "公告可匿名浏览；完整信息、订阅和联系方式通常需登录/会员。"
+  },
+  {
+    "id": "bibenet",
+    "name": "比比网",
+    "entryUrl": "https://www.bibenet.com/",
+    "category": "authentication",
+    "access": "login_required",
+    "coverage": "招投标信息、企业商机和项目监控",
+    "auditNote": "连接失败（实测）；完整详情、导出和订阅受账户/会员限制。"
+  },
+  {
+    "id": "ztb8",
+    "name": "招投标信息网",
+    "entryUrl": "https://www.ztb8.com/",
+    "category": "authentication",
+    "access": "login_required",
+    "coverage": "跨平台历史招标信息聚合",
+    "auditNote": "连接失败（实测）；完整历史库和订阅需登录/付费，仅作线索。"
+  }
 ]
