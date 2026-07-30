@@ -36,6 +36,7 @@ function Detail({ item, onClose }) { return <div className="detail"><div><button
 
 function SourcePage({ type }) {
   const authentication = type === '平台清单';
-  const entries = platformLibrary.filter(platform => authentication ? platform.access === 'login_required' : platform.access === 'anonymous');
-  return <div className="source-page"><p>{authentication ? '需账号、注册或付费的平台只列入口；系统不会绕过鉴权。' : '匿名公开平台库：公开浏览不代表可以绕过下载、投标或付费权限。每周会复审平台入口可达性。'}</p><p className="source-count">已收录 {entries.length} 个{authentication ? '需鉴权' : '匿名公开'}平台。</p><table><thead><tr><th>平台</th><th>覆盖内容</th><th>复审说明</th></tr></thead><tbody>{entries.map(platform => <tr key={platform.id}><td><a href={platform.entryUrl} target="_blank" rel="noreferrer">{platform.name} ↗</a></td><td>{platform.coverage}</td><td>{platform.auditNote}</td></tr>)}</tbody></table></div>;
+  const entries = platformLibrary.filter(platform => authentication ? platform.access !== 'anonymous' : platform.access === 'anonymous');
+  const accessLabel = access => access === 'registration_required' ? '需注册/登录' : '需登录/会员';
+  return <div className="source-page"><p>{authentication ? '这里列的是两类受限来源：公告可看但完整文件或深度查询要注册的平台，以及本身需登录或会员的商业情报库。系统不会绕过鉴权；你登录后再在已授权会话中抓取。' : '仅保留可匿名浏览的公开入口。公开浏览不代表可以绕过下载、投标或付费权限；正式入账仍须保存原公告。'}</p><p className="source-count">已收录 {entries.length} 个{authentication ? '需鉴权' : '匿名公开'}平台。</p><table><thead><tr><th>平台</th>{authentication && <th>权限</th>}<th>覆盖内容</th><th>复审说明</th></tr></thead><tbody>{entries.map(platform => <tr key={platform.id}><td><a href={platform.entryUrl} target="_blank" rel="noreferrer">{platform.name} ↗</a></td>{authentication && <td><span className="access-tag">{accessLabel(platform.access)}</span></td>}<td>{platform.coverage}</td><td>{platform.auditNote}</td></tr>)}</tbody></table></div>;
 }
