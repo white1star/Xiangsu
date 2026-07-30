@@ -10,10 +10,13 @@ const icons = ['▣', '◉', '◌'];
 const PAGE_SIZE = 10;
 const PHASE_OPTIONS = ['全部', '待开标', '已开标', '未披露', '中标候选人', '已中标'];
 
-function openCell(item) {
-  if (item.bid !== '招标公告') return item.bidOpenDate || '—';
-  if (!item.bidOpenDate) return '未披露';
-  return `${item.bidOpenDate} ${item.openStatus === '已开标' ? '·已开标' : '·待开标'}`;
+function bidCell(item) {
+  let s = item.bid;
+  if (item.bid === '招标公告') {
+    s += item.bidOpenDate ? ` ${item.bidOpenDate}·${item.openStatus}` : ' 开标未披露';
+    if (item.resultGap) s += ' ⚠';
+  }
+  return s;
 }
 
 // 招标公告按开标核对派生状态；结果类按公告类型。供“招标状态”筛选。
@@ -45,7 +48,7 @@ export default function App() {
     <section className="workspace"><header><h1>{page === '情报台账' ? '公开情报台账' : page}</h1><div><button className="export" onClick={() => window.print()}>导出 / 打印</button></div></header>
       {page === '情报台账' ? <>
         <div className="filters"><label>产品线{select(line, setLine, 'line')}</label><label>竞品{select(competitor, setCompetitor, 'competitor')}</label><label>地区{select(region, setRegion, 'region')}</label><label>置信度{select(confidence, setConfidence, 'confidence')}</label><label>招标状态{phaseSelect}</label></div>
-        <div className="tablebox"><table><thead><tr>{['情报标题', '产品线', '竞品', '地区', '金额', '中标情况', '开标', '来源', '置信度', '发布日期'].map(item => <th key={item}>{item}</th>)}</tr></thead><tbody>{pageRows.map(item => <tr key={item.url} onClick={() => setSelected(item)}>{[item.title, item.line, item.competitor, item.region, item.amount, item.bid, openCell(item), <a href={item.url} target="_blank" rel="noreferrer" onClick={event => event.stopPropagation()}>{item.source} ↗</a>, item.confidence, item.date].map((value, index) => <td className={index === 5 ? `bid ${item.bid}` : index === 8 ? `confidence ${item.confidence}` : ''} key={index}>{value}</td>)}</tr>)}</tbody></table></div>
+        <div className="tablebox"><table><thead><tr>{['情报标题', '产品线', '竞品', '地区', '金额', '中标情况', '来源', '置信度', '发布日期'].map(item => <th key={item}>{item}</th>)}</tr></thead><tbody>{pageRows.map(item => <tr key={item.url} onClick={() => setSelected(item)}>{[item.title, item.line, item.competitor, item.region, item.amount, bidCell(item), <a href={item.url} target="_blank" rel="noreferrer" onClick={event => event.stopPropagation()}>{item.source} ↗</a>, item.confidence, item.date].map((value, index) => <td className={index === 5 ? `bid ${item.bid}` : index === 7 ? `confidence ${item.confidence}` : ''} key={index}>{value}</td>)}</tr>)}</tbody></table></div>
         <footer><span>共 {filtered.length} 条　|　第 {current}/{totalPages} 页</span><span className="pager"><button disabled={current <= 1} onClick={() => setPageNum(current - 1)}>上一页</button><button disabled={current >= totalPages} onClick={() => setPageNum(current + 1)}>下一页</button></span><span>点击任意记录查看证据摘要</span></footer>
         {selected && <Detail item={selected} onClose={() => setSelected(null)} />}
       </> : <SourcePage type={page} />}
