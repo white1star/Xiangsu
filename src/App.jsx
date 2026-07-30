@@ -28,13 +28,12 @@ function phaseOf(item) {
 export default function App() {
   const [line, setLine] = useState('全部');
   const [competitor, setCompetitor] = useState('全部');
-  const [region, setRegion] = useState('全部');
   const [confidence, setConfidence] = useState('全部');
   const [phase, setPhase] = useState('全部');
   const [page, setPage] = useState('情报台账');
   const [pageNum, setPageNum] = useState(1);
   const [selected, setSelected] = useState(null);
-  const filtered = useMemo(() => rows.filter(item => (line === '全部' || item.line === line) && (competitor === '全部' || item.competitor === competitor) && (region === '全部' || item.region === region) && (confidence === '全部' || item.confidence === confidence) && (phase === '全部' || phaseOf(item) === phase)), [line, competitor, region, confidence, phase]);
+  const filtered = useMemo(() => rows.filter(item => (line === '全部' || item.line === line) && (competitor === '全部' || item.competitor === competitor) && (confidence === '全部' || item.confidence === confidence) && (phase === '全部' || phaseOf(item) === phase)), [line, competitor, confidence, phase]);
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const current = Math.min(Math.max(1, pageNum), totalPages);
   const pageRows = filtered.slice((current - 1) * PAGE_SIZE, current * PAGE_SIZE);
@@ -47,8 +46,8 @@ export default function App() {
     <aside><div className="brand"><div className="mark">◈</div><b>唐山像素智能</b></div><nav>{['情报台账', '来源分类', '平台清单'].map((item, index) => <button className={page === item ? 'active' : ''} onClick={() => setPage(item)} key={item}><i>{icons[index]}</i>{item}</button>)}</nav></aside>
     <section className="workspace"><header><h1>{page === '情报台账' ? '公开情报台账' : page}</h1><div><button className="export" onClick={() => window.print()}>导出 / 打印</button></div></header>
       {page === '情报台账' ? <>
-        <div className="filters"><label>产品线{select(line, setLine, 'line')}</label><label>竞品{select(competitor, setCompetitor, 'competitor')}</label><label>地区{select(region, setRegion, 'region')}</label><label>置信度{select(confidence, setConfidence, 'confidence')}</label><label>招标状态{phaseSelect}</label></div>
-        <div className="tablebox"><table><thead><tr>{['情报标题', '产品线', '竞品', '地区', '金额', '中标情况', '来源', '置信度', '发布日期'].map(item => <th key={item}>{item}</th>)}</tr></thead><tbody>{pageRows.map(item => <tr key={item.url} onClick={() => setSelected(item)}>{[item.title, item.line, item.competitor, item.region, item.amount, bidCell(item), <a href={item.url} target="_blank" rel="noreferrer" onClick={event => event.stopPropagation()}>{item.source} ↗</a>, item.confidence, item.date].map((value, index) => <td className={index === 5 ? `bid ${item.bid}` : index === 7 ? `confidence ${item.confidence}` : ''} key={index}>{value}</td>)}</tr>)}</tbody></table></div>
+        <div className="filters"><label>产品线{select(line, setLine, 'line')}</label><label>竞品{select(competitor, setCompetitor, 'competitor')}</label><label>置信度{select(confidence, setConfidence, 'confidence')}</label><label>招标状态{phaseSelect}</label></div>
+        <div className="tablebox"><table><thead><tr>{['情报标题', '产品线', '竞品', '金额', '中标情况', '来源', '置信度', '发布日期'].map(item => <th key={item}>{item}</th>)}</tr></thead><tbody>{pageRows.map(item => <tr key={item.url} onClick={() => setSelected(item)}>{[item.title, item.line, item.competitor, item.amount, bidCell(item), <a href={item.url} target="_blank" rel="noreferrer" onClick={event => event.stopPropagation()}>{item.source} ↗</a>, item.confidence, item.date].map((value, index) => <td className={index === 4 ? `bid ${item.bid}` : index === 6 ? `confidence ${item.confidence}` : ''} key={index}>{value}</td>)}</tr>)}</tbody></table></div>
         <footer><span>共 {filtered.length} 条　|　第 {current}/{totalPages} 页</span><span className="pager"><button disabled={current <= 1} onClick={() => setPageNum(current - 1)}>上一页</button><button disabled={current >= totalPages} onClick={() => setPageNum(current + 1)}>下一页</button></span><span>点击任意记录查看证据摘要</span></footer>
         {selected && <Detail item={selected} onClose={() => setSelected(null)} />}
       </> : <SourcePage type={page} />}
