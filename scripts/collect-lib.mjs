@@ -93,6 +93,33 @@ export function extractWinner(text) {
   return null;
 }
 
+// 从招标公告原文抽取“开标时间/开标日期”。优先“开标时间/开标日期”锚点，
+// 兜底“投标/投标文件递交截止时间”。归一到 YYYY-MM-DD（忽略时分）。
+export function extractBidOpenDate(text) {
+  if (!text) return null;
+  const decoded = text
+    .replace(/&ensp;|&emsp;|&nbsp;/g, ' ')
+    .replace(/&ldquo;|&rdquo;|&lsquo;|&rsquo;/g, '"')
+    .replace(/&amp;/g, '&')
+    .replace(/\s+/g, ' ');
+  const dateRe = /(20\d{2})[-/.年\s]\s*(\d{1,2})[-/.月\s]\s*(\d{1,2})/;
+  const trySlice = slice => {
+    const m = slice.match(dateRe);
+    return m ? `${m[1]}-${m[2].padStart(2, '0')}-${m[3].padStart(2, '0')}` : null;
+  };
+  for (const anchor of ['开标时间', '开标日期']) {
+    const i = decoded.indexOf(anchor);
+    if (i >= 0) { const r = trySlice(decoded.slice(i, i + 40)); if (r) return r; }
+  }
+  const bi = decoded.indexOf('开标');
+  if (bi >= 0) { const r = trySlice(decoded.slice(bi, bi + 40)); if (r) return r; }
+  for (const anchor of ['递交截止时间', '投标截止时间', '投标文件递交截止时间', '递交截止', '截止时间']) {
+    const i = decoded.indexOf(anchor);
+    if (i >= 0) { const r = trySlice(decoded.slice(i, i + 40)); if (r) return r; }
+  }
+  return null;
+}
+
 export function buildWindow(mode, today = new Date()) {
   const end = today.toISOString().slice(0, 10);
   if (mode === 'backfill') return { from: MINIMUM_PUBLISH_DATE, to: end };
@@ -113,7 +140,7 @@ export function htmlToText(html) {
 
 export function excerptEvidence(text, maxLength = 220) {
   if (!text) return '';
-  const anchors = ['中标候选人', '中标单位', '中标人', '成交供应商', '中标价格', '成交金额', '中标金额'];
+  const anchors = ['中标候选人', '中标单位', '中标人', '成交供应商', '中标价格', '成交金额', '中标金额', '开标时间', '开标日期', '投标截止', '递交截止'];
   for (const anchor of anchors) {
     const idx = text.indexOf(anchor);
     if (idx >= 0) return text.slice(Math.max(0, idx - 30), idx + maxLength - 30).trim();
@@ -155,7 +182,7 @@ function makeCandidate({ title, url, source, publishDate, typeText = '', region,
   return { title, url, source, publishDate, line, bidStatus, region: region || '待核实', sourceAuthority };
 }
 
-async function enrichFromOfficialDetail(candidate, detailUrl) {
+export async function enrichFromOfficialDetail(candidate, detailUrl) {
   try {
     const { status, text } = await fetchText(detailUrl, { timeout: 25000 });
     if (status !== 200 || text.length < 500) return candidate;
@@ -168,6 +195,9 @@ async function enrichFromOfficialDetail(candidate, detailUrl) {
       const winner = extractWinner(body);
       if (amount) candidate.amount = amount.display;
       if (winner) candidate.competitor = candidate.bidStatus === '中标候选人' ? `${winner}（第一候选人）` : winner;
+    } else if (candidate.bidStatus === '招标公告') {
+      // 招标公告：抽取开标日期，用于与当前日期核对（已开标/待开标）。
+      candidate.bidOpenDate = extractBidOpenDate(body) || null;
     }
     return candidate;
   } catch {

@@ -9,7 +9,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ADAPTERS, buildWindow, MINIMUM_PUBLISH_DATE as MIN_DATE } from './collect-lib.mjs';
+import { ADAPTERS, buildWindow, enrichFromOfficialDetail, MINIMUM_PUBLISH_DATE as MIN_DATE } from './collect-lib.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const rulesFile = path.join(root, 'config', 'scan-rules.json');
@@ -56,6 +56,7 @@ export function mergeCandidates(existing, candidates) {
       competitor: candidate.competitor || '未披露',
       region: candidate.region || '待核实',
       amount: candidate.amount || '未披露',
+      bidOpenDate: candidate.bidOpenDate || null,
       bid: candidate.bidStatus,
       bidStatus: candidate.bidStatus,
       source: candidate.source,
@@ -85,6 +86,54 @@ export function mergePendingLeads(existingLeads, ledger, leads) {
     });
   }
   return { leads: [...existingLeads, ...added], added };
+}
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+const normProject = t => (t || '').replace(/[（(]第[^)）]*[)）]/g, '').replace(/[（(][^)）]*次[)）]/g, '').replace(/\s+/g, '');
+
+// 对台账中“招标公告”记录，比对开标日期与今天，派生 openStatus（已开标/待开标/未披露），
+// 并标记 resultGap：已开标但台账无同项目中标候选/已中标记录（疑似结果未收录）。
+export function auditBidOpen(records, today = new Date().toISOString().slice(0, 10)) {
+  const resultRecords = [];
+  const audit = [];
+  for (const r of records) {
+    const rec = { ...r };
+    if (r.bid === '招标公告' || r.bidStatus === '招标公告') {
+      const open = r.bidOpenDate || null;
+      let openStatus = '未披露';
+      if (open) openStatus = open < today ? '已开标' : '待开标';
+      rec.openStatus = openStatus;
+      let resultGap = false;
+      if (openStatus === '已开标') {
+        const key = normProject(r.title).slice(0, 14);
+        const hasResult = records.some(o => o !== r && (o.bid === '中标候选人' || o.bid === '已中标') && normProject(o.title).includes(key.slice(0, 8)) && key.length >= 8);
+        resultGap = !hasResult;
+      }
+      rec.resultGap = resultGap;
+      audit.push({ title: r.title, publishDate: r.date || r.publishDate, bidOpenDate: open, openStatus, resultGap });
+    }
+    resultRecords.push(rec);
+  }
+  const opened = audit.filter(a => a.openStatus === '已开标').length;
+  const upcoming = audit.filter(a => a.openStatus === '待开标').length;
+  const undisclosed = audit.filter(a => a.openStatus === '未披露').length;
+  return { records: resultRecords, audit, summary: { total: audit.length, opened, upcoming, undisclosed, resultGap: audit.filter(a => a.resultGap).length } };
+}
+
+// 补全缺失的开标日期：对“招标公告”且缺 bidOpenDate 的记录重新抓取官方原文抽取。
+async function backfillBidOpenDates(records, limit = 30) {
+  let done = 0;
+  for (const r of records) {
+    if (done >= limit) break;
+    if ((r.bid === '招标公告' || r.bidStatus === '招标公告') && !r.bidOpenDate && r.url) {
+      try {
+        const cand = await enrichFromOfficialDetail({ url: r.url, bidStatus: '招标公告' }, r.url);
+        if (cand.bidOpenDate) { r.bidOpenDate = cand.bidOpenDate; done += 1; }
+      } catch { /* 抓取失败如实保留未披露 */ }
+      await sleep(600);
+    }
+  }
+  return done;
 }
 
 async function readJson(file, fallback) {
@@ -137,6 +186,11 @@ async function main() {
     .map(candidate => ({ title: candidate.title, url: candidate.url, source: candidate.source, reason: !candidate.line ? '与两类设备无关或命中排除规则' : '公告类型不在收录范围（如流标/废标/资格预审）' }));
   const pending = mergePendingLeads(existingPending, merged.records, aggregatorLeads);
 
+  // 核对开标日期：补全缺失开标日期并派生“已开标/待开标”状态。
+  const backfilled = await backfillBidOpenDates(merged.records);
+  const audited = auditBidOpen(merged.records, window.to);
+  merged.records = audited.records;
+
   const coverage = evaluateCoverage(rules, checks);
   const allRejected = [...merged.rejected, ...scopeRejected];
   const scanState = { ...previousState };
@@ -153,6 +207,13 @@ async function main() {
     mode,
     window,
     coverage,
+    bidOpenAudit: {
+      generatedAt: new Date().toISOString(),
+      today: window.to,
+      backfilledOpenDates: backfilled,
+      summary: audited.summary,
+      entries: audited.audit,
+    },
     platforms: checks.map(check => ({
       id: check.sourceId, name: check.name, status: check.status,
       pagesScanned: check.pagesScanned, discovered: check.discovered,

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { evaluateCoverage, mergeCandidates, validateCandidate } from '../scripts/weekly-run.mjs';
+import { auditBidOpen, evaluateCoverage, mergeCandidates, validateCandidate } from '../scripts/weekly-run.mjs';
 
 const mandatory = [
   { id: 'ccteg', name: '中国煤科电子采购平台', required: true },
@@ -35,6 +35,28 @@ test('accepts a complete official bidding record with traceable evidence', () =>
     evidence: '中标人：某设备有限公司；中标价格：7,540,000.00元。', evidenceCapturedAt: '2026-07-02T01:00:00Z',
   });
   assert.equal(result.valid, true);
+});
+
+test('auditBidOpen derives open status and flags result gaps', () => {
+  const today = '2026-07-30';
+  const records = [
+    { title: '甲煤矿智能干选机采购项目招标公告', bid: '招标公告', bidOpenDate: '2026-06-12', date: '2026-05-20' },
+    { title: '乙煤矿干选设备招标公告', bid: '招标公告', bidOpenDate: '2026-08-10', date: '2026-07-20' },
+    { title: '丙煤矿XRT分选机招标公告', bid: '招标公告', date: '2026-04-01' },
+    { title: '甲煤矿智能干选机采购项目中标结果公告', bid: '已中标', date: '2026-06-30' },
+  ];
+  const { records: out, summary } = auditBidOpen(records, today);
+  const a = out.find(r => r.title.startsWith('甲'));
+  assert.equal(a.openStatus, '已开标');
+  assert.equal(a.resultGap, false, '同项目已有中标结果，不应标记缺口');
+  const b = out.find(r => r.title.startsWith('乙'));
+  assert.equal(b.openStatus, '待开标');
+  const c = out.find(r => r.title.startsWith('丙'));
+  assert.equal(c.openStatus, '未披露');
+  assert.equal(c.resultGap, false, '未披露开标日期不标记缺口');
+  assert.equal(summary.opened, 1);
+  assert.equal(summary.upcoming, 1);
+  assert.equal(summary.undisclosed, 1);
 });
 
 test('rejects a record that is outside the two product lines', () => {

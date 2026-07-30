@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-30T02:31:17.679Z",
+  "generatedAt": "2026-07-30T02:48:30.851Z",
   "mode": "backfill",
   "window": {
     "from": "2026-01-01",
@@ -11,6 +11,104 @@
     "required": 5,
     "missing": []
   },
+  "bidOpenAudit": {
+    "generatedAt": "2026-07-30T02:55:08.243Z",
+    "today": "2026-07-30",
+    "backfilledOpenDates": 1,
+    "summary": {
+      "total": 12,
+      "opened": 6,
+      "upcoming": 1,
+      "undisclosed": 5,
+      "resultGap": 1
+    },
+    "entries": [
+      {
+        "title": "坪上煤业TDS智能干选设备技术服务询比采购",
+        "publishDate": "2026-07-24",
+        "bidOpenDate": "2026-08-03",
+        "openStatus": "待开标",
+        "resultGap": false
+      },
+      {
+        "title": "山西潞安环保能源开发股份有限公司漳村煤矿选矸车间2号智能干选机维保项目（第三次）",
+        "publishDate": "2026-07-09",
+        "bidOpenDate": null,
+        "openStatus": "未披露",
+        "resultGap": false
+      },
+      {
+        "title": "山东黄金矿业（玲珑）有限公司光电智能分选机采购项目招标公告",
+        "publishDate": "2026-07-08",
+        "bidOpenDate": "2026-07-28",
+        "openStatus": "已开标",
+        "resultGap": true
+      },
+      {
+        "title": "胜利能源坑下干选系统移设改造工程项目（第2次）招标",
+        "publishDate": "2026-06-02",
+        "bidOpenDate": null,
+        "openStatus": "未披露",
+        "resultGap": false
+      },
+      {
+        "title": "淮北矿业涡北选煤厂干选机及配件公开招标（第2次）",
+        "publishDate": "2026-05-27",
+        "bidOpenDate": null,
+        "openStatus": "未披露",
+        "resultGap": false
+      },
+      {
+        "title": "新疆中富矿业有限公司智能干选机采购项目",
+        "publishDate": "2026-05-22",
+        "bidOpenDate": "2026-06-12",
+        "openStatus": "已开标",
+        "resultGap": false
+      },
+      {
+        "title": "阳泉市南庄煤炭集团有限责任公司西上庄煤矿121508工作面巷道工程、井下智能分选及矸石处置系统工程招标公告",
+        "publishDate": "2026-05-21",
+        "bidOpenDate": "2026-06-11",
+        "openStatus": "已开标",
+        "resultGap": false
+      },
+      {
+        "title": "（定稿）阳泉市南庄煤炭集团有限责任公司西上庄煤矿121508工作面巷道工程、井下智能分选及矸石处置系统工程 - 副本.pdf",
+        "publishDate": "2026-05-21",
+        "bidOpenDate": null,
+        "openStatus": "未披露",
+        "resultGap": false
+      },
+      {
+        "title": "山西阳泉矿区泊里煤矿项目井下智能分选系统智能干选机招标公告",
+        "publishDate": "2026-05-11",
+        "bidOpenDate": "2026-06-01",
+        "openStatus": "已开标",
+        "resultGap": false
+      },
+      {
+        "title": "甘肃省景泰县安家岭能源有限公司郭家台二号煤矿选煤厂TDS智能干选机设备采购项目招标公告",
+        "publishDate": "2026-04-17",
+        "bidOpenDate": "2026-05-11",
+        "openStatus": "已开标",
+        "resultGap": false
+      },
+      {
+        "title": "山西潞安矿业（集团）有限责任公司古城煤矿井下矸石智能分选系统和不可利用矸石充填系统工程（阶段一）设备安装项目招标公告",
+        "publishDate": "2026-02-11",
+        "bidOpenDate": "2026-03-13",
+        "openStatus": "已开标",
+        "resultGap": false
+      },
+      {
+        "title": "【华能煤业公司华亭煤业陈家沟煤矿、砚北煤矿、煤炭智选公司智能干选机、破碎机、磁选机配件（限额以下）】招标公告",
+        "publishDate": "2026-01-15",
+        "bidOpenDate": null,
+        "openStatus": "未披露",
+        "resultGap": false
+      }
+    ]
+  },
   "platforms": [
     {
       "id": "national-ggzy",
@@ -18,10 +116,10 @@
       "status": "ok",
       "pagesScanned": 6,
       "discovered": 64,
-      "accepted": 1,
+      "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-07-30T02:29:58.803Z"
+      "checkedAt": "2026-07-30T02:47:25.796Z"
     },
     {
       "id": "ccteg-goods",
@@ -32,7 +130,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-07-30T02:30:45.357Z"
+      "checkedAt": "2026-07-30T02:47:49.978Z"
     },
     {
       "id": "ccteg-all",
@@ -43,7 +141,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-07-30T02:30:54.101Z"
+      "checkedAt": "2026-07-30T02:47:58.716Z"
     },
     {
       "id": "gsei-results",
@@ -54,7 +152,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-07-30T02:31:04.990Z"
+      "checkedAt": "2026-07-30T02:48:09.636Z"
     },
     {
       "id": "chnenergy-home",
@@ -67,7 +165,7 @@
       "notes": [
         "栏目列表页需 JS 渲染（直接访问 404），当前仅能扫描入口页最新公告；深页覆盖待接入授权采集。"
       ],
-      "checkedAt": "2026-07-30T02:31:11.167Z"
+      "checkedAt": "2026-07-30T02:48:16.327Z"
     },
     {
       "id": "zmzb-home",
@@ -80,7 +178,7 @@
       "notes": [
         "首页含大量最新公告链接，可匿名浅扫；栏目分页地址探测 500，暂无法深扫。"
       ],
-      "checkedAt": "2026-07-30T02:31:11.577Z"
+      "checkedAt": "2026-07-30T02:48:16.737Z"
     },
     {
       "id": "mtzbw-leads",
@@ -93,7 +191,7 @@
       "notes": [
         "行业聚合站，只产出待复核线索，必须反查官方原文后才能入高置信台账。"
       ],
-      "checkedAt": "2026-07-30T02:31:16.222Z"
+      "checkedAt": "2026-07-30T02:48:21.308Z"
     },
     {
       "id": "ccgp-search",
@@ -104,7 +202,7 @@
       "accepted": 0,
       "failReason": "平台反爬拦截（频繁访问/验证提示），未绕过，等待下次重试",
       "notes": [],
-      "checkedAt": "2026-07-30T02:31:17.598Z"
+      "checkedAt": "2026-07-30T02:48:22.513Z"
     }
   ],
   "coveredByNational": [
@@ -127,7 +225,7 @@
   ],
   "totals": {
     "discovered": 65,
-    "accepted": 1,
+    "accepted": 0,
     "acceptedWithAmount": 0,
     "pendingReviewAdded": 0,
     "rejected": 45

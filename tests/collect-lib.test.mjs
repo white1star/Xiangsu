@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { buildWindow, classifyLine, extractAmount, extractWinner, mapBidStatus, normalizeDate } from '../scripts/collect-lib.mjs';
+import { buildWindow, classifyLine, extractAmount, extractBidOpenDate, extractWinner, mapBidStatus, normalizeDate } from '../scripts/collect-lib.mjs';
 import { mergePendingLeads } from '../scripts/weekly-run.mjs';
 
 test('normalizeDate handles Chinese and dash formats', () => {
@@ -27,6 +27,16 @@ test('mapBidStatus prioritises result notices and rejects failed tenders', () =>
   assert.equal(mapBidStatus('智能干选机采购项目流标公告'), null);
   assert.equal(mapBidStatus('智能干选机第一标段招标文件[20260511]'), null, '招标文件附件不入台账');
   assert.equal(mapBidStatus('TDS智能干选机设备采购项目开标记录'), null);
+});
+
+test('extractBidOpenDate parses multiple announcement formats', () => {
+  assert.equal(extractBidOpenDate('开标时间：2026-07-28 09:00:00 开标地点：济南'), '2026-07-28');
+  assert.equal(extractBidOpenDate('1.开标时间： 2026年06月12日 10时30分 2.开标地点'), '2026-06-12');
+  assert.equal(extractBidOpenDate('开标时间：2026年6月11日8时50分开标方式'), '2026-06-11');
+  assert.equal(extractBidOpenDate('投标文件递交截止时间: 2026年06月12日 10时30分'), '2026-06-12', '兜底投标截止时间');
+  assert.equal(extractBidOpenDate('报价截止时间：2026-08-03 10:00:00 报价截止'), '2026-08-03', '询比采购的截止时间即开标时点');
+  assert.equal(extractBidOpenDate('公告全文无任何时间信息'), null);
+  assert.equal(extractBidOpenDate(''), null);
 });
 
 test('classifyLine ignores XRT inside project codes and magnetic separators', () => {
