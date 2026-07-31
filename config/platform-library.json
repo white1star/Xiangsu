@@ -346,116 +346,116 @@
     "name": "企查查",
     "entryUrl": "https://www.qcc.com/",
     "category": "authentication",
-    "access": "anonymous",
+    "access": "login_required",
     "coverage": "工商、司法、融资、招投标聚合",
-    "auditNote": "招投标聚合可匿名浏览（实测：核心工商与招投标聚合数据免登录可查，深度报告需账号）；批量导出和监控需会员。"
+    "auditNote": "招投标聚合内容需登录/会员才能查看（实测：/web/bidding.html 直接跳转\"会员登录\"；仅企业基础工商信息可游客浏览，招标公告正文、联系方式、附件需登录）。"
   },
   {
     "id": "tianyancha",
     "name": "天眼查",
     "entryUrl": "https://www.tianyancha.com/",
     "category": "authentication",
-    "access": "anonymous",
+    "access": "login_required",
     "coverage": "工商、司法、融资、招投标聚合",
-    "auditNote": "招投标/企业页面可匿名浏览（实测：招投标信息免登录可查，深度字段需登录）；批量导出和监控需会员。"
+    "auditNote": "招投标与企业深度信息需登录（仅企业基础信息可游客浏览，招标公告详情、联系方式需登录账号；批量导出/监控需会员）。"
   },
   {
     "id": "aiqicha",
     "name": "爱企查",
     "entryUrl": "https://aiqicha.baidu.com/",
     "category": "authentication",
-    "access": "anonymous",
+    "access": "login_required",
     "coverage": "企业关系、风险和招投标信息",
-    "auditNote": "招投标查询可匿名浏览（实测：招投标查询功能免登录可用）；完整企业深度信息需百度账号登录。"
+    "auditNote": "招投标查询功能需登录百度账号（企业基础信息可浏览，招标公告详情与深度信息需登录；完整数据需会员）。"
   },
   {
     "id": "qixin",
     "name": "启信宝",
     "entryUrl": "https://www.qixin.com/home",
     "category": "authentication",
-    "access": "anonymous",
+    "access": "login_required",
     "coverage": "企业信用、关系、招投标和风险信息",
-    "auditNote": "招投标信息可匿名浏览（实测：zhaobiao.qixin.com 招投标信息免登录可查）；深度查询和企业版功能需授权。"
+    "auditNote": "招投标与企业信用深度信息需授权/登录（zhaobiao.qixin.com 仅展示标题与摘要，完整公告正文与联系方式需登录；企业版功能需授权）。"
   },
   {
     "id": "chinabidding-commercial",
     "name": "中国采购与招标网",
     "entryUrl": "https://www.chinabidding.com/",
     "category": "authentication",
-    "access": "anonymous",
+    "access": "login_required",
     "coverage": "商业招投标聚合和订阅",
-    "auditNote": "公告可匿名浏览（实测：.com.cn 版本招标信息与公告列表免登录可查）；完整历史库和高级检索需会员。"
+    "auditNote": "公告完整正文与历史库需会员（免费仅看标题与摘要，招标/中标全文、联系人、附件需登录会员；高级检索受账户限制）。"
   },
   {
     "id": "qianlima",
     "name": "千里马招标网",
     "entryUrl": "https://www.qianlima.com/",
     "category": "authentication",
-    "access": "anonymous",
+    "access": "login_required",
     "coverage": "全国招标、中标、拟在建项目和订阅",
-    "auditNote": "公告可匿名浏览（实测：首页及 wap.qianlima.com/zb/detail 公告详情免登录可见）；完整历史库和高级检索需会员。"
+    "auditNote": "公告详情与联系方式需会员（实测：首页仅列标题与日期，VIP项目/标书下载/企业监控均指向会员；完整正文与联系人需登录）。"
   },
   {
     "id": "jianyu",
     "name": "剑鱼标讯",
     "entryUrl": "https://www.jianyu360.cn/",
     "category": "authentication",
-    "access": "anonymous",
+    "access": "login_required",
     "coverage": "招标、中标、业主监控和企业投标画像",
-    "auditNote": "招标/中标公告可匿名浏览；订阅、监控和���整详情需登录/会员。"
+    "auditNote": "完整公告详情、订阅与监控需登录/会员（免费仅看标题摘要，正文、联系方式、附件及项目监控需登录）。"
   },
   {
     "id": "xunbiaobao",
     "name": "寻标宝",
     "entryUrl": "https://xunbiaobao.baidu.com/s",
     "category": "authentication",
-    "access": "anonymous",
+    "access": "login_required",
     "coverage": "全国招投标信息查询和项目订阅",
-    "auditNote": "招标信息可匿名检索浏览；订阅和完整详情需登录。"
+    "auditNote": "完整公告详情与订阅需登录（免费检索仅看标题摘要，正文与联系方式需登录账号）。"
   },
   {
     "id": "bidcenter",
     "name": "中国招标网",
     "entryUrl": "https://www.bidcenter.com.cn/",
     "category": "authentication",
-    "access": "anonymous",
+    "access": "login_required",
     "coverage": "招标公告、中标结果和项目订阅",
-    "auditNote": "公告可匿名浏览；高级查询、订阅和部分详情受账户/会员限制。"
+    "auditNote": "高级查询、订阅与部分详情需账户/会员（免费仅看标题摘要，完整公告正文与联系人受会员限制）。"
   },
   {
     "id": "ebnew",
     "name": "必联网",
     "entryUrl": "https://www.ebnew.com/",
     "category": "authentication",
-    "access": "anonymous",
+    "access": "login_required",
     "coverage": "招标采购、国际招标和中标信息",
-    "auditNote": "公告可匿名浏览；深度检索、订阅及业务功能需登录。"
+    "auditNote": "深度检索、订阅与业务功能需登录（免费仅看标题摘要，完整公告正文需登录会员）。"
   },
   {
     "id": "yfbzb",
     "name": "乙方宝招标网",
     "entryUrl": "https://www.yfbzb.com/",
     "category": "authentication",
-    "access": "anonymous",
+    "access": "login_required",
     "coverage": "招标、中标、采购商及项目线索",
-    "auditNote": "公告可匿名浏览；完整信息、订阅和联系方式通常需登录/会员。"
+    "auditNote": "完整信息、订阅与联系方式通常需登录/会员（免费仅看标题摘要，正文与联系人受会员限制）。"
   },
   {
     "id": "bibenet",
     "name": "比比网",
     "entryUrl": "https://www.bibenet.com/",
     "category": "authentication",
-    "access": "anonymous",
+    "access": "login_required",
     "coverage": "招投标信息、企业商机和项目监控",
-    "auditNote": "公告可匿名浏览（实测：m.bibenet.com/zbgs* 中标候选人公示免登录可见）；完整详情和订阅需会员。"
+    "auditNote": "完整公告详情与订阅需会员（m站仅展示标题摘要，中标候选人公示全文、联系人需登录会员）。"
   },
   {
     "id": "ztb8",
     "name": "招投标信息网",
     "entryUrl": "https://www.ztb8.com/",
     "category": "authentication",
-    "access": "anonymous",
+    "access": "login_required",
     "coverage": "跨平台历史招标信息聚合",
-    "auditNote": "公告可匿名浏览（实测：跨平台招标信息列表免登录可查）；完整历史库和订阅需会员。"
+    "auditNote": "完整历史库与订阅需会员（免费仅看标题摘要，跨平台公告全文与联系人需登录会员）。"
   }
 ]
