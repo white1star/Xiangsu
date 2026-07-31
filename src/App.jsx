@@ -50,6 +50,7 @@ export default function App() {
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const current = Math.min(Math.max(1, pageNum), totalPages);
   const pageRows = filtered.slice((current - 1) * PAGE_SIZE, current * PAGE_SIZE);
+  const latestUpdate = useMemo(() => { const ds = rows.map(r => r.date).filter(Boolean).sort(); return ds.length ? ds[ds.length - 1] : '—'; }, []);
   const resetPage = fn => event => { fn(event.target.value); setPageNum(1); };
   const options = key => ['全部', ...new Set(rows.map(item => item[key]))];
   const select = (value, setter, key) => <select value={value} onChange={resetPage(setter)}>{options(key).map(item => <option key={item}>{item}</option>)}</select>;
@@ -61,7 +62,7 @@ export default function App() {
       {page === '情报台账' ? <>
         <div className="filters"><label>产品线{select(line, setLine, 'line')}</label><label>竞品{select(competitor, setCompetitor, 'competitor')}</label><label>置信度{select(confidence, setConfidence, 'confidence')}</label><label>招标状态{phaseSelect}</label></div>
         <div className="tablebox"><table><thead><tr>{['情报标题', '产品线', '竞品', '金额', '中标情况', '来源', '置信度', '发布日期'].map(item => <th key={item}>{item}</th>)}</tr></thead><tbody>{pageRows.map(item => <tr key={item.url} onClick={() => setSelected(item)}>{[item.title, item.line, item.competitor, amountCell(item), bidCell(item), <a href={item.url} target="_blank" rel="noreferrer" onClick={event => event.stopPropagation()}>{item.source} ↗</a>, item.confidence, item.date].map((value, index) => <td className={index === 3 ? 'amt' : index === 4 ? `bid ${item.bid}` : index === 6 ? `confidence ${item.confidence}` : ''} key={index}>{value}</td>)}</tr>)}</tbody></table></div>
-        <footer><span>共 {filtered.length} 个项目（同项目招标/候选/中标公告已合并）　|　第 {current}/{totalPages} 页</span><span className="pager"><button disabled={current <= 1} onClick={() => setPageNum(current - 1)}>上一页</button><button disabled={current >= totalPages} onClick={() => setPageNum(current + 1)}>下一页</button></span><span>点击任意记录查看证据摘要</span></footer>
+        <footer><span>共 {filtered.length} 个项目（同项目招标/候选/中标公告已合并）　|　最近更新：{latestUpdate}　|　第 {current}/{totalPages} 页</span><span className="pager"><button disabled={current <= 1} onClick={() => setPageNum(current - 1)}>上一页</button><button disabled={current >= totalPages} onClick={() => setPageNum(current + 1)}>下一页</button></span><span>点击任意记录查看证据摘要</span></footer>
         {selected && <Detail item={selected} onClose={() => setSelected(null)} />}
       </> : <SourcePage type={page} />}
     </section>
