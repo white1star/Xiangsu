@@ -265,9 +265,9 @@
     "name": "中国华能集团电子商务平台",
     "entryUrl": "https://ec.chng.com.cn/",
     "category": "energy_owner",
-    "access": "login_required",
+    "access": "anonymous",
     "coverage": "煤业、煤电、选煤相关设备及工程采购",
-    "auditNote": "访问返回412（WAF反爬，实测），匿名无法稳定浏览；下载和投标需登录。"
+    "auditNote": "公告可匿名查看（实测未登录即见采购公告/招标公告正文；WAF偶发412但非登录墙）；下载文件和投标需供应商注册。"
   },
   {
     "id": "huadian",
