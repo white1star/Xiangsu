@@ -202,7 +202,7 @@
     "name": "中国煤科电子采购平台",
     "entryUrl": "https://cg.ccteg.cn/cms/index.htm",
     "category": "energy_owner",
-    "access": "public_listing",
+    "access": "anonymous",
     "coverage": "煤炭洗选、设计院、装备采购和中标公告",
     "auditNote": "公告可公开查阅（实测入口200、含招标公告列表）；下载文件、报名和投标需供应商注册。"
   },
@@ -211,7 +211,7 @@
     "name": "国能 e 招",
     "entryUrl": "https://www.chnenergybidding.com.cn/bidweb/",
     "category": "energy_owner",
-    "access": "public_listing",
+    "access": "anonymous",
     "coverage": "国家能源集团煤矿、选煤厂、设备采购及中标公告",
     "auditNote": "公告公开可匿名浏览（实测入口200、含公告列表）；供应商注册及CA是下载和投标的前提。"
   },
@@ -319,7 +319,7 @@
     "name": "山东能源在线询比价平台",
     "entryUrl": "https://snxy.minegoods.com/",
     "category": "coal_owner",
-    "access": "public_listing",
+    "access": "anonymous",
     "coverage": "询比价、物资采购和结果线索",
     "auditNote": "询比价公告可匿名浏览（实测入口200）；完整询报价内容和参与交易需账号。"
   },
@@ -337,7 +337,7 @@
     "name": "淮北矿业电子招标采购平台",
     "entryUrl": "https://zbcg.hbcoal.com/",
     "category": "coal_owner",
-    "access": "login_required",
+    "access": "anonymous",
     "coverage": "淮北矿业干选机及配件采购公告",
     "auditNote": "公告详情页可匿名访问（如涡北中标），但列表页需JS动态加载（实测空壳）；正式文件及投标需注册。"
   },
@@ -400,7 +400,7 @@
     "name": "剑鱼标讯",
     "entryUrl": "https://www.jianyu360.cn/",
     "category": "authentication",
-    "access": "public_listing",
+    "access": "anonymous",
     "coverage": "招标、中标、业主监控和企业投标画像",
     "auditNote": "招标/中标公告可匿名浏览；订阅、监控和���整详情需登录/会员。"
   },
@@ -418,7 +418,7 @@
     "name": "中国招标网",
     "entryUrl": "https://www.bidcenter.com.cn/",
     "category": "authentication",
-    "access": "public_listing",
+    "access": "anonymous",
     "coverage": "招标公告、中标结果和项目订阅",
     "auditNote": "公告可匿名浏览；高级查询、订阅和部分详情受账户/会员限制。"
   },
@@ -427,7 +427,7 @@
     "name": "必联网",
     "entryUrl": "https://www.ebnew.com/",
     "category": "authentication",
-    "access": "public_listing",
+    "access": "anonymous",
     "coverage": "招标采购、国际招标和中标信息",
     "auditNote": "公告可匿名浏览；深度检索、订阅及业务功能需登录。"
   },
@@ -436,7 +436,7 @@
     "name": "乙方宝招标网",
     "entryUrl": "https://www.yfbzb.com/",
     "category": "authentication",
-    "access": "public_listing",
+    "access": "anonymous",
     "coverage": "招标、中标、采购商及项目线索",
     "auditNote": "公告可匿名浏览；完整信息、订阅和联系方式通常需登录/会员。"
   },
