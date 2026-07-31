@@ -1,10 +1,11 @@
-.tablebox{overflow-x:auto;overflow-y:hidden}.tablebox table{min-width:1160px;table-layout:fixed}.tablebox th,.tablebox td{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tablebox td{height:66px}
-/* 8 列：情报标题 / 产品线 / 竞品 / 金额 / 中标情况 / 来源 / 置信度 / 发布日期 */
+.tablebox{overflow-x:auto;overflow-y:hidden}.tablebox table{min-width:1300px;table-layout:fixed}.tablebox th,.tablebox td{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tablebox td{height:66px}
+/* 9 列：客户 / 矿种 / 产品线 / 竞品 / 金额 / 中标情况 / 发布日期 / 来源 / 置信度 */
 .tablebox th:nth-child(1),.tablebox td:nth-child(1){width:360px;white-space:normal;line-height:1.5}
-.tablebox th:nth-child(2),.tablebox td:nth-child(2){width:120px}
-.tablebox th:nth-child(3),.tablebox td:nth-child(3){width:165px}
-.tablebox th:nth-child(4),.tablebox td:nth-child(4){width:130px}
-.tablebox th:nth-child(5),.tablebox td:nth-child(5){width:120px}
-.tablebox th:nth-child(6),.tablebox td:nth-child(6){width:150px}
-.tablebox th:nth-child(7),.tablebox td:nth-child(7){width:80px}
-.tablebox th:nth-child(8),.tablebox td:nth-child(8){width:105px}
+.tablebox th:nth-child(2),.tablebox td:nth-child(2){width:80px}
+.tablebox th:nth-child(3),.tablebox td:nth-child(3){width:120px}
+.tablebox th:nth-child(4),.tablebox td:nth-child(4){width:165px}
+.tablebox th:nth-child(5),.tablebox td:nth-child(5){width:130px}
+.tablebox th:nth-child(6),.tablebox td:nth-child(6){width:120px}
+.tablebox th:nth-child(7),.tablebox td:nth-child(7){width:150px}
+.tablebox th:nth-child(8),.tablebox td:nth-child(8){width:110px}
+.tablebox th:nth-child(9),.tablebox td:nth-child(9){width:80px}

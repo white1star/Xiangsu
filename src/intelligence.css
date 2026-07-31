@@ -23,8 +23,7 @@
 .tablebox td.amt { white-space: nowrap; }
 .tablebox { overflow-x: auto; }
 .tablebox tbody td:nth-child(2),
-.tablebox tbody td:nth-child(8) { white-space: nowrap; }
-.tablebox tbody td.title-cell { max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tablebox tbody td:nth-child(7) { white-space: nowrap; }
 .amt-undisclosed { color: #b3261e; font-weight: 600; }
 .amt-undisclosed .amt-why { color: #9aa3ad; font-weight: 400; font-size: 12px; margin-left: 2px; }
 .amt .why { color: #9aa3ad; font-weight: 400; font-size: 12px; }
