@@ -21,6 +21,8 @@
 
 /* 金额列：未披露带复核原因，避免表格看起空白 */
 .tablebox td.amt { white-space: nowrap; }
+.tablebox { overflow-x: auto; }
+.tablebox tbody td:nth-child(8) { white-space: nowrap; }
 .amt-undisclosed { color: #b3261e; font-weight: 600; }
 .amt-undisclosed .amt-why { color: #9aa3ad; font-weight: 400; font-size: 12px; margin-left: 2px; }
 .amt .why { color: #9aa3ad; font-weight: 400; font-size: 12px; }
