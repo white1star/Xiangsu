@@ -229,9 +229,9 @@
     "name": "中煤易购采购一体化平台",
     "entryUrl": "https://ego.chinacoal.com/",
     "category": "energy_owner",
-    "access": "login_required",
+    "access": "anonymous",
     "coverage": "中国中煤询价、采购文件和公开结果线索",
-    "auditNote": "列表接口返回401（实测），公告浏览需登录；采购参与、文件下载需注册。"
+    "auditNote": "公告可匿名查看（实测：搜索引擎已收录 #/announcementInquiryDetail 询价/招标公告全文，WebFetch 直接返回物资清单/报价时间等正文；/group1/M00/... 与 noauth 下载接口免登录可获取公告文档。仅 报名/在线报价/下载采购文件 需供应商注册登录）。"
   },
   {
     "id": "spic-ebid",
