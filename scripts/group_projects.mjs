@@ -106,7 +106,7 @@ for (const [k, arr] of groups) {
     }
   }
   // 采购人/预算/采购内容/开标日期/规格：任一记录有就带上
-  for (const f of ['buyer', 'budget', 'procurement', 'bidOpenDate', 'openStatus', 'specs', 'amountNote']) {
+  for (const f of ['buyer', 'budget', 'procurement', 'bidOpenDate', 'openStatus', 'specs', 'amountNote', 'region', 'sourceAuthority']) {
     if (!proj[f]) { const v = tl.map(r => r[f]).find(Boolean); if (v) proj[f] = v; }
   }
   proj.timeline = tl.map(r => ({

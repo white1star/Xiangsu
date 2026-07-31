@@ -19,6 +19,18 @@
 .detail .bids tr.win { background: rgba(201,162,39,0.16); font-weight: 600; }
 .detail .bids th { background: rgba(0,0,0,0.05); }
 
+/* 金额列：未披露带复核原因，避免表格看起空白 */
+.tablebox td.amt { white-space: nowrap; }
+.amt-undisclosed { color: #b3261e; font-weight: 600; }
+.amt-undisclosed .amt-why { color: #9aa3ad; font-weight: 400; font-size: 12px; margin-left: 2px; }
+.amt .why { color: #9aa3ad; font-weight: 400; font-size: 12px; }
+
+/* 来源鉴权标签 */
+.auth { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 12px; font-weight: 600; }
+.auth-open { background: #e8f5ee; color: #149348; }
+.auth-locked { background: #fde8e6; color: #d2322d; }
+
+
 /* 竞品分析页 */
 .competitor-page { padding: 4px 2px; }
 .comp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; margin-top: 12px; }
