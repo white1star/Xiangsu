@@ -18,9 +18,20 @@
     "winner": "丹东东方测控技术股份有限公司",
     "bid": "中标候选人",
     "date": "2026-07-30",
-    "projectKey": "铁煤集团2026年度第98批集中招标智能选矸系统集成供液系统招标",
+    "projectKey": "铁煤集团2026年度第98批集中招标智能选矸系统集成供液系统",
     "amountStage": "候选报价",
+    "openStatus": "未披露",
+    "amountNote": "招标公告未含预算；同批次中标候选人公示已披露338万元（丹东东方测控），见项目时间线。",
     "timeline": [
+      {
+        "date": "2026-06-25",
+        "bid": "招标公告",
+        "title": "铁煤集团2026年度第98批集中招标（智能选矸系统、集成供液系统）招标公告",
+        "amount": "未披露",
+        "url": "https://www.ggzy.gov.cn/information/deal/html/b/0067/0101/20260625/0067dc7f15e8cc3d43afa0d198af65222587.html",
+        "source": "全国公共资源交易平台（央企招投标）",
+        "amountNote": "招标公告未含预算；同批次中标候选人公示已披露338万元（丹东东方测控），见项目时间线。"
+      },
       {
         "date": "2026-07-30",
         "bid": "中标候选人",
@@ -30,13 +41,13 @@
         "source": "全国公共资源交易平台（央企招投标）"
       }
     ],
-    "stages": 1
+    "stages": 2
   },
   {
     "id": "auto-aHR0cHM6Ly93d3",
     "title": "甘肃靖煤能源有限公司红会第一煤矿分公司智能干选系统PC总承包项目 中标候选人公示",
     "line": "煤炭智能干选设备",
-    "competitor": "甘肃煤炭第一工程有限责任公司（第一候选人）",
+    "competitor": "甘肃煤炭第一工程有限责任公司",
     "region": "甘肃",
     "amount": "1643.15万元",
     "bid": "中标候选人",
@@ -51,6 +62,31 @@
     "procurement": "甘肃靖煤能源有限公司红会第一煤矿分公司智能干选系统PC总承包项目 中标候选人公示_中标公示_甘肃经济信息网欢迎您！ 欢迎访问甘肃经济信息网！ 今天是： 会员中心 信息",
     "bidOpenDate": "2026-07-24",
     "winner": "甘肃煤炭第一工程有限责任公司",
+    "bids": [
+      {
+        "rank": 1,
+        "company": "甘肃煤炭第一工程有限责任公司",
+        "quote": "1643.15万元",
+        "quoteYuan": 16431464.99,
+        "_stageDate": "2026-07-28",
+        "isWinner": true
+      },
+      {
+        "rank": 2,
+        "company": "纵揽建设发展有限公司",
+        "quote": "1643.62万元",
+        "quoteYuan": 16436201.28,
+        "_stageDate": "2026-07-28"
+      },
+      {
+        "rank": 3,
+        "company": "义峰建设投资集团有限公司",
+        "quote": "1643.88万元",
+        "quoteYuan": 16438759.08,
+        "_stageDate": "2026-07-28"
+      }
+    ],
+    "amountNote": "PC总承包（含设备+土建+安装），三家报价极差仅约2.7万，竞争胶着",
     "projectKey": "靖煤红会一矿干选PC总包",
     "amountStage": "候选报价",
     "timeline": [
@@ -60,7 +96,8 @@
         "title": "甘肃靖煤能源有限公司红会第一煤矿分公司智能干选系统PC总承包项目 中标候选人公示",
         "amount": "1643.15万元",
         "url": "https://www.gsei.com.cn/html/1337/2026-07-28/content-689494.html",
-        "source": "甘肃经济信息网（中标结果栏目）"
+        "source": "甘肃经济信息网（中标结果栏目）",
+        "amountNote": "PC总承包（含设备+土建+安装），三家报价极差仅约2.7万，竞争胶着"
       }
     ],
     "stages": 1
@@ -73,10 +110,10 @@
     "bid": "招标公告",
     "bidStatus": "招标公告",
     "line": "智能干选",
-    "competitor": null,
+    "competitor": "（设计阶段，未定设备商）",
     "buyer": "山西汾西正升煤业有限责任公司",
     "amount": "未披露",
-    "amountNote": "企业自主采购非招标项目（设计采购），公开源未披露设计费金额，需抓详情页",
+    "amountNote": "企业自主采购非招标设计项目(2026-07-27)，设备金额待后续招标公告",
     "amountSrc": "中国招标投标公共服务平台（公开镜像）· 采购公告",
     "source": "中国招标投标公共服务平台（公开镜像）· 采购公告",
     "confidence": "高",
@@ -92,7 +129,7 @@
         "amount": "未披露",
         "url": "https://www.chinabidding.com.cn/dw_726_zbcgxxw/",
         "source": "中国招标投标公共服务平台（公开镜像）· 采购公告",
-        "amountNote": "企业自主采购非招标项目（设计采购），公开源未披露设计费金额，需抓详情页"
+        "amountNote": "企业自主采购非招标设计项目(2026-07-27)，设备金额待后续招标公告"
       }
     ],
     "stages": 1
@@ -105,10 +142,10 @@
     "bid": "已中标",
     "bidStatus": "已中标",
     "line": "智能干选",
-    "competitor": "河南宝发建筑工程有限公司",
+    "competitor": "（设备招标流标，未授标）",
     "buyer": "鹤壁煤业(集团)有限责任公司",
     "amount": "未披露",
-    "amountNote": "施工劳务直接采购成交（设备招标已失败，此为土建施工劳务，非设备金额）",
+    "amountNote": "党家河TDS智能干选系统设备招标2026-04-24因投标人不足三家流标失败；土建施工劳务询比价(2026-07-18)金额未公开(中原云商)",
     "amountSrc": "采购与招标网（公开镜像）· 成交结果",
     "source": "采购与招标网（公开镜像）· 成交结果",
     "confidence": "中",
@@ -124,7 +161,7 @@
         "amount": "未披露",
         "url": "https://wap.qianlima.com/gjxx/245248/index_10.html",
         "source": "采购与招标网（公开镜像）· 成交结果",
-        "amountNote": "施工劳务直接采购成交（设备招标已失败，此为土建施工劳务，非设备金额）"
+        "amountNote": "党家河TDS智能干选系统设备招标2026-04-24因投标人不足三家流标失败；土建施工劳务询比价(2026-07-18)金额未公开(中原云商)"
       }
     ],
     "stages": 1
@@ -232,7 +269,7 @@
     "id": "auto-aHR0cHM6Ly93d3cuZ2d6eS5nb3Yu",
     "title": "山东黄金矿业（玲珑）有限公司光电智能分选机采购项目招标公告",
     "line": "XRT矿石分选设备",
-    "competitor": "未披露",
+    "competitor": "（待开标结果）",
     "region": "山东省",
     "amount": "未披露",
     "bid": "招标公告",
@@ -248,7 +285,7 @@
     "resultGap": true,
     "buyer": "山东黄金矿",
     "procurement": "（1）招标范围：山东黄金矿业（玲珑）有限公司光电智能分选机采购，具体要求、交货期、供货范围及参数等详见招标文件",
-    "amountNote": "招标公告未设预算；2026-07-28已开标，截至抓取日中标结果尚未公示，待跟踪。",
+    "amountNote": "招标公告(2026-07-07)，开标2026-07-28 09:00，截至2026-07-31中标结果尚未公示（金矿XRT光电分选，新增/扩容设备）",
     "projectKey": "山东黄金矿业玲珑有限公司光电智能分选机采购项目",
     "timeline": [
       {
@@ -258,7 +295,7 @@
         "amount": "未披露",
         "url": "https://www.ggzy.gov.cn/information/deal/html/b/370000/9001/20260708/0037d3c65333223f4fd1b9fbf3bfb4046892.html",
         "source": "全国公共资源交易平台（山东产权交易中心综合交易系统）",
-        "amountNote": "招标公告未设预算；2026-07-28已开标，截至抓取日中标结果尚未公示，待跟踪。"
+        "amountNote": "招标公告(2026-07-07)，开标2026-07-28 09:00，截至2026-07-31中标结果尚未公示（金矿XRT光电分选，新增/扩容设备）"
       }
     ],
     "stages": 1
@@ -267,7 +304,7 @@
     "id": "web-jizhong-12",
     "title": "冀中能源股份有限公司2026年度设备采购第四批12标包（智能干选系统）中标候选人公示",
     "line": "煤炭智能干选设备",
-    "competitor": "唐山神州机械集团有限公司（第一候选人）",
+    "competitor": "唐山神州机械集团有限公司",
     "region": "河北省",
     "amount": "318万元",
     "bid": "中标候选人",
@@ -281,6 +318,30 @@
     "evidence": "12标包智能干选系统：第一候选人唐山神州3179999.67元；第二枣庄海纳3499500.39元；第三霍里思特4196820元。河北玖河因防爆证无效被否决。开标2026-06-30。",
     "amountNote": "深挖新增：三家竞价完整（神州318.0万/海纳349.95万/霍里思特419.68万）。",
     "evidenceCapturedAt": "2026-07-31T03:09:00.118Z",
+    "bids": [
+      {
+        "rank": 1,
+        "company": "唐山神州机械集团有限公司",
+        "quote": "318万元",
+        "quoteYuan": 3179999.67,
+        "_stageDate": "2026-07-01",
+        "isWinner": true
+      },
+      {
+        "rank": 2,
+        "company": "枣庄海纳科技有限公司",
+        "quote": "349.95万元",
+        "quoteYuan": 3499500.39,
+        "_stageDate": "2026-07-01"
+      },
+      {
+        "rank": 3,
+        "company": "霍里思特科技（浙江）有限公司",
+        "quote": "419.68万元",
+        "quoteYuan": 4196820,
+        "_stageDate": "2026-07-01"
+      }
+    ],
     "projectKey": "冀中能源股份有限公司2026年度设备采购第四批12标包智能干选系统",
     "amountStage": "候选报价",
     "timeline": [
@@ -346,7 +407,7 @@
     "url": "https://zbcg.hbcoal.com/company-pages/hbky/notice/detail?cateId=1&id=18fe9fed-9800-4805-b241-8aedf2454ef8",
     "evidence": "淮北矿业股份有限公司涡北选煤厂干选机及配件公开招标(第2次)中标公告 招标编号HBKY-2026-H-0149 开标时间2026年6月17日15:00 中标单位威海市海王科技有限公司 中标金额玖拾壹万元整(¥910000.0000元)",
     "evidenceCapturedAt": "2026-07-30T03:31:46.069Z",
-    "projectKey": "淮北矿业股份有限公司涡北选煤厂干选机及配件公开招标",
+    "projectKey": "淮北矿业股份有限公司涡北选煤厂干选机及配件公开",
     "amountStage": "中标价",
     "timeline": [
       {
@@ -356,42 +417,6 @@
         "amount": "91.00万元",
         "url": "https://zbcg.hbcoal.com/company-pages/hbky/notice/detail?cateId=1&id=18fe9fed-9800-4805-b241-8aedf2454ef8",
         "source": "淮北矿业电子招标采购平台"
-      }
-    ],
-    "stages": 1
-  },
-  {
-    "id": "auto-aHR0cHM6Ly93d3cuZ2d6eS5nb3Yu",
-    "title": "铁煤集团2026年度第98批集中招标（智能选矸系统、集成供液系统）招标公告",
-    "line": "煤炭智能干选设备",
-    "competitor": "未披露",
-    "region": "央企招投标",
-    "amount": "未披露",
-    "budget": null,
-    "buyer": null,
-    "procurement": "公共资源交易平台 铁煤集团2026年度第98批集中招标（智能选矸系统、集成供液系统）招标公告 发布时间：2026-06-25 18:02 信息来源： 央企招投标 原文链接地址 无文本内",
-    "bidOpenDate": null,
-    "bid": "招标公告",
-    "bidStatus": "招标公告",
-    "source": "全国公共资源交易平台（央企招投标）",
-    "date": "2026-06-25",
-    "publishDate": "2026-06-25",
-    "confidence": "高",
-    "url": "https://www.ggzy.gov.cn/information/deal/html/b/0067/0101/20260625/0067dc7f15e8cc3d43afa0d198af65222587.html",
-    "evidence": "全国公共资源交易平台 铁煤集团2026年度第98批集中招标（智能选矸系统、集成供液系统）招标公告 发布时间：2026-06-25 18:02 信息来源： 央企招投标 原文链接地址 无文本内容，请查阅pdf文件",
-    "openStatus": "未披露",
-    "resultGap": false,
-    "amountNote": "招标公告未含预算；同批次中标候选人公示已披露338万元（丹东东方测控），见项目时间线。",
-    "projectKey": "铁煤集团2026年度第98批集中招标智能选矸系统集成供液系统",
-    "timeline": [
-      {
-        "date": "2026-06-25",
-        "bid": "招标公告",
-        "title": "铁煤集团2026年度第98批集中招标（智能选矸系统、集成供液系统）招标公告",
-        "amount": "未披露",
-        "url": "https://www.ggzy.gov.cn/information/deal/html/b/0067/0101/20260625/0067dc7f15e8cc3d43afa0d198af65222587.html",
-        "source": "全国公共资源交易平台（央企招投标）",
-        "amountNote": "招标公告未含预算；同批次中标候选人公示已披露338万元（丹东东方测控），见项目时间线。"
       }
     ],
     "stages": 1
@@ -415,6 +440,23 @@
     "winner": "山西宏厦第一建设有限责任公司",
     "projectKey": "阳泉市南庄煤炭集团有限责任公司西上庄煤矿121508工作面巷道工程井下智能分选及矸石处置系统工程",
     "amountStage": "中标价",
+    "bids": [
+      {
+        "rank": 1,
+        "company": "山西宏厦第一建设有限责任公司",
+        "quoteYuan": 392745562,
+        "quote": "39274.56万元",
+        "_stageDate": "2026-06-15",
+        "isWinner": true
+      },
+      {
+        "rank": 2,
+        "company": "浙江中宇实业发展有限公司",
+        "quoteYuan": 383886504.14,
+        "quote": "38388.65万元",
+        "_stageDate": "2026-06-15"
+      }
+    ],
     "bidOpenDate": "2026-06-11",
     "openStatus": "已开标",
     "timeline": [
@@ -462,10 +504,35 @@
     "evidence": "设兵团·七师 其他说明:无 标段（包）编号 标段（包）名称 中标单位 项目经理 中标价格 工期（日历天） E6607004006260257001001 新疆中富矿业有限公司智能干选机采购项目 天津美腾科技股份有限公司 吕英敏 2791300.0000元 90 公告开始时间: 公告结束时间: --> 受理异议人:杨光华 受理异议人联系方式:18399917607 受理投诉部门:新疆锦恒能源（集团）有限公司 受理投诉部门联系方式:0992",
     "buyer": "新疆中富矿",
     "procurement": "全国公共资源交易平台 新疆中富矿业有限公司智能干选机采购项目中标结果公告 发布时间：2026-06-16 12:06 信息来源： 新疆生产建设兵团公共资源交易中心 原文链",
+    "bids": [
+      {
+        "rank": 1,
+        "company": "天津美腾科技股份有限公司",
+        "quote": "279.13万元",
+        "quoteYuan": 2791300,
+        "_stageDate": "2026-06-16",
+        "isWinner": true
+      },
+      {
+        "rank": 2,
+        "company": "唐山神州机械集团有限公司",
+        "quote": "269万元",
+        "quoteYuan": 2690000,
+        "_stageDate": "2026-06-16"
+      },
+      {
+        "rank": 3,
+        "company": "威海市海王科技有限公司",
+        "quote": "258万元",
+        "quoteYuan": 2580000,
+        "_stageDate": "2026-06-16"
+      }
+    ],
     "projectKey": "新疆中富矿业有限公司智能干选机采购项目",
     "amountStage": "中标价",
     "bidOpenDate": "2026-06-12",
     "openStatus": "已开标",
+    "amountNote": "公告正文确无金额信息",
     "timeline": [
       {
         "date": "2026-05-22",
@@ -516,8 +583,33 @@
     "winner": "威海市海王科技有限公司",
     "projectKey": "山西阳泉矿区泊里煤矿项目井下智能分选系统智能干选机",
     "amountStage": "中标价",
+    "bids": [
+      {
+        "rank": 1,
+        "company": "威海市海王科技有限公司",
+        "quoteYuan": 6300000,
+        "quote": "630万元",
+        "_stageDate": "2026-06-01",
+        "isWinner": true
+      },
+      {
+        "rank": 2,
+        "company": "霍里思特科技（浙江）有限公司",
+        "quoteYuan": 5958000,
+        "quote": "595.8万元",
+        "_stageDate": "2026-06-01"
+      },
+      {
+        "rank": 3,
+        "company": "枣庄海纳科技有限公司",
+        "quoteYuan": 6366000,
+        "quote": "636.6万元",
+        "_stageDate": "2026-06-01"
+      }
+    ],
     "bidOpenDate": "2026-06-01",
     "openStatus": "已开标",
+    "amountNote": "招标公告无预算；同项目2026-06-12中标结果公示：威海海王630万元，见项目时间线。",
     "timeline": [
       {
         "date": "2026-05-11",
@@ -605,7 +697,7 @@
   {
     "title": "胜利能源坑下干选系统移设改造工程项目（第2次）招标",
     "line": "煤炭智能干选设备",
-    "competitor": "未披露",
+    "competitor": "（中标人：无）",
     "region": "内蒙古锡林浩特",
     "amount": "未披露",
     "bid": "招标公告",
@@ -618,9 +710,9 @@
     "evidence": "官方招标公告：项目对现有移动式智能干法选煤系统及附属设备实施移设、安装、调试和验收等全过程总承包；公告未披露预算金额。",
     "openStatus": "未披露",
     "resultGap": false,
-    "amountNote": "中标结果公告中\"中标人/中标金额\"栏填写为\"无\"（疑似流标或废标），公开渠道无成交金额。",
+    "amountNote": "中标结果公告(2026-07-20)中标人栏为\"无\"，项目未成功授标（EPC式移设改造，含勘察设计+设备拆运安+土建）",
     "id": "auto-aHR0cHM6Ly93d3cuY2huZW5lcmd5",
-    "projectKey": "胜利能源坑下干选系统移设改造工程项目招标",
+    "projectKey": "胜利能源坑下干选系统移设改造工程项目",
     "timeline": [
       {
         "date": "2026-06-02",
@@ -629,7 +721,64 @@
         "amount": "未披露",
         "url": "https://www.chnenergybidding.com.cn/bidweb/001/001002/001002003/20260602/9e8ef698-e08d-4c5c-a634-b589a9493c0b.html",
         "source": "国能e招",
-        "amountNote": "中标结果公告中\"中标人/中标金额\"栏填写为\"无\"（疑似流标或废标），公开渠道无成交金额。"
+        "amountNote": "中标结果公告(2026-07-20)中标人栏为\"无\"，项目未成功授标（EPC式移设改造，含勘察设计+设备拆运安+土建）"
+      }
+    ],
+    "stages": 1
+  },
+  {
+    "id": "auto-baojizhang-1785469722033",
+    "title": "山西煤炭运销集团簸箕掌煤业有限责任公司智能干选设备采购（第2次招标）中标结果公示",
+    "source": "山西省招标投标公共服务平台（公开镜像）",
+    "sourceAuthority": "公开",
+    "bidStatus": "中标结果",
+    "bid": "已中标",
+    "date": "2026-06-02",
+    "publishDate": "2026-06-02",
+    "region": "山西·大同",
+    "line": "煤炭智能干选设备",
+    "competitor": "枣庄海纳科技有限公司",
+    "winner": "枣庄海纳科技有限公司",
+    "amount": "856万元",
+    "amountNote": "第2次招标中标价；第1次招标流标",
+    "confidence": "高",
+    "url": "https://www.dlnyzb.com/detail/40537245",
+    "evidence": "中标候选人：1枣庄海纳8560000元 2威海市海王8000000元 3河北玖河精密机械8380000元",
+    "bids": [
+      {
+        "rank": 1,
+        "company": "枣庄海纳科技有限公司",
+        "quote": "856万元",
+        "quoteYuan": 8560000,
+        "_stageDate": "2026-06-02",
+        "isWinner": true
+      },
+      {
+        "rank": 2,
+        "company": "威海市海王科技有限公司",
+        "quote": "800万元",
+        "quoteYuan": 8000000,
+        "_stageDate": "2026-06-02"
+      },
+      {
+        "rank": 3,
+        "company": "河北玖河精密机械制造有限公司",
+        "quote": "838万元",
+        "quoteYuan": 8380000,
+        "_stageDate": "2026-06-02"
+      }
+    ],
+    "projectKey": "山西煤炭运销集团簸箕掌煤业有限责任公司智能干选设备采购第2次招标",
+    "amountStage": "中标价",
+    "timeline": [
+      {
+        "date": "2026-06-02",
+        "bid": "已中标",
+        "title": "山西煤炭运销集团簸箕掌煤业有限责任公司智能干选设备采购（第2次招标）中标结果公示",
+        "amount": "856万元",
+        "url": "https://www.dlnyzb.com/detail/40537245",
+        "source": "山西省招标投标公共服务平台（公开镜像）",
+        "amountNote": "第2次招标中标价；第1次招标流标"
       }
     ],
     "stages": 1
@@ -669,7 +818,7 @@
   {
     "title": "宁夏煤业汝箕沟无烟煤分公司智能干选机设备采购中标候选人公示",
     "line": "煤炭智能干选设备",
-    "competitor": "威海市海王科技有限公司（第一候选人）",
+    "competitor": "威海市海王科技有限公司",
     "region": "宁夏石嘴山",
     "amount": "305万元",
     "bid": "中标候选人",
@@ -684,6 +833,23 @@
     "winner": "威海市海王科技有限公司",
     "amountSource": "官方公告摘要",
     "id": "auto-aHR0cHM6Ly93d3cuY2huZW5lcmd5",
+    "bids": [
+      {
+        "rank": 1,
+        "company": "威海市海王科技有限公司",
+        "quote": "305万元",
+        "quoteYuan": 3050000,
+        "_stageDate": "2026-05-20",
+        "isWinner": true
+      },
+      {
+        "rank": 2,
+        "company": "唐山神州机械集团有限公司",
+        "quote": "307.58万元",
+        "quoteYuan": 3075800,
+        "_stageDate": "2026-05-20"
+      }
+    ],
     "projectKey": "宁夏煤业汝箕沟无烟煤分公司智能干选机设备采购",
     "amountStage": "候选报价",
     "timeline": [
@@ -766,7 +932,7 @@
     "url": "https://ztb.hbcoal.com/webportal/index/webnotice/show/512.do",
     "evidence": "平台公告标题明确为淮北矿业股份有限公司与天津美腾科技股份有限公司智能干选机主机配件直接采购公示；当前公开索引未披露成交金额。",
     "procurement": "平台公告 >> 淮北矿业股份有限公司天津美腾科技股份有限公司智能干选机主机配件直接采购公示 平台公告 淮北矿业股份有限公司天津美腾科技股份有限公司智能干选机主机配件直接采购公示 日期： 2",
-    "amountNote": "公告正文确无金额信息",
+    "amountNote": "天津美腾科技智能干选机主机配件直接采购公示(2026-05-07，单一来源)，金额未公示",
     "buyer": "淮北矿业股份有限公司",
     "id": "auto-aHR0cHM6Ly96dGIuaGJjb2FsLmNv",
     "projectKey": "淮北矿业股份有限公司天津美腾科技智能干选机主机配件直接采购",
@@ -778,7 +944,7 @@
         "amount": "未披露",
         "url": "https://ztb.hbcoal.com/webportal/index/webnotice/show/512.do",
         "source": "淮北矿业电子商务采购平台",
-        "amountNote": "公告正文确无金额信息"
+        "amountNote": "天津美腾科技智能干选机主机配件直接采购公示(2026-05-07，单一来源)，金额未公示"
       }
     ],
     "stages": 1
@@ -791,10 +957,10 @@
     "bid": "招标公告",
     "bidStatus": "流标",
     "line": "智能干选",
-    "competitor": null,
+    "competitor": "（流标，无中标方）",
     "buyer": "鹤壁煤业(集团)有限责任公司",
     "amount": "未披露",
-    "amountNote": "2026-04-24开标投标人不足三家，公开招标失败（设备尚未采购）",
+    "amountNote": "设备招标失败(不足三家)，项目尚未授标",
     "amountSrc": "中原云商（公开）· 异常公告",
     "source": "中原云商（公开）· 异常公告",
     "confidence": "高",
@@ -810,7 +976,7 @@
         "amount": "未披露",
         "url": "https://bid.zyepp.com/zbzq/001005/20260424/0812947f-c105-4c2a-ac15-513ef4a41356.html",
         "source": "中原云商（公开）· 异常公告",
-        "amountNote": "2026-04-24开标投标人不足三家，公开招标失败（设备尚未采购）"
+        "amountNote": "设备招标失败(不足三家)，项目尚未授标"
       }
     ],
     "stages": 1
@@ -818,7 +984,7 @@
   {
     "title": "雁宝能源内蒙古蒙东能源有限公司选煤系统智能干选设备采购中标候选人公示",
     "line": "煤炭智能干选设备",
-    "competitor": "唐山神州机械集团有限公司（第一候选人）",
+    "competitor": "唐山神州机械集团有限公司",
     "region": "内蒙古呼伦贝尔",
     "amount": "1067.58万元",
     "bid": "中标候选人",
@@ -833,6 +999,23 @@
     "winner": "唐山神州机械集团有限公司",
     "amountSource": "官方公告摘要",
     "id": "auto-aHR0cHM6Ly93d3cuY2huZW5lcmd5",
+    "bids": [
+      {
+        "rank": 1,
+        "company": "唐山神州机械集团有限公司",
+        "quote": "1067.58万元",
+        "quoteYuan": 10675800,
+        "_stageDate": "2026-04-03",
+        "isWinner": true
+      },
+      {
+        "rank": 2,
+        "company": "威海市海王科技有限公司",
+        "quote": "1100.0028万元",
+        "quoteYuan": 11000028,
+        "_stageDate": "2026-04-03"
+      }
+    ],
     "projectKey": "雁宝能源内蒙古蒙东能源有限公司选煤系统智能干选设备采购",
     "amountStage": "候选报价",
     "timeline": [
@@ -867,8 +1050,33 @@
     "winner": "安徽淮昊矿山工程有限公司",
     "projectKey": "潞安古城设备安装",
     "amountStage": "中标价",
+    "bids": [
+      {
+        "rank": 1,
+        "company": "安徽淮昊矿山工程有限公司",
+        "quoteYuan": 6922047,
+        "quote": "692.2万元",
+        "_stageDate": "2026-03-13",
+        "isWinner": true
+      },
+      {
+        "rank": 2,
+        "company": "山冶鑫拓工程项目管理有限公司",
+        "quoteYuan": 6563283,
+        "quote": "656.33万元",
+        "_stageDate": "2026-03-13"
+      },
+      {
+        "rank": 3,
+        "company": "山西安畅建筑工程有限公司",
+        "quoteYuan": 6967576,
+        "quote": "696.76万元",
+        "_stageDate": "2026-03-13"
+      }
+    ],
     "bidOpenDate": "2026-03-13",
     "openStatus": "已开标",
+    "amountNote": "公告正文确无金额信息",
     "timeline": [
       {
         "date": "2026-02-11",
@@ -916,10 +1124,49 @@
     "procurement": "> 物资 > 正文 【沈阳设计院】神东煤炭洗选中心保德选煤厂智能干选改造项目(EPC)设计、采购及施工总承包智能干选机采购(二次)中标公告 &#xe652; 发布时间： 2026-03-0",
     "winner": "霍里思特科技（浙江）有限公司",
     "id": "auto-aHR0cHM6Ly9jZy5jY3RlZy5jbi9j",
+    "bids": [
+      {
+        "rank": 1,
+        "company": "霍里思特科技（浙江）有限公司",
+        "quote": "754万元",
+        "quoteYuan": 7540000,
+        "_stageDate": "2026-03-09",
+        "isWinner": true
+      },
+      {
+        "rank": 1,
+        "company": "中煤科工集团沈阳设计研究院有限公司",
+        "quote": "2046.74万元",
+        "quoteYuan": 20467416.7,
+        "_stageDate": "2025-08-18"
+      },
+      {
+        "rank": 2,
+        "company": "合肥泰禾卓海智能科技有限公司",
+        "quote": "795万元",
+        "quoteYuan": 7950000,
+        "_stageDate": "2026-03-09"
+      },
+      {
+        "rank": 2,
+        "company": "煤炭工业石家庄设计研究院有限公司",
+        "quote": "2109.28万元",
+        "quoteYuan": 21092800,
+        "_stageDate": "2025-08-18"
+      },
+      {
+        "rank": 3,
+        "company": "河南恒冠卓科技有限公司",
+        "quote": "780.8万元",
+        "quoteYuan": 7808000,
+        "_stageDate": "2026-03-09"
+      }
+    ],
     "projectKey": "神东保德干选改造EPC",
     "amountStage": "中标价",
     "bidOpenDate": "2025-08-06",
     "openStatus": "已开标",
+    "amountNote": "EPC总包（设计+采购+施工），设备分包另计霍里思特754万",
     "timeline": [
       {
         "date": "2025-07-17",
@@ -936,7 +1183,7 @@
         "amount": "2046.74万元",
         "url": "https://www.ggzy.gov.cn/information/deal/html/b/0067/0104/20250818/0067cf8bf98799264b6691cdaa7a04953789.html",
         "source": "全国公共资源交易平台（神华招标网）",
-        "amountNote": "第2次中标候选人公示：第一候选人中煤科工沈阳设计院报价2046.7417万元（第二候选人煤炭工业石家庄设计院2109.28万元）。系EPC总承包价。原文见chnenergybidding.com.cn，经Web交叉检索确认。后续设备分包：智能干选机（二次）由霍里思特以754万元中标（2026-03-09）。"
+        "amountNote": "EPC总包（设计+采购+施工），设备分包另计霍里思特754万"
       },
       {
         "date": "2025-08-26",
@@ -986,6 +1233,7 @@
     "projectKey": "华能陈家沟砚北配件",
     "amountStage": "候选报价",
     "openStatus": "未披露",
+    "amountNote": "公告正文为PDF附件，HTML无金额",
     "timeline": [
       {
         "date": "2026-01-15",
@@ -1024,6 +1272,30 @@
     "buyer": "窑街煤电集团",
     "procurement": "窑街煤电集团有限公司金河煤矿智能干选系统采购项目中标结果公告_中标公示_甘肃经济信息网欢迎您！ 欢迎访问甘肃经济信息网！ 今天是： 会员中心 信息统计 首",
     "id": "auto-aHR0cHM6Ly93d3cuZ3NlaS5jb20u",
+    "bids": [
+      {
+        "rank": 1,
+        "company": "枣庄海纳科技有限公司",
+        "quote": "316万元",
+        "quoteYuan": 3160000,
+        "_stageDate": "2026-02-02",
+        "isWinner": true
+      },
+      {
+        "rank": 2,
+        "company": "威海市海王科技有限公司",
+        "quote": "336.6万元",
+        "quoteYuan": 3366000,
+        "_stageDate": "2026-02-02"
+      },
+      {
+        "rank": 3,
+        "company": "甘肃卓越智能工矿物资有限公司",
+        "quote": "344万元",
+        "quoteYuan": 3440000,
+        "_stageDate": "2026-02-02"
+      }
+    ],
     "projectKey": "窑街煤电集团金河煤矿智能干选系统采购项目中标结果",
     "amountStage": "中标价",
     "timeline": [
@@ -1044,10 +1316,10 @@
     "source": "全国公共资源交易平台（神华招标网）",
     "publishDate": "2025-12-09",
     "line": "煤炭智能干选设备",
-    "bidStatus": "招标公告",
+    "bidStatus": "中标候选人",
     "region": "央企招投标",
     "sourceAuthority": "official",
-    "amount": "未披露",
+    "amount": "259.67万元",
     "confidence": "高",
     "evidence": "关证件(如有)等信息向所有参加投标的投标人进行公示。 （2）中标候选人公示阶段，对中标候选人满足招标文件要求的资质、业绩、拟任项目经理/项目负责人/项目负责人（设总）/总监理工程师的相关证件(如有)向社会进行公示。 （3）招标公告中要求的业绩未进行公示的（补充公示的业绩视为已公示业绩），评标阶段将不予认可。 7.2 / 8.发布公告的媒介 本招标公告同时在国能e招（http://www.chnenergybidding.com.cn）和",
     "evidenceCapturedAt": "2026-07-31T01:18:15.368Z",
@@ -1055,21 +1327,40 @@
     "procurement": "振动筛和干选机配件主要包括： 激振器 、 激振器总成 、 激振梁 、 减速机带逆止器 、 机头",
     "bidOpenDate": "2025-12-29",
     "id": "auto-aHR0cHM6Ly93d3cuZ2d6eS5nb3Yu",
-    "amountNote": "全文需登录(聚合站付费墙)",
+    "amountNote": "第一中标候选报价(配件总包，含振动筛/干选机/过滤机配件24+51项)",
     "bid": "招标公告",
     "date": "2025-12-09",
     "competitor": "未披露",
     "openStatus": "已开标",
+    "bids": [
+      {
+        "rank": 1,
+        "company": "青岛金盛万豪机械设备有限公司",
+        "quote": "259.67万元",
+        "quoteYuan": 2596779.61,
+        "_stageDate": "2025-12-09",
+        "isWinner": true
+      },
+      {
+        "rank": 2,
+        "company": "河北澳德工业设备有限公司",
+        "quote": "292.13万元",
+        "quoteYuan": 2921264.57,
+        "_stageDate": "2025-12-09"
+      }
+    ],
+    "winner": "青岛金盛万豪机械设备有限公司",
     "projectKey": "准能集团振动筛和干选机及过滤机配件采购公开招标项目",
+    "amountStage": "招标控制价/预算",
     "timeline": [
       {
         "date": "2025-12-09",
         "bid": "招标公告",
         "title": "准能集团振动筛和干选机及过滤机配件采购公开招标项目招标公告",
-        "amount": "未披露",
+        "amount": "259.67万元",
         "url": "https://www.ggzy.gov.cn/information/deal/html/b/0067/0101/20251209/006766ddeaeb9a8445b589ac4e5a490932f0.html",
         "source": "全国公共资源交易平台（神华招标网）",
-        "amountNote": "全文需登录(聚合站付费墙)"
+        "amountNote": "第一中标候选报价(配件总包，含振动筛/干选机/过滤机配件24+51项)"
       }
     ],
     "stages": 1
@@ -1096,6 +1387,7 @@
     "amountStage": "招标控制价/预算",
     "bidOpenDate": "2025-11-19",
     "openStatus": "已开标",
+    "amountNote": "公告正文确无金额信息",
     "timeline": [
       {
         "date": "2025-11-12",
@@ -1132,12 +1424,29 @@
     "evidenceCapturedAt": "2026-07-31T01:19:01.722Z",
     "procurement": "全国公共资源交易平台 国源电力哈密煤电公司大南湖一矿原煤干选系统建设项目公开招标中标候选人公示 发布时间：2025-10-29 08:36 信息来源： 神华招标网 原文链接地址 无标题",
     "id": "auto-aHR0cHM6Ly93d3cuZ2d6eS5nb3Yu",
-    "amountNote": "第2次中标候选人公示：第一候选人中煤建筑安装工程集团报价6878.6万元（第二候选人大地工程开发集团6988.12万元）。系原煤干选系统建设整体EPC价，含土建安装，非单纯设备价。金额经Web交叉检索确认。",
-    "competitor": "中煤建筑安装工程集团有限公司（第一候选人）",
+    "amountNote": "EPC整体价（含块煤智能干选车间土建+设备+安装），非单纯设备价",
+    "competitor": "中煤建筑安装工程集团有限公司",
     "winner": "中煤建筑安装工程集团有限公司",
     "bid": "中标候选人",
     "date": "2025-10-29",
-    "projectKey": "国源电力哈密煤电公司大南湖一矿原煤干选系统建设项目公开招标",
+    "bids": [
+      {
+        "rank": 1,
+        "company": "中煤建筑安装工程集团有限公司",
+        "quote": "6878.60万元",
+        "quoteYuan": 68786031.28,
+        "_stageDate": "2025-10-29",
+        "isWinner": true
+      },
+      {
+        "rank": 2,
+        "company": "大地工程开发（集团）有限公司",
+        "quote": "6988.12万元",
+        "quoteYuan": 69881183.39,
+        "_stageDate": "2025-10-29"
+      }
+    ],
+    "projectKey": "国源电力哈密煤电公司大南湖一矿原煤干选系统建设项目公开",
     "amountStage": "候选报价",
     "timeline": [
       {
@@ -1147,7 +1456,7 @@
         "amount": "6878.6万元",
         "url": "https://www.ggzy.gov.cn/information/deal/html/b/0067/0104/20251029/0067610cdb41052a4c788fd89cca80181932.html",
         "source": "全国公共资源交易平台（神华招标网）",
-        "amountNote": "第2次中标候选人公示：第一候选人中煤建筑安装工程集团报价6878.6万元（第二候选人大地工程开发集团6988.12万元）。系原煤干选系统建设整体EPC价，含土建安装，非单纯设备价。金额经Web交叉检索确认。"
+        "amountNote": "EPC整体价（含块煤智能干选车间土建+设备+安装），非单纯设备价"
       }
     ],
     "stages": 1
@@ -1172,6 +1481,7 @@
     "bid": "招标公告",
     "date": "2025-10-28",
     "competitor": "未披露",
+    "amountNote": "招标公告最高限价1063.7万元（中标价即顶限）",
     "projectKey": "西黑山一号矿井选煤厂EPC总承包项目智能干选机设备项目",
     "amountStage": "招标控制价/预算",
     "timeline": [
@@ -1181,7 +1491,8 @@
         "title": "西黑山一号矿井选煤厂EPC总承包项目智能干选机设备项目公告",
         "amount": "1063.7万元",
         "url": "https://www.ggzy.gov.cn/information/deal/html/b/0067/0101/20251028/0067c83a180518344310839df80314c7974f.html",
-        "source": "全国公共资源交易平台（央企招投标）"
+        "source": "全国公共资源交易平台（央企招投标）",
+        "amountNote": "招标公告最高限价1063.7万元（中标价即顶限）"
       }
     ],
     "stages": 1
@@ -1253,6 +1564,30 @@
     "date": "2025-10-20",
     "projectKey": "潞安古城矿建工程",
     "amountStage": "中标价",
+    "bids": [
+      {
+        "rank": 1,
+        "company": "中煤第三建设（集团）有限责任公司",
+        "quoteYuan": 18052245,
+        "quote": "1805.22万元",
+        "_stageDate": "2025-10-14"
+      },
+      {
+        "rank": 2,
+        "company": "新龙建设工程集团有限公司",
+        "quoteYuan": 18227146,
+        "quote": "1822.71万元",
+        "_stageDate": "2025-10-14"
+      },
+      {
+        "rank": 3,
+        "company": "山西惠安煤矿建设工程有限公司",
+        "quoteYuan": 18266897,
+        "quote": "1826.69万元",
+        "_stageDate": "2025-10-14"
+      }
+    ],
+    "amountNote": "公告正文确无金额信息",
     "timeline": [
       {
         "date": "2025-08-22",
@@ -1307,10 +1642,10 @@
     "buyer": "中煤科工集团",
     "procurement": "： 包段号 标的名称 备注 1 中煤科工集团北京华宇工程有限公司《块煤智能干选技术与装备的研究》实验室工程 本次采购采用多轮竞争性谈判方式，二次报价为最终报价",
     "id": "auto-aHR0cHM6Ly93d3cuZ2d6eS5nb3Yu",
-    "amountNote": "公告正文确无金额信息",
+    "amountNote": "北京华宇自研实验室工程(竞争性谈判HYCG-2025-GC-571，北京门头沟，工期25天)，公告未披露金额",
     "bid": "招标公告",
     "date": "2025-09-10",
-    "competitor": "未披露",
+    "competitor": "中煤科工集团北京华宇工程有限公司",
     "projectKey": "中煤科工集团北京华宇工程有限公司《块煤智能干选技术与装备的研究》实验室工程项目",
     "timeline": [
       {
@@ -1320,7 +1655,7 @@
         "amount": "未披露",
         "url": "https://www.ggzy.gov.cn/information/deal/html/b/0067/0101/20250910/0067ac8bbdd9247c429bb8491e20571bc51a.html",
         "source": "全国公共资源交易平台（央企招投标）",
-        "amountNote": "公告正文确无金额信息"
+        "amountNote": "北京华宇自研实验室工程(竞争性谈判HYCG-2025-GC-571，北京门头沟，工期25天)，公告未披露金额"
       }
     ],
     "stages": 1

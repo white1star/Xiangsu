@@ -23,6 +23,7 @@ function projKey(title) {
   const stage = /(中标（成交）结果公告|中标候选人公示|中标结果公[示告]|评标结果公示|候选人公示|中标公示|成交结果公告|成交公告|竞争性谈判公告|招标公告|采购公告|询价公告|结果公[示告]|中标|公示|公告)$/;
   let prev;
   do { prev = s; s = s.replace(stage, ''); } while (s !== prev);
+  s = s.replace(/招标$/, ''); // 去掉阶段后缀剥离后残留的“招标”（如“…集中招标（…）招标”）
   s = s.replace(/[\s\-—_、，,。.·（）()]/g, '');
   return s;
 }
@@ -82,8 +83,29 @@ for (const [k, arr] of groups) {
     if (!proj.amountNote) delete proj.amountNote;
   }
   if (compRec) proj.competitor = compRec.competitor;
-  // 采购人/预算/采购内容/开标日期：任一记录有就带上
-  for (const f of ['buyer', 'budget', 'procurement', 'bidOpenDate', 'openStatus']) {
+  // 候选名单（竞品维度）：合并该项目所有阶段的 bids，按公司去重，取最高阶段报价
+  const bidMap = new Map();
+  for (const r of arr) {
+    if (Array.isArray(r.bids)) for (const b of r.bids) {
+      if (!b || !b.company) continue;
+      const key = b.company.replace(/\s|（.*?）|\(.*?\)/g, '');
+      const prev = bidMap.get(key);
+      if (!prev || (b.quoteYuan && (!prev.quoteYuan || b.quoteYuan > prev.quoteYuan))) {
+        bidMap.set(key, { ...b, _stageDate: r.date || '' });
+      }
+    }
+  }
+  if (bidMap.size) {
+    proj.bids = [...bidMap.values()].sort((a, b) => (a.rank || 9) - (b.rank || 9));
+    // 中标方标记
+    const winName = (proj.winner || proj.competitor || '').replace(/\s|（.*?）|\(.*?\)/g, '');
+    if (winName && proj.bids.length) {
+      const w = proj.bids.find(b => b.company.replace(/\s|（.*?）|\(.*?\)/g, '') === winName);
+      if (w) w.isWinner = true;
+    }
+  }
+  // 采购人/预算/采购内容/开标日期/规格：任一记录有就带上
+  for (const f of ['buyer', 'budget', 'procurement', 'bidOpenDate', 'openStatus', 'specs', 'amountNote']) {
     if (!proj[f]) { const v = tl.map(r => r[f]).find(Boolean); if (v) proj[f] = v; }
   }
   proj.timeline = tl.map(r => ({
