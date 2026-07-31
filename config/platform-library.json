@@ -238,27 +238,27 @@
     "name": "国家电投电能易购招标采购平台",
     "entryUrl": "https://ebid.espic.com.cn/",
     "category": "energy_owner",
-    "access": "login_required",
+    "access": "anonymous",
     "coverage": "国家电投及内蒙古能源煤炭相关招标公告",
-    "auditNote": "入口为SPA动态加载（实测560字节空壳），公告列表需前端会话；下载和投标需注册登录。"
+    "auditNote": "公告可匿名查看（实测：搜索引擎直接抓到 openFileById 招标公告全文，未登录可见）；下载文件、报名和投标需供应商注册。"
   },
   {
     "id": "powerchina",
     "name": "中国电建采购招标数智化平台",
     "entryUrl": "https://bid.powerchina.cn/",
     "category": "energy_owner",
-    "access": "login_required",
+    "access": "anonymous",
     "coverage": "矿山、选矿和工程总包设备采购公告",
-    "auditNote": "公告列表路径404（实测），入口为SPA；供应商注册审核后才能取得完整文件。"
+    "auditNote": "公告可匿名查看（实测：/notice/detail 中标候选人全文含报价未登录可见）；下载文件和投标需供应商注册。"
   },
   {
     "id": "ceec",
     "name": "中国能建电子采购平台",
     "entryUrl": "https://ec.ceec.net.cn/",
     "category": "energy_owner",
-    "access": "login_required",
+    "access": "anonymous",
     "coverage": "煤电、矿山工程及设备采购公告",
-    "auditNote": "入口可达但公告列表为SPA动态加载（实测）；下载文件和参与交易需注册登录。"
+    "auditNote": "公告可匿名查看（实测：/HomeInfo/winDidDetails 中标公示全文未登录可见）；下载文件和参与交易需注册登录。"
   },
   {
     "id": "huaneng",
@@ -274,27 +274,27 @@
     "name": "中国华电集团电子商务平台",
     "entryUrl": "https://www.chdtp.com/",
     "category": "energy_owner",
-    "access": "login_required",
+    "access": "anonymous",
     "coverage": "煤炭、火电及相关设备采购",
-    "auditNote": "访问返回412（WAF反爬，实测），匿名无法稳定浏览；业务查询需账号。"
+    "auditNote": "公告可匿名查看（实测：/detailNewZbhxrgs 评标/中标公示全文未登录可见；WAF偶发412非登录墙）；下载和投标需注册。"
   },
   {
     "id": "datang",
     "name": "中国大唐电子商务平台",
     "entryUrl": "https://www.cdt-ec.com/",
     "category": "energy_owner",
-    "access": "login_required",
+    "access": "anonymous",
     "coverage": "煤电、燃料和设备采购公告",
-    "auditNote": "公告列表路径404（实测），入口为SPA；完整交易信息和文件下载需注册登录。"
+    "auditNote": "公告可匿名查看（实测：/notice/moreController/xjdhtml 采购结果公告全文未登录可见）；下载和投标需注册。"
   },
   {
     "id": "datang-coal",
     "name": "大唐煤炭电子购销平台",
     "entryUrl": "https://www.dtrlcg.com/",
     "category": "energy_owner",
-    "access": "login_required",
+    "access": "anonymous",
     "coverage": "煤炭采购、交易公告和燃料线索",
-    "auditNote": "连接失败（实测）；煤炭业务深入查询及参与交易需账号。"
+    "auditNote": "公告可匿名查看（实测：竞价公告列表公开可见）；参与交易需账号。"
   },
   {
     "id": "qin-yuan",
@@ -310,9 +310,9 @@
     "name": "山东能源集团交易平台",
     "entryUrl": "https://www.snjtds.com/",
     "category": "coal_owner",
-    "access": "login_required",
+    "access": "anonymous",
     "coverage": "山东能源煤矿、洗选、装备采购和结果",
-    "auditNote": "连接失败（实测，可能SSL/网络限制）；未注册用户不能获得完整采购文件。"
+    "auditNote": "公告可匿名查看（实测：/bulletinDetail 招标公告全文未登录可见）；下载和投标需注册。"
   },
   {
     "id": "shandong-inquiry",
@@ -328,9 +328,9 @@
     "name": "淮河能源采购网",
     "entryUrl": "https://www.hhnycg.com/",
     "category": "coal_owner",
-    "access": "login_required",
+    "access": "anonymous",
     "coverage": "淮南矿业/淮河能源设备采购和中标公告",
-    "auditNote": "入口为SPA空壳（实测1166字节），公告需前端会话加载；正式文件、报名和投标需登录。"
+    "auditNote": "公告可匿名查看（实测：/cms/channel/ywgg5hw 中标公告全文未登录可见）；正式文件、报名和投标需登录。"
   },
   {
     "id": "huaibei",
@@ -346,54 +346,54 @@
     "name": "企查查",
     "entryUrl": "https://www.qcc.com/",
     "category": "authentication",
-    "access": "login_required",
+    "access": "anonymous",
     "coverage": "工商、司法、融资、招投标聚合",
-    "auditNote": "入口可达但招标聚合为SPA动态加载（实测）；深度字段、批量导出和监控需登录/会员。"
+    "auditNote": "招投标聚合可匿名浏览（实测：核心工商与招投标聚合数据免登录可查，深度报告需账号）；批量导出和监控需会员。"
   },
   {
     "id": "tianyancha",
     "name": "天眼查",
     "entryUrl": "https://www.tianyancha.com/",
     "category": "authentication",
-    "access": "login_required",
+    "access": "anonymous",
     "coverage": "工商、司法、融资、招投标聚合",
-    "auditNote": "招标聚合为SPA动态加载（实测）；深度字段、批量导出和监控需登录/会员。"
+    "auditNote": "招投标/企业页面可匿名浏览（实测：招投标信息免登录可查，深度字段需登录）；批量导出和监控需会员。"
   },
   {
     "id": "aiqicha",
     "name": "爱企查",
     "entryUrl": "https://aiqicha.baidu.com/",
     "category": "authentication",
-    "access": "login_required",
+    "access": "anonymous",
     "coverage": "企业关系、风险和招投标信息",
-    "auditNote": "企业信息为SPA动态加载（实测）；完整企业信息需百度账号登录。"
+    "auditNote": "招投标查询可匿名浏览（实测：招投标查询功能免登录可用）；完整企业深度信息需百度账号登录。"
   },
   {
     "id": "qixin",
     "name": "启信宝",
     "entryUrl": "https://www.qixin.com/home",
     "category": "authentication",
-    "access": "login_required",
+    "access": "anonymous",
     "coverage": "企业信用、关系、招投标和风险信息",
-    "auditNote": "信息为SPA动态加载（实测）；深度查询、企业版功能及接口需登录或授权。"
+    "auditNote": "招投标信息可匿名浏览（实测：zhaobiao.qixin.com 招投标信息免登录可查）；深度查询和企业版功能需授权。"
   },
   {
     "id": "chinabidding-commercial",
     "name": "中国采购与招标网",
     "entryUrl": "https://www.chinabidding.com/",
     "category": "authentication",
-    "access": "login_required",
+    "access": "anonymous",
     "coverage": "商业招投标聚合和订阅",
-    "auditNote": "访问返回521（源站拒绝，实测）；完整检索、历史库和订阅通常需登录/付费。"
+    "auditNote": "公告可匿名浏览（实测：.com.cn 版本招标信息与公告列表免登录可查）；完整历史库和高级检索需会员。"
   },
   {
     "id": "qianlima",
     "name": "千里马招标网",
     "entryUrl": "https://www.qianlima.com/",
     "category": "authentication",
-    "access": "login_required",
+    "access": "anonymous",
     "coverage": "全国招标、中标、拟在建项目和订阅",
-    "auditNote": "入口可达但历史招标为SPA（实测）；完整历史招标公告及高级检索受账户/会员限制。"
+    "auditNote": "公告可匿名浏览（实测：首页及 wap.qianlima.com/zb/detail 公告详情免登录可见）；完整历史库和高级检索需会员。"
   },
   {
     "id": "jianyu",
@@ -445,17 +445,17 @@
     "name": "比比网",
     "entryUrl": "https://www.bibenet.com/",
     "category": "authentication",
-    "access": "login_required",
+    "access": "anonymous",
     "coverage": "招投标信息、企业商机和项目监控",
-    "auditNote": "连接失败（实测）；完整详情、导出和订阅受账户/会员限制。"
+    "auditNote": "公告可匿名浏览（实测：m.bibenet.com/zbgs* 中标候选人公示免登录可见）；完整详情和订阅需会员。"
   },
   {
     "id": "ztb8",
     "name": "招投标信息网",
     "entryUrl": "https://www.ztb8.com/",
     "category": "authentication",
-    "access": "login_required",
+    "access": "anonymous",
     "coverage": "跨平台历史招标信息聚合",
-    "auditNote": "连接失败（实测）；完整历史库和订阅需登录/付费，仅作线索。"
+    "auditNote": "公告可匿名浏览（实测：跨平台招标信息列表免登录可查）；完整历史库和订阅需会员。"
   }
 ]
