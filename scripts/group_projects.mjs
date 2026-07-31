@@ -106,8 +106,13 @@ for (const [k, arr] of groups) {
     }
   }
   // 采购人/预算/采购内容/开标日期/规格：任一记录有就带上
-  for (const f of ['buyer', 'budget', 'procurement', 'bidOpenDate', 'openStatus', 'specs', 'amountNote', 'region', 'sourceAuthority']) {
+  for (const f of ['buyer', 'budget', 'procurement', 'bidOpenDate', 'openStatus', 'specs', 'amountNote', 'region', 'sourceAuthority', 'mineral']) {
     if (!proj[f]) { const v = tl.map(r => r[f]).find(Boolean); if (v) proj[f] = v; }
+  }
+  // 矿种：同一项目内若最高阶段标了"未披露"，应从其他阶段取真实矿种（"未披露"视为空）
+  if (!proj.mineral || proj.mineral === '未披露') {
+    const mv = tl.map(r => r.mineral).find(x => x && x !== '未披露');
+    if (mv) proj.mineral = mv;
   }
   proj.timeline = tl.map(r => ({
     date: r.date, bid: r.bid || r.bidStatus, title: r.title,
