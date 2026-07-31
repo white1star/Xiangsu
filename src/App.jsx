@@ -6,7 +6,7 @@ import './table-fix.css';
 import './intelligence.css';
 import './platform-library.css';
 
-const icons = ['▣', '◉', '◌'];
+const icons = ['▣', '◉'];
 const PAGE_SIZE = 10;
 const PHASE_OPTIONS = ['全部', '待开标', '已开标', '未披露', '中标候选人', '已中标', '流标'];
 
@@ -57,14 +57,14 @@ export default function App() {
   const phaseSelect = <select value={phase} onChange={resetPage(setPhase)}>{PHASE_OPTIONS.map(item => <option key={item}>{item}</option>)}</select>;
 
   return <main className="shell">
-    <aside><div className="brand"><div className="mark">◈</div><b>唐山像素智能</b></div><nav>{['情报台账', '来源分类', '平台清单'].map((item, index) => <button className={page === item ? 'active' : ''} onClick={() => setPage(item)} key={item}><i>{icons[index]}</i>{item}</button>)}</nav></aside>
+    <aside><div className="brand"><div className="mark">◈</div><b>唐山像素智能</b></div><nav>{['情报台账', '数据源'].map((item, index) => <button className={page === item ? 'active' : ''} onClick={() => setPage(item)} key={item}><i>{icons[index]}</i>{item}</button>)}</nav></aside>
     <section className="workspace"><header><h1>{page === '情报台账' ? '公开情报台账' : page}</h1><div><button className="export" onClick={() => window.print()}>导出 / 打印</button></div></header>
       {page === '情报台账' ? <>
         <div className="filters"><label>产品线{select(line, setLine, 'line')}</label><label>竞品{select(competitor, setCompetitor, 'competitor')}</label><label>置信度{select(confidence, setConfidence, 'confidence')}</label><label>招标状态{phaseSelect}</label></div>
         <div className="tablebox"><table><thead><tr>{['客户', '矿种', '产品线', '竞品', '金额', '中标情况', '发布日期', '来源', '置信度'].map(item => <th key={item}>{item}</th>)}</tr></thead><tbody>{pageRows.map(item => <tr key={item.url} onClick={() => setSelected(item)}>{[item.buyer || '未披露', item.mineral || '未披露', item.line, item.competitor, amountCell(item), bidCell(item), item.date, <a href={item.url} target="_blank" rel="noreferrer" onClick={event => event.stopPropagation()}>{item.source} ↗</a>, item.confidence].map((value, index) => { const cls = index === 4 ? 'amt' : index === 5 ? `bid ${item.bid}` : index === 8 ? `confidence ${item.confidence}` : ''; return <td className={cls} key={index}>{value}</td>; })}</tr>)}</tbody></table></div>
         <footer><span>共 {filtered.length} 个项目（同项目招标/候选/中标公告已合并）　|　最近更新：{latestUpdate}　|　第 {current}/{totalPages} 页</span><span className="pager"><button disabled={current <= 1} onClick={() => setPageNum(current - 1)}>上一页</button><button disabled={current >= totalPages} onClick={() => setPageNum(current + 1)}>下一页</button></span><span>点击任意记录查看证据摘要</span></footer>
         {selected && <Detail item={selected} onClose={() => setSelected(null)} />}
-      </> : <SourcePage type={page} />}
+      </> : <SourcePage />}
     </section>
   </main>;
 }
@@ -74,9 +74,21 @@ function Detail({ item, onClose }) { return <div className="detail"><div><button
 // 竞品分析页已按需求从侧边栏移除，组件一并删除（2026-07-31）。
 
 
-function SourcePage({ type }) {
-  const authentication = type === '平台清单';
-  const entries = platformLibrary.filter(platform => authentication ? platform.access !== 'anonymous' : platform.access === 'anonymous');
-  const accessLabel = access => '需登录才能看公告';
-  return <div className="source-page"><p>{authentication ? (entries.length === 0 ? '经逐站实测，当前收录的所有平台公告均可匿名查看，无需登录——这与“只看公开公告”的采集原则完全一致。' : '以下平台经实测审查，公告内容本身需登录才能查看（或 SPA 动态加载 / WAF 反爬导致匿名无法稳定浏览）。系统不会绕过鉴权；你登录后在已授权会话中再抓取。') : '仅保留公告完全公开可匿名浏览的入口（含公告可看、仅下载/投标需注册的平台）。公开浏览不代表可以绕过下载、投标或付费权限；正式入账仍须保存原公告。'}</p><p className="source-count">已收录 {entries.length} 个{authentication ? '需登录才能看公告' : '公告可匿名浏览'}平台。</p><table><thead><tr><th>平台</th>{authentication && <th>权限</th>}<th>覆盖内容</th><th>复审说明</th></tr></thead><tbody>{entries.map(platform => <tr key={platform.id}><td><a href={platform.entryUrl} target="_blank" rel="noreferrer">{platform.name} ↗</a></td>{authentication && <td><span className="access-tag">{accessLabel(platform.access)}</span></td>}<td>{platform.coverage}</td><td>{platform.auditNote}</td></tr>)}</tbody></table></div>;
+function SourceSection({ title, count, desc, entries, restricted }) {
+  return <section className="src-group">
+    <h2>{title}<span className="src-count">{count} 个</span></h2>
+    <p className="src-desc">{desc}</p>
+    <table><thead><tr><th>平台</th>{restricted && <th>权限</th>}<th>覆盖内容</th><th>复审说明</th></tr></thead><tbody>{entries.map(platform => <tr key={platform.id}><td title={platform.entryUrl}>{platform.name}</td>{restricted && <td><span className="access-tag">需登录才能看公告</span></td>}<td>{platform.coverage}</td><td>{platform.auditNote}</td></tr>)}</tbody></table>
+  </section>;
+}
+
+function SourcePage() {
+  const open = platformLibrary.filter(p => p.access === 'anonymous');
+  const restricted = platformLibrary.filter(p => p.access !== 'anonymous');
+  return <div className="source-page">
+    <SourceSection title="公开数据源" count={open.length} entries={open}
+      desc="公告完全公开、可匿名浏览的入口（含公告可看、仅下载/投标需注册的平台）。公开浏览不代表可以绕过下载、投标或付费权限；正式入账仍须保存原公告。" />
+    <SourceSection title="受限数据源" count={restricted.length} entries={restricted} restricted
+      desc="以下平台经实测审查，公告内容本身需登录才能查看（或 SPA 动态加载 / WAF 反爬导致匿名无法稳定浏览）。系统不会绕过鉴权；你登录后在已授权会话中再抓取。" />
+  </div>;
 }

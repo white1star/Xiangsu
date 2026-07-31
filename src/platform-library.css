@@ -1,2 +1,6 @@
 .source-count{font-weight:700;color:#1766cb!important}.source-page td:first-child{font-weight:700}.source-page td:nth-child(2),.source-page td:nth-child(3){white-space:normal;line-height:1.6}
 .access-tag{display:inline-block;padding:3px 8px;border-radius:999px;background:#fff3dd;color:#9a5d00;font-size:12px;font-weight:700;white-space:nowrap}
+.src-group{margin-bottom:30px}
+.src-group h2{font-size:18px;margin:0 0 4px;display:flex;align-items:baseline;gap:10px}
+.src-group h2 .src-count{font-size:13px;font-weight:700;color:#1766cb}
+.src-desc{color:#52667b;margin:0 0 12px;line-height:1.7}
