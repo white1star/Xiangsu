@@ -16,6 +16,7 @@ function bidCell(item) {
     s += item.bidOpenDate ? ` ${item.bidOpenDate}·${item.openStatus}` : ' 开标未披露';
     if (item.resultGap) s += ' ⚠';
   }
+  if (item.stages > 1) s += `（${item.stages}阶段）`;
   return s;
 }
 
@@ -48,14 +49,14 @@ export default function App() {
       {page === '情报台账' ? <>
         <div className="filters"><label>产品线{select(line, setLine, 'line')}</label><label>竞品{select(competitor, setCompetitor, 'competitor')}</label><label>置信度{select(confidence, setConfidence, 'confidence')}</label><label>招标状态{phaseSelect}</label></div>
         <div className="tablebox"><table><thead><tr>{['情报标题', '产品线', '竞品', '金额', '中标情况', '来源', '置信度', '发布日期'].map(item => <th key={item}>{item}</th>)}</tr></thead><tbody>{pageRows.map(item => <tr key={item.url} onClick={() => setSelected(item)}>{[item.title, item.line, item.competitor, item.amount, bidCell(item), <a href={item.url} target="_blank" rel="noreferrer" onClick={event => event.stopPropagation()}>{item.source} ↗</a>, item.confidence, item.date].map((value, index) => <td className={index === 4 ? `bid ${item.bid}` : index === 6 ? `confidence ${item.confidence}` : ''} key={index}>{value}</td>)}</tr>)}</tbody></table></div>
-        <footer><span>共 {filtered.length} 条　|　第 {current}/{totalPages} 页</span><span className="pager"><button disabled={current <= 1} onClick={() => setPageNum(current - 1)}>上一页</button><button disabled={current >= totalPages} onClick={() => setPageNum(current + 1)}>下一页</button></span><span>点击任意记录查看证据摘要</span></footer>
+        <footer><span>共 {filtered.length} 个项目（同项目招标/候选/中标公告已合并）　|　第 {current}/{totalPages} 页</span><span className="pager"><button disabled={current <= 1} onClick={() => setPageNum(current - 1)}>上一页</button><button disabled={current >= totalPages} onClick={() => setPageNum(current + 1)}>下一页</button></span><span>点击任意记录查看证据摘要</span></footer>
         {selected && <Detail item={selected} onClose={() => setSelected(null)} />}
       </> : <SourcePage type={page} />}
     </section>
   </main>;
 }
 
-function Detail({ item, onClose }) { return <div className="detail"><div><button onClick={onClose}>×</button><h2>{item.title}</h2><p><b>开标日期：</b>{item.bidOpenDate ? `${item.bidOpenDate}（${item.openStatus || '未披露'}）` : '未披露'}{item.resultGap ? '　⚠ 已开标但台账未收录对应中标结果，建议反查官方原文' : ''}</p><p><b>金额：</b>{item.amount || '未披露'}{item.amountNote ? <span className="why">（{item.amountNote}）</span> : ''}</p><p><b>采购人：</b>{item.buyer || '未披露'}</p>{item.budget && <p><b>预算/控制价：</b>{item.budget}</p>}{item.procurement && <p><b>采购内容：</b>{item.procurement}</p>}<p><b>证据摘要：</b>{item.evidence}</p><p><b>原始页面：</b><a href={item.url} target="_blank" rel="noreferrer">打开原文 ↗</a></p><p className="hint">金额优先取公告表格中的首个投标/中标报价（多家竞价时取第一家）；已排除保证金、注册资本、标书费等非交易金额。凡标注“未披露”的，均已逐条复核并在括号中注明具体原因（正文为PDF、需登录、链接失效或原文确无金额），不以猜测补全。</p></div></div>; }
+function Detail({ item, onClose }) { return <div className="detail"><div><button onClick={onClose}>×</button><h2>{item.title}</h2><p><b>开标日期：</b>{item.bidOpenDate ? `${item.bidOpenDate}（${item.openStatus || '未披露'}）` : '未披露'}{item.resultGap ? '　⚠ 已开标但台账未收录对应中标结果，建议反查官方原文' : ''}</p><p><b>金额：</b>{item.amount || '未披露'}{item.amountStage ? <span className="why">（{item.amountStage}）</span> : ''}{item.amountNote ? <span className="why">（{item.amountNote}）</span> : ''}</p>{item.timeline && item.timeline.length > 1 && <div className="timeline"><b>项目时间线（{item.timeline.length} 个阶段公告，已合并去重）：</b><ul>{item.timeline.map((t, i) => <li key={i}><span className={`bid ${t.bid}`}>{t.bid}</span>　{t.date}　{t.amount}　<a href={t.url} target="_blank" rel="noreferrer">原文 ↗</a><br /><span className="tl-title">{t.title}</span></li>)}</ul></div>}<p><b>采购人：</b>{item.buyer || '未披露'}</p>{item.budget && <p><b>预算/控制价：</b>{item.budget}</p>}{item.procurement && <p><b>采购内容：</b>{item.procurement}</p>}<p><b>证据摘要：</b>{item.evidence}</p><p><b>原始页面：</b><a href={item.url} target="_blank" rel="noreferrer">打开原文 ↗</a></p><p className="hint">金额优先取公告表格中的首个投标/中标报价（多家竞价时取第一家）；已排除保证金、注册资本、标书费等非交易金额。凡标注“未披露”的，均已逐条复核并在括号中注明具体原因（正文为PDF、需登录、链接失效或原文确无金额），不以猜测补全。</p></div></div>; }
 
 function SourcePage({ type }) {
   const authentication = type === '平台清单';

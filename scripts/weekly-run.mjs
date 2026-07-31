@@ -13,7 +13,8 @@ import { ADAPTERS, buildWindow, enrichFromOfficialDetail, MINIMUM_PUBLISH_DATE a
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const rulesFile = path.join(root, 'config', 'scan-rules.json');
-const dataFile = path.join(root, 'src', 'data', 'intelligence.json');
+// 平铺台账（管道产物、增量合并基准）；intelligence.json 是分组视图，由 group_projects.mjs 生成
+const flatFile = path.join(root, 'src', 'data', 'intelligence.flat.json');
 const pendingFile = path.join(root, 'src', 'data', 'pending-review.json');
 const reportFile = path.join(root, 'public', 'data', 'latest-run.json');
 const stateFile = path.join(root, 'public', 'data', 'scan-state.json');
@@ -187,7 +188,7 @@ async function main() {
   const mode = process.argv.includes('--backfill') ? 'backfill' : 'weekly';
   const window = buildWindow(mode);
   const rules = await readJson(rulesFile, []);
-  const existing = await readJson(dataFile, []);
+  const existing = await readJson(flatFile, []);
   const existingPending = await readJson(pendingFile, []);
   const previousState = await readJson(stateFile, {});
 
@@ -274,8 +275,11 @@ async function main() {
     return;
   }
   merged.records.sort((a, b) => String(b.publishDate || b.date).localeCompare(String(a.publishDate || a.date)));
-  await writeFile(dataFile, JSON.stringify(merged.records, null, 2) + '\n');
+  await writeFile(flatFile, JSON.stringify(merged.records, null, 2) + '\n');
   await writeFile(pendingFile, JSON.stringify(pending.leads, null, 2) + '\n');
+  // 固定末级步骤：按项目分组生成前端消费的 intelligence.json
+  const { execFileSync } = await import('node:child_process');
+  execFileSync(process.execPath, [path.join(root, 'scripts', 'group_projects.mjs')], { cwd: root, stdio: 'inherit' });
   console.log(JSON.stringify(report.totals));
 }
 
