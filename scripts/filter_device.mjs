@@ -22,6 +22,7 @@ const isNonDevice = c => NON_DEVICE.some(k => (c || '').includes(k));
 // ---- projKey / keyOf / HINTS（与 group_projects.mjs 保持一致）----
 function projKey(title) {
   let s = (title || '').replace(/[\[【\]】]/g, '').replace(/\s+/g, '');
+  s = s.replace(/（定稿）|定稿|副本|pdf/g, '');
   s = s.replace(/[（(](第?[一二三四五2-5]次(发询)?|日常采购|重新招标|\d+次)[)）]/g, '');
   s = s.replace(/重新招标|变更公告|\[?询比价采购\]?/g, '');
   const stage = /(中标（成交）结果公告|中标候选人公示|中标结果公[示告]|评标结果公示|候选人公示|中标公示|成交结果公告|成交公告|竞争性谈判公告|招标公告|采购公告|询价公告|结果公[示告]|中标|公示|公告)$/;

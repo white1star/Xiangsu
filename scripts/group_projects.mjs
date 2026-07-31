@@ -133,7 +133,7 @@ for (const [k, arr] of groups) {
       proj.statusNote = '本项目最新公告为招标失败/流标，尚未产生中标人';
     }
   }
-  if (proj.bid === '已中标' && !proj.winner && !(proj.competitor && !/未披露/.test(proj.competitor))) {
+  if (proj.bid === '已中标' && !proj.winner && !(proj.competitor && !/未披露|未定标/.test(proj.competitor))) {
     proj.bid = '中标候选人';
     proj.bidStatus = '中标候选人';
     proj.statusNote = '公告未明确中标人，按候选阶段保守标注';
