@@ -1,0 +1,38 @@
+national-ggzy	发现=65	
+ccteg-hw	发现=0	
+ccteg-qb	发现=0	
+chnenergy-zbgg	发现=0	
+chnenergy-zbhx	发现=0	
+zmzb-hw	发现=0	
+gsei-zb	发现=0	
+gsei-zbgg	发现=0	
+qin-yuan-zbgg	发现=0	
+qin-yuan-zbgs	发现=0	
+qin-yuan-zbgg2	发现=0	
+sdny-inquiry	发现=0	
+sdny-inquiry2	发现=0	
+jianyu	发现=0	招标/中标可匿名浏览；SPA动态加载，空壳则记录 ; https://www.jianyu360.cn/list/stype/ZBGG.html 内容过短(38)，疑似SPA/反爬空壳 ; https://www.jianyu360.cn/list/keywords/ZHINENGGANXUAN.html 内容过短(38)，疑似SPA/反爬空壳
+bidcenter	发现=0	公告可匿名浏览；高级检索受会员限制 ; https://www.bidcenter.com.cn/zbpage-1-1.html 内容过短(4)，疑似SPA/反爬空壳 ; https://www.bidcenter.com.cn/zbpage-4-1.html 内容过短(4)，疑似SPA/反爬空壳
+ebnew	发现=0	公告可匿名浏览；深度检索需登录
+yfbzb	发现=27	招标信息可匿名检索；完整详情需登录
+ceb-public	发现=0	官方公告服务平台；以原公告链接为最终证据 ; https://www.cebpubservice.com/web/search?keyword=%E6%99%BA%E8%83%BD%E5%B9%B2%E9%80%89&pageNo=1 内容过短(33)，疑似SPA/反爬空壳
+ccgp	发现=0	对非浏览器流量返回“频繁访问”拦截；不绕过 ; https://search.ccgp.gov.cn/bxsearch?searchtype=1&page_index=1&kw=%E6%99%BA%E8%83%BD%E5%B9%B2%E9%80%89 内容过短(227)，疑似SPA/反爬空壳
+cgs	发现=0	XRT矿石分选设备官方补充来源 ; https://www.cgs.gov.cn/tzgg/zfcg_5637/ 内容过短(105)，疑似SPA/反爬空壳
+mtzbw	发现=0	行业聚合站，只产出待复核线索，须反查官方原文
+xunbiaobao	发现=0	招标信息可匿名检索；订阅和完整详情需登录 ; https://xunbiaobao.baidu.com/s?keyword=%E6%99%BA%E8%83%BD%E5%B9%B2%E9%80%89 内容过短(31)，疑似SPA/反爬空壳
+shanxi-ggzy	发现=聚合覆盖	由全国公共资源交易平台聚合器统一覆盖（同一官方数据源）
+shaanxi-ggzy	发现=聚合覆盖	由全国公共资源交易平台聚合器统一覆盖（同一官方数据源）
+inner-mongolia-ggzy	发现=聚合覆盖	由全国公共资源交易平台聚合器统一覆盖（同一官方数据源）
+xinjiang-ggzy	发现=聚合覆盖	由全国公共资源交易平台聚合器统一覆盖（同一官方数据源）
+anhui-ggzy	发现=聚合覆盖	由全国公共资源交易平台聚合器统一覆盖（同一官方数据源）
+shandong-ggzy	发现=聚合覆盖	由全国公共资源交易平台聚合器统一覆盖（同一官方数据源）
+henan-ggzy	发现=聚合覆盖	由全国公共资源交易平台聚合器统一覆盖（同一官方数据源）
+hebei-ggzy	发现=聚合覆盖	由全国公共资源交易平台聚合器统一覆盖（同一官方数据源）
+guizhou-ggzy	发现=聚合覆盖	由全国公共资源交易平台聚合器统一覆盖（同一官方数据源）
+gansu-ggzy	发现=聚合覆盖	由全国公共资源交易平台聚合器统一覆盖（同一官方数据源）
+ningxia-ggzy	发现=聚合覆盖	由全国公共资源交易平台聚合器统一覆盖（同一官方数据源）
+heilongjiang-ggzy	发现=聚合覆盖	由全国公共资源交易平台聚合器统一覆盖（同一官方数据源）
+yunnan-ggzy	发现=聚合覆盖	由全国公共资源交易平台聚合器统一覆盖（同一官方数据源）
+sichuan-ggzy	发现=聚合覆盖	由全国公共资源交易平台聚合器统一覆盖（同一官方数据源）
+liaoning-ggzy	发现=聚合覆盖	由全国公共资源交易平台聚合器统一覆盖（同一官方数据源）
+qinghai-ggzy	发现=聚合覆盖	由全国公共资源交易平台聚合器统一覆盖（同一官方数据源）
