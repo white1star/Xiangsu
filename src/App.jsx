@@ -8,10 +8,12 @@ import './platform-library.css';
 
 const icons = ['▣', '◉', '◌', '◇'];
 const PAGE_SIZE = 10;
-const PHASE_OPTIONS = ['全部', '待开标', '已开标', '未披露', '中标候选人', '已中标'];
+const PHASE_OPTIONS = ['全部', '待开标', '已开标', '未披露', '中标候选人', '已中标', '流标'];
 
 function bidCell(item) {
   let s = item.bid;
+  if (item.bid === '流标') return `流标 · 未授标${item.stages > 1 ? `（${item.stages}阶段）` : ''}`;
+  if (item.bid === '已中标' && item.winner) s = `已中标`;
   if (item.bid === '招标公告') {
     s += item.bidOpenDate ? ` ${item.bidOpenDate}·${item.openStatus}` : ' 开标未披露';
     if (item.resultGap) s += ' ⚠';
@@ -56,7 +58,7 @@ export default function App() {
   </main>;
 }
 
-function Detail({ item, onClose }) { return <div className="detail"><div><button onClick={onClose}>×</button><h2>{item.title}</h2><p><b>开标日期：</b>{item.bidOpenDate ? `${item.bidOpenDate}（${item.openStatus || '未披露'}）` : '未披露'}{item.resultGap ? '　⚠ 已开标但台账未收录对应中标结果，建议反查官方原文' : ''}</p><p><b>金额：</b>{item.amount || '未披露'}{item.amountStage ? <span className="why">（{item.amountStage}）</span> : ''}{item.amountNote ? <span className="why">（{item.amountNote}）</span> : ''}</p>{item.timeline && item.timeline.length > 1 && <div className="timeline"><b>项目时间线（{item.timeline.length} 个阶段公告，已合并去重）：</b><ul>{item.timeline.map((t, i) => <li key={i}><span className={`bid ${t.bid}`}>{t.bid}</span>　{t.date}　{t.amount}　<a href={t.url} target="_blank" rel="noreferrer">原文 ↗</a><br /><span className="tl-title">{t.title}</span></li>)}</ul></div>}<p><b>采购人：</b>{item.buyer || '未披露'}</p>{item.budget && <p><b>预算/控制价：</b>{item.budget}</p>}{item.procurement && <p><b>采购内容：</b>{item.procurement}</p>}{item.bids && item.bids.length > 0 && <div className="bids"><b>竞品候选报价（{item.bids.length} 家）：</b><table><thead><tr><th>排名</th><th>竞品公司</th><th>报价</th></tr></thead><tbody>{item.bids.map((b, i) => <tr key={i} className={b.isWinner ? 'win' : ''}><td>{b.rank || '-'}</td><td>{b.company}{b.isWinner ? '　🏆' : ''}</td><td>{b.quote}</td></tr>)}</tbody></table></div>}<p><b>证据摘要：</b>{item.evidence}</p><p><b>原始页面：</b><a href={item.url} target="_blank" rel="noreferrer">打开原文 ↗</a></p><p className="hint">金额优先取公告表格中的首个投标/中标报价（多家竞价时取第一家）；已排除保证金、注册资本、标书费等非交易金额。凡标注“未披露”的，均已逐条复核并在括号中注明具体原因（正文为PDF、需登录、链接失效或原文确无金额），不以猜测补全。</p></div></div>; }
+function Detail({ item, onClose }) { return <div className="detail"><div><button onClick={onClose}>×</button><h2>{item.title}</h2><p><b>中标情况：</b><span className={`bid ${item.bid}`}>{item.bid}</span>{item.winner ? `　中标人：${item.winner}` : item.bid === '已中标' ? '　（中标人未在公告中明确）' : ''}{item.statusNote ? <span className="why">（{item.statusNote}）</span> : ''}</p>{item.scopeNote && <p className="scope-note"><b>⚠ 标的说明：</b>{item.scopeNote}</p>}<p><b>开标日期：</b>{item.bidOpenDate ? `${item.bidOpenDate}（${item.openStatus || '未披露'}）` : '未披露'}{item.resultGap ? '　⚠ 已开标但台账未收录对应中标结果，建议反查官方原文' : ''}</p><p><b>金额：</b>{item.amount || '未披露'}{item.amountStage ? <span className="why">（{item.amountStage}）</span> : ''}{item.amountNote ? <span className="why">（{item.amountNote}）</span> : ''}</p>{item.timeline && item.timeline.length > 1 && <div className="timeline"><b>项目时间线（{item.timeline.length} 个阶段公告，已合并去重）：</b><ul>{item.timeline.map((t, i) => <li key={i}><span className={`bid ${t.bid}`}>{t.bid}</span>　{t.date}　{t.amount}　<a href={t.url} target="_blank" rel="noreferrer">原文 ↗</a><br /><span className="tl-title">{t.title}</span></li>)}</ul></div>}<p><b>采购人：</b>{item.buyer || '未披露'}</p>{item.budget && <p><b>预算/控制价：</b>{item.budget}</p>}{item.procurement && <p><b>采购内容：</b>{item.procurement}</p>}{item.bids && item.bids.length > 0 && <div className="bids"><b>竞品候选报价（{item.bids.length} 家）：</b><table><thead><tr><th>排名</th><th>竞品公司</th><th>报价</th></tr></thead><tbody>{item.bids.map((b, i) => <tr key={i} className={b.isWinner ? 'win' : ''}><td>{b.rank || '-'}</td><td>{b.company}{b.isWinner ? '　🏆' : ''}</td><td>{b.quote}</td></tr>)}</tbody></table></div>}<p><b>证据摘要：</b>{item.evidence}</p><p><b>原始页面：</b><a href={item.url} target="_blank" rel="noreferrer">打开原文 ↗</a></p><p className="hint">金额优先取公告表格中的首个投标/中标报价（多家竞价时取第一家）；已排除保证金、注册资本、标书费等非交易金额。凡标注“未披露”的，均已逐条复核并在括号中注明具体原因（正文为PDF、需登录、链接失效或原文确无金额），不以猜测补全。</p></div></div>; }
 
 function CompetitorPage({ rows, onOpen }) {
   const rollup = useMemo(() => {

@@ -141,8 +141,8 @@
     "publishDate": "2026-07-25",
     "bid": "已中标",
     "bidStatus": "已中标",
-    "line": "智能干选",
-    "competitor": "（设备招标流标，未授标）",
+    "line": "土建施工劳务（关联标的）",
+    "competitor": "河南宝发建筑工程有限公司",
     "buyer": "鹤壁煤业(集团)有限责任公司",
     "amount": "未披露",
     "amountNote": "党家河TDS智能干选系统设备招标2026-04-24因投标人不足三家流标失败；土建施工劳务询比价(2026-07-18)金额未公开(中原云商)",
@@ -152,6 +152,8 @@
     "evidence": "建设公司天宏钢构...党家河 TDS 智能干选系统施工劳务中标结果公示 成交人:河南宝发建筑工程有限公司",
     "digQuery": "党家河 TDS 智能干选",
     "digProj": "鹤壁党家河TDS施工",
+    "winner": "河南宝发建筑工程有限公司",
+    "scopeNote": "本条为土建施工劳务标的（非智能干选设备）；同项目设备采购已于 2026-04-24 因投标人不足三家流标，设备尚未授标",
     "projectKey": "建设公司天宏钢构鹤壁煤业集团有限责任公司设备采购党家河TDS智能干选系统施工劳务询比价",
     "timeline": [
       {
@@ -237,8 +239,8 @@
     "url": "https://m.chinabidding.cn/zbgg/U-vz2sswo.html",
     "date": "2026-07-13",
     "publishDate": "2026-07-13",
-    "bid": "已中标",
-    "bidStatus": "已中标",
+    "bid": "中标候选人",
+    "bidStatus": "中标候选人",
     "line": "智能干选",
     "competitor": "北京霍里思特科技有限公司",
     "buyer": "山西潞安环保能源开发股份有限公司漳村煤矿",
@@ -250,12 +252,13 @@
     "evidence": "北京霍里思特科技有限公司 中标总额 50.5万；项目 漳村煤矿选矸车间2号智能干选机维保(型号:TT104-20-X)",
     "digQuery": "漳村煤矿 智能干选机 维保",
     "digProj": "潞安漳村维保",
+    "winner": "北京霍里思特科技有限公司",
     "projectKey": "山西潞安环保能源开发股份有限公司漳村煤矿选矸车间2号智能干选机维保成交",
-    "amountStage": "中标价",
+    "amountStage": "候选报价",
     "timeline": [
       {
         "date": "2026-07-13",
-        "bid": "已中标",
+        "bid": "中标候选人",
         "title": "山西潞安环保能源开发股份有限公司漳村煤矿选矸车间2号智能干选机维保成交候选人公示",
         "amount": "50.5万元",
         "url": "https://m.chinabidding.cn/zbgg/U-vz2sswo.html",
@@ -375,6 +378,7 @@
     "evidence": "成交人:唐山神州机械集团有限公司 成交金额:258.0000万元",
     "digQuery": "兰阿煤业 干法选煤",
     "digProj": "兰阿煤业干法选煤",
+    "winner": "唐山神州机械集团有限公司",
     "projectKey": "甘肃兰阿煤业有限责任公司干法选煤设备采购项目成交",
     "amountStage": "中标价",
     "timeline": [
@@ -407,6 +411,7 @@
     "url": "https://zbcg.hbcoal.com/company-pages/hbky/notice/detail?cateId=1&id=18fe9fed-9800-4805-b241-8aedf2454ef8",
     "evidence": "淮北矿业股份有限公司涡北选煤厂干选机及配件公开招标(第2次)中标公告 招标编号HBKY-2026-H-0149 开标时间2026年6月17日15:00 中标单位威海市海王科技有限公司 中标金额玖拾壹万元整(¥910000.0000元)",
     "evidenceCapturedAt": "2026-07-30T03:31:46.069Z",
+    "winner": "威海市海王科技有限公司",
     "projectKey": "淮北矿业股份有限公司涡北选煤厂干选机及配件公开",
     "amountStage": "中标价",
     "timeline": [
@@ -528,6 +533,7 @@
         "_stageDate": "2026-06-16"
       }
     ],
+    "winner": "天津美腾科技股份有限公司",
     "projectKey": "新疆中富矿业有限公司智能干选机采购项目",
     "amountStage": "中标价",
     "bidOpenDate": "2026-06-12",
@@ -731,7 +737,7 @@
     "title": "山西煤炭运销集团簸箕掌煤业有限责任公司智能干选设备采购（第2次招标）中标结果公示",
     "source": "山西省招标投标公共服务平台（公开镜像）",
     "sourceAuthority": "公开",
-    "bidStatus": "中标结果",
+    "bidStatus": "已中标",
     "bid": "已中标",
     "date": "2026-06-02",
     "publishDate": "2026-06-02",
@@ -935,6 +941,7 @@
     "amountNote": "天津美腾科技智能干选机主机配件直接采购公示(2026-05-07，单一来源)，金额未公示",
     "buyer": "淮北矿业股份有限公司",
     "id": "auto-aHR0cHM6Ly96dGIuaGJjb2FsLmNv",
+    "winner": "天津美腾科技股份有限公司",
     "projectKey": "淮北矿业股份有限公司天津美腾科技智能干选机主机配件直接采购",
     "timeline": [
       {
@@ -954,7 +961,7 @@
     "url": "https://bid.zyepp.com/zbzq/001005/20260424/0812947f-c105-4c2a-ac15-513ef4a41356.html",
     "date": "2026-04-24",
     "publishDate": "2026-04-24",
-    "bid": "招标公告",
+    "bid": "流标",
     "bidStatus": "流标",
     "line": "智能干选",
     "competitor": "（流标，无中标方）",
@@ -971,7 +978,7 @@
     "timeline": [
       {
         "date": "2026-04-24",
-        "bid": "招标公告",
+        "bid": "流标",
         "title": "鹤壁煤业(集团)有限责任公司设备采购党家河TDS智能干选系统异常公告",
         "amount": "未披露",
         "url": "https://bid.zyepp.com/zbzq/001005/20260424/0812947f-c105-4c2a-ac15-513ef4a41356.html",
@@ -979,7 +986,8 @@
         "amountNote": "设备招标失败(不足三家)，项目尚未授标"
       }
     ],
-    "stages": 1
+    "stages": 1,
+    "statusNote": "本项目最新公告为招标失败/流标，尚未产生中标人"
   },
   {
     "title": "雁宝能源内蒙古蒙东能源有限公司选煤系统智能干选设备采购中标候选人公示",
@@ -1296,6 +1304,7 @@
         "_stageDate": "2026-02-02"
       }
     ],
+    "winner": "枣庄海纳科技有限公司",
     "projectKey": "窑街煤电集团金河煤矿智能干选系统采购项目中标结果",
     "amountStage": "中标价",
     "timeline": [
@@ -1328,7 +1337,7 @@
     "bidOpenDate": "2025-12-29",
     "id": "auto-aHR0cHM6Ly93d3cuZ2d6eS5nb3Yu",
     "amountNote": "第一中标候选报价(配件总包，含振动筛/干选机/过滤机配件24+51项)",
-    "bid": "招标公告",
+    "bid": "中标候选人",
     "date": "2025-12-09",
     "competitor": "未披露",
     "openStatus": "已开标",
@@ -1351,11 +1360,11 @@
     ],
     "winner": "青岛金盛万豪机械设备有限公司",
     "projectKey": "准能集团振动筛和干选机及过滤机配件采购公开招标项目",
-    "amountStage": "招标控制价/预算",
+    "amountStage": "候选报价",
     "timeline": [
       {
         "date": "2025-12-09",
-        "bid": "招标公告",
+        "bid": "中标候选人",
         "title": "准能集团振动筛和干选机及过滤机配件采购公开招标项目招标公告",
         "amount": "259.67万元",
         "url": "https://www.ggzy.gov.cn/information/deal/html/b/0067/0101/20251209/006766ddeaeb9a8445b589ac4e5a490932f0.html",
@@ -1371,7 +1380,7 @@
     "source": "全国公共资源交易平台（鞍钢集团电子招标投标交易平台）",
     "publishDate": "2025-11-25",
     "line": "煤炭智能干选设备",
-    "bidStatus": "已中标",
+    "bidStatus": "中标候选人",
     "region": "央企招投标",
     "sourceAuthority": "official",
     "amount": "50万元",
@@ -1380,7 +1389,7 @@
     "evidenceCapturedAt": "2026-07-31T01:19:04.893Z",
     "id": "auto-aHR0cHM6Ly93d3cuZ2d6eS5nb3Yu",
     "buyer": "本溪钢铁（集团",
-    "bid": "已中标",
+    "bid": "中标候选人",
     "date": "2025-11-25",
     "competitor": "未披露",
     "projectKey": "本钢建设矿山实业贾家堡干选设备租赁",
@@ -1399,7 +1408,7 @@
       },
       {
         "date": "2025-11-25",
-        "bid": "已中标",
+        "bid": "中标候选人",
         "title": "本钢建设矿山实业贾家堡干选设备租赁",
         "amount": "未披露",
         "url": "https://www.ggzy.gov.cn/information/deal/html/b/0067/0104/20251125/0067557d9e65466649b394cb9f0cc97ee245.html",
@@ -1559,7 +1568,7 @@
     "buyer": "山西潞安矿",
     "procurement": "源交易平台 山西潞安矿业（集团）有限责任公司古城煤矿井下矸石智能分选系统和不可利用矸石充填系统工程（阶段一）井下返井矸石+分选矸石仓及装载硐室、东翼矸石分选硐室、东翼充填矸石胶带巷、矸石细破碎",
     "id": "auto-aHR0cHM6Ly93d3cuZ2d6eS5nb3Yu",
-    "winner": "中煤第三建设（集团",
+    "winner": "中煤第三建设（集团）有限责任公司",
     "bid": "已中标",
     "date": "2025-10-20",
     "projectKey": "潞安古城矿建工程",
@@ -1570,7 +1579,8 @@
         "company": "中煤第三建设（集团）有限责任公司",
         "quoteYuan": 18052245,
         "quote": "1805.22万元",
-        "_stageDate": "2025-10-14"
+        "_stageDate": "2025-10-14",
+        "isWinner": true
       },
       {
         "rank": 2,

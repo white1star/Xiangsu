@@ -53,7 +53,8 @@ for (const r of data) {
   groups.get(k).push(r);
 }
 
-const RANK = { '已中标': 3, '中标候选人': 2, '招标公告': 1 };
+// 流标排最低：绝不能让流标记录冒充中标；但若项目最新阶段就是流标，项目状态强制回落为流标
+const RANK = { '已中标': 3, '中标候选人': 2, '招标公告': 1, '招标计划': 1, '流标': 0 };
 const rank = r => RANK[r.bid] || RANK[r.bidStatus] || 1;
 const AMT_LABEL = { 3: '中标价', 2: '候选报价', 1: '招标控制价/预算' };
 const hasAmt = r => r.amount && !/未披露/.test(r.amount);
@@ -114,6 +115,25 @@ for (const [k, arr] of groups) {
     ...(r.amountNote ? { amountNote: r.amountNote } : {}),
   }));
   proj.stages = tl.length;
+
+  // ---- 状态一致性守卫（防止流标/候选被误显示为已中标）----
+  const latest = tl[tl.length - 1];
+  if (latest && (latest.bid === '流标' || latest.bidStatus === '流标')) {
+    // 最新阶段是流标：除非之后另有中标记录，否则项目状态回落为流标
+    const laterAward = tl.some(r => r.bid === '已中标' && (r.date || '') > (latest.date || ''));
+    if (!laterAward) {
+      proj.bid = '流标';
+      proj.bidStatus = '流标';
+      delete proj.winner;
+      proj.statusNote = '本项目最新公告为招标失败/流标，尚未产生中标人';
+    }
+  }
+  if (proj.bid === '已中标' && !proj.winner && !(proj.competitor && !/未披露/.test(proj.competitor))) {
+    proj.bid = '中标候选人';
+    proj.bidStatus = '中标候选人';
+    proj.statusNote = '公告未明确中标人，按候选阶段保守标注';
+  }
+
   projects.push(proj);
 }
 
@@ -123,6 +143,10 @@ writeFileSync(OUT, JSON.stringify(projects, null, 2));
 // ---------- 汇总 ----------
 console.log(`平铺 ${data.length} 条 -> 项目 ${projects.length} 个（原始数据已留档 intelligence.flat.json）`);
 console.log('有金额项目:', projects.filter(hasAmt).length, '| 未披露:', projects.filter(p => !hasAmt(p)).length);
+const st = {}; for (const p of projects) st[p.bid] = (st[p.bid] || 0) + 1;
+console.log('状态分布:', st);
+const bad = projects.filter(p => p.bid === '已中标' && !p.winner);
+console.log(bad.length ? `⚠ 已中标但缺中标人 ${bad.length} 个：` + bad.map(p => p.title.slice(0, 20)).join(' / ') : '✓ 状态校验通过：所有"已中标"项目均有明确中标人，流标项目未被误标');
 console.log('\n多阶段项目:');
 for (const p of projects.filter(p => p.stages > 1).sort((a, b) => b.stages - a.stages)) {
   console.log(` [${p.stages}条] ${p.bid} | ${p.amount}${p.amountStage ? '(' + p.amountStage + ')' : ''} | ${(p.projectKey || p.title).slice(0, 40)}`);
