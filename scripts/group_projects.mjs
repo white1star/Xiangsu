@@ -54,9 +54,9 @@ for (const r of data) {
 }
 
 // 流标排最低：绝不能让流标记录冒充中标；但若项目最新阶段就是流标，项目状态强制回落为流标
-const RANK = { '已中标': 3, '中标候选人': 2, '招标公告': 1, '招标计划': 1, '流标': 0 };
+const RANK = { '已中标': 3, '中标候选人': 2, '招标公告': 1, '招标计划': 1, '流标': 0, '已签约': 3, '已交付': 3, '已投运': 3 };
 const rank = r => RANK[r.bid] || RANK[r.bidStatus] || 1;
-const AMT_LABEL = { 3: '中标价', 2: '候选报价', 1: '招标控制价/预算' };
+const AMT_LABEL = { 3: '中标/签约价', 2: '候选报价', 1: '招标控制价/预算' };
 const hasAmt = r => r.amount && !/未披露/.test(r.amount);
 
 const projects = [];
