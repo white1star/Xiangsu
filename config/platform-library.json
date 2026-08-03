@@ -382,9 +382,9 @@
     "name": "中国采购与招标网",
     "entryUrl": "https://www.chinabidding.com/",
     "category": "authentication",
-    "access": "login_paid",
+    "access": "anonymous",
     "coverage": "商业招投标聚合和订阅",
-    "auditNote": "公告完整正文与历史库需会员（免费仅看标题与摘要，招标/中标全文、联系人、附件需登录会员；高级检索受账户限制）。"
+    "auditNote": "2026-08-03 实测：公告详情页（pageInfoSsr）正文含中标人+金额可匿名完整查看，归公开数据源；联系方式/附件仍需会员。"
   },
   {
     "id": "qianlima",
@@ -436,9 +436,9 @@
     "name": "乙方宝招标网",
     "entryUrl": "https://www.yfbzb.com/",
     "category": "authentication",
-    "access": "login_paid",
+    "access": "anonymous",
     "coverage": "招标、中标、采购商及项目线索",
-    "auditNote": "完整信息、订阅与联系方式通常需登录/会员（免费仅看标题摘要，正文与联系人受会员限制）。"
+    "auditNote": "2026-08-03 实测：公告详情页中标人全名+中标金额完整可见（仅联系方式需登录），归公开数据源。"
   },
   {
     "id": "bibenet",
@@ -447,7 +447,7 @@
     "category": "authentication",
     "access": "login_paid",
     "coverage": "招投标信息、企业商机和项目监控",
-    "auditNote": "完整公告详情与订阅需会员（m站仅展示标题摘要，中标候选人公示全文、联系人需登录会员）。"
+    "auditNote": "2026-08-03 实测：站点详情页连接重置无法验证，暂按需登录处理。"
   },
   {
     "id": "ztb8",
@@ -456,7 +456,7 @@
     "category": "authentication",
     "access": "login_paid",
     "coverage": "跨平台历史招标信息聚合",
-    "auditNote": "完整历史库与订阅需会员（免费仅看标题摘要，跨平台公告全文与联系人需登录会员）。"
+    "auditNote": "2026-08-03 实测：站点 502/404 疑似失效，暂按需登录处理。"
   },
   {
     "id": "xinjiang-sunshine",
