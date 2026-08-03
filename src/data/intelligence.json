@@ -302,6 +302,43 @@
     "stages": 1
   },
   {
+    "title": "民丰县某矿山分选站固定资产采购项目成交结果公示",
+    "url": "https://www.xjygcg.com/jyxx/001002/001002003/20260715/2524171937723238400.html",
+    "source": "新疆阳光采购平台",
+    "publishDate": "2026-07-15",
+    "line": "矿石XRT光电分选设备",
+    "bid": "已中标",
+    "bidStatus": "已中标",
+    "region": "新疆·和田（民丰）",
+    "sourceAuthority": "官方公开",
+    "amount": "351.8万元",
+    "amountNote": "成交价格3518000.00元（分选站固定资产：分选机/空压机/给料器等）",
+    "confidence": "高",
+    "evidence": "新疆阳光采购平台2026-07-15成交结果公示（项目编号XKGYL-XB2026-219）：民丰县某矿山分选站固定资产采购项目，成交人霍里思特科技(浙江)有限公司，成交价格3518000.00元，采购人新疆地质工程有限公司，公告发布于新矿集团供应链平台与新疆阳光采购平台。公告未披露矿种（民丰县已知有硝尔库勒锑矿项目）。",
+    "competitor": "霍里思特",
+    "winner": "霍里思特",
+    "buyer": "新疆地质工程有限公司",
+    "mineral": "未披露",
+    "date": "2026-07-15",
+    "procurement": "成交价格3518000.00元（分选站固定资产：分选机/空压机/给料器等）",
+    "evidenceCapturedAt": "2026-08-03T01:38:55.379Z",
+    "id": "auto-aHR0cHM6Ly93d3cueGp5Z2",
+    "projectKey": "民丰县某矿山分选站固定资产采购项目成交",
+    "amountStage": "中标/签约价",
+    "timeline": [
+      {
+        "date": "2026-07-15",
+        "bid": "已中标",
+        "title": "民丰县某矿山分选站固定资产采购项目成交结果公示",
+        "amount": "351.8万元",
+        "url": "https://www.xjygcg.com/jyxx/001002/001002003/20260715/2524171937723238400.html",
+        "source": "新疆阳光采购平台",
+        "amountNote": "成交价格3518000.00元（分选站固定资产：分选机/空压机/给料器等）"
+      }
+    ],
+    "stages": 1
+  },
+  {
     "title": "山西潞安环保能源开发股份有限公司漳村煤矿选矸车间2号智能干选机维保成交候选人公示",
     "url": "https://m.chinabidding.cn/zbgg/U-vz2sswo.html",
     "date": "2026-07-13",
@@ -530,6 +567,42 @@
         "url": "https://www.xjygcg.com/jyxx/001001/001001004/20260706/596e508d-035e-493d-b022-ce4e5cdfe4d6.html",
         "source": "新疆阳光采购平台",
         "amountNote": "中标金额33547500.00元（机械选矸加工服务，工期50日历天+运营服务期18个月）"
+      }
+    ],
+    "stages": 1
+  },
+  {
+    "title": "黑龙江龙煤双鸭山矿业有限责任公司第四次需用设备采购-第二次招标中标候选人公示",
+    "url": "https://www.qcc.com/crun/4de95399a1eadd16f478ef4dfde5cb41.html",
+    "source": "龙煤双鸭山矿业招标（企查查/水滴信用/爱企查交叉核验）",
+    "publishDate": "2026-07-03",
+    "line": "煤炭智能干选设备",
+    "bid": "中标候选人",
+    "bidStatus": "中标候选人",
+    "region": "黑龙江·双鸭山",
+    "sourceAuthority": "公开",
+    "amount": "2012.61万元（候选）",
+    "amountNote": "候选报价20126084.00元；候选阶段待定标结果",
+    "confidence": "中",
+    "evidence": "黑龙江龙煤双鸭山矿业有限责任公司第四次需用设备采购-第二次招标中标候选人公示（2026-07-03）：合肥泰禾卓海智能科技有限公司为中标候选人，中标金额20126084元（企查查动态/水滴信用/爱企查多源交叉核验，原文在龙煤矿业招标平台需登录）。",
+    "competitor": "合肥泰禾卓海智能科技有限公司",
+    "buyer": "黑龙江龙煤双鸭山矿业有限责任公司",
+    "mineral": "煤",
+    "date": "2026-07-03",
+    "procurement": "候选报价20126084.00元；候选阶段待定标结果",
+    "evidenceCapturedAt": "2026-08-03T01:38:55.379Z",
+    "id": "auto-aHR0cHM6Ly93d3cucWNjLm",
+    "projectKey": "黑龙江龙煤双鸭山矿业有限责任公司第四次需用设备采购第二次",
+    "amountStage": "候选报价",
+    "timeline": [
+      {
+        "date": "2026-07-03",
+        "bid": "中标候选人",
+        "title": "黑龙江龙煤双鸭山矿业有限责任公司第四次需用设备采购-第二次招标中标候选人公示",
+        "amount": "2012.61万元（候选）",
+        "url": "https://www.qcc.com/crun/4de95399a1eadd16f478ef4dfde5cb41.html",
+        "source": "龙煤双鸭山矿业招标（企查查/水滴信用/爱企查交叉核验）",
+        "amountNote": "候选报价20126084.00元；候选阶段待定标结果"
       }
     ],
     "stages": 1
@@ -1693,6 +1766,68 @@
     "stages": 1
   },
   {
+    "title": "雁宝能源内蒙古蒙东能源有限公司首选系统智能干选设备采购项目公开招标中标结果公告",
+    "url": "https://www.chnenergybidding.com.cn/bidweb/001/001006/001006001/20260408/2e3babce-522c-4ee7-a0e2-bf2dd9191366.html",
+    "source": "国家能源招标网（国能e招）",
+    "publishDate": "2026-04-08",
+    "line": "煤炭智能干选设备",
+    "bid": "已中标",
+    "bidStatus": "已中标",
+    "region": "内蒙古·呼伦贝尔",
+    "sourceAuthority": "官方公开",
+    "amount": "1067.58万元",
+    "amountNote": "中标结果公告（招标编号CEZB260301572001；与台账2026-04-03候选公示为同一项目）",
+    "confidence": "高",
+    "evidence": "国能e招2026-04-08中标结果公告：雁宝能源内蒙古蒙东能源有限公司选煤系统智能干选设备采购项目公开招标，中标人唐山神州机械集团有限公司（包号CEZB260301572001）；候选阶段（2026-04-03公示）第一神州1067.58万、第二威海海王1100.0028万。",
+    "competitor": "唐山神州机械集团有限公司",
+    "winner": "唐山神州机械集团有限公司",
+    "buyer": "内蒙古蒙东能源有限公司",
+    "mineral": "煤",
+    "date": "2026-04-08",
+    "procurement": "中标结果公告（招标编号CEZB260301572001；与台账2026-04-03候选公示为同一项目）",
+    "evidenceCapturedAt": "2026-08-03T01:38:55.379Z",
+    "id": "auto-aHR0cHM6Ly93d3cuY2huZW",
+    "projectKey": "雁宝蒙东智能干选设备",
+    "amountStage": "中标/签约价",
+    "bids": [
+      {
+        "rank": 1,
+        "company": "唐山神州机械集团有限公司",
+        "quote": "1067.58万元",
+        "quoteYuan": 10675800,
+        "_stageDate": "2026-04-03",
+        "isWinner": true
+      },
+      {
+        "rank": 2,
+        "company": "威海市海王科技有限公司",
+        "quote": "1100.0028万元",
+        "quoteYuan": 11000028,
+        "_stageDate": "2026-04-03"
+      }
+    ],
+    "timeline": [
+      {
+        "date": "2026-04-03",
+        "bid": "中标候选人",
+        "title": "雁宝能源内蒙古蒙东能源有限公司选煤系统智能干选设备采购中标候选人公示",
+        "amount": "1067.58万元",
+        "url": "https://www.chnenergybidding.com.cn/bidweb/001/001005/001005001/20260403/0a77f58d-4875-43d7-bd68-97a0b6f9895b.html",
+        "source": "国能e招"
+      },
+      {
+        "date": "2026-04-08",
+        "bid": "已中标",
+        "title": "雁宝能源内蒙古蒙东能源有限公司首选系统智能干选设备采购项目公开招标中标结果公告",
+        "amount": "1067.58万元",
+        "url": "https://www.chnenergybidding.com.cn/bidweb/001/001006/001006001/20260408/2e3babce-522c-4ee7-a0e2-bf2dd9191366.html",
+        "source": "国家能源招标网（国能e招）",
+        "amountNote": "中标结果公告（招标编号CEZB260301572001；与台账2026-04-03候选公示为同一项目）"
+      }
+    ],
+    "stages": 2
+  },
+  {
     "title": "霍里思特携手南方路基破解砾石型硅石矿分选难题",
     "url": "https://www.honesort.com/news/company/528.html",
     "source": "霍里思特官网新闻（官方媒体搜狐号同步）",
@@ -1723,58 +1858,6 @@
         "url": "https://www.honesort.com/news/company/528.html",
         "source": "霍里思特官网新闻（官方媒体搜狐号同步）",
         "amountNote": "官方案例稿件未披露设备金额"
-      }
-    ],
-    "stages": 1
-  },
-  {
-    "title": "雁宝能源内蒙古蒙东能源有限公司选煤系统智能干选设备采购中标候选人公示",
-    "line": "煤炭智能干选设备",
-    "competitor": "唐山神州机械集团有限公司",
-    "region": "内蒙古·呼伦贝尔",
-    "amount": "1067.58万元",
-    "bid": "中标候选人",
-    "bidStatus": "中标候选人",
-    "source": "国能e招",
-    "date": "2026-04-03",
-    "publishDate": "2026-04-03",
-    "confidence": "高",
-    "url": "https://www.chnenergybidding.com.cn/bidweb/001/001005/001005001/20260403/0a77f58d-4875-43d7-bd68-97a0b6f9895b.html",
-    "evidence": "官方候选人公示：第一候选人唐山神州机械集团有限公司报价1,067.58万元；第二候选人威海市海王科技有限公司报价1,100.0028万元。",
-    "procurement": "a0b6f9895b 雁宝能源内蒙古蒙东能源有限公司首选系统智能干选设备采购项目公开招标中标候选人公示 【发布时间：2026-04-03 15:53:55 阅读次数： 】 无标题文档 雁宝",
-    "winner": "唐山神州机械集团有限公司",
-    "amountSource": "官方公告摘要",
-    "id": "auto-aHR0cHM6Ly93d3cuY2huZW5lcmd5",
-    "bids": [
-      {
-        "rank": 1,
-        "company": "唐山神州机械集团有限公司",
-        "quote": "1067.58万元",
-        "quoteYuan": 10675800,
-        "_stageDate": "2026-04-03",
-        "isWinner": true
-      },
-      {
-        "rank": 2,
-        "company": "威海市海王科技有限公司",
-        "quote": "1100.0028万元",
-        "quoteYuan": 11000028,
-        "_stageDate": "2026-04-03"
-      }
-    ],
-    "sourceAuthority": "公开",
-    "buyer": "雁宝能源内蒙古蒙东能源有限公司",
-    "mineral": "煤",
-    "projectKey": "雁宝能源内蒙古蒙东能源有限公司选煤系统智能干选设备采购",
-    "amountStage": "候选报价",
-    "timeline": [
-      {
-        "date": "2026-04-03",
-        "bid": "中标候选人",
-        "title": "雁宝能源内蒙古蒙东能源有限公司选煤系统智能干选设备采购中标候选人公示",
-        "amount": "1067.58万元",
-        "url": "https://www.chnenergybidding.com.cn/bidweb/001/001005/001005001/20260403/0a77f58d-4875-43d7-bd68-97a0b6f9895b.html",
-        "source": "国能e招"
       }
     ],
     "stages": 1
@@ -2226,6 +2309,43 @@
         "url": "http://www.china-zbycg.com/guest/info/4/732/279.html",
         "source": "中国招标与采购网（公开）· 招标公告",
         "amountNote": "设计类招标公告未公布招标控制价/预算，仅列投标保证金4000元；且截至2026-07-31未检索到公开的中标结果公告"
+      }
+    ],
+    "stages": 1
+  },
+  {
+    "title": "中钨高新2025年11月远景钨业分选机询价书MJJ032采购结果公示",
+    "url": "https://www.jianyu360.cn/nologin/content/SEEY1xrcS4vKDk6AmdxcFwoCycCFjJ0V3h0KB4nIy9Fd3lwAyNUCXI.html",
+    "source": "中钨高新供应链平台（剑鱼/千里马/知了标讯交叉核验）",
+    "publishDate": "2026-01-05",
+    "line": "矿石XRT光电分选设备",
+    "bid": "已中标",
+    "bidStatus": "已中标",
+    "region": "湖南·衡阳（衡南）",
+    "sourceAuthority": "公开",
+    "amount": "350万元",
+    "amountNote": "成交总额3500000.00元（分选机整机；公示期2026-01-05至01-07）",
+    "confidence": "中",
+    "evidence": "中钨高新2025年11月远景钨业分选机询价书MJJ032采购结果公示（2026-01-05）：成交金额3500000.00元，中标公司赣州好朋友科技有限公司，采购单位衡阳远景钨业有限责任公司（中钨高新材料成员企业，湖南衡阳衡南县）。原文在五矿供应链平台需登录，经千里马/剑鱼/知了标讯多源交叉核验。",
+    "competitor": "赣州好朋友科技股份有限公司",
+    "winner": "赣州好朋友科技股份有限公司",
+    "buyer": "衡阳远景钨业有限责任公司（中钨高新成员企业）",
+    "mineral": "钨",
+    "date": "2026-01-05",
+    "procurement": "成交总额3500000.00元（分选机整机；公示期2026-01-05至01-07）",
+    "evidenceCapturedAt": "2026-08-03T01:38:55.379Z",
+    "id": "auto-aHR0cHM6Ly93d3cuamlhbn",
+    "projectKey": "中钨高新2025年11月远景钨业分选机询价书MJJ032采购",
+    "amountStage": "中标/签约价",
+    "timeline": [
+      {
+        "date": "2026-01-05",
+        "bid": "已中标",
+        "title": "中钨高新2025年11月远景钨业分选机询价书MJJ032采购结果公示",
+        "amount": "350万元",
+        "url": "https://www.jianyu360.cn/nologin/content/SEEY1xrcS4vKDk6AmdxcFwoCycCFjJ0V3h0KB4nIy9Fd3lwAyNUCXI.html",
+        "source": "中钨高新供应链平台（剑鱼/千里马/知了标讯交叉核验）",
+        "amountNote": "成交总额3500000.00元（分选机整机；公示期2026-01-05至01-07）"
       }
     ],
     "stages": 1
