@@ -400,9 +400,9 @@
     "name": "剑鱼标讯",
     "entryUrl": "https://www.jianyu360.cn/",
     "category": "authentication",
-    "access": "login_paid",
+    "access": "login_free",
     "coverage": "招标、中标、业主监控和企业投标画像",
-    "auditNote": "完整公告详情、订阅与监控需登录/会员（免费仅看标题摘要，正文、联系方式、附件及项目监控需登录）。"
+    "auditNote": "2026-08-03 用户确认可用：注册登录后可免费查看公告正文（无需付费会员），归入\"登录后免费可看\"数据源。"
   },
   {
     "id": "xunbiaobao",
@@ -418,18 +418,18 @@
     "name": "中国招标网",
     "entryUrl": "https://www.bidcenter.com.cn/",
     "category": "authentication",
-    "access": "login_paid",
+    "access": "login_free",
     "coverage": "招标公告、中标结果和项目订阅",
-    "auditNote": "高级查询、订阅与部分详情需账户/会员（免费仅看标题摘要，完整公告正文与联系人受会员限制）。"
+    "auditNote": "2026-08-03 用户确认可用：注册登录后可免费查看公告正文（无需付费会员），归入\"登录后免费可看\"数据源。"
   },
   {
     "id": "ebnew",
     "name": "必联网",
     "entryUrl": "https://www.ebnew.com/",
     "category": "authentication",
-    "access": "login_paid",
+    "access": "login_free",
     "coverage": "招标采购、国际招标和中标信息",
-    "auditNote": "深度检索、订阅与业务功能需登录（免费仅看标题摘要，完整公告正文需登录会员）。"
+    "auditNote": "2026-08-03 用户确认可用：注册登录后可免费查看公告正文（无需付费会员），归入\"登录后免费可看\"数据源。"
   },
   {
     "id": "yfbzb",
