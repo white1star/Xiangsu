@@ -76,21 +76,24 @@ function Detail({ item, onClose }) { return <div className="detail"><div><button
 // 竞品分析页已按需求从侧边栏移除，组件一并删除（2026-07-31）。
 
 
-function SourceSection({ title, count, desc, entries, restricted }) {
+function SourceSection({ title, count, desc, entries, tag }) {
   return <section className="src-group">
     <h2>{title}<span className="src-count">{count} 个</span></h2>
     <p className="src-desc">{desc}</p>
-    <table><thead><tr><th>平台</th>{restricted && <th>权限</th>}<th>覆盖内容</th><th>复审说明</th></tr></thead><tbody>{entries.map(platform => <tr key={platform.id}><td title={platform.entryUrl}>{platform.name}</td>{restricted && <td><span className="access-tag">需登录才能看公告</span></td>}<td>{platform.coverage}</td><td>{platform.auditNote}</td></tr>)}</tbody></table>
+    <table><thead><tr><th>平台</th>{tag && <th>权限</th>}<th>覆盖内容</th><th>复审说明</th></tr></thead><tbody>{entries.map(platform => <tr key={platform.id}><td title={platform.entryUrl}>{platform.name}</td>{tag && <td><span className="access-tag">{tag}</span></td>}<td>{platform.coverage}</td><td>{platform.auditNote}</td></tr>)}</tbody></table>
   </section>;
 }
 
 function SourcePage() {
   const open = platformLibrary.filter(p => p.access === 'anonymous');
-  const restricted = platformLibrary.filter(p => p.access !== 'anonymous');
+  const free = platformLibrary.filter(p => p.access === 'login_free');
+  const paid = platformLibrary.filter(p => p.access === 'login_paid');
   return <div className="source-page">
     <SourceSection title="公开数据源" count={open.length} entries={open}
-      desc="公告完全公开、可匿名浏览的入口（含公告可看、仅下载/投标需注册的平台）。公开浏览不代表可以绕过下载、投标或付费权限；正式入账仍须保存原公告。" />
-    <SourceSection title="受限数据源" count={restricted.length} entries={restricted} restricted
-      desc="以下平台经实测审查，公告内容本身需登录才能查看（或 SPA 动态加载 / WAF 反爬导致匿名无法稳定浏览）。系统不会绕过鉴权；你登录后在已授权会话中再抓取。" />
+      desc="公告完全公开、可匿名浏览的入口（含公告可看、仅下载/投标需注册的平台）。正式入账仍须保存原公告链接。" />
+    <SourceSection title="登录后免费可看" count={free.length} entries={free} tag="登录后免费看公告"
+      desc={free.length ? '需注册登录、但无需付费即可查看公告正文的平台。' : '当前实测暂无此类平台（实测已知平台要么可匿名、要么需付费会员）；后续发现「注册登录后免费可看正文」的平台将归入此类。'} />
+    <SourceSection title="已排除·需付费会员" count={paid.length} entries={paid} tag="需付费会员（不收录）"
+      desc="商业聚合/企业查询平台，公告正文需付费会员才能查看。按数据源口径排除：不从此类平台收录数据，仅作了解。" />
   </div>;
 }
