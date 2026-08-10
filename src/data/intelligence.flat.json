@@ -1914,5 +1914,27 @@
     "procurement": "询比价公告未披露金额；仅询价阶段未见成交公告",
     "evidenceCapturedAt": "2026-08-03T02:42:22.414Z",
     "id": "auto-aHR0cHM6Ly9ybC56aGFvYm"
+  },
+  {
+    "title": "新建光电选系统中标候选人公示",
+    "url": "https://ybqyygcgfwpt.com/web-portal/#/trade-info-detail?id=1534244573365485568&noticeType=3&publishStatus=1&systemStatus=&cid=14",
+    "source": "宜宾企业阳光采购服务平台",
+    "publishDate": "2026-08-04",
+    "line": "矿石XRT光电分选设备",
+    "bidStatus": "中标候选人",
+    "region": "四川·宜宾",
+    "sourceAuthority": "官方公开",
+    "amount": "839.35万元",
+    "confidence": "高",
+    "evidence": "新建光电选系统中标候选人公示 采购模式：企业采购 采购方式：公开招选 项目类型：货物 标段/包编号：GKZX202607100005-01 评标时间：2026-07-31 09:59:35 公示开始时间：2026-08-04 17:00:00 公示结束时间：2026-08-07 17:00:00 第1中标候选人：天津美腾科技股份有限公司 投标报价：8393500元；第2中标候选人：湖南军芃科技股份有限公司 7880000元；第3中标候选人：湖北金石智能装备有限公司 8081120元",
+    "evidenceCapturedAt": "2026-08-10T01:02:06.678Z",
+    "competitor": "天津美腾科技股份有限公司",
+    "procurement": "宜宾企业阳光采购服务平台公开招选·新建光电选系统（GKZX202607100005-01）候选人公示，第1候选人天津美腾839.35万",
+    "id": "auto-aHR0cHM6Ly95YnF5eWdjZ2",
+    "winner": "天津美腾科技股份有限公司",
+    "bid": "中标候选人",
+    "date": "2026-08-04",
+    "buyer": "未披露（宜宾企业阳光采购服务平台招选项目）",
+    "mineral": "未披露"
   }
 ]
