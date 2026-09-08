@@ -1,0 +1,163 @@
+{
+  "version": "2026-09-08",
+  "note": "竞品官网/自媒新闻定向检索渠道清单。每周抓取流程步骤2.5使用：逐渠道 WebFetch 新闻列表页，只取上一周（最近7天）新发布内容。交易信号（中标/签约/订单/交付/验收且涉及智能干选机/XRT/光电分选整机）→ 回官方招标平台或权威媒体转载核验后同口径收录；荣誉/展会/党建/专利/软文等非交易信号不收录。聚合站（企查查/天眼查等）仅可当线索雷达，禁止作来源、禁止采信其'新增中标日期'（那是快照收录日非公告发布日）。",
+  "listedCompetitors": [
+    {
+      "fullName": "天津美腾科技股份有限公司",
+      "lines": "煤炭智能干选设备 / 矿石XRT光电分选设备",
+      "channelType": "官网新闻 + 上市公司公告",
+      "channels": [
+        { "name": "美腾科技官网·新闻资讯", "url": "https://www.tjmeiteng.com/web/news", "notes": "列表+newsDetails?id=正文链接均可抓；官网新闻偏滞后（展会/案例/党建），交易公告走巨潮" },
+        { "name": "巨潮资讯网（688420 公告检索）", "url": "https://www.cninfo.com.cn/new/fulltextSearch?notautosubmit=&keyWord=美腾科技", "notes": "重大合同/中标类公告 PDF 官方渠道，search 需带公司名" }
+      ]
+    },
+    {
+      "fullName": "唐山神州机械集团有限公司",
+      "lines": "煤炭智能干选设备",
+      "channelType": "官网新闻",
+      "channels": [
+        { "name": "神州机械官网·神州动态", "url": "https://www.tsshenzhou.com/xinwen/", "notes": "列表含标题+日期+正文链接（20260829.html 式），更新约每周；含设备发运/项目交付类自宣" }
+      ]
+    },
+    {
+      "fullName": "威海市海王科技有限公司",
+      "lines": "煤炭智能干选设备",
+      "channelType": "官网新闻",
+      "channels": [
+        { "name": "海王科技官网·新闻资讯", "url": "https://haiwangkeji.com", "notes": "新闻资讯 news/show-87.aspx 式，更新偏慢；注意与做旋流器的'海王工业集团 wh-hw.com'（1989年老海王）非同一主体，勿混淆" }
+      ]
+    },
+    {
+      "fullName": "霍里思特（北京/浙江/湖州三主体合并）",
+      "lines": "矿石XRT光电分选设备（含少量煤炭干选）",
+      "channelType": "官网新闻 + 网易号",
+      "channels": [
+        { "name": "霍里思特官网·新闻动态", "url": "https://www.honesort.com/news", "notes": "可抓但滞后（约到当年5月）；正文 news/company/xxx.html" },
+        { "name": "霍里思特网易号（更新最快）", "url": "https://c.m.163.com/news/sub/T1772531517520.html", "notes": "列表完整含标题+日期+正文链接 c.m.163.com/news/a/xxx.html；荣誉/交付/宣传类多，具体中标仍需官方公告核实" }
+      ]
+    },
+    {
+      "fullName": "赣州好朋友科技股份有限公司",
+      "lines": "矿石XRT光电分选设备",
+      "channelType": "官网新闻",
+      "channels": [
+        { "name": "好朋友科技官网·新闻", "url": "https://www.gzhpy.com", "notes": "新闻 news-pages/YYYYMMDD.html 式（如 20260826 中试平台揭牌）；含项目落地/合作类自宣" }
+      ]
+    },
+    {
+      "fullName": "合肥泰禾卓海智能科技有限公司",
+      "lines": "煤炭智能干选设备",
+      "channelType": "母公司官网 + 上市公司公告",
+      "channels": [
+        { "name": "泰禾智能官网·新闻中心（卓海智能）", "url": "https://www.chinataiho.com/info.php?class_id=105", "notes": "矿业干选类新闻滞后至 2023；新动态主要靠母公司公告与招标平台" },
+        { "name": "上交所/巨潮（泰禾智能 603011）", "url": "https://www.cninfo.com.cn/new/fulltextSearch?notautosubmit=&keyWord=泰禾智能", "notes": "卓海为并表子公司，重大事项走母公司公告" }
+      ]
+    },
+    {
+      "fullName": "枣庄海纳科技有限公司",
+      "lines": "煤炭智能干选设备",
+      "channelType": "官网新闻",
+      "channels": [
+        { "name": "枣庄海纳官网·公司新闻", "url": "https://www.haina2001.com/gsxw.html", "notes": "ART煤矸干选机；新闻更新约月级；另一家'山东海纳智能装备 hainakj.com'（济宁/海纳美腾 HTDS）见潜在进入者" }
+      ]
+    },
+    {
+      "fullName": "丹东东方测控技术股份有限公司",
+      "lines": "煤炭智能干选设备 / 矿石XRT光电分选设备（仅干选/选矸设备类）",
+      "channelType": "官网新闻",
+      "channels": [
+        { "name": "东方测控官网·市场新闻", "url": "https://www.dfmc.cc/shichangxinwen/", "notes": "shichangxinwen/1116.html 式；多为论坛/签约/仪器新闻，需筛干选选矸类；8/21 与中铁资源战略签约=智能化整体非分选整机" }
+      ]
+    },
+    {
+      "fullName": "合肥奥博特自动化设备有限公司",
+      "lines": "煤炭智能干选设备 / 矿石XRT光电分选设备",
+      "channelType": "官网新闻",
+      "channels": [
+        { "name": "奥博特官网·新闻资讯", "url": "http://abtrobot.com", "notes": "ETDS 智能干选机/色选机；新闻中心有集团新闻/行业新闻栏目" }
+      ]
+    },
+    {
+      "fullName": "湖北金石智能装备有限公司",
+      "lines": "矿石XRT光电分选设备",
+      "channelType": "官网 + 公众号",
+      "channels": [
+        { "name": "金石智能官网·新闻", "url": "https://www.jinshisort.com", "notes": "含项目交付类自宣（如 6/4 保康国投磷矿第五台交付、3/27 四川金河磷矿一体化交付）；公众号 HBJSZNZB 正文不可直接抓，靠官网/转载" }
+      ]
+    },
+    {
+      "fullName": "河北澳兰机械设备进出口有限公司",
+      "lines": "煤炭智能干选设备（贸易/代理）",
+      "channelType": "无公开新闻渠道",
+      "channels": [
+        { "name": "官网", "url": "http://auland.cn", "notes": "贸易商主体，官网无新闻栏目；动态靠招投标平台（华能系筛机/配件类为主），每周用关键词检索即可" }
+      ]
+    },
+    {
+      "fullName": "湖南升华智选装备制造有限公司",
+      "lines": "矿石XRT光电分选设备",
+      "channelType": "官网（更新少）",
+      "channels": [
+        { "name": "升华智选官网", "url": "https://sup-sorting.com", "notes": "2023 成立初创（株洲，A轮），官网更新极少；动态主要靠招标平台/融资新闻" }
+      ]
+    },
+    {
+      "fullName": "同方威视技术股份有限公司",
+      "lines": "矿石XRT光电分选设备（仅矿业分选线）",
+      "channelType": "官网新闻",
+      "channels": [
+        { "name": "同方威视官网·新闻中心", "url": "https://www.nuctech.com", "notes": "有固定/移动式智能矿石分选机产品线；新闻中心多安检类需人工筛选矿物分选条目；另同方股份 thtf.com.cn 亦发矿业新闻" }
+      ]
+    },
+    {
+      "fullName": "赣州吉瑞机械设备有限公司",
+      "lines": "矿石XRT光电分选设备",
+      "channelType": "无官网",
+      "channels": [
+        { "name": "无公开官网", "url": "", "notes": "2023 成立初创（赣州）；曾中标甘肃新洲矿业90万吨/年钨矿光电预选（2026-03）；动态靠招标平台关键词检索" }
+      ]
+    }
+  ],
+  "watchCompetitors": [
+    {
+      "fullName": "山东海纳智能装备科技股份有限公司（济宁/海纳美腾）",
+      "lines": "煤炭智能干选设备（HTDS 智能干选+井下充填）",
+      "reason": "济宁能源系，HTDS 干选与美腾合资'海纳美腾'布局井下充填，多次出现在竞标/考察新闻",
+      "channels": [
+        { "name": "海纳科技官网·公司新闻", "url": "https://www.hainakj.com/h-col-125.html", "notes": "列表含 2026-06 国能乌海考察 HTDS+井下充填等；更新约月级" }
+      ]
+    },
+    {
+      "fullName": "河南恒冠卓科技有限公司",
+      "lines": "煤炭智能干选设备",
+      "reason": "平顶山；智能煤质检测+干选系统；曾列神东保德干选机采购候选第三（2026-03）",
+      "channels": [
+        { "name": "恒冠卓官网", "url": "https://www.hnhgzkj.com", "notes": "官网有产品信息（煤矿智能高效干选系统）；新闻栏目有限" }
+      ]
+    },
+    {
+      "fullName": "湖南军芃科技股份有限公司",
+      "lines": "矿石XRT光电分选设备",
+      "reason": "JPXRT 智能矿石拣选机（新三板 832863）；2026-08 华钼/上湘曾赴其考察",
+      "channels": [
+        { "name": "军芃科技官网", "url": "https://www.hnjumper.com", "notes": "官网有产品/案例；JPXRT 干选见闻多经招标数据体现" }
+      ]
+    },
+    {
+      "fullName": "山东华特磁电集团股份有限公司",
+      "lines": "矿石XRT光电分选设备（磁选厂商跨界）",
+      "reason": "XRT 智能传感分选机新品；09-10~12 天津矿业展推新，跨界入局需观察",
+      "channels": [
+        { "name": "华特磁电官网", "url": "http://www.sdhuate.com", "notes": "磁选主业+新推 XRT；观察其 XRT 中标的项目公告" }
+      ]
+    },
+    {
+      "fullName": "河图矿业（智能干选新面孔）",
+      "lines": "煤炭智能干选设备",
+      "reason": "自研可见光全光谱智能干选机（5-300mm，排矸率98%+），2026-08 太原能博会亮相",
+      "channels": [
+        { "name": "无稳定官网", "url": "", "notes": "靠展会新闻/招标平台捕捉；若后续出现中标公告即收录为新竞品" }
+      ]
+    }
+  ]
+}
