@@ -484,5 +484,113 @@
     "access": "anonymous",
     "coverage": "转引各地招标公告（甘肃新洲钨矿光电预选等）",
     "auditNote": "2026-08-03 实测公告正文可匿名查看（新洲钨矿中标758万）；属公开镜像。"
+  },
+  {
+    "id": "disclosure-cninfo",
+    "name": "巨潮资讯网（上市公司公告）",
+    "entryUrl": "https://www.cninfo.com.cn/",
+    "category": "disclosure",
+    "access": "anonymous",
+    "coverage": "A股上市公司定期/临时公告：重大合同、中标、订单（美腾科技 688420、泰禾智能 603011 等竞品主体及股东方）",
+    "auditNote": "证监会指定信息披露平台，公告 PDF 原文可匿名抓取，权威官方来源（同港交所之于 H 股）。检索需带公司名；竞品大额合同/中标公告以此为首选出处（实例：美腾莱煤智能 2886.18 万智能干选机合同 2026-030）。"
+  },
+  {
+    "id": "vendor-meiteng",
+    "name": "美腾科技官网 · 新闻资讯",
+    "entryUrl": "https://www.tjmeiteng.com/web/news",
+    "category": "vendor",
+    "access": "anonymous",
+    "coverage": "美腾科技（688420）官网新闻/案例/展会动态，含 TDS 智能干选、光电分选项目自宣",
+    "auditNote": "2026-09-08 实测列表+正文链接可匿名抓取；官网偏滞后（展会/案例/党建为主），交易公告走巨潮资讯网。自宣类 confidence=中，交易信号回官方公告核验。"
+  },
+  {
+    "id": "vendor-shenzhou",
+    "name": "唐山神州机械官网 · 神州动态",
+    "entryUrl": "https://www.tsshenzhou.com/xinwen/",
+    "category": "vendor",
+    "access": "anonymous",
+    "coverage": "神州机械干法选煤/智能干选装备新闻、设备发运与项目交付动态",
+    "auditNote": "2026-09-08 实测列表（标题+日期+正文链接）可匿名抓取，更新约每周；设备发运/交付类自宣多为无金额摘要，金额口径按未披露处理。"
+  },
+  {
+    "id": "vendor-haiwang",
+    "name": "威海海王科技官网 · 新闻资讯",
+    "entryUrl": "https://haiwangkeji.com",
+    "category": "vendor",
+    "access": "anonymous",
+    "coverage": "威海海王科技智能干选/分选设备新闻动态",
+    "auditNote": "官网可匿名访问（news/show-87.aspx 式新闻），更新偏慢；注意与做旋流器的'海王工业集团 wh-hw.com'非同一主体，勿混淆。"
+  },
+  {
+    "id": "vendor-holysort",
+    "name": "霍里思特网易号 + 官网",
+    "entryUrl": "https://c.m.163.com/news/sub/T1772531517520.html",
+    "category": "vendor",
+    "access": "anonymous",
+    "coverage": "霍里思特（XRT 光电分选）官方自媒体：交付/荣誉/宣传动态",
+    "auditNote": "2026-09-08 实测网易号列表完整可匿名抓取且更新最快（09-04 仍在发）；官网 honesort.com/news 滞后至当年5月。荣誉/软文多，具体中标须回官方公告核实，confidence=中。"
+  },
+  {
+    "id": "vendor-gzhpy",
+    "name": "赣州好朋友科技官网 · 新闻",
+    "entryUrl": "https://www.gzhpy.com",
+    "category": "vendor",
+    "access": "anonymous",
+    "coverage": "好朋友科技（矿石 XRT 光电分选）官网新闻与项目落地动态",
+    "auditNote": "官网可匿名访问，新闻 news-pages/YYYYMMDD.html 式（如 2026-08-26 中试平台揭牌）；含项目落地/合作类自宣，交易信号需核验。"
+  },
+  {
+    "id": "vendor-taiho",
+    "name": "泰禾智能（母公司）官网 · 卓海智能新闻",
+    "entryUrl": "https://www.chinataiho.com/info.php?class_id=105",
+    "category": "vendor",
+    "access": "anonymous",
+    "coverage": "泰禾智能（603011）官网新闻中心，含卓海智能（泰禾卓海）矿业干选条目",
+    "auditNote": "矿业干选内容滞后（约至2023）；卓海为并表子公司，新动态主要靠母公司公告（上交所/巨潮）与招标平台，官网仅作兜底检查。"
+  },
+  {
+    "id": "vendor-haina2001",
+    "name": "枣庄海纳官网 · 公司新闻",
+    "entryUrl": "https://www.haina2001.com/gsxw.html",
+    "category": "vendor",
+    "access": "anonymous",
+    "coverage": "枣庄海纳 ART 煤矸干选机公司新闻",
+    "auditNote": "官网可匿名访问，新闻更新约月级；与济宁'山东海纳智能装备 hainakj.com'（海纳美腾 HTDS）非同一主体，勿混淆。"
+  },
+  {
+    "id": "vendor-dfmc",
+    "name": "东方测控官网 · 市场新闻",
+    "entryUrl": "https://www.dfmc.cc/shichangxinwen/",
+    "category": "vendor",
+    "access": "anonymous",
+    "coverage": "东方测控市场动态（含干选/选矸类设备新闻，混有大量仪表/仪器/签约新闻）",
+    "auditNote": "官网可匿名访问（shichangxinwen/1116.html 式）；需人工筛出干选/选矸整机条目（实例：8/21 与中铁资源战略签约=智能化整体非分选整机，不收）。"
+  },
+  {
+    "id": "vendor-abtrobot",
+    "name": "合肥奥博特官网 · 新闻资讯",
+    "entryUrl": "http://abtrobot.com",
+    "category": "vendor",
+    "access": "anonymous",
+    "coverage": "奥博特 ETDS 智能干选机/色选机新闻（集团新闻+行业新闻栏目）",
+    "auditNote": "官网可匿名访问；栏目含色选/杂项，需筛智能干选整机条目。"
+  },
+  {
+    "id": "vendor-jinshisort",
+    "name": "湖北金石智能官网 · 新闻",
+    "entryUrl": "https://www.jinshisort.com",
+    "category": "vendor",
+    "access": "anonymous",
+    "coverage": "金石智能（矿石 XRT 光电分选）项目交付/发货自宣动态",
+    "auditNote": "官网可匿名访问，含交付类自宣（6/4 保康国投磷矿第五台、3/27 四川金河磷矿一体化交付）；公众号 HBJSZNZB 正文不可抓，靠官网/权威转载核验。"
+  },
+  {
+    "id": "vendor-nuctech",
+    "name": "同方威视官网 · 新闻中心",
+    "entryUrl": "https://www.nuctech.com",
+    "category": "vendor",
+    "access": "anonymous",
+    "coverage": "同方威视新闻中心（含固定/移动式智能矿石分选机矿业线动态）",
+    "auditNote": "官网可匿名访问；新闻中心以安检/核电为主，需人工筛矿业分选条目；同方股份 thtf.com.cn 亦发矿业新闻。仅收矿业分选线，其余产品线不收。"
   }
 ]
