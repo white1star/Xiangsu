@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { jsPDF } from 'jspdf';
 import rows from './data/intelligence.json';
 import crawlStamp from './data/crawl_stamp.json';
 import platformLibrary from '../config/platform-library.json';
@@ -98,48 +99,50 @@ function Detail({ item, onClose }) {
   const [showNotes, setShowNotes] = useState(false);
   const amountMissing = !item.amount || /未披露/.test(item.amount);
 
-  // 导出当前项目为 PDF：生成独立干净 HTML 后走浏览器打印（另存为 PDF）
+  // 导出当前项目为 PDF 文件：jsPDF 的 html() 用浏览器原生渲染（中文正常），直接生成 .pdf 下载，不走打印
   const exportPdf = () => {
     const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
     const row = (k, v) => v ? `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>` : '';
     const dt = dealTypeOf(item);
-    const html = `<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><title>${esc(item.title)}</title><style>
-      body{font-family:"Microsoft YaHei",Arial,sans-serif;color:#111;max-width:720px;margin:32px auto;padding:0 20px;line-height:1.7;font-size:14px}
-      h1{font-size:20px;margin:0 0 16px;border-bottom:2px solid #1267c9;padding-bottom:10px}
-      .meta{display:flex;gap:24px;flex-wrap:wrap;background:#f5f8fc;padding:12px 16px;border-radius:6px;margin-bottom:16px}
-      .meta b{display:block;font-size:12px;color:#6a7887;font-weight:400}
-      .meta span{font-size:16px;font-weight:600}
-      h2{font-size:15px;margin:22px 0 8px;color:#16466f;border-left:3px solid #1267c9;padding-left:8px}
-      table{width:100%;border-collapse:collapse;margin:8px 0}
-      th,td{border:1px solid #dbe4ef;padding:8px 12px;text-align:left;vertical-align:top}
-      th{background:#f5f8fc;width:120px;color:#47576a;font-weight:600}
-      .deal{display:inline-block;padding:2px 12px;border-radius:999px;font-size:12px;font-weight:700;background:#e8f0fb;color:#1267c9}
-      .foot{margin-top:24px;padding-top:12px;border-top:1px dashed #ccc;color:#889;font-size:12px}
-      @media print{body{margin:0;padding:0}}
-    </style></head><body>
-    <h1>${esc(item.title)}</h1>
-    <div class="meta">
-      <div><b>金额</b><span>${esc(item.amount || '未披露')}</span>${item.amountStage ? ` <small>(${esc(item.amountStage)})</small>` : ''}</div>
-      <div><b>发布日期</b><span>${esc(item.date || '未披露')}</span></div>
-      <div><b>成交方式</b><span class="deal">${esc(dt.label)}</span></div>
-    </div>
-    <h2>项目属性</h2>
-    <table>
-      ${row('中标情况', item.bid)}${row('中标人', item.winner || (item.bid === '已中标' ? '中标人未在公告中明确' : ''))}
-      ${row('采购人', item.buyer)}${row('矿种', item.mineral)}${row('地区', item.region)}
-      ${row('竞品', item.competitor)}${row('产品线', item.line)}${row('预算/控制价', item.budget)}
-      ${row('采购内容', item.procurement)}${row('来源', item.source)}${row('置信度', item.confidence)}
-    </table>
-    <h2>成交方式说明</h2><p>${esc(dt.label)}：${esc(dt.desc)}</p>
-    <h2>证据摘要</h2><p>${esc(item.evidence)}</p>
-    ${item.amountNote ? `<h2>金额/未披露说明</h2><p>${esc(item.amountNote)}</p>` : ''}
-    <h2>原文链接</h2><p>${esc(item.url)}</p>
-    <div class="foot">导出时间：${new Date().toLocaleString('zh-CN')}　|　数据来源：唐山像素智能·公开情报台账（置信度 ${esc(item.confidence)}）</div>
-    <script>window.onload=function(){setTimeout(function(){window.print()},300)}</script>
-    </body></html>`;
-    const w = window.open('', '_blank');
-    if (!w) { alert('请允许弹出窗口以导出 PDF'); return; }
-    w.document.open(); w.document.write(html); w.document.close();
+    const html = `<div style="font-family:'Microsoft YaHei',Arial,sans-serif;color:#111;line-height:1.7;font-size:13px;width:720px">
+      <h1 style="font-size:20px;margin:0 0 14px;border-bottom:2px solid #1267c9;padding-bottom:10px">${esc(item.title)}</h1>
+      <div style="display:flex;gap:24px;background:#f5f8fc;padding:12px 16px;border-radius:6px;margin-bottom:16px">
+        <div style="flex:1"><div style="font-size:11px;color:#6a7887">金额</div><div style="font-size:15px;font-weight:700">${esc(item.amount || '未披露')}${item.amountStage ? ` <span style="font-size:11px;font-weight:400">（${esc(item.amountStage)}）</span>` : ''}</div></div>
+        <div style="flex:1"><div style="font-size:11px;color:#6a7887">发布日期</div><div style="font-size:15px;font-weight:700">${esc(item.date || '未披露')}</div></div>
+        <div style="flex:1"><div style="font-size:11px;color:#6a7887">成交方式</div><div><span style="padding:2px 12px;border-radius:999px;font-size:12px;font-weight:700;background:#e8f0fb;color:#1267c9">${esc(dt.label)}</span></div></div>
+      </div>
+      <h2 style="font-size:14px;margin:20px 0 8px;color:#16466f;border-left:3px solid #1267c9;padding-left:8px">项目属性</h2>
+      <table style="width:100%;border-collapse:collapse;margin:8px 0">
+        ${row('中标情况', item.bid)}${row('中标人', item.winner || (item.bid === '已中标' ? '中标人未在公告中明确' : ''))}
+        ${row('采购人', item.buyer)}${row('矿种', item.mineral)}${row('地区', item.region)}
+        ${row('竞品', item.competitor)}${row('产品线', item.line)}${row('预算/控制价', item.budget)}
+        ${row('采购内容', item.procurement)}${row('来源', item.source)}${row('置信度', item.confidence)}
+      </table>
+      <h2 style="font-size:14px;margin:20px 0 8px;color:#16466f;border-left:3px solid #1267c9;padding-left:8px">成交方式说明</h2>
+      <p style="margin:4px 0">${esc(dt.label)}：${esc(dt.desc)}</p>
+      <h2 style="font-size:14px;margin:20px 0 8px;color:#16466f;border-left:3px solid #1267c9;padding-left:8px">证据摘要</h2>
+      <p style="margin:4px 0">${esc(item.evidence)}</p>
+      ${item.amountNote ? `<h2 style="font-size:14px;margin:20px 0 8px;color:#16466f;border-left:3px solid #1267c9;padding-left:8px">金额 / 未披露说明</h2><p style="margin:4px 0">${esc(item.amountNote)}</p>` : ''}
+      <h2 style="font-size:14px;margin:20px 0 8px;color:#16466f;border-left:3px solid #1267c9;padding-left:8px">原文链接</h2>
+      <p style="margin:4px 0;color:#1267c9">${esc(item.url)}</p>
+      <div style="margin-top:24px;padding-top:12px;border-top:1px dashed #ccc;color:#889;font-size:11px">导出时间：${new Date().toLocaleString('zh-CN')}　|　数据来源：唐山像素智能·公开情报台账（置信度 ${esc(item.confidence)}）</div>
+    </div>`;
+    const el = document.createElement('div');
+    el.style.position = 'absolute'; el.style.left = '-9999px'; el.style.top = '0';
+    el.innerHTML = html;
+    document.body.appendChild(el);
+    const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+    doc.html(el, {
+      margin: 40,
+      autoPaging: 'text',
+      width: 720,
+      windowWidth: 720,
+      callback(d) {
+        const fname = (item.title || '项目').replace(/[\\/:*?"<>|]/g, '').slice(0, 40);
+        d.save(`${fname}.pdf`);
+        el.remove();
+      },
+    });
   };
 
   return <div className="detail"><div>
