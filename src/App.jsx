@@ -79,6 +79,18 @@ function Field({ label, span, children }) {
   return <div className={`d-field${span ? ' span2' : ''}`}><span className="d-label">{label}</span><div className="d-value">{children}</div></div>;
 }
 
+// 成交方式推导：招投标进度类 vs 非招投标成交类（直签/租赁/BOT/EPC分包等）
+function dealTypeOf(item) {
+  const t = item.title || '';
+  const b = item.bid || '';
+  if (/租赁|承租/.test(t + b)) return { label: '租赁', desc: '设备租赁模式成交（中标方提供设备并按租期结算），非买断招投标。' };
+  if (/BOT|运营合作|运营服务/.test(t + b)) return { label: 'BOT / 运营合作', desc: '乙方投资设备+运营，按处理服务费结算，合作期满移交，非一次性采购。' };
+  if (/EPC|总包|总承包/.test(t + b)) return { label: 'EPC 总包（含设备）', desc: '工程总承包模式，设备作为总包内容的一部分成交。' };
+  if (/重大销售合同|已签约|直接签约|销售合同/.test(t + b)) return { label: '直接签约（非招投标）', desc: '商务谈判直接签订销售合同，未走公开招投标流程（多为上市公司公告披露）。' };
+  if (/已交付|已投运|投运|投产|发运/.test(t + b)) return { label: '直接签约（非招投标）', desc: '以交付/投运状态呈现的成交，未体现招投标流程。' };
+  return { label: '招投标', desc: '通过公开招标/竞争性谈判等采购流程成交，按公告阶段推进（招标→候选→中标）。' };
+}
+
 function Block({ title, extra, children }) {
   return <div className="d-block"><h3>{title}{extra && <span className="d-extra">{extra}</span>}</h3>{children}</div>;
 }
@@ -108,6 +120,8 @@ function Detail({ item, onClose }) {
       {item.scopeNote ? <div className="d-warn"><b>标的说明：</b>{item.scopeNote}</div> : null}
       {item.resultGap ? <div className="d-warn">⚠ 已开标但台账未收录对应中标结果，建议反查官方原文</div> : null}
     </div> : null}
+
+    {(() => { const dt = dealTypeOf(item); return <div className="d-dealtype"><span className="d-dealtype-label">成交方式</span><span className={`d-dealtype-badge dt-${dt.label.includes('招投标') ? 'tender' : dt.label.includes('直接签约') ? 'direct' : 'other'}`}>{dt.label}</span><span className="d-dealtype-desc">{dt.desc}</span></div>; })()}
 
     <Block title="项目属性">
       <div className="d-grid">
