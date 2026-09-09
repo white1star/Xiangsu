@@ -18,7 +18,7 @@
  *   - mp 直链为搜狗签发的临时授权链接（signature 有时效），解析后须立即抓正文；
  *   - 搜狗索引滞后：竞品公众号近期推文可能延迟数周才被收录，本工具用于"补漏雷达"，
  *     命中疑似交易信号（中标/签约等）后须回官方招标平台/权威媒体转载核验再落库；
- *   - 公众号内容为企业自宣，收录口径 confidence=中。
+ *   - 公众号内容为企业自宣，收录口径 confidence=低（标题线索，未经官方核验；与官方=高/官网自宣=中 区分）。
  */
 import { createRequire } from 'node:module';
 import { writeFile } from 'node:fs/promises';
