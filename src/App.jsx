@@ -145,11 +145,13 @@ function Detail({ item, onClose }) {
   };
 
   return <div className="detail"><div>
-    <div className="d-toolbar">
-      <button className="d-export" onClick={exportPdf}>导出 PDF</button>
-      <button className="d-close" onClick={onClose} aria-label="关闭">×</button>
+    <div className="d-head">
+      <h2>{item.title}</h2>
+      <div className="d-toolbar">
+        <button className="d-export" onClick={exportPdf}>导出 PDF</button>
+        <button className="d-close" onClick={onClose} aria-label="关闭">×</button>
+      </div>
     </div>
-    <h2>{item.title}</h2>
 
     <div className="d-conclusion">
       <div className="d-status">
