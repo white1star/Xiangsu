@@ -60,6 +60,7 @@
     "id": "auto-aHR0cHM6Ly9seWdnenlqeS",
     "projectKey": "洛阳安沟钼矿智能抛废XRT运营合作",
     "amountStage": "招标控制价/预算",
+    "openStatus": "未披露",
     "timeline": [
       {
         "date": "2026-08-25",
@@ -78,9 +79,17 @@
         "url": "https://lyggzyjy.ly.gov.cn/jyxx/003001/003001002/20260831/49ae0319-93e9-4a56-ad9e-33856b74627c.html",
         "source": "洛阳市公共资源交易中心（lyggzyjy.ly.gov.cn 官方，匿名可看）",
         "amountNote": "资格预审公告披露暂估合同金额5053.9962万元（招标编号洛直工货招标(2026)0023号-1，项目代码2211-410300-04-01-769815）；采用运营合作（建设-运营-移交/BOT）模式：乙方投资X射线智能分选抛废全部工艺设备并负责合作期运营维保，甲方按'精矿石处理服务费'付费，合作期满乙方将设备及技术（含专利使用权）完好移交给甲方；甲方提供抛废车间厂房、原矿给料机、皮带机、除尘系统及水电气接口；项目为嵩县安沟钼多金属矿145万吨/年露天采选项目选矿工程前端抛废，正式资格预审启动（08-25预公示为同项目前期阶段，已在台账）"
+      },
+      {
+        "date": "2026-08-31",
+        "bid": "招标公告",
+        "title": "安沟钼多金属矿选矿工程智能抛废（X射线智能分选）工艺运营合作项目招标  --资格预审公告",
+        "amount": "5054.00万元",
+        "url": "https://www.ggzy.gov.cn/information/deal/html/b/410000/0101/20260831/00411fa4c8ed568842b8b4c50a527a33262a.html",
+        "source": "全国公共资源交易平台（河南省）"
       }
     ],
-    "stages": 2
+    "stages": 3
   },
   {
     "title": "拜城县峰峰煤焦化有限公司2026年设备购置（第十四批）智能干选机采购招标公告",
@@ -104,6 +113,8 @@
     "procurement": "招标公告未披露预算；智能干选机TT104-20-X 1套，交货东兴泰煤矿，投标截止09-22",
     "evidenceCapturedAt": "2026-09-02T05:40:00.000Z",
     "id": "auto-aHR0cHM6Ly93d3cuanpiaW",
+    "openStatus": "未披露",
+    "resultGap": false,
     "projectKey": "拜城县峰峰煤焦化有限公司2026年设备购置第十四批智能干选机采购",
     "timeline": [
       {
@@ -140,6 +151,9 @@
     "procurement": "招标公告未披露预算；大块干选机2套（X射线，Q≥300t/h）+中块干选机2套大修升级（TDS36-100-S2D2）",
     "evidenceCapturedAt": "2026-09-02T05:40:00.000Z",
     "id": "auto-aHR0cHM6Ly9jZy5jY3RlZy",
+    "bidOpenDate": "2026-09-17",
+    "openStatus": "待开标",
+    "resultGap": false,
     "projectKey": "石头梅一号选煤工艺改造干选机采购",
     "timeline": [
       {
@@ -211,6 +225,9 @@
     "procurement": "二次重新招标公告未披露预算（金额需登录查看）；08-01首次招标、08-12二次招标公告已在台账，本次为同项目二次重新招标新阶段，未定标",
     "evidenceCapturedAt": "2026-08-24T01:03:53.673Z",
     "id": "auto-aHR0cHM6Ly93d3cuZWJuZX",
+    "bidOpenDate": "2026-09-02",
+    "openStatus": "已开标",
+    "resultGap": true,
     "projectKey": "崇信县百贯沟煤业有限公司手选皮带TDS智能选矸系统采购及安装项目二次",
     "timeline": [
       {
@@ -255,6 +272,8 @@
     "procurement": "重新公告未披露预算金额；08-19首次公告已在台账，本次同项目重新公告（业绩要求调整），投标截止2026-09-02",
     "evidenceCapturedAt": "2026-08-27T02:38:57.421Z",
     "id": "auto-aHR0cHM6Ly93d3cuY2hpbm",
+    "openStatus": "未披露",
+    "resultGap": false,
     "projectKey": "江苏省矿业工程集团有限公司安装分公司榆树田煤矿项目部智能干选系统智能干选机采购",
     "timeline": [
       {
@@ -300,6 +319,8 @@
     "evidenceCapturedAt": "2026-08-24T00:54:26.000Z",
     "mineral": "煤",
     "id": "auto-aHR0cDovL3pjLmdobnlnZi",
+    "openStatus": "未披露",
+    "resultGap": false,
     "projectKey": "伊吾广汇矿业公司新建分选设备EPC建设+运营总承包项目招标二次",
     "timeline": [
       {
@@ -499,6 +520,9 @@
     "procurement": "招标公告未披露预算（金额需登录查看）；8月新发布，未定标",
     "evidenceCapturedAt": "2026-08-03T02:42:22.414Z",
     "id": "auto-aHR0cHM6Ly93d3cuZWJuZX",
+    "bidOpenDate": "2026-08-11",
+    "openStatus": "已开标",
+    "resultGap": true,
     "projectKey": "崇信县百贯沟煤业有限公司手选皮带TDS智能选矸系统采购及安装",
     "timeline": [
       {
@@ -613,6 +637,9 @@
     "sourceAuthority": "公开",
     "region": "山西",
     "mineral": "煤",
+    "bidOpenDate": "2026-09-28",
+    "openStatus": "待开标",
+    "resultGap": false,
     "projectKey": "山西汾西正升煤业有限责任公司动筛车间改造和智能干选系统改造设计",
     "timeline": [
       {
@@ -648,6 +675,8 @@
     "sourceAuthority": "公开",
     "region": "山西",
     "mineral": "煤",
+    "openStatus": "未披露",
+    "resultGap": false,
     "projectKey": "坪上煤业TDS智能干选设备技术服务1标段二次重新询比",
     "amountStage": "招标控制价/预算",
     "timeline": [
@@ -874,6 +903,7 @@
     "sourceAuthority": "公开",
     "region": "山西·长治",
     "mineral": "煤",
+    "procurement": "及相关要求 2.1 采购范围：选矸车间2号智能射线干选机X年X月投用",
     "projectKey": "山西潞安环保能源开发股份有限公司漳村煤矿选矸车间2号智能干选机维保成交",
     "amountStage": "候选报价",
     "timeline": [
@@ -913,12 +943,13 @@
         "company": "合肥奥博特自动化设备有限公司",
         "quote": "186万元",
         "quoteYuan": 1860000,
-        "_stageDate": "2026-06-19",
-        "isWinner": true
+        "isWinner": true,
+        "_stageDate": "2026-07-10"
       }
     ],
     "id": "auto-more3-1445w1dj",
     "mineral": "煤",
+    "procurement": "本次招标采购智能干选机及配件，在淮北矿业股份有限公司下属单位使用",
     "projectKey": "淮北矿业股份有限公司2026年神源煤化工智能干选机及配件公开",
     "amountStage": "中标/签约价",
     "timeline": [
@@ -964,6 +995,9 @@
     "procurement": "外委承包招标未披露预算；2026-07-07首次招标、07-22二次招标，未定标",
     "evidenceCapturedAt": "2026-08-03T01:57:43.858Z",
     "id": "auto-aHR0cHM6Ly9kenpiLmpua2",
+    "bidOpenDate": "2026-07-21",
+    "openStatus": "已开标",
+    "resultGap": true,
     "projectKey": "莲盛智能煤矸石分选系统IDS2400筛选运维及矸石破碎倒运外委承包2026",
     "timeline": [
       {
@@ -1000,28 +1034,32 @@
       {
         "rank": 1,
         "company": "唐山神州机械集团有限公司",
-        "quote": "318万元",
+        "quote": "317.999967万元",
         "quoteYuan": 3179999.67,
-        "_stageDate": "2026-07-01",
-        "isWinner": true
+        "isWinner": true,
+        "note": "评分85.24",
+        "_stageDate": "2026-07-06"
       },
       {
         "rank": 2,
         "company": "枣庄海纳科技有限公司",
-        "quote": "349.95万元",
+        "quote": "349.950039万元",
         "quoteYuan": 3499500.39,
-        "_stageDate": "2026-07-01"
+        "note": "评分83.18",
+        "_stageDate": "2026-07-06"
       },
       {
         "rank": 3,
         "company": "霍里思特",
-        "quote": "419.68万元",
+        "quote": "419.682万元",
         "quoteYuan": 4196820,
-        "_stageDate": "2026-07-01"
+        "note": "评分80.73",
+        "_stageDate": "2026-07-06"
       }
     ],
     "id": "auto-more3-xqhfcq0b",
     "mineral": "煤",
+    "procurement": "发布日期： 2026年7月6日 二、中标结果信息 12标包：智能干选系统 单位：人民币元 排名 统一社会信用代码 中标人 单位名称 中标 价格 大写中标 价格 质量 标准 交货期 1 91",
     "projectKey": "冀中能源股份有限公司2026年度设备采购第四批12标包智能干选系统",
     "amountStage": "中标/签约价",
     "timeline": [
@@ -1374,6 +1412,7 @@
     "id": "auto-more4-1785474047811",
     "buyer": "淮南矿业(集团)有限责任公司物资采供中心物资供销分公司",
     "mineral": "煤",
+    "procurement": "> 招采信息 >自愿招标 采购公告 答疑澄清公告 成交公示 智能干选机升级改造中标公告 2026-06-16 智能干选机升级改造中标候选人公示 2026-06-09 智能干选机升级改造中标",
     "projectKey": "淮南矿业集团有限责任公司物资采供中心智能干选机升级改造",
     "timeline": [
       {
@@ -1665,6 +1704,7 @@
     "id": "auto-more0-1785474047807",
     "buyer": "山西华晋明珠煤业有限责任公司",
     "mineral": "煤",
+    "procurement": "及规模： 建设一座年入洗能力120万吨的矿井配套选煤厂（含施工图设计、土建施工，设备采购、安装调试、运行），洗选工艺采用“TDS智能干选预排矸+脱泥无压三产品旋流器分选+TCS粗煤泥分选+细煤泥浮选”联合工艺，项目建",
     "projectKey": "山西华晋明珠煤业有限责任公司配套选煤厂招标计划",
     "timeline": [
       {
@@ -2208,6 +2248,7 @@
     "sourceAuthority": "公开",
     "region": "河南·鹤壁",
     "mineral": "煤",
+    "procurement": "公开招标] 鹤壁煤业（集团）有限责任公司设备采购党家河TDS智能干选系统异常公告 项目标段编号：HNEC-ZYZB260353001H001 标段编号: 采购人: 保证金: 代理机构: 工",
     "projectKey": "鹤壁煤业集团有限责任公司设备采购党家河TDS智能干选系统异常",
     "timeline": [
       {
@@ -2289,6 +2330,7 @@
     "id": "auto-more5-1785474047812",
     "buyer": "保康夏禹矿业有限公司",
     "mineral": "未披露",
+    "procurement": "保康夏禹矿业矿石精选项目XRT选矿设备采购 中标结果公告 搜索 无障碍 | 长者模式 网站首页 政府信息公开 网上办事 政民互动 楚源保康 政务服务",
     "projectKey": "保康夏禹矿业矿石精选项目XRT选矿设备采购",
     "amountStage": "中标/签约价",
     "timeline": [
@@ -2752,6 +2794,8 @@
     "procurement": "询比价公告未披露金额；仅询价阶段未见成交公告",
     "evidenceCapturedAt": "2026-08-03T02:42:22.414Z",
     "id": "auto-aHR0cHM6Ly9ybC56aGFvYm",
+    "openStatus": "未披露",
+    "resultGap": false,
     "projectKey": "思茅山水保护盖等配件采购项目公开询比价公告好朋友设备配件",
     "timeline": [
       {
@@ -2873,6 +2917,9 @@
     "scopeNote": "本条为设计(代可研)前置标的，非设备采购；可作为后续干选机设备招标的先行信号",
     "id": "auto-more3-o94gdou0",
     "mineral": "煤",
+    "procurement": "2026年陕西郭家河煤业有限责任公司选煤厂智能干选项目初步设计(代可研)项目招标_变更公告_招标与采购信息网 欢迎来到招标与采购信息网! 登录 | 注册 返回首页 | 加",
+    "openStatus": "未披露",
+    "resultGap": false,
     "projectKey": "陕西郭家河煤业有限责任公司选煤厂智能干选项目初步设计代可研项目",
     "timeline": [
       {
