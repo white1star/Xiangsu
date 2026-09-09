@@ -51,7 +51,6 @@ export default function App() {
     <header className="topbar">
       <div className="brand"><span className="mark">◈</span><b>唐山像素智能</b></div>
       <nav>{['情报台账', '数据源'].map((item, index) => <button className={page === item ? 'active' : ''} onClick={() => setPage(item)} key={item}><i>{icons[index]}</i>{item}</button>)}</nav>
-      <div className="topbar-actions"><button className="export" onClick={() => window.print()}>导出</button></div>
     </header>
     <section className="workspace">
       {page === '情报台账' ? <>
