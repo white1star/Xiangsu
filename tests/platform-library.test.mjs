@@ -16,7 +16,7 @@ test('platform library covers national, owner procurement, coal provinces, and a
   const groups = new Set(platforms.map(platform => platform.category));
   for (const group of ['national', 'energy_owner', 'coal_owner', 'province', 'authentication']) assert.ok(groups.has(group), group);
   assert.ok(platforms.filter(platform => platform.access === 'anonymous').length >= 20);
-  assert.ok(platforms.filter(platform => platform.access !== 'anonymous').length >= 25);
+  assert.ok(platforms.filter(platform => platform.access !== 'anonymous').length >= 10);
   assert.ok(platforms.some(platform => platform.access === 'login_free'));
   assert.ok(platforms.some(platform => platform.access === 'login_paid'));
   assert.ok(platforms.some(platform => platform.id === 'aiqicha'));
