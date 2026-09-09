@@ -1,36 +1,36 @@
 {
   "national-ggzy": {
     "name": "全国公共资源交易平台",
-    "lastScanAt": "2026-07-30T06:13:32.825Z",
+    "lastScanAt": "2026-09-09T07:41:06.918Z",
     "lastStatus": "ok",
-    "pagesScanned": 18,
-    "discovered": 77,
+    "pagesScanned": 17,
+    "discovered": 2,
     "failReason": null,
     "notes": []
   },
   "ccteg-goods": {
     "name": "中国煤科电子采购平台",
-    "lastScanAt": "2026-07-30T06:14:16.242Z",
+    "lastScanAt": "2026-09-09T07:41:37.785Z",
     "lastStatus": "ok",
-    "pagesScanned": 6,
+    "pagesScanned": 3,
     "discovered": 0,
     "failReason": null,
     "notes": []
   },
   "ccteg-all": {
     "name": "中国煤科电子采购平台（全部结果公告）",
-    "lastScanAt": "2026-07-30T06:14:25.821Z",
+    "lastScanAt": "2026-09-09T07:41:42.239Z",
     "lastStatus": "ok",
-    "pagesScanned": 8,
+    "pagesScanned": 3,
     "discovered": 0,
     "failReason": null,
     "notes": []
   },
   "gsei-results": {
     "name": "甘肃经济信息网（中标结果栏目）",
-    "lastScanAt": "2026-07-30T06:14:37.185Z",
+    "lastScanAt": "2026-09-09T07:41:46.430Z",
     "lastStatus": "ok",
-    "pagesScanned": 6,
+    "pagesScanned": 3,
     "discovered": 0,
     "failReason": null,
     "notes": []
@@ -59,7 +59,7 @@
   },
   "mtzbw-leads": {
     "name": "中国煤炭招标网（聚合线索）",
-    "lastScanAt": "2026-07-30T06:14:49.522Z",
+    "lastScanAt": "2026-09-09T07:41:59.367Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -70,7 +70,7 @@
   },
   "ccgp-search": {
     "name": "中国政府采购网",
-    "lastScanAt": "2026-07-30T06:14:51.310Z",
+    "lastScanAt": "2026-09-09T07:42:28.755Z",
     "lastStatus": "failed",
     "pagesScanned": 0,
     "discovered": 0,
@@ -79,7 +79,7 @@
   },
   "chnenergy-zbgg": {
     "name": "国能e招（招标公告栏目）",
-    "lastScanAt": "2026-07-30T06:14:42.741Z",
+    "lastScanAt": "2026-09-09T07:41:49.782Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -88,7 +88,7 @@
   },
   "zmzb-hw": {
     "name": "中煤招标与采购网（货物招标栏目）",
-    "lastScanAt": "2026-07-30T06:14:45.019Z",
+    "lastScanAt": "2026-09-09T07:41:53.292Z",
     "lastStatus": "ok",
     "pagesScanned": 3,
     "discovered": 0,

@@ -592,5 +592,14 @@
     "access": "anonymous",
     "coverage": "同方威视新闻中心（含固定/移动式智能矿石分选机矿业线动态）",
     "auditNote": "官网可匿名访问；新闻中心以安检/核电为主，需人工筛矿业分选条目；同方股份 thtf.com.cn 亦发矿业新闻。仅收矿业分选线，其余产品线不收。"
+  },
+  {
+    "id": "sogou-wechat",
+    "name": "搜狗微信搜索（公众号线索雷达）",
+    "entryUrl": "https://weixin.sogou.com/",
+    "category": "wechat_radar",
+    "access": "anonymous",
+    "coverage": "14 家在册竞品的微信公众号文章线索（标题/摘要/日期/公众号名，type=2 短词搜索，扫描词表见每周流程 2.6）",
+    "auditNote": "2026-09-09 实测：type=2 短词搜索可用但收录滞后约一周；type=1 公众号搜索被验证码墙封死勿再尝试；口径=标题命中交易词（中标/签约/喜报/合同等）直接落库 confidence=低，后续官方公告核验版另行收录（confidence=高），交易信号以官方公告为准。"
   }
 ]
