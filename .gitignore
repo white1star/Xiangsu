@@ -2,3 +2,4 @@ node_modules/
 .npm-cache/
 dist/
 .DS_Store
+.verify_dist_build/
