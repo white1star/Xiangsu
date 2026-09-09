@@ -35,3 +35,33 @@
 
 
 /* 竞品分析页（已随侧边栏入口移除，样式留空备用） */
+
+/* 详情弹窗重构：结论区 + 分组区块（2026-09-09） */
+.detail .d-conclusion { background: #f5f8fc; border: 1px solid #dbe7f4; border-radius: 8px; padding: 14px 16px; }
+.detail .d-status { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.detail .d-badge { display: inline-block; padding: 2px 10px; border-radius: 4px; background: #fff; border: 1px solid rgba(0,0,0,.12); font-size: 13px; font-weight: 700; }
+.detail .d-winner { font-size: 15px; font-weight: 600; color: #111418; }
+.detail .d-metrics { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-top: 12px; }
+.detail .d-metric { background: #fff; border: 1px solid rgba(0,0,0,.07); border-radius: 6px; padding: 8px 10px; }
+.detail .d-metric span { display: block; font-size: 12px; color: #6a7887; margin-bottom: 2px; }
+.detail .d-metric b { font-size: 16px; font-weight: 600; color: #16466f; word-break: break-all; }
+.detail .d-metric b.undisclosed { color: #b3261e; font-size: 14px; }
+.detail .d-metric i { display: block; font-style: normal; font-size: 12px; color: #9aa3ad; margin-top: 2px; line-height: 1.5; }
+.detail .d-warn { margin-top: 10px; background: #fff7e6; border-left: 3px solid #e0a800; padding: 8px 12px; border-radius: 4px; color: #6b4e00; font-size: 13px; line-height: 1.7; }
+.detail .d-block { margin-top: 18px; }
+.detail .d-block h3 { margin: 0 0 10px; font-size: 13px; font-weight: 600; color: #16466f; padding-bottom: 6px; border-bottom: 1px solid #e6ecf3; display: flex; align-items: baseline; gap: 8px; }
+.detail .d-extra { font-weight: 400; font-size: 12px; color: #8b98a6; }
+.detail .d-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px 16px; }
+.detail .d-field { display: flex; gap: 8px; font-size: 13px; line-height: 1.75; }
+.detail .d-field.span2 { grid-column: 1 / -1; }
+.detail .d-label { flex: 0 0 76px; color: #6a7887; }
+.detail .d-value { flex: 1; min-width: 0; color: #111418; }
+.detail .d-evidence { font-size: 13px; line-height: 1.85; color: #31404f; }
+.detail .d-source { margin-top: 10px; display: flex; align-items: center; gap: 10px; font-size: 13px; }
+.detail .d-src-name { color: #8b98a6; font-size: 12px; }
+.detail .d-foot { margin-top: 20px; padding-top: 12px; border-top: 1px dashed #e6ecf3; }
+.detail button.d-toggle { float: none; width: auto; height: auto; background: none; border: 0; border-radius: 0; color: #1267c9; font-size: 12px; padding: 0; cursor: pointer; }
+.detail .d-foot .hint { margin-top: 8px; font-size: 12px; line-height: 1.7; }
+.detail .timeline { margin: 0; }
+.detail .bids { margin: 0; }
+@media (max-width: 560px) { .detail .d-metrics { grid-template-columns: 1fr; } .detail .d-grid { grid-template-columns: 1fr; } }

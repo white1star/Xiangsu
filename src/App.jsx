@@ -71,7 +71,63 @@ export default function App() {
   </main>;
 }
 
-function Detail({ item, onClose }) { return <div className="detail"><div><button onClick={onClose}>×</button><h2>{item.title}</h2><p><b>中标情况：</b><span className={`bid ${item.bid}`}>{item.bid}</span>{item.winner ? `　中标人：${item.winner}` : item.bid === '已中标' ? '　（中标人未在公告中明确）' : ''}{item.statusNote ? <span className="why">（{item.statusNote}）</span> : ''}</p>{item.scopeNote && <p className="scope-note"><b>⚠ 标的说明：</b>{item.scopeNote}</p>}<p><b>发布日期：</b>{item.date || '未披露'}</p><p><b>开标日期：</b>{item.bidOpenDate ? `${item.bidOpenDate}（${item.openStatus || '未披露'}）` : '未披露'}{item.resultGap ? '　⚠ 已开标但台账未收录对应中标结果，建议反查官方原文' : ''}</p><p><b>金额：</b>{item.amount || '未披露'}{item.amountStage ? <span className="why">（{item.amountStage}）</span> : ''}{item.amountNote ? <span className="why">（{item.amountNote}）</span> : ''}</p>{item.timeline && item.timeline.length > 1 && <div className="timeline"><b>项目时间线（{item.timeline.length} 个阶段公告，已合并去重）：</b><ul>{item.timeline.map((t, i) => <li key={i}><span className={`bid ${t.bid}`}>{t.bid}</span>　{t.date}　{t.amount}　<a href={t.url} target="_blank" rel="noreferrer">原文 ↗</a><br /><span className="tl-title">{t.title}</span></li>)}</ul></div>}<p><b>采购人：</b>{item.buyer || '未披露'}</p><p><b>矿种：</b>{item.mineral || '未披露'}</p>{item.budget && <p><b>预算/控制价：</b>{item.budget}</p>}{item.procurement && <p><b>采购内容：</b>{item.procurement}</p>}{item.bids && item.bids.length > 0 && <div className="bids"><b>竞品候选报价（{item.bids.length} 家）：</b><table><thead><tr><th>排名</th><th>竞品公司</th><th>报价</th></tr></thead><tbody>{item.bids.map((b, i) => <tr key={i} className={b.isWinner ? 'win' : ''}><td>{b.rank || '-'}</td><td>{b.company}{b.isWinner ? '　🏆' : ''}</td><td>{b.quote}</td></tr>)}</tbody></table></div>}<p><b>证据摘要：</b>{item.evidence}</p><p><b>来源鉴权：</b><span className={`auth ${item.sourceAuthority === '需登录' ? 'auth-locked' : 'auth-open'}`}>{item.sourceAuthority || '未披露'}</span>　<b>地区：</b>{item.region || '未披露'}</p><p><b>原始页面：</b><a href={item.url} target="_blank" rel="noreferrer">打开原文 ↗</a></p><p className="hint">金额优先取公告表格中的首个投标/中标报价（多家竞价时取第一家）；已排除保证金、注册资本、标书费等非交易金额。凡标注“未披露”的，均已逐条复核并在括号中注明具体原因（正文为PDF、需登录、链接失效或原文确无金额），不以猜测补全。</p></div></div>; }
+function Field({ label, span, children }) {
+  return <div className={`d-field${span ? ' span2' : ''}`}><span className="d-label">{label}</span><div className="d-value">{children}</div></div>;
+}
+
+function Block({ title, extra, children }) {
+  return <div className="d-block"><h3>{title}{extra && <span className="d-extra">{extra}</span>}</h3>{children}</div>;
+}
+
+function Detail({ item, onClose }) {
+  const [showNotes, setShowNotes] = useState(false);
+  const amountMissing = !item.amount || /未披露/.test(item.amount);
+  return <div className="detail"><div>
+    <button onClick={onClose}>×</button>
+    <h2>{item.title}</h2>
+
+    <div className="d-conclusion">
+      <div className="d-status">
+        <span className={`d-badge bid ${item.bid}`}>{item.bid}</span>
+        <span className="d-winner">{item.winner || (item.bid === '已中标' ? '中标人未在公告中明确' : '—')}</span>
+        {item.statusNote ? <span className="why">（{item.statusNote}）</span> : ''}
+      </div>
+      <div className="d-metrics">
+        <div className="d-metric"><span>金额</span><b className={amountMissing ? 'undisclosed' : ''}>{item.amount || '未披露'}</b>{item.amountStage ? <i>{item.amountStage}</i> : ''}{amountMissing && item.amountNote ? <i>{item.amountNote}</i> : ''}</div>
+        <div className="d-metric"><span>发布日期</span><b>{item.date || '未披露'}</b></div>
+        <div className="d-metric"><span>开标日期</span><b>{item.bidOpenDate || '未披露'}</b>{item.openStatus ? <i>{item.openStatus}</i> : ''}</div>
+      </div>
+      {item.resultGap ? <div className="d-warn">⚠ 已开标但台账未收录对应中标结果，建议反查官方原文</div> : ''}
+      {item.scopeNote ? <div className="d-warn"><b>⚠ 标的说明：</b>{item.scopeNote}</div> : ''}
+    </div>
+
+    <Block title="项目属性">
+      <div className="d-grid">
+        <Field label="采购人">{item.buyer || '未披露'}</Field>
+        <Field label="矿种">{item.mineral || '未披露'}</Field>
+        <Field label="地区">{item.region || '未披露'}</Field>
+        {item.budget ? <Field label="预算/控制价">{item.budget}</Field> : ''}
+        <Field label="来源鉴权"><span className={`auth ${item.sourceAuthority === '需登录' ? 'auth-locked' : 'auth-open'}`}>{item.sourceAuthority || '未披露'}</span></Field>
+        {item.procurement ? <Field label="采购内容" span>{item.procurement}</Field> : ''}
+      </div>
+    </Block>
+
+    {item.timeline && item.timeline.length > 1 ? <Block title="项目时间线" extra={`${item.timeline.length} 个阶段公告 · 已合并去重`}>
+      <div className="timeline"><ul>{item.timeline.map((t, i) => <li key={i}><span className={`bid ${t.bid}`}>{t.bid}</span>　{t.date}　{t.amount}　<a href={t.url} target="_blank" rel="noreferrer">原文 ↗</a><br /><span className="tl-title">{t.title}</span></li>)}</ul></div>
+    </Block> : ''}
+
+    {item.bids && item.bids.length > 0 ? <Block title="竞品候选报价" extra={`${item.bids.length} 家`}>
+      <div className="bids"><table><thead><tr><th>排名</th><th>竞品公司</th><th>报价</th></tr></thead><tbody>{item.bids.map((b, i) => <tr key={i} className={b.isWinner ? 'win' : ''}><td>{b.rank || '-'}</td><td>{b.company}{b.isWinner ? '　🏆' : ''}</td><td>{b.quote}</td></tr>)}</tbody></table></div>
+    </Block> : ''}
+
+    <Block title="证据与来源">
+      <div className="d-evidence">{item.evidence}</div>
+      <div className="d-source"><a href={item.url} target="_blank" rel="noreferrer">打开原始页面 ↗</a><span className="d-src-name">{item.source}</span></div>
+    </Block>
+
+    <div className="d-foot"><button className="d-toggle" onClick={() => setShowNotes(!showNotes)}>{showNotes ? '▾' : '▸'} 数据口径说明</button>{showNotes ? <p className="hint">金额优先取公告表格中的首个投标/中标报价（多家竞价时取第一家）；已排除保证金、注册资本、标书费等非交易金额。凡标注“未披露”的，均已逐条复核并在括号中注明具体原因（正文为PDF、需登录、链接失效或原文确无金额），不以猜测补全。</p> : ''}</div>
+  </div></div>;
+}
 
 // 竞品分析页已按需求从侧边栏移除，组件一并删除（2026-07-31）。
 
