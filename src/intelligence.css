@@ -78,6 +78,8 @@
 .deal-badge.dt-other { background: #fff3dd; color: #9a5d00; }
 .deal-phase { font-size: 12px; color: #8a94a3; }
 .detail button.d-toggle { float: none; width: auto; height: auto; background: none; border: 0; border-radius: 0; color: #1267c9; font-size: 12px; padding: 0; cursor: pointer; }
+.detail button.d-export { float: right; width: auto; height: auto; border: 1px solid #1267c9; background: #fff; color: #1267c9; font-size: 13px; border-radius: 4px; padding: 6px 14px; cursor: pointer; font-weight: 600; margin-left: 8px; }
+.detail button.d-export:hover { background: #1267c9; color: #fff; }
 .detail .d-foot .hint { margin-top: 8px; font-size: 12px; line-height: 1.7; }
 .detail .timeline { margin: 0; }
 .detail .bids { margin: 0; }
