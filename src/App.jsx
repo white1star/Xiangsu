@@ -11,18 +11,6 @@ const icons = ['▣', '◉'];
 const PAGE_SIZE = 10;
 const PHASE_OPTIONS = ['全部', '待开标', '已开标', '未披露', '中标候选人', '已中标', '流标'];
 
-function bidCell(item) {
-  let s = item.bid;
-  if (item.bid === '流标') return `流标 · 未授标${item.stages > 1 ? `（${item.stages}阶段）` : ''}`;
-  if (item.bid === '已中标' && item.winner) s = `已中标`;
-  if (item.bid === '招标公告') {
-    s += item.bidOpenDate ? ` ${item.bidOpenDate}·${item.openStatus}` : ' 开标未披露';
-    if (item.resultGap) s += ' ⚠';
-  }
-  if (item.stages > 1) s += `（${item.stages}阶段）`;
-  return s;
-}
-
 // 金额列：已披露带阶段标签；未披露带出复核原因（避免表格看起来一片空白）
 function amountCell(item) {
   if (item.amount && !/未披露/.test(item.amount)) {
@@ -67,7 +55,7 @@ export default function App() {
     <section className="workspace">
       {page === '情报台账' ? <>
         <div className="filters"><label>产品线{select(line, setLine, 'line')}</label><label>竞品{select(competitor, setCompetitor, 'competitor')}</label><label>招标状态{phaseSelect}</label><label>置信度{select(confidence, setConfidence, 'confidence')}</label></div>
-        <div className="tablebox"><table><thead><tr>{['客户', '矿种', '产品线', '竞品', '金额', '中标情况', '发布日期', '来源', '置信度'].map(item => <th key={item}>{item}</th>)}</tr></thead><tbody>{pageRows.map(item => <tr key={item.url} onClick={() => setSelected(item)}>{[item.buyer || '未披露', item.mineral || '未披露', item.line, item.competitor, amountCell(item), bidCell(item), item.date, <a href={item.url} target="_blank" rel="noreferrer" onClick={event => event.stopPropagation()}>{item.source} ↗</a>, item.confidence].map((value, index) => { const cls = index === 4 ? 'amt' : index === 5 ? `bid ${item.bid}` : index === 8 ? `confidence ${item.confidence}` : ''; return <td className={cls} key={index}>{value}</td>; })}</tr>)}</tbody></table></div>
+        <div className="tablebox"><table><thead><tr>{['客户', '矿种', '产品线', '竞品', '金额', '成交方式', '发布日期', '来源', '置信度'].map(item => <th key={item}>{item}</th>)}</tr></thead><tbody>{pageRows.map(item => <tr key={item.url} onClick={() => setSelected(item)}>{[item.buyer || '未披露', item.mineral || '未披露', item.line, item.competitor, amountCell(item), dealTypeCell(item), item.date, <a href={item.url} target="_blank" rel="noreferrer" onClick={event => event.stopPropagation()}>{item.source} ↗</a>, item.confidence].map((value, index) => { const cls = index === 4 ? 'amt' : index === 5 ? 'deal' : index === 8 ? `confidence ${item.confidence}` : ''; return <td className={cls} key={index}>{value}</td>; })}</tr>)}</tbody></table></div>
         <footer><span>共 {filtered.length} 个项目（同项目招标/候选/中标公告已合并）　|　最近抓取：{lastCrawl}　|　第 {current}/{totalPages} 页</span><span className="pager"><button disabled={current <= 1} onClick={() => setPageNum(current - 1)}>上一页</button><button disabled={current >= totalPages} onClick={() => setPageNum(current + 1)}>下一页</button></span><span>点击任意记录查看证据摘要</span></footer>
         {selected && <Detail item={selected} onClose={() => setSelected(null)} />}
       </> : <SourcePage />}
@@ -89,6 +77,17 @@ function dealTypeOf(item) {
   if (/重大销售合同|已签约|直接签约|销售合同/.test(t + b)) return { label: '直接签约（非招投标）', desc: '商务谈判直接签订销售合同，未走公开招投标流程（多为上市公司公告披露）。' };
   if (/已交付|已投运|投运|投产|发运/.test(t + b)) return { label: '直接签约（非招投标）', desc: '以交付/投运状态呈现的成交，未体现招投标流程。' };
   return { label: '招投标', desc: '通过公开招标/竞争性谈判等采购流程成交，按公告阶段推进（招标→候选→中标）。' };
+}
+
+// 表格“成交方式”列：成交方式徽章 + 进度小字
+function dealTypeCell(item) {
+  const dt = dealTypeOf(item);
+  const cls = dt.label.includes('招投标') ? 'dt-tender' : dt.label.includes('直接签约') ? 'dt-direct' : 'dt-other';
+  const phase = item.bid;
+  return <span className="deal-cell">
+    <span className={`deal-badge ${cls}`}>{dt.label}</span>
+    <span className="deal-phase">{phase}</span>
+  </span>;
 }
 
 function Block({ title, extra, children }) {

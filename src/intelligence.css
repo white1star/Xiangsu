@@ -70,6 +70,13 @@
 .detail .d-dealtype-badge.dt-direct { background: #e8f5ee; color: #149348; }
 .detail .d-dealtype-badge.dt-other { background: #fff3dd; color: #9a5d00; }
 .detail .d-dealtype-desc { font-size: 12px; color: #52667b; line-height: 1.6; flex-basis: 100%; }
+.tablebox td.deal { white-space: nowrap; }
+.deal-cell { display: inline-flex; flex-direction: column; gap: 3px; align-items: flex-start; }
+.deal-badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+.deal-badge.dt-tender { background: #e8f0fb; color: #1267c9; }
+.deal-badge.dt-direct { background: #e8f5ee; color: #149348; }
+.deal-badge.dt-other { background: #fff3dd; color: #9a5d00; }
+.deal-phase { font-size: 12px; color: #8a94a3; }
 .detail button.d-toggle { float: none; width: auto; height: auto; background: none; border: 0; border-radius: 0; color: #1267c9; font-size: 12px; padding: 0; cursor: pointer; }
 .detail .d-foot .hint { margin-top: 8px; font-size: 12px; line-height: 1.7; }
 .detail .timeline { margin: 0; }
