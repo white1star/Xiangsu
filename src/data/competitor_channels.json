@@ -50,7 +50,7 @@
       "channelType": "母公司官网 + 上市公司公告",
       "channels": [
         { "name": "泰禾智能官网·新闻中心（卓海智能）", "url": "https://www.chinataiho.com/info.php?class_id=105", "notes": "矿业干选类新闻滞后至 2023；新动态主要靠母公司公告与招标平台" },
-        { "name": "上交所/巨潮（泰禾智能 603011）", "url": "https://www.cninfo.com.cn/new/fulltextSearch?notautosubmit=&keyWord=泰禾智能", "notes": "卓海为并表子公司，重大事项走母公司公告" }
+        { "name": "上交所/巨潮（泰禾智能 603656）", "url": "https://www.cninfo.com.cn/new/fulltextSearch?notautosubmit=&keyWord=泰禾智能", "notes": "卓海为并表子公司，重大事项走母公司公告（603656=泰禾智能，勿与合锻智能603011混淆）" }
       ]
     },
     {
