@@ -4,3 +4,14 @@
 .src-group h2{font-size:18px;margin:0 0 4px;display:flex;align-items:baseline;gap:10px}
 .src-group h2 .src-count{font-size:13px;font-weight:700;color:#1766cb}
 .src-desc{color:#52667b;margin:0 0 12px;line-height:1.7}
+.src-intro{background:#f6f9fc;border:1px solid #dbe7f4;border-radius:8px;padding:16px 20px;margin-bottom:24px}
+.src-intro h3{margin:0 0 8px;font-size:15px;color:#16466f}
+.src-intro p{margin:0 0 10px;color:#31404f;font-size:13px}
+.src-intro ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.src-intro li{font-size:13px;line-height:1.7;color:#31404f}
+.src-conf-col{width:76px}
+.src-conf-cell{text-align:center}
+.src-conf{display:inline-block;min-width:34px;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:700;text-align:center}
+.conf-高{background:#e8f5ee;color:#149348}
+.conf-中{background:#fff3dd;color:#9a5d00}
+.conf-低{background:#fde8e6;color:#d2322d}

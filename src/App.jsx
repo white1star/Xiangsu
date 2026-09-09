@@ -140,11 +140,11 @@ function Detail({ item, onClose }) {
 // 竞品分析页已按需求从侧边栏移除，组件一并删除（2026-07-31）。
 
 
-function SourceSection({ title, count, desc, entries, tag }) {
+function SourceSection({ title, count, desc, entries, tag, showConfidence }) {
   return <section className="src-group">
     <h2>{title}<span className="src-count">{count} 个</span></h2>
     <p className="src-desc">{desc}</p>
-    <table><thead><tr><th>平台</th>{tag && <th>权限</th>}<th>覆盖内容</th><th>复审说明</th></tr></thead><tbody>{entries.map(platform => <tr key={platform.id}><td title={platform.entryUrl}>{platform.name}</td>{tag && <td><span className="access-tag">{tag}</span></td>}<td>{platform.coverage}</td><td>{platform.auditNote}</td></tr>)}</tbody></table>
+    <table><thead><tr><th>平台</th>{tag && <th>权限</th>}<th>覆盖内容</th><th>复审说明</th>{showConfidence && <th className="src-conf-col">可信度</th>}</tr></thead><tbody>{entries.map(platform => <tr key={platform.id}><td title={platform.entryUrl}>{platform.name}</td>{tag && <td><span className="access-tag">{tag}</span></td>}<td>{platform.coverage}</td><td>{platform.auditNote}</td>{showConfidence && <td className="src-conf-cell"><span className={`src-conf conf-${platform.confidence}`}>{platform.confidence}</span></td>}</tr>)}</tbody></table>
   </section>;
 }
 
@@ -153,7 +153,16 @@ function SourcePage() {
   const free = platformLibrary.filter(p => p.access === 'login_free');
   const paid = platformLibrary.filter(p => p.access === 'login_paid');
   return <div className="source-page">
-    <SourceSection title="公开数据源" count={open.length} entries={open}
+    <div className="src-intro">
+      <h3>数据来源可信度说明</h3>
+      <p>本台账数据按来源可信度分三档，与前端「置信度」筛选项一一对应：</p>
+      <ul>
+        <li><span className="src-conf conf-高">高</span>　<strong>官方招标/披露平台</strong>：公共资源交易网、企业自有采购平台、上市公司公告（巨潮/港交所）等官方公示，金额与中标人均以公告原文为准。</li>
+        <li><span className="src-conf conf-中">中</span>　<strong>竞品官网/权威媒体自宣</strong>：14 家在册竞品官网新闻、自媒频道，属企业自宣，交易信号会尽量回官方平台独立核验。</li>
+        <li><span className="src-conf conf-低">低</span>　<strong>公众号标题线索</strong>：搜狗微信搜索命中标题即收录（未经官方核验），正文可能不可抓取，需点原文链接自行查看确认。</li>
+      </ul>
+    </div>
+    <SourceSection title="公开数据源" count={open.length} entries={open} showConfidence
       desc="公告完全公开、可匿名浏览的入口（含公告可看、仅下载/投标需注册的平台）。正式入账仍须保存原公告链接。" />
     <SourceSection title="登录后免费可看" count={free.length} entries={free} tag="登录后免费看公告"
       desc={free.length ? '需注册登录、但无需付费即可查看公告正文的平台。' : '当前实测暂无此类平台（实测已知平台要么可匿名、要么需付费会员）；后续发现「注册登录后免费可看正文」的平台将归入此类。'} />

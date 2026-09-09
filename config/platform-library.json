@@ -6,7 +6,8 @@
     "category": "national",
     "access": "anonymous",
     "coverage": "全国工程、货物、矿业权及部分企业采购公告和结果",
-    "auditNote": "官方聚合入口；正式入账须保留原公告链接。"
+    "auditNote": "官方聚合入口；正式入账须保留原公告链接。",
+    "confidence": "高"
   },
   {
     "id": "ceb-public",
@@ -15,7 +16,8 @@
     "category": "national",
     "access": "anonymous",
     "coverage": "依法必须招标项目公告、中标候选人和结果",
-    "auditNote": "官方公告服务平台；以原公告链接为最终证据。"
+    "auditNote": "官方公告服务平台；以原公告链接为最终证据。",
+    "confidence": "高"
   },
   {
     "id": "ccgp",
@@ -24,7 +26,8 @@
     "category": "national",
     "access": "anonymous",
     "coverage": "政府采购公告、成交和中标结果",
-    "auditNote": "政府及事业单位设备采购补充来源。"
+    "auditNote": "政府及事业单位设备采购补充来源。",
+    "confidence": "高"
   },
   {
     "id": "cgs-procurement",
@@ -33,7 +36,8 @@
     "category": "national",
     "access": "anonymous",
     "coverage": "地质调查、矿产综合利用、选矿及科研设备采购和中标信息",
-    "auditNote": "XRT矿石分选设备的官方补充来源。"
+    "auditNote": "XRT矿石分选设备的官方补充来源。",
+    "confidence": "高"
   },
   {
     "id": "mtzbw",
@@ -42,7 +46,8 @@
     "category": "coal_owner",
     "access": "anonymous",
     "coverage": "煤炭行业招标、中标和项目线索",
-    "auditNote": "仅作公开聚合线索；正式入账必须回到官方原文。"
+    "auditNote": "仅作公开聚合线索；正式入账必须回到官方原文。",
+    "confidence": "高"
   },
   {
     "id": "shanxi-ggzy",
@@ -51,7 +56,8 @@
     "category": "province",
     "access": "anonymous",
     "coverage": "山西煤矿、矿业权、工程和设备招标",
-    "auditNote": "产煤核心省份官方平台。"
+    "auditNote": "产煤核心省份官方平台。",
+    "confidence": "高"
   },
   {
     "id": "shaanxi-ggzy",
@@ -60,7 +66,8 @@
     "category": "province",
     "access": "anonymous",
     "coverage": "陕西煤矿、矿业工程、设备招标",
-    "auditNote": "产煤核心省份官方平台。"
+    "auditNote": "产煤核心省份官方平台。",
+    "confidence": "高"
   },
   {
     "id": "inner-mongolia-ggzy",
@@ -69,7 +76,8 @@
     "category": "province",
     "access": "anonymous",
     "coverage": "内蒙古煤矿、选煤厂、矿业权和设备招标",
-    "auditNote": "产煤核心自治区官方平台。"
+    "auditNote": "产煤核心自治区官方平台。",
+    "confidence": "高"
   },
   {
     "id": "xinjiang-ggzy",
@@ -78,7 +86,8 @@
     "category": "province",
     "access": "anonymous",
     "coverage": "新疆煤矿、矿业工程和设备招标",
-    "auditNote": "产煤核心自治区官方平台。"
+    "auditNote": "产煤核心自治区官方平台。",
+    "confidence": "高"
   },
   {
     "id": "anhui-ggzy",
@@ -87,7 +96,8 @@
     "category": "province",
     "access": "anonymous",
     "coverage": "安徽煤矿、选煤、设备采购招标",
-    "auditNote": "淮北、淮南矿区的重要官方补充。"
+    "auditNote": "淮北、淮南矿区的重要官方补充。",
+    "confidence": "高"
   },
   {
     "id": "shandong-ggzy",
@@ -96,7 +106,8 @@
     "category": "province",
     "access": "anonymous",
     "coverage": "山东矿业、设备和工程招标",
-    "auditNote": "山东能源项目的官方补充。"
+    "auditNote": "山东能源项目的官方补充。",
+    "confidence": "高"
   },
   {
     "id": "henan-ggzy",
@@ -105,7 +116,8 @@
     "category": "province",
     "access": "anonymous",
     "coverage": "河南煤矿、矿业权、设备和工程招标",
-    "auditNote": "公开公告可浏览。"
+    "auditNote": "公开公告可浏览。",
+    "confidence": "高"
   },
   {
     "id": "hebei-ggzy",
@@ -114,7 +126,8 @@
     "category": "province",
     "access": "anonymous",
     "coverage": "河北煤矿、矿业和装备项目招标",
-    "auditNote": "开滦等区域项目的官方补充。"
+    "auditNote": "开滦等区域项目的官方补充。",
+    "confidence": "高"
   },
   {
     "id": "guizhou-ggzy",
@@ -123,7 +136,8 @@
     "category": "province",
     "access": "anonymous",
     "coverage": "贵州煤矿、磷矿及矿业设备项目",
-    "auditNote": "煤炭与矿石分选双覆盖省份。"
+    "auditNote": "煤炭与矿石分选双覆盖省份。",
+    "confidence": "高"
   },
   {
     "id": "gansu-ggzy",
@@ -132,7 +146,8 @@
     "category": "province",
     "access": "anonymous",
     "coverage": "甘肃煤矿、矿业工程和设备采购",
-    "auditNote": "金河、景泰等区域项目官方补充。"
+    "auditNote": "金河、景泰等区域项目官方补充。",
+    "confidence": "高"
   },
   {
     "id": "gsei",
@@ -141,7 +156,8 @@
     "category": "province",
     "access": "anonymous",
     "coverage": "甘肃工程、设备采购、中标候选人和中标结果公告",
-    "auditNote": "甘肃能源和矿业项目的公开结果补充来源。"
+    "auditNote": "甘肃能源和矿业项目的公开结果补充来源。",
+    "confidence": "高"
   },
   {
     "id": "ningxia-ggzy",
@@ -150,7 +166,8 @@
     "category": "province",
     "access": "anonymous",
     "coverage": "宁夏煤业、煤矿及设备项目",
-    "auditNote": "汝箕沟等区域项目官方补充。"
+    "auditNote": "汝箕沟等区域项目官方补充。",
+    "confidence": "高"
   },
   {
     "id": "heilongjiang-ggzy",
@@ -159,7 +176,8 @@
     "category": "province",
     "access": "anonymous",
     "coverage": "龙煤矿业、煤矿改造及设备项目",
-    "auditNote": "东北煤炭项目官方补充。"
+    "auditNote": "东北煤炭项目官方补充。",
+    "confidence": "高"
   },
   {
     "id": "yunnan-ggzy",
@@ -168,7 +186,8 @@
     "category": "province",
     "access": "anonymous",
     "coverage": "有色、非金属矿和矿石分选项目",
-    "auditNote": "XRT 矿石分选重点补充省份。"
+    "auditNote": "XRT 矿石分选重点补充省份。",
+    "confidence": "高"
   },
   {
     "id": "sichuan-ggzy",
@@ -177,7 +196,8 @@
     "category": "province",
     "access": "anonymous",
     "coverage": "磷矿、有色矿及矿业设备项目",
-    "auditNote": "XRT 矿石分选重点补充省份。"
+    "auditNote": "XRT 矿石分选重点补充省份。",
+    "confidence": "高"
   },
   {
     "id": "liaoning-ggzy",
@@ -186,7 +206,8 @@
     "category": "province",
     "access": "anonymous",
     "coverage": "铁矿、有色矿及矿山装备项目",
-    "auditNote": "东北矿石分选重点补充省份。"
+    "auditNote": "东北矿石分选重点补充省份。",
+    "confidence": "高"
   },
   {
     "id": "qinghai-ggzy",
@@ -195,7 +216,8 @@
     "category": "province",
     "access": "anonymous",
     "coverage": "盐湖、金属矿及矿业设备项目",
-    "auditNote": "矿石分选补充省份。"
+    "auditNote": "矿石分选补充省份。",
+    "confidence": "高"
   },
   {
     "id": "ccteg",
@@ -204,7 +226,8 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "煤炭洗选、设计院、装备采购和中标公告",
-    "auditNote": "公告可公开查阅（实测入口200、含招标公告列表）；下载文件、报名和投标需供应商注册。"
+    "auditNote": "公告可公开查阅（实测入口200、含招标公告列表）；下载文件、报名和投标需供应商注册。",
+    "confidence": "高"
   },
   {
     "id": "chnenergy",
@@ -213,7 +236,8 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "国家能源集团煤矿、选煤厂、设备采购及中标公告",
-    "auditNote": "公告公开可匿名浏览（实测入口200、含公告列表）；供应商注册及CA是下载和投标的前提。"
+    "auditNote": "公告公开可匿名浏览（实测入口200、含公告列表）；供应商注册及CA是下载和投标的前提。",
+    "confidence": "高"
   },
   {
     "id": "zmzb",
@@ -222,7 +246,8 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "中国中煤及所属矿井设备采购、中标公告",
-    "auditNote": "公告列表页（/cms/channel/ywggNhw/index.htm）公开可匿名浏览；报名、下载和投标需登录。"
+    "auditNote": "公告列表页（/cms/channel/ywggNhw/index.htm）公开可匿名浏览；报名、下载和投标需登录。",
+    "confidence": "高"
   },
   {
     "id": "ego-chinacoal",
@@ -231,7 +256,8 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "中国中煤询价、采购文件和公开结果线索",
-    "auditNote": "公告可匿名查看（实测：搜索引擎已收录 #/announcementInquiryDetail 询价/招标公告全文，WebFetch 直接返回物资清单/报价时间等正文；/group1/M00/... 与 noauth 下载接口免登录可获取公告文档。仅 报名/在线报价/下载采购文件 需供应商注册登录）。"
+    "auditNote": "公告可匿名查看（实测：搜索引擎已收录 #/announcementInquiryDetail 询价/招标公告全文，WebFetch 直接返回物资清单/报价时间等正文；/group1/M00/... 与 noauth 下载接口免登录可获取公告文档。仅 报名/在线报价/下载采购文件 需供应商注册登录）。",
+    "confidence": "高"
   },
   {
     "id": "spic-ebid",
@@ -240,7 +266,8 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "国家电投及内蒙古能源煤炭相关招标公告",
-    "auditNote": "公告可匿名查看（实测：搜索引擎直接抓到 openFileById 招标公告全文，未登录可见）；下载文件、报名和投标需供应商注册。"
+    "auditNote": "公告可匿名查看（实测：搜索引擎直接抓到 openFileById 招标公告全文，未登录可见）；下载文件、报名和投标需供应商注册。",
+    "confidence": "高"
   },
   {
     "id": "powerchina",
@@ -249,7 +276,8 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "矿山、选矿和工程总包设备采购公告",
-    "auditNote": "公告可匿名查看（实测：/notice/detail 中标候选人全文含报价未登录可见）；下载文件和投标需供应商注册。"
+    "auditNote": "公告可匿名查看（实测：/notice/detail 中标候选人全文含报价未登录可见）；下载文件和投标需供应商注册。",
+    "confidence": "高"
   },
   {
     "id": "ceec",
@@ -258,7 +286,8 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "煤电、矿山工程及设备采购公告",
-    "auditNote": "公告可匿名查看（实测：/HomeInfo/winDidDetails 中标公示全文未登录可见）；下载文件和参与交易需注册登录。"
+    "auditNote": "公告可匿名查看（实测：/HomeInfo/winDidDetails 中标公示全文未登录可见）；下载文件和参与交易需注册登录。",
+    "confidence": "高"
   },
   {
     "id": "huaneng",
@@ -267,7 +296,8 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "煤业、煤电、选煤相关设备及工程采购",
-    "auditNote": "公告可匿名查看（实测未登录即见采购公告/招标公告正文；WAF偶发412但非登录墙）；下载文件和投标需供应商注册。"
+    "auditNote": "公告可匿名查看（实测未登录即见采购公告/招标公告正文；WAF偶发412但非登录墙）；下载文件和投标需供应商注册。",
+    "confidence": "高"
   },
   {
     "id": "huadian",
@@ -276,7 +306,8 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "煤炭、火电及相关设备采购",
-    "auditNote": "公告可匿名查看（实测：/detailNewZbhxrgs 评标/中标公示全文未登录可见；WAF偶发412非登录墙）；下载和投标需注册。"
+    "auditNote": "公告可匿名查看（实测：/detailNewZbhxrgs 评标/中标公示全文未登录可见；WAF偶发412非登录墙）；下载和投标需注册。",
+    "confidence": "高"
   },
   {
     "id": "datang",
@@ -285,7 +316,8 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "煤电、燃料和设备采购公告",
-    "auditNote": "公告可匿名查看（实测：/notice/moreController/xjdhtml 采购结果公告全文未登录可见）；下载和投标需注册。"
+    "auditNote": "公告可匿名查看（实测：/notice/moreController/xjdhtml 采购结果公告全文未登录可见）；下载和投标需注册。",
+    "confidence": "高"
   },
   {
     "id": "datang-coal",
@@ -294,7 +326,8 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "煤炭采购、交易公告和燃料线索",
-    "auditNote": "公告可匿名查看（实测：竞价公告列表公开可见）；参与交易需账号。"
+    "auditNote": "公告可匿名查看（实测：竞价公告列表公开可见）；参与交易需账号。",
+    "confidence": "高"
   },
   {
     "id": "qin-yuan",
@@ -303,7 +336,8 @@
     "category": "coal_owner",
     "access": "anonymous",
     "coverage": "陕煤集团及所属矿业单位设备采购、中标公告",
-    "auditNote": "公告入口公开可匿名浏览；文件下载、报名和投标需供应商注册。"
+    "auditNote": "公告入口公开可匿名浏览；文件下载、报名和投标需供应商注册。",
+    "confidence": "高"
   },
   {
     "id": "shandong-energy",
@@ -312,7 +346,8 @@
     "category": "coal_owner",
     "access": "anonymous",
     "coverage": "山东能源煤矿、洗选、装备采购和结果",
-    "auditNote": "公告可匿名查看（实测：/bulletinDetail 招标公告全文未登录可见）；下载和投标需注册。"
+    "auditNote": "公告可匿名查看（实测：/bulletinDetail 招标公告全文未登录可见）；下载和投标需注册。",
+    "confidence": "高"
   },
   {
     "id": "shandong-inquiry",
@@ -321,7 +356,8 @@
     "category": "coal_owner",
     "access": "anonymous",
     "coverage": "询比价、物资采购和结果线索",
-    "auditNote": "询比价公告可匿名浏览（实测入口200）；完整询报价内容和参与交易需账号。"
+    "auditNote": "询比价公告可匿名浏览（实测入口200）；完整询报价内容和参与交易需账号。",
+    "confidence": "高"
   },
   {
     "id": "huaihe",
@@ -330,7 +366,8 @@
     "category": "coal_owner",
     "access": "anonymous",
     "coverage": "淮南矿业/淮河能源设备采购和中标公告",
-    "auditNote": "公告可匿名查看（实测：/cms/channel/ywgg5hw 中标公告全文未登录可见）；正式文件、报名和投标需登录。"
+    "auditNote": "公告可匿名查看（实测：/cms/channel/ywgg5hw 中标公告全文未登录可见）；正式文件、报名和投标需登录。",
+    "confidence": "高"
   },
   {
     "id": "huaibei",
@@ -339,7 +376,8 @@
     "category": "coal_owner",
     "access": "anonymous",
     "coverage": "淮北矿业干选机及配件采购公告",
-    "auditNote": "公告详情页可匿名访问（如涡北中标），但列表页需JS动态加载（实测空壳）；正式文件及投标需注册。"
+    "auditNote": "公告详情页可匿名访问（如涡北中标），但列表页需JS动态加载（实测空壳）；正式文件及投标需注册。",
+    "confidence": "高"
   },
   {
     "id": "qcc",
@@ -348,7 +386,8 @@
     "category": "authentication",
     "access": "login_paid",
     "coverage": "工商、司法、融资、招投标聚合",
-    "auditNote": "招投标聚合内容需登录/会员才能查看（实测：/web/bidding.html 直接跳转\"会员登录\"；仅企业基础工商信息可游客浏览，招标公告正文、联系方式、附件需登录）。"
+    "auditNote": "招投标聚合内容需登录/会员才能查看（实测：/web/bidding.html 直接跳转\"会员登录\"；仅企业基础工商信息可游客浏览，招标公告正文、联系方式、附件需登录）。",
+    "confidence": "—"
   },
   {
     "id": "tianyancha",
@@ -357,7 +396,8 @@
     "category": "authentication",
     "access": "login_paid",
     "coverage": "工商、司法、融资、招投标聚合",
-    "auditNote": "招投标与企业深度信息需登录（仅企业基础信息可游客浏览，招标公告详情、联系方式需登录账号；批量导出/监控需会员）。"
+    "auditNote": "招投标与企业深度信息需登录（仅企业基础信息可游客浏览，招标公告详情、联系方式需登录账号；批量导出/监控需会员）。",
+    "confidence": "—"
   },
   {
     "id": "aiqicha",
@@ -366,7 +406,8 @@
     "category": "authentication",
     "access": "login_paid",
     "coverage": "企业关系、风险和招投标信息",
-    "auditNote": "招投标查询功能需登录百度账号（企业基础信息可浏览，招标公告详情与深度信息需登录；完整数据需会员）。"
+    "auditNote": "招投标查询功能需登录百度账号（企业基础信息可浏览，招标公告详情与深度信息需登录；完整数据需会员）。",
+    "confidence": "—"
   },
   {
     "id": "qixin",
@@ -375,7 +416,8 @@
     "category": "authentication",
     "access": "login_paid",
     "coverage": "企业信用、关系、招投标和风险信息",
-    "auditNote": "招投标与企业信用深度信息需授权/登录（zhaobiao.qixin.com 仅展示标题与摘要，完整公告正文与联系方式需登录；企业版功能需授权）。"
+    "auditNote": "招投标与企业信用深度信息需授权/登录（zhaobiao.qixin.com 仅展示标题与摘要，完整公告正文与联系方式需登录；企业版功能需授权）。",
+    "confidence": "—"
   },
   {
     "id": "chinabidding-commercial",
@@ -384,7 +426,8 @@
     "category": "authentication",
     "access": "anonymous",
     "coverage": "商业招投标聚合和订阅",
-    "auditNote": "2026-08-03 实测：公告详情页（pageInfoSsr）正文含中标人+金额可匿名完整查看，归公开数据源；联系方式/附件仍需会员。"
+    "auditNote": "2026-08-03 实测：公告详情页（pageInfoSsr）正文含中标人+金额可匿名完整查看，归公开数据源；联系方式/附件仍需会员。",
+    "confidence": "—"
   },
   {
     "id": "qianlima",
@@ -393,7 +436,8 @@
     "category": "authentication",
     "access": "login_paid",
     "coverage": "全国招标、中标、拟在建项目和订阅",
-    "auditNote": "公告详情与联系方式需会员（实测：首页仅列标题与日期，VIP项目/标书下载/企业监控均指向会员；完整正文与联系人需登录）。"
+    "auditNote": "公告详情与联系方式需会员（实测：首页仅列标题与日期，VIP项目/标书下载/企业监控均指向会员；完整正文与联系人需登录）。",
+    "confidence": "—"
   },
   {
     "id": "jianyu",
@@ -402,7 +446,8 @@
     "category": "authentication",
     "access": "login_free",
     "coverage": "招标、中标、业主监控和企业投标画像",
-    "auditNote": "2026-08-03 用户确认可用：注册登录后可免费查看公告正文（无需付费会员），归入\"登录后免费可看\"数据源。"
+    "auditNote": "2026-08-03 用户确认可用：注册登录后可免费查看公告正文（无需付费会员），归入\"登录后免费可看\"数据源。",
+    "confidence": "—"
   },
   {
     "id": "xunbiaobao",
@@ -411,7 +456,8 @@
     "category": "authentication",
     "access": "login_paid",
     "coverage": "全国招投标信息查询和项目订阅",
-    "auditNote": "完整公告详情与订阅需登录（免费检索仅看标题摘要，正文与联系方式需登录账号）。"
+    "auditNote": "完整公告详情与订阅需登录（免费检索仅看标题摘要，正文与联系方式需登录账号）。",
+    "confidence": "—"
   },
   {
     "id": "bidcenter",
@@ -420,7 +466,8 @@
     "category": "authentication",
     "access": "login_free",
     "coverage": "招标公告、中标结果和项目订阅",
-    "auditNote": "2026-08-03 用户确认可用：注册登录后可免费查看公告正文（无需付费会员），归入\"登录后免费可看\"数据源。"
+    "auditNote": "2026-08-03 用户确认可用：注册登录后可免费查看公告正文（无需付费会员），归入\"登录后免费可看\"数据源。",
+    "confidence": "—"
   },
   {
     "id": "ebnew",
@@ -429,7 +476,8 @@
     "category": "authentication",
     "access": "login_free",
     "coverage": "招标采购、国际招标和中标信息",
-    "auditNote": "2026-08-03 用户确认可用：注册登录后可免费查看公告正文（无需付费会员），归入\"登录后免费可看\"数据源。"
+    "auditNote": "2026-08-03 用户确认可用：注册登录后可免费查看公告正文（无需付费会员），归入\"登录后免费可看\"数据源。",
+    "confidence": "—"
   },
   {
     "id": "yfbzb",
@@ -438,7 +486,8 @@
     "category": "authentication",
     "access": "anonymous",
     "coverage": "招标、中标、采购商及项目线索",
-    "auditNote": "2026-08-03 实测：公告详情页中标人全名+中标金额完整可见（仅联系方式需登录），归公开数据源。"
+    "auditNote": "2026-08-03 实测：公告详情页中标人全名+中标金额完整可见（仅联系方式需登录），归公开数据源。",
+    "confidence": "—"
   },
   {
     "id": "bibenet",
@@ -447,7 +496,8 @@
     "category": "authentication",
     "access": "login_paid",
     "coverage": "招投标信息、企业商机和项目监控",
-    "auditNote": "2026-08-03 实测：站点详情页连接重置无法验证，暂按需登录处理。"
+    "auditNote": "2026-08-03 实测：站点详情页连接重置无法验证，暂按需登录处理。",
+    "confidence": "—"
   },
   {
     "id": "ztb8",
@@ -456,7 +506,8 @@
     "category": "authentication",
     "access": "login_paid",
     "coverage": "跨平台历史招标信息聚合",
-    "auditNote": "2026-08-03 实测：站点 502/404 疑似失效，暂按需登录处理。"
+    "auditNote": "2026-08-03 实测：站点 502/404 疑似失效，暂按需登录处理。",
+    "confidence": "—"
   },
   {
     "id": "xinjiang-sunshine",
@@ -465,7 +516,8 @@
     "category": "province",
     "access": "anonymous",
     "coverage": "新疆国企阳光采购公告与结果（石头梅830煤场选矸、民丰分选站等）",
-    "auditNote": "2026-08-03 实测公告正文可匿名查看（石头梅/民丰成交公示）。"
+    "auditNote": "2026-08-03 实测公告正文可匿名查看（石头梅/民丰成交公示）。",
+    "confidence": "高"
   },
   {
     "id": "jinneng-ggzy",
@@ -474,7 +526,8 @@
     "category": "coal_owner",
     "access": "anonymous",
     "coverage": "晋能控股集团招标采购公告与结果（塔山选矸维保、荫营检测装置等）",
-    "auditNote": "2026-08-03 实测公告正文可匿名查看（塔山/荫营公示）。"
+    "auditNote": "2026-08-03 实测公告正文可匿名查看（塔山/荫营公示）。",
+    "confidence": "高"
   },
   {
     "id": "shihuan-bid",
@@ -483,7 +536,8 @@
     "category": "mirror",
     "access": "anonymous",
     "coverage": "转引各地招标公告（甘肃新洲钨矿光电预选等）",
-    "auditNote": "2026-08-03 实测公告正文可匿名查看（新洲钨矿中标758万）；属公开镜像。"
+    "auditNote": "2026-08-03 实测公告正文可匿名查看（新洲钨矿中标758万）；属公开镜像。",
+    "confidence": "—"
   },
   {
     "id": "disclosure-cninfo",
@@ -492,7 +546,8 @@
     "category": "disclosure",
     "access": "anonymous",
     "coverage": "A股上市公司定期/临时公告：重大合同、中标、订单（美腾科技 688420、泰禾智能 603011 等竞品主体及股东方）",
-    "auditNote": "证监会指定信息披露平台，公告 PDF 原文可匿名抓取，权威官方来源（同港交所之于 H 股）。检索需带公司名；竞品大额合同/中标公告以此为首选出处（实例：美腾莱煤智能 2886.18 万智能干选机合同 2026-030）。"
+    "auditNote": "证监会指定信息披露平台，公告 PDF 原文可匿名抓取，权威官方来源（同港交所之于 H 股）。检索需带公司名；竞品大额合同/中标公告以此为首选出处（实例：美腾莱煤智能 2886.18 万智能干选机合同 2026-030）。",
+    "confidence": "高"
   },
   {
     "id": "vendor-meiteng",
@@ -501,7 +556,8 @@
     "category": "vendor",
     "access": "anonymous",
     "coverage": "美腾科技（688420）官网新闻/案例/展会动态，含 TDS 智能干选、光电分选项目自宣",
-    "auditNote": "2026-09-08 实测列表+正文链接可匿名抓取；官网偏滞后（展会/案例/党建为主），交易公告走巨潮资讯网。自宣类 confidence=中，交易信号回官方公告核验。"
+    "auditNote": "2026-09-08 实测列表+正文链接可匿名抓取；官网偏滞后（展会/案例/党建为主），交易公告走巨潮资讯网。自宣类 confidence=中，交易信号回官方公告核验。",
+    "confidence": "中"
   },
   {
     "id": "vendor-shenzhou",
@@ -510,7 +566,8 @@
     "category": "vendor",
     "access": "anonymous",
     "coverage": "神州机械干法选煤/智能干选装备新闻、设备发运与项目交付动态",
-    "auditNote": "2026-09-08 实测列表（标题+日期+正文链接）可匿名抓取，更新约每周；设备发运/交付类自宣多为无金额摘要，金额口径按未披露处理。"
+    "auditNote": "2026-09-08 实测列表（标题+日期+正文链接）可匿名抓取，更新约每周；设备发运/交付类自宣多为无金额摘要，金额口径按未披露处理。",
+    "confidence": "中"
   },
   {
     "id": "vendor-haiwang",
@@ -519,7 +576,8 @@
     "category": "vendor",
     "access": "anonymous",
     "coverage": "威海海王科技智能干选/分选设备新闻动态",
-    "auditNote": "官网可匿名访问（news/show-87.aspx 式新闻），更新偏慢；注意与做旋流器的'海王工业集团 wh-hw.com'非同一主体，勿混淆。"
+    "auditNote": "官网可匿名访问（news/show-87.aspx 式新闻），更新偏慢；注意与做旋流器的'海王工业集团 wh-hw.com'非同一主体，勿混淆。",
+    "confidence": "中"
   },
   {
     "id": "vendor-holysort",
@@ -528,7 +586,8 @@
     "category": "vendor",
     "access": "anonymous",
     "coverage": "霍里思特（XRT 光电分选）官方自媒体：交付/荣誉/宣传动态",
-    "auditNote": "2026-09-08 实测网易号列表完整可匿名抓取且更新最快（09-04 仍在发）；官网 honesort.com/news 滞后至当年5月。荣誉/软文多，具体中标须回官方公告核实，confidence=中。"
+    "auditNote": "2026-09-08 实测网易号列表完整可匿名抓取且更新最快（09-04 仍在发）；官网 honesort.com/news 滞后至当年5月。荣誉/软文多，具体中标须回官方公告核实，confidence=中。",
+    "confidence": "中"
   },
   {
     "id": "vendor-gzhpy",
@@ -537,7 +596,8 @@
     "category": "vendor",
     "access": "anonymous",
     "coverage": "好朋友科技（矿石 XRT 光电分选）官网新闻与项目落地动态",
-    "auditNote": "官网可匿名访问，新闻 news-pages/YYYYMMDD.html 式（如 2026-08-26 中试平台揭牌）；含项目落地/合作类自宣，交易信号需核验。"
+    "auditNote": "官网可匿名访问，新闻 news-pages/YYYYMMDD.html 式（如 2026-08-26 中试平台揭牌）；含项目落地/合作类自宣，交易信号需核验。",
+    "confidence": "中"
   },
   {
     "id": "vendor-taiho",
@@ -546,7 +606,8 @@
     "category": "vendor",
     "access": "anonymous",
     "coverage": "泰禾智能（603656）官网新闻中心，含卓海智能（泰禾卓海）矿业干选条目",
-    "auditNote": "矿业干选内容滞后（约至2023）；卓海为并表子公司，新动态主要靠母公司公告（上交所/巨潮）与招标平台，官网仅作兜底检查。"
+    "auditNote": "矿业干选内容滞后（约至2023）；卓海为并表子公司，新动态主要靠母公司公告（上交所/巨潮）与招标平台，官网仅作兜底检查。",
+    "confidence": "中"
   },
   {
     "id": "vendor-haina2001",
@@ -555,7 +616,8 @@
     "category": "vendor",
     "access": "anonymous",
     "coverage": "枣庄海纳 ART 煤矸干选机公司新闻",
-    "auditNote": "官网可匿名访问，新闻更新约月级；与济宁'山东海纳智能装备 hainakj.com'（海纳美腾 HTDS）非同一主体，勿混淆。"
+    "auditNote": "官网可匿名访问，新闻更新约月级；与济宁'山东海纳智能装备 hainakj.com'（海纳美腾 HTDS）非同一主体，勿混淆。",
+    "confidence": "中"
   },
   {
     "id": "vendor-dfmc",
@@ -564,7 +626,8 @@
     "category": "vendor",
     "access": "anonymous",
     "coverage": "东方测控市场动态（含干选/选矸类设备新闻，混有大量仪表/仪器/签约新闻）",
-    "auditNote": "官网可匿名访问（shichangxinwen/1116.html 式）；需人工筛出干选/选矸整机条目（实例：8/21 与中铁资源战略签约=智能化整体非分选整机，不收）。"
+    "auditNote": "官网可匿名访问（shichangxinwen/1116.html 式）；需人工筛出干选/选矸整机条目（实例：8/21 与中铁资源战略签约=智能化整体非分选整机，不收）。",
+    "confidence": "中"
   },
   {
     "id": "vendor-abtrobot",
@@ -573,7 +636,8 @@
     "category": "vendor",
     "access": "anonymous",
     "coverage": "奥博特 ETDS 智能干选机/色选机新闻（集团新闻+行业新闻栏目）",
-    "auditNote": "官网可匿名访问；栏目含色选/杂项，需筛智能干选整机条目。"
+    "auditNote": "官网可匿名访问；栏目含色选/杂项，需筛智能干选整机条目。",
+    "confidence": "中"
   },
   {
     "id": "vendor-jinshisort",
@@ -582,7 +646,8 @@
     "category": "vendor",
     "access": "anonymous",
     "coverage": "金石智能（矿石 XRT 光电分选）项目交付/发货自宣动态",
-    "auditNote": "官网可匿名访问，含交付类自宣（6/4 保康国投磷矿第五台、3/27 四川金河磷矿一体化交付）；公众号 HBJSZNZB 正文不可抓，靠官网/权威转载核验。"
+    "auditNote": "官网可匿名访问，含交付类自宣（6/4 保康国投磷矿第五台、3/27 四川金河磷矿一体化交付）；公众号 HBJSZNZB 正文不可抓，靠官网/权威转载核验。",
+    "confidence": "中"
   },
   {
     "id": "vendor-nuctech",
@@ -591,7 +656,8 @@
     "category": "vendor",
     "access": "anonymous",
     "coverage": "同方威视新闻中心（含固定/移动式智能矿石分选机矿业线动态）",
-    "auditNote": "官网可匿名访问；新闻中心以安检/核电为主，需人工筛矿业分选条目；同方股份 thtf.com.cn 亦发矿业新闻。仅收矿业分选线，其余产品线不收。"
+    "auditNote": "官网可匿名访问；新闻中心以安检/核电为主，需人工筛矿业分选条目；同方股份 thtf.com.cn 亦发矿业新闻。仅收矿业分选线，其余产品线不收。",
+    "confidence": "中"
   },
   {
     "id": "sogou-wechat",
@@ -600,6 +666,7 @@
     "category": "wechat_radar",
     "access": "anonymous",
     "coverage": "14 家在册竞品的微信公众号文章线索（标题/摘要/日期/公众号名，type=2 短词搜索，扫描词表见每周流程 2.6）",
-    "auditNote": "2026-09-09 实测：type=2 短词搜索可用但收录滞后约一周；type=1 公众号搜索被验证码墙封死勿再尝试；口径=标题命中交易词（中标/签约/喜报/合同等）直接落库 confidence=低，后续官方公告核验版另行收录（confidence=高），交易信号以官方公告为准。"
+    "auditNote": "2026-09-09 实测：type=2 短词搜索可用但收录滞后约一周；type=1 公众号搜索被验证码墙封死勿再尝试；口径=标题命中交易词（中标/签约/喜报/合同等）直接落库 confidence=低，后续官方公告核验版另行收录（confidence=高），交易信号以官方公告为准。",
+    "confidence": "低"
   }
 ]
