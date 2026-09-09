@@ -89,17 +89,21 @@ function Detail({ item, onClose }) {
     <div className="d-conclusion">
       <div className="d-status">
         <span className={`d-badge bid ${item.bid}`}>{item.bid}</span>
-        <span className="d-winner">{item.winner || (item.bid === '已中标' ? '中标人未在公告中明确' : '—')}</span>
-        {item.statusNote ? <span className="why">（{item.statusNote}）</span> : ''}
+        {item.winner ? <span className="d-winner">{item.winner}</span> : item.bid === '已中标' ? <span className="d-winner muted">中标人未在公告中明确</span> : null}
+        {item.statusNote ? <span className="why">（{item.statusNote}）</span> : null}
       </div>
       <div className="d-metrics">
-        <div className="d-metric"><span>金额</span><b className={amountMissing ? 'undisclosed' : ''}>{item.amount || '未披露'}</b>{item.amountStage ? <i>{item.amountStage}</i> : ''}{amountMissing && item.amountNote ? <i>{item.amountNote}</i> : ''}</div>
+        <div className="d-metric"><span>金额</span><b className={amountMissing ? 'undisclosed' : ''}>{item.amount || '未披露'}</b>{item.amountStage ? <i>{item.amountStage}</i> : null}</div>
         <div className="d-metric"><span>发布日期</span><b>{item.date || '未披露'}</b></div>
-        <div className="d-metric"><span>开标日期</span><b>{item.bidOpenDate || '未披露'}</b>{item.openStatus ? <i>{item.openStatus}</i> : ''}</div>
+        <div className="d-metric"><span>开标日期</span><b>{item.bidOpenDate || '未披露'}</b>{item.openStatus ? <i>{item.openStatus}</i> : null}</div>
       </div>
-      {item.resultGap ? <div className="d-warn">⚠ 已开标但台账未收录对应中标结果，建议反查官方原文</div> : ''}
-      {item.scopeNote ? <div className="d-warn"><b>⚠ 标的说明：</b>{item.scopeNote}</div> : ''}
     </div>
+
+    {(amountMissing && item.amountNote) || item.scopeNote || item.resultGap ? <div className="d-notes">
+      {amountMissing && item.amountNote ? <div className="d-note"><b>未披露说明：</b>{item.amountNote}</div> : null}
+      {item.scopeNote ? <div className="d-warn"><b>标的说明：</b>{item.scopeNote}</div> : null}
+      {item.resultGap ? <div className="d-warn">⚠ 已开标但台账未收录对应中标结果，建议反查官方原文</div> : null}
+    </div> : null}
 
     <Block title="项目属性">
       <div className="d-grid">

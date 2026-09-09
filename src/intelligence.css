@@ -41,13 +41,16 @@
 .detail .d-status { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
 .detail .d-badge { display: inline-block; padding: 2px 10px; border-radius: 4px; background: #fff; border: 1px solid rgba(0,0,0,.12); font-size: 13px; font-weight: 700; }
 .detail .d-winner { font-size: 15px; font-weight: 600; color: #111418; }
-.detail .d-metrics { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-top: 12px; }
-.detail .d-metric { background: #fff; border: 1px solid rgba(0,0,0,.07); border-radius: 6px; padding: 8px 10px; }
+.detail .d-winner.muted { color: #9aa3ad; font-size: 13px; font-weight: 400; }
+.detail .d-metrics { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-top: 12px; align-items: stretch; }
+.detail .d-metric { background: #fff; border: 1px solid rgba(0,0,0,.07); border-radius: 6px; padding: 8px 10px; min-height: 76px; display: flex; flex-direction: column; }
 .detail .d-metric span { display: block; font-size: 12px; color: #6a7887; margin-bottom: 2px; }
-.detail .d-metric b { font-size: 16px; font-weight: 600; color: #16466f; word-break: break-all; }
+.detail .d-metric b { font-size: 16px; font-weight: 600; color: #16466f; word-break: break-all; line-height: 1.35; }
 .detail .d-metric b.undisclosed { color: #b3261e; font-size: 14px; }
 .detail .d-metric i { display: block; font-style: normal; font-size: 12px; color: #9aa3ad; margin-top: 2px; line-height: 1.5; }
-.detail .d-warn { margin-top: 10px; background: #fff7e6; border-left: 3px solid #e0a800; padding: 8px 12px; border-radius: 4px; color: #6b4e00; font-size: 13px; line-height: 1.7; }
+.detail .d-notes { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.detail .d-warn { background: #fff7e6; border-left: 3px solid #e0a800; padding: 8px 12px; border-radius: 4px; color: #6b4e00; font-size: 13px; line-height: 1.7; }
+.detail .d-note { background: #f6f9fc; border-left: 3px solid #b5d4f4; padding: 8px 12px; border-radius: 4px; color: #31404f; font-size: 13px; line-height: 1.7; }
 .detail .d-block { margin-top: 18px; }
 .detail .d-block h3 { margin: 0 0 10px; font-size: 13px; font-weight: 600; color: #16466f; padding-bottom: 6px; border-bottom: 1px solid #e6ecf3; display: flex; align-items: baseline; gap: 8px; }
 .detail .d-extra { font-weight: 400; font-size: 12px; color: #8b98a6; }
