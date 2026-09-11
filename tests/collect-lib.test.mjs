@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { buildWindow, classifyLine, extractAmount, extractBidOpenDate, extractWinner, mapBidStatus, normalizeDate } from '../scripts/collect-lib.mjs';
+import { buildWindow, canonicalLine, classifyLine, cleanVendorTitle, extractAmount, extractBidOpenDate, extractDateFromUrl, extractWinner, mapBidStatus, mapVendorSignal, normalizeDate, VENDOR_AUTHORITY } from '../scripts/collect-lib.mjs';
 import { mergePendingLeads } from '../scripts/weekly-run.mjs';
 
 test('normalizeDate handles Chinese and dash formats', () => {
@@ -82,3 +82,35 @@ test('mergePendingLeads keeps aggregator leads out of the high-confidence ledger
   assert.equal(leads[0].confidence, '中');
   assert.equal(leads[0].status, '待复核');
 });
+
+test('classifyLine recognises dry-coal-beneficiation wording and canonicalises the ore line', () => {
+  assert.equal(classifyLine('蒙古国煤炭干法提质项目设备顺利发运'), '煤炭智能干选设备', '干法选煤/干法提质属煤炭干选范围');
+  assert.equal(canonicalLine('XRT矿石分选设备'), '矿石XRT光电分选设备');
+  assert.equal(canonicalLine('煤炭智能干选设备'), '煤炭智能干选设备');
+});
+
+test('mapVendorSignal only accepts hard trade/deal signals and drops product-page noise', () => {
+  assert.equal(mapVendorSignal('“极寒条件下露天煤矿坑下移动式智能干选”项目通过验收'), '已交付');
+  assert.equal(mapVendorSignal('唐山神州机械集团-蒙古国煤炭干法提质项目设备顺利发运'), '已交付');
+  assert.equal(mapVendorSignal('十台套智能干选机 | 霍里思特助力帽帽山煤业实现多产品分选'), '已签约', '订单数量词视为成交');
+  assert.equal(mapVendorSignal('神州集团助力哈密大南湖七号煤矿末煤干选系统成功投运'), '已投运');
+  assert.equal(mapVendorSignal('智能煤矸干选机的优点 ART智能煤矸干选机产品优势：能耗低，运营维护成本低'), null, '产品介绍页不得因“运营”误判');
+  assert.equal(mapVendorSignal('美腾科技诚邀您莅临第28届中国国际矿业大会'), null, '展会邀约不是交易信号');
+  assert.equal(mapVendorSignal('霍里思特携手金徽新科打造国内首条碳酸钙XRT光电智能分选生产线'), null, '“携手/打造”等软措辞暂不收录，保持高精度（如需放宽需显式确认）');
+});
+
+test('cleanVendorTitle strips dates glued onto list-page anchor text', () => {
+  assert.equal(cleanVendorTitle('2026 08-12 恭喜 | 枣庄海纳科技有限公司官网上线啦'), '恭喜 | 枣庄海纳科技有限公司官网上线啦');
+  assert.equal(cleanVendorTitle('9.10天津等您！美腾科技诚邀您莅临第28届中国国际矿业大会 2026-08-17'), '9.10天津等您！美腾科技诚邀您莅临第28届中国国际矿业大会');
+  assert.equal(cleanVendorTitle('  唐山神州机械集团-蒙古国煤炭干法提质项目设备顺利发运  '), '唐山神州机械集团-蒙古国煤炭干法提质项目设备顺利发运');
+});
+
+test('extractDateFromUrl recovers publish dates from detail links', () => {
+  assert.equal(extractDateFromUrl('https://www.tsshenzhou.com/xinwen/20260805.html'), '2026-08-05');
+  assert.equal(extractDateFromUrl('https://c.m.163.com/news/a/L60HJ41J0556KPRG.html?from=subscribe'), null);
+});
+
+test('VENDOR_AUTHORITY is a stable constant used as the medium-confidence source marker', () => {
+  assert.equal(VENDOR_AUTHORITY, '官方自宣');
+});
+

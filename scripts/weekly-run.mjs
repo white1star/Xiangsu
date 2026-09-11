@@ -9,7 +9,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ADAPTERS, buildWindow, enrichFromOfficialDetail, MINIMUM_PUBLISH_DATE as MIN_DATE } from './collect-lib.mjs';
+import { ADAPTERS, buildWindow, enrichFromOfficialDetail, MINIMUM_PUBLISH_DATE as MIN_DATE, VENDOR_AUTHORITY } from './collect-lib.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const rulesFile = path.join(root, 'config', 'scan-rules.json');
@@ -32,10 +32,13 @@ export function validateCandidate(candidate) {
   const required = ['url', 'title', 'source', 'publishDate', 'bidStatus', 'evidence', 'evidenceCapturedAt'];
   const missing = required.filter(key => !candidate[key]);
   if (missing.length) return { valid: false, reason: `缺少${missing.join('、')}` };
-  if (candidate.sourceAuthority !== 'official') return { valid: false, reason: '缺少官方原文验证，聚合来源只能作为线索' };
+  const isVendor = candidate.sourceAuthority === VENDOR_AUTHORITY;
+  if (candidate.sourceAuthority !== 'official' && !isVendor) return { valid: false, reason: '缺少官方原文验证，聚合来源只能作为线索' };
   if (candidate.publishDate < MINIMUM_PUBLISH_DATE) return { valid: false, reason: `发布日期早于${MINIMUM_PUBLISH_DATE}` };
   if (candidate.evidence.replace(/\s/g, '').length < 16) return { valid: false, reason: '原文证据摘录过短' };
-  if (!['招标公告', '中标候选人', '已中标'].includes(candidate.bidStatus)) return { valid: false, reason: '不是允许入库的招投标状态' };
+  // 官网/官方自媒体自宣：只认交易信号（中标/签约/交付/投运），置信度中；官方招采平台：招标/候选/中标，置信度高。
+  const allowedBids = isVendor ? ['已中标', '中标候选人', '已签约', '已交付', '已投运'] : ['招标公告', '中标候选人', '已中标'];
+  if (!allowedBids.includes(candidate.bidStatus)) return { valid: false, reason: '不是允许入库的招投标状态' };
   if (!candidate.line) return { valid: false, reason: '与XRT矿石分选/煤炭智能干选设备无关' };
   return { valid: true };
 }
@@ -50,13 +53,16 @@ export function mergeCandidates(existing, candidates) {
     const key = `${candidate.title}|${candidate.publishDate}`;
     if (knownUrls.has(candidate.url) || knownKeys.has(key)) continue;
     knownUrls.add(candidate.url); knownKeys.add(key);
+    const isVendor = candidate.sourceAuthority === VENDOR_AUTHORITY;
     const record = {
       id: `auto-${Buffer.from(candidate.url).toString('base64url').slice(0, 14)}`,
       title: candidate.title,
       line: candidate.line || '待核实',
       competitor: candidate.competitor || '未披露',
       region: candidate.region || '待核实',
+      mineral: candidate.mineral || '未披露',
       amount: candidate.amount || '未披露',
+      amountNote: candidate.amount ? null : (candidate.amountNote || null),
       budget: candidate.budget || null,
       buyer: candidate.buyer || null,
       procurement: candidate.procurement || null,
@@ -64,12 +70,14 @@ export function mergeCandidates(existing, candidates) {
       bid: candidate.bidStatus,
       bidStatus: candidate.bidStatus,
       source: candidate.source,
+      sourceAuthority: isVendor ? VENDOR_AUTHORITY : '官方公开',
       date: candidate.publishDate,
       publishDate: candidate.publishDate,
-      confidence: '高',
+      confidence: isVendor ? '中' : '高',
       url: candidate.url,
       evidence: candidate.evidence,
     };
+    if (!record.amountNote) delete record.amountNote;
     added.push(record);
   }
   return { records: [...existing, ...added], added, rejected };
@@ -202,17 +210,21 @@ async function main() {
   }
 
   const officialCandidates = [];
+  const vendorCandidates = [];
   const aggregatorLeads = [];
   for (const check of checks) {
     const rule = rules.find(item => item.id === check.sourceId);
     for (const candidate of check.candidates) {
+      if (candidate.sourceAuthority === VENDOR_AUTHORITY) { vendorCandidates.push(candidate); continue; }
       if ((rule.sourceAuthority || 'official') === 'official' && candidate.sourceAuthority === 'official') officialCandidates.push(candidate);
       else aggregatorLeads.push(candidate);
     }
   }
 
-  const merged = mergeCandidates(existing, officialCandidates.filter(candidate => candidate.line && candidate.bidStatus));
-  const scopeRejected = officialCandidates
+  // 官方招采平台（高置信）+ 竞品官网/官方自媒体交易信号自宣（中置信）同批入库；聚合站仅作待复核线索。
+  const evidenceCandidates = [...officialCandidates, ...vendorCandidates];
+  const merged = mergeCandidates(existing, evidenceCandidates.filter(candidate => candidate.line && candidate.bidStatus));
+  const scopeRejected = evidenceCandidates
     .filter(candidate => !candidate.line || !candidate.bidStatus)
     .map(candidate => ({ title: candidate.title, url: candidate.url, source: candidate.source, reason: !candidate.line ? '与两类设备无关或命中排除规则' : '公告类型不在收录范围（如流标/废标/资格预审）' }));
   const pending = mergePendingLeads(existingPending, merged.records, aggregatorLeads);
@@ -258,6 +270,7 @@ async function main() {
       discovered: checks.reduce((sum, check) => sum + check.discovered, 0),
       accepted: merged.added.length,
       acceptedWithAmount: merged.added.filter(record => record.amount && record.amount !== '未披露').length,
+      vendorAccepted: merged.added.filter(record => record.sourceAuthority === VENDOR_AUTHORITY).length,
       pendingReviewAdded: pending.added.length,
       rejected: allRejected.length,
       reEnriched,

@@ -12,7 +12,7 @@ const GLOBAL_EXCLUDES = [
   /带式输送机|胶带输送机|皮带输送机/,
 ];
 const ORE_PATTERN = /(?<![A-Za-z0-9])XRT(?![A-Za-z0-9])|X\s*射线[^，。]{0,6}(分选|拣选|智能)|射线(智能)?分选/;
-const COAL_PATTERN = /干选/;
+const COAL_PATTERN = /干选|干法选煤|干法分选|干法提质|复合干选/;
 const GENERIC_SORT_PATTERN = /智能(分选|拣选|选矸)/;
 const MINING_CONTEXT = /矿|煤|选煤|洗选|矸|选厂|选矿/;
 const GENERIC_BLOCKLIST = /垃圾|果蔬|茶叶|种子|塑料|快递|包裹|细胞|医疗/;
@@ -558,10 +558,151 @@ export async function runJsonApiAdapter(rule, window, limits = {}) {
   return result;
 }
 
+// —— 竞品官网/官方自媒体：交易信号自宣（置信度中） ——
+// 口径：仅收「中标/签约/订单/交付/验收」等交易信号，且标题命中两类设备；
+// 荣誉/展会/党建/专利/软文等非交易信号一律不收。金额只取正文披露，否则"未披露"。
+export const VENDOR_AUTHORITY = '官方自宣';
+
+// 交易信号词表：仅保留“项目/设备成交、签约、供货、交付、投运”类硬信号。
+// 刻意不含裸「运营/安装/调试/到场/下线」——官网产品介绍页常出现“运营维护成本低”等
+// 描述词，会把产品页误判成交易新闻（枣庄海纳产品页即踩过此坑）。
+const TRADE_SIGNAL = /中标|成交|签约|签订|合同|订单|框架协议|供货|交付|发运|发货|到货|验收|投运|投产|投入运营|正式运营|移交|承租|租赁|BOT|总承包|中标候选人/;
+
+// 订单数量词（“十台套智能干选机”“3套分选系统”）本身即成交/签约信号，单独兜底。
+const ORDER_QUANTITY = /[\d一二三四五六七八九十百千万]+\s*台(?:套)?(?!班|风|面|词|阶|湾|账)|[\d一二三四五六七八九十百千万]+\s*套(?:系统|设备|机组|装置)?/;
+
+// 把 classifyLine 的矿石线路名归一到台账既有口径（'矿石XRT光电分选设备'）。
+export function canonicalLine(line) {
+  if (line === 'XRT矿石分选设备') return '矿石XRT光电分选设备';
+  return line;
+}
+
+// 官网自宣交易信号 → 台账 bid 阶段（与 group_projects 的 RANK 对齐）。
+export function mapVendorSignal(title) {
+  if (!title) return null;
+  if (/流标|废标|终止|暂停|撤销/.test(title)) return null;
+  const hasTrade = TRADE_SIGNAL.test(title);
+  const hasOrderQty = ORDER_QUANTITY.test(title);
+  if (!hasTrade && !hasOrderQty) return null;
+  if (/候选人/.test(title)) return '中标候选人';
+  if (/中标|成交/.test(title)) return '已中标';
+  if (/签约|签订|合同|订单|框架协议|总承包|供货/.test(title)) return '已签约';
+  if (/投运|投产|投入运营|正式运营|移交|承租|租赁|BOT/.test(title)) return '已投运';
+  if (/交付|发运|发货|到货|验收/.test(title)) return '已交付';
+  if (hasOrderQty) return '已签约';
+  return null;
+}
+
+// 官网列表页常把“发布日期”“正文摘要”一起塞进 <a> 文本。清掉日期前后缀与分隔符，
+// 只留标题主体，避免用摘要文字做线路/信号判定。
+export function cleanVendorTitle(raw) {
+  if (!raw) return '';
+  let t = String(raw).replace(/\s+/g, ' ').trim();
+  t = t.replace(/^20\d{2}[\s./-]*\d{1,2}[\s./-]*\d{1,2}\s*/, '');       // 前置日期 2026 08-12
+  t = t.replace(/\s*20\d{2}[./-]\d{1,2}([./-]\d{1,2})?\s*$/, '');      // 后置日期 2026-08-17
+  t = t.replace(/^[|｜·・\-\s]+/, '').replace(/[|｜\s]+$/, '');
+  return t.trim();
+}
+
+// 从 URL 反推发布日期（如 /xinwen/20260805.html → 2026-08-05）。
+export function extractDateFromUrl(url) {
+  if (!url) return null;
+  const m = String(url).match(/(20\d{2})(\d{2})(\d{2})/);
+  return m ? `${m[1]}-${m[2]}-${m[3]}` : null;
+}
+
+async function enrichVendorDetail(candidate) {
+  try {
+    const { status, text } = await fetchText(candidate.url, { timeout: 25000 });
+    if (status === 200 && text.length >= 400) {
+      const body = htmlToText(text);
+      candidate.evidence = excerptEvidence(body);
+      candidate.evidenceCapturedAt = new Date().toISOString();
+      const amount = extractAmount(body);
+      const budget = extractBudget(body);
+      const buyer = extractBuyer(body);
+      if (amount) candidate.amount = amount.display;
+      else if (budget) candidate.budget = budget.display;
+      if (buyer) candidate.buyer = buyer;
+      // 官网/官方自媒体页含大量导航/版式文字，extractProcurement 易把页面 chrome 当“采购内容”，故不写该字段。
+      if (!candidate.amount) candidate.amountNote = '官网/官方自媒体正文未披露金额，按未披露处理';
+    }
+  } catch {
+    /* 详情抓取失败：保留列表页证据，不阻断 */
+  }
+  if (!candidate.evidence) candidate.evidence = `${candidate.source}：${candidate.title}（官网列表页标题，正文抓取失败，金额未披露）`;
+  candidate.evidenceCapturedAt = candidate.evidenceCapturedAt || new Date().toISOString();
+  return candidate;
+}
+
+export async function runVendorNewsAdapter(rule, window, limits = {}) {
+  const maxPages = limits.maxPages ?? rule.maxPages ?? 2;
+  const maxDetails = limits.maxDetails ?? 15;
+  // 只认真正的新闻详情链接，滤掉导航/产品页/侧栏（如海纳的 /artzngxj.html 产品页）。
+  const hrefRe = rule.hrefPattern ? new RegExp(rule.hrefPattern, 'i') : null;
+  const result = { pagesScanned: 0, discovered: 0, candidates: [], notes: [] };
+  const seen = new Set();
+  for (let page = 1; page <= maxPages; page += 1) {
+    const url = page === 1 ? rule.listingUrl : (rule.pageTemplate ? rule.pageTemplate.replace('{n}', String(page)) : null);
+    if (!url) break;
+    let response;
+    try {
+      response = await fetchText(url, { timeout: 25000 });
+    } catch (error) {
+      if (page === 1) throw error;
+      result.notes.push(`第${page}页抓取失败：${error.message}`);
+      break;
+    }
+    if (response.status !== 200) {
+      if (page === 1) throw new Error(`列表页 HTTP ${response.status}`);
+      result.notes.push(`第${page}页 HTTP ${response.status}`);
+      break;
+    }
+    result.pagesScanned += 1;
+    for (const anchor of extractAnchors(response.text, url)) {
+      if (seen.has(anchor.url)) continue;
+      if (hrefRe && !hrefRe.test(anchor.url)) continue;
+      const title = cleanVendorTitle(anchor.title);
+      if (!title || title.length < 8) continue;
+      const line = canonicalLine(classifyLine(title));
+      if (!line) continue;
+      const signal = mapVendorSignal(title);
+      if (!signal) continue;
+      seen.add(anchor.url);
+      result.discovered += 1;
+      result.candidates.push({
+        title,
+        url: anchor.url,
+        source: rule.name,
+        publishDate: anchor.date || extractDateFromUrl(anchor.url),
+        line,
+        bidStatus: signal,
+        bid: signal,
+        region: rule.defaultRegion || '未披露',
+        mineral: rule.defaultMineral || '未披露',
+        competitor: rule.vendorName || '未披露',
+        sourceAuthority: VENDOR_AUTHORITY,
+      });
+    }
+    await sleep(800);
+  }
+  // 新→旧排序：周更场景先保证最近的交易新闻拿到详情；回填时再逐次补齐更早年份。
+  result.candidates.sort((a, b) => String(b.publishDate || '').localeCompare(String(a.publishDate || '')));
+  let enriched = 0;
+  for (const candidate of result.candidates) {
+    if (enriched >= maxDetails) { result.notes.push('已达单次详情抓取上限，剩余候选下次运行继续'); break; }
+    await enrichVendorDetail(candidate);
+    enriched += 1;
+    await sleep(600);
+  }
+  return result;
+}
+
 export const ADAPTERS = {
   'ggzy-api': runGgzyApiAdapter,
   'html-list': runHtmlListAdapter,
   'home-scan': runHomeScanAdapter,
   'json-api': runJsonApiAdapter,
+  'vendor-news': runVendorNewsAdapter,
   probe: runProbeAdapter,
 };
