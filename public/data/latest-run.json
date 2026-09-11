@@ -1,32 +1,116 @@
 {
-  "generatedAt": "2026-09-09T07:43:56.865Z",
+  "generatedAt": "2026-09-11T06:53:34.423Z",
   "mode": "weekly",
   "window": {
-    "from": "2026-08-26",
-    "to": "2026-09-09"
+    "from": "2026-08-28",
+    "to": "2026-09-11"
   },
   "coverage": {
     "publishable": true,
-    "checked": 7,
+    "checked": 23,
     "required": 5,
     "missing": []
   },
   "bidOpenAudit": {
-    "generatedAt": "2026-09-09T07:43:56.865Z",
-    "today": "2026-09-09",
-    "backfilledOpenDates": 6,
+    "generatedAt": "2026-09-11T06:53:34.423Z",
+    "today": "2026-09-11",
+    "backfilledOpenDates": 0,
     "summary": {
-      "total": 22,
+      "total": 24,
       "opened": 8,
       "upcoming": 2,
-      "undisclosed": 12,
+      "undisclosed": 14,
       "resultGap": 5
     },
     "entries": [
       {
+        "title": "拜城县峰峰煤焦化有限公司2026年设备购置（第十四批）智能干选机采购招标公告",
+        "publishDate": "2026-08-31",
+        "bidOpenDate": null,
+        "openStatus": "未披露",
+        "resultGap": false
+      },
+      {
+        "title": "安沟钼多金属矿选矿工程智能抛废（X射线智能分选）工艺运营合作项目招标  --资格预审公告",
+        "publishDate": "2026-08-31",
+        "bidOpenDate": null,
+        "openStatus": "未披露",
+        "resultGap": false
+      },
+      {
+        "title": "新疆能源集团哈密三塘湖公司石头梅一号露天煤矿一系统选煤工艺改造项目-干选机采购招标公告",
+        "publishDate": "2026-08-28",
+        "bidOpenDate": "2026-09-17",
+        "openStatus": "待开标",
+        "resultGap": false
+      },
+      {
+        "title": "崇信县百贯沟煤业有限公司手选皮带TDS智能选矸系统采购及安装项目（二次重新招标）招标公告",
+        "publishDate": "2026-08-22",
+        "bidOpenDate": "2026-09-02",
+        "openStatus": "已开标",
+        "resultGap": true
+      },
+      {
+        "title": "江苏省矿业工程集团有限公司安装分公司 榆树田煤矿项目部智能干选系统智能干选机采购 招标公告（重新公告）",
+        "publishDate": "2026-08-21",
+        "bidOpenDate": null,
+        "openStatus": "未披露",
+        "resultGap": false
+      },
+      {
+        "title": "江苏省矿业工程集团有限公司安装分公司 榆树田煤矿项目部智能干选系统智能干选机采购 招标公告",
+        "publishDate": "2026-08-19",
+        "bidOpenDate": null,
+        "openStatus": "未披露",
+        "resultGap": false
+      },
+      {
+        "title": "伊吾广汇矿业公司新建分选设备EPC建设+运营总承包项目招标二次公告",
+        "publishDate": "2026-08-19",
+        "bidOpenDate": null,
+        "openStatus": "未披露",
+        "resultGap": false
+      },
+      {
+        "title": "崇信县百贯沟煤业有限公司手选皮带TDS智能选矸系统采购及安装项目二次招标公告",
+        "publishDate": "2026-08-12",
+        "bidOpenDate": "2026-08-22",
+        "openStatus": "已开标",
+        "resultGap": true
+      },
+      {
+        "title": "崇信县百贯沟煤业有限公司手选皮带TDS智能选矸系统采购及安装招标公告",
+        "publishDate": "2026-08-01",
+        "bidOpenDate": "2026-08-11",
+        "openStatus": "已开标",
+        "resultGap": true
+      },
+      {
+        "title": "山西汾西正升煤业有限责任公司动筛车间改造和智能干选系统改造设计采购公告",
+        "publishDate": "2026-07-27",
+        "bidOpenDate": "2026-09-28",
+        "openStatus": "待开标",
+        "resultGap": false
+      },
+      {
+        "title": "坪上煤业TDS智能干选设备技术服务(1标段)二次重新询比采购公告",
+        "publishDate": "2026-07-24",
+        "bidOpenDate": null,
+        "openStatus": "未披露",
+        "resultGap": false
+      },
+      {
         "title": "山东黄金矿业（玲珑）有限公司光电智能分选机采购项目招标公告",
         "publishDate": "2026-07-08",
         "bidOpenDate": "2026-07-28",
+        "openStatus": "已开标",
+        "resultGap": true
+      },
+      {
+        "title": "莲盛智能煤矸石分选系统(IDS-2400)筛选运维及矸石破碎倒运外委承包(2026)招标公告",
+        "publishDate": "2026-07-07",
+        "bidOpenDate": "2026-07-21",
         "openStatus": "已开标",
         "resultGap": true
       },
@@ -73,24 +157,17 @@
         "resultGap": false
       },
       {
+        "title": "思茅山水保护盖等配件采购项目公开询比价公告（好朋友设备配件）",
+        "publishDate": "2026-03-03",
+        "bidOpenDate": null,
+        "openStatus": "未披露",
+        "resultGap": false
+      },
+      {
         "title": "【华能煤业公司华亭煤业陈家沟煤矿、砚北煤矿、煤炭智选公司智能干选机、破碎机、磁选机配件（限额以下）】招标公告",
         "publishDate": "2026-01-15",
         "bidOpenDate": null,
         "openStatus": "未披露",
-        "resultGap": false
-      },
-      {
-        "title": "坪上煤业TDS智能干选设备技术服务(1标段)二次重新询比采购公告",
-        "publishDate": "2026-07-24",
-        "bidOpenDate": null,
-        "openStatus": "未披露",
-        "resultGap": false
-      },
-      {
-        "title": "山西汾西正升煤业有限责任公司动筛车间改造和智能干选系统改造设计采购公告",
-        "publishDate": "2026-07-27",
-        "bidOpenDate": "2026-09-28",
-        "openStatus": "待开标",
         "resultGap": false
       },
       {
@@ -101,78 +178,15 @@
         "resultGap": false
       },
       {
-        "title": "莲盛智能煤矸石分选系统(IDS-2400)筛选运维及矸石破碎倒运外委承包(2026)招标公告",
-        "publishDate": "2026-07-07",
-        "bidOpenDate": "2026-07-21",
-        "openStatus": "已开标",
-        "resultGap": true
-      },
-      {
-        "title": "崇信县百贯沟煤业有限公司手选皮带TDS智能选矸系统采购及安装招标公告",
-        "publishDate": "2026-08-01",
-        "bidOpenDate": "2026-08-11",
-        "openStatus": "已开标",
-        "resultGap": true
-      },
-      {
-        "title": "思茅山水保护盖等配件采购项目公开询比价公告（好朋友设备配件）",
-        "publishDate": "2026-03-03",
+        "title": "能投公司内蒙古大唐国际准格尔矿业有限公司孔兑沟选煤厂智能干选机设备采购招标公告",
+        "publishDate": "2026-08-25",
         "bidOpenDate": null,
         "openStatus": "未披露",
         "resultGap": false
       },
       {
-        "title": "崇信县百贯沟煤业有限公司手选皮带TDS智能选矸系统采购及安装项目二次招标公告",
-        "publishDate": "2026-08-12",
-        "bidOpenDate": "2026-08-22",
-        "openStatus": "已开标",
-        "resultGap": true
-      },
-      {
-        "title": "江苏省矿业工程集团有限公司安装分公司 榆树田煤矿项目部智能干选系统智能干选机采购 招标公告",
-        "publishDate": "2026-08-19",
-        "bidOpenDate": null,
-        "openStatus": "未披露",
-        "resultGap": false
-      },
-      {
-        "title": "伊吾广汇矿业公司新建分选设备EPC建设+运营总承包项目招标二次公告",
-        "publishDate": "2026-08-19",
-        "bidOpenDate": null,
-        "openStatus": "未披露",
-        "resultGap": false
-      },
-      {
-        "title": "崇信县百贯沟煤业有限公司手选皮带TDS智能选矸系统采购及安装项目（二次重新招标）招标公告",
-        "publishDate": "2026-08-22",
-        "bidOpenDate": "2026-09-02",
-        "openStatus": "已开标",
-        "resultGap": true
-      },
-      {
-        "title": "江苏省矿业工程集团有限公司安装分公司 榆树田煤矿项目部智能干选系统智能干选机采购 招标公告（重新公告）",
-        "publishDate": "2026-08-21",
-        "bidOpenDate": null,
-        "openStatus": "未披露",
-        "resultGap": false
-      },
-      {
-        "title": "新疆能源集团哈密三塘湖公司石头梅一号露天煤矿一系统选煤工艺改造项目-干选机采购招标公告",
-        "publishDate": "2026-08-28",
-        "bidOpenDate": "2026-09-17",
-        "openStatus": "待开标",
-        "resultGap": false
-      },
-      {
-        "title": "拜城县峰峰煤焦化有限公司2026年设备购置（第十四批）智能干选机采购招标公告",
-        "publishDate": "2026-08-31",
-        "bidOpenDate": null,
-        "openStatus": "未披露",
-        "resultGap": false
-      },
-      {
-        "title": "安沟钼多金属矿选矿工程智能抛废（X射线智能分选）工艺运营合作项目招标  --资格预审公告",
-        "publishDate": "2026-08-31",
+        "title": "[洛直工货招标(2026)0023号-1]安沟钼多金属矿选矿工程智能抛废（X射线智能分选）工艺运营合作项目招标",
+        "publishDate": "2026-09-11",
         "bidOpenDate": null,
         "openStatus": "未披露",
         "resultGap": false
@@ -185,11 +199,11 @@
       "name": "全国公共资源交易平台",
       "status": "ok",
       "pagesScanned": 17,
-      "discovered": 2,
+      "discovered": 5,
       "accepted": 1,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-09T07:41:06.918Z"
+      "checkedAt": "2026-09-11T06:50:25.755Z"
     },
     {
       "id": "ccteg-goods",
@@ -200,7 +214,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-09T07:41:37.785Z"
+      "checkedAt": "2026-09-11T06:50:55.516Z"
     },
     {
       "id": "ccteg-all",
@@ -211,7 +225,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-09T07:41:42.239Z"
+      "checkedAt": "2026-09-11T06:50:59.931Z"
     },
     {
       "id": "gsei-results",
@@ -222,7 +236,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-09T07:41:46.430Z"
+      "checkedAt": "2026-09-11T06:51:04.048Z"
     },
     {
       "id": "chnenergy-zbgg",
@@ -233,7 +247,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-09T07:41:49.782Z"
+      "checkedAt": "2026-09-11T06:51:06.746Z"
     },
     {
       "id": "zmzb-hw",
@@ -244,20 +258,18 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-09T07:41:53.292Z"
+      "checkedAt": "2026-09-11T06:51:07.921Z"
     },
     {
       "id": "mtzbw-leads",
       "name": "中国煤炭招标网（聚合线索）",
-      "status": "ok",
-      "pagesScanned": 1,
+      "status": "failed",
+      "pagesScanned": 0,
       "discovered": 0,
       "accepted": 0,
-      "failReason": null,
-      "notes": [
-        "行业聚合站，只产出待复核线索，必须反查官方原文后才能入高置信台账。"
-      ],
-      "checkedAt": "2026-09-09T07:41:59.367Z"
+      "failReason": "The operation was aborted due to timeout",
+      "notes": [],
+      "checkedAt": "2026-09-11T06:51:12.633Z"
     },
     {
       "id": "ccgp-search",
@@ -268,7 +280,194 @@
       "accepted": 0,
       "failReason": "平台反爬拦截（频繁访问/验证提示），未绕过，等待下次重试",
       "notes": [],
-      "checkedAt": "2026-09-09T07:42:28.755Z"
+      "checkedAt": "2026-09-11T06:51:42.639Z"
+    },
+    {
+      "id": "gsnhcg-zbgg",
+      "name": "甘肃能化数字化采购管理平台（招标预审公告）",
+      "status": "ok",
+      "pagesScanned": 3,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-09-11T06:51:44.615Z"
+    },
+    {
+      "id": "gsnhcg-zhb",
+      "name": "甘肃能化数字化采购管理平台（中标候选人公示）",
+      "status": "ok",
+      "pagesScanned": 3,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-09-11T06:51:47.335Z"
+    },
+    {
+      "id": "gsnhcg-zjgg",
+      "name": "甘肃能化数字化采购管理平台（中标结果公告）",
+      "status": "ok",
+      "pagesScanned": 3,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-09-11T06:51:49.910Z"
+    },
+    {
+      "id": "shanxi-ggzy-gc",
+      "name": "山西公共资源交易平台（工程建设）",
+      "status": "ok",
+      "pagesScanned": 1,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-09-11T06:51:52.890Z"
+    },
+    {
+      "id": "shaanxi-ggzy-zb",
+      "name": "陕西公共资源交易平台（招标/资审公告）",
+      "status": "ok",
+      "pagesScanned": 1,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-09-11T06:51:54.685Z"
+    },
+    {
+      "id": "shaanxi-ggzy-zj",
+      "name": "陕西公共资源交易平台（中标/成交公示）",
+      "status": "ok",
+      "pagesScanned": 1,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-09-11T06:51:55.574Z"
+    },
+    {
+      "id": "nmg-ggzy-jy",
+      "name": "内蒙古公共资源交易网（交易信息）",
+      "status": "ok",
+      "pagesScanned": 1,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-09-11T06:51:56.416Z"
+    },
+    {
+      "id": "xinjiang-ggzy-jy",
+      "name": "新疆公共资源交易网（交易信息）",
+      "status": "ok",
+      "pagesScanned": 1,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-09-11T06:51:57.480Z"
+    },
+    {
+      "id": "guizhou-ggzy-gc",
+      "name": "贵州公共资源交易中心（工程建设交易公告）",
+      "status": "ok",
+      "pagesScanned": 1,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-09-11T06:51:58.576Z"
+    },
+    {
+      "id": "hlj-ggzy-zb",
+      "name": "黑龙江公共资源交易网（招标/资审公告）",
+      "status": "ok",
+      "pagesScanned": 1,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-09-11T06:51:59.627Z"
+    },
+    {
+      "id": "hlj-ggzy-zj",
+      "name": "黑龙江公共资源交易网（中标结果公示）",
+      "status": "ok",
+      "pagesScanned": 1,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-09-11T06:52:00.589Z"
+    },
+    {
+      "id": "sichuan-ggzy-jy",
+      "name": "四川公共资源交易平台（交易信息）",
+      "status": "ok",
+      "pagesScanned": 1,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-09-11T06:52:01.447Z"
+    },
+    {
+      "id": "liaoning-ggzy-jy",
+      "name": "辽宁公共资源交易平台（交易信息）",
+      "status": "ok",
+      "pagesScanned": 1,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-09-11T06:52:02.524Z"
+    },
+    {
+      "id": "qinghai-ggzy-jy",
+      "name": "青海公共资源交易网（交易信息）",
+      "status": "ok",
+      "pagesScanned": 1,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-09-11T06:52:03.724Z"
+    },
+    {
+      "id": "jinneng-ggzy-gg",
+      "name": "晋能控股招标采购平台（公告公示）",
+      "status": "ok",
+      "pagesScanned": 1,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-09-11T06:52:04.647Z"
+    },
+    {
+      "id": "xjyg-ggzy-zb",
+      "name": "新疆阳光采购平台（招标预审公告）",
+      "status": "ok",
+      "pagesScanned": 1,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-09-11T06:52:05.594Z"
+    },
+    {
+      "id": "xjyg-ggzy-zj",
+      "name": "新疆阳光采购平台（中标公告）",
+      "status": "ok",
+      "pagesScanned": 1,
+      "discovered": 0,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-09-11T06:52:06.685Z"
     }
   ],
   "coveredByNational": [
@@ -290,14 +489,26 @@
     "qinghai-ggzy"
   ],
   "totals": {
-    "discovered": 2,
+    "discovered": 5,
     "accepted": 1,
-    "acceptedWithAmount": 1,
+    "acceptedWithAmount": 0,
     "pendingReviewAdded": 0,
-    "rejected": 1,
+    "rejected": 3,
     "reEnriched": 80
   },
   "rejected": [
+    {
+      "title": "庄浪县优质苹果智能分选及冷链仓储一体化建设项目招标公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/620000/0201/20260909/fe9ffa4986548f71a19ea6e0ca6c2897.html",
+      "source": "全国公共资源交易平台（甘肃省）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "庄浪县优质苹果智能分选及冷链仓储一体化建设项目招标公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/620000/0201/20260909/0062d184197e66624c748bdba4d295b258a2.html",
+      "source": "全国公共资源交易平台（平凉市公共资源交易平台）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
     {
       "title": "山西阳泉矿区泊里煤矿项目井下智能分选系统带式输送机（第二次）中标结果公示",
       "url": "https://www.ggzy.gov.cn/information/deal/html/b/140000/0104/20260831/0014a42bd0f702784cdf9e547b14f3e4f25a.html",
