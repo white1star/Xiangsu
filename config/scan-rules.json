@@ -115,6 +115,51 @@
     "listingUrl": "https://search.ccgp.gov.cn/bxsearch?searchtype=1&page_index=1&bidSort=0&pinMu=0&bidType=0&kw=%E6%99%BA%E8%83%BD%E5%B9%B2%E9%80%89",
     "keywords": ["干选", "智能分选", "XRT"],
     "columns": "全站检索",
-    "coverNote": "站点对非浏览器流量返回“频繁访问”拦截页；不绕过反爬，每次运行探测并如实记录失败原因。"
+    "coverNote": "站点对非浏览器流量返回「频繁访问」拦截页；不绕过反爬，每次运行探测并如实记录失败原因。"
+  },
+  {
+    "id": "gsnhcg-zbgg",
+    "platformId": "gsnhcg",
+    "name": "甘肃能化数字化采购管理平台（招标预审公告）",
+    "adapter": "html-list",
+    "access": "anonymous",
+    "required": false,
+    "listingUrl": "https://www.gsnhcg.com/cgxx/002001/002001001/purchase_info.html",
+    "pageTemplate": "https://www.gsnhcg.com/cgxx/002001/002001001/{n}.html",
+    "keywords": ["干选", "分选", "XRT", "智能分选", "选矸", "光电"],
+    "columns": "公开招标-招标(预审)公告",
+    "maxPages": 10,
+    "defaultRegion": "甘肃",
+    "coverNote": "甘肃煤炭交易中心数字化采购管理平台（窑街煤电/靖煤/甘肃能化等甘肃煤企采购），公开招标公告栏目，静态分页可匿名浏览（第1页purchase_info.html，第2页起{n}.html）。"
+  },
+  {
+    "id": "gsnhcg-zhb",
+    "platformId": "gsnhcg",
+    "name": "甘肃能化数字化采购管理平台（中标候选人公示）",
+    "adapter": "html-list",
+    "access": "anonymous",
+    "required": false,
+    "listingUrl": "https://www.gsnhcg.com/cgxx/002001/002001003/purchase_info.html",
+    "pageTemplate": "https://www.gsnhcg.com/cgxx/002001/002001003/{n}.html",
+    "keywords": ["干选", "分选", "XRT", "智能分选", "选矸", "光电"],
+    "columns": "公开招标-中标(候选人)公示",
+    "maxPages": 10,
+    "defaultRegion": "甘肃",
+    "coverNote": "甘肃煤炭交易中心采购平台中标候选人公示栏目，静态分页可匿名浏览。"
+  },
+  {
+    "id": "gsnhcg-zjgg",
+    "platformId": "gsnhcg",
+    "name": "甘肃能化数字化采购管理平台（中标结果公告）",
+    "adapter": "html-list",
+    "access": "anonymous",
+    "required": false,
+    "listingUrl": "https://www.gsnhcg.com/cgxx/002001/002001006/purchase_info.html",
+    "pageTemplate": "https://www.gsnhcg.com/cgxx/002001/002001006/{n}.html",
+    "keywords": ["干选", "分选", "XRT", "智能分选", "选矸", "光电"],
+    "columns": "公开招标-中标结果公告",
+    "maxPages": 10,
+    "defaultRegion": "甘肃",
+    "coverNote": "甘肃煤炭交易中心采购平台中标结果公告栏目，静态分页可匿名浏览。"
   }
 ]
