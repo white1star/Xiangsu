@@ -590,5 +590,234 @@
     "maxPages": 1,
     "defaultRegion": "新疆",
     "coverNote": "省级公共资源交易平台静态列表页，匿名可看；先扫第一页最新数据，分页模板待确认后补。"
+  },
+  {
+    "id": "ego-chinacoal-notice",
+    "platformId": "ego-chinacoal",
+    "name": "中煤易购采购一体化平台（公告查询）",
+    "adapter": "json-api",
+    "access": "anonymous",
+    "required": false,
+    "searchEndpoint": "https://ego.chinacoal.com/dyc/busicommon/noauth/qryArticleList",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json;charset=UTF-8",
+      "Origin": "https://ego.chinacoal.com",
+      "Referer": "https://ego.chinacoal.com/announcementInquiryList"
+    },
+    "pageParam": "pageNo",
+    "sizeParam": "pageSize",
+    "pageSize": 30,
+    "keywordParam": "keyword",
+    "extraParams": {
+      "objType": "1",
+      "source": 1
+    },
+    "response": {
+      "rowsPath": "data.rows",
+      "totalPath": "data.recordsTotal",
+      "titleField": "articleName",
+      "dateField": "createTime",
+      "idField": "id",
+      "typeTextField": "buyTypeStr"
+    },
+    "detail": {
+      "enabled": true,
+      "endpoint": "https://ego.chinacoal.com/dyc/busicommon/noauth/qryArticleInfo",
+      "method": "POST",
+      "bodyTemplate": "{\"id\":\"{id}\"}",
+      "contentPath": "data.articleContent",
+      "headers": {
+        "Origin": "https://ego.chinacoal.com",
+        "Referer": "https://ego.chinacoal.com/announcementInquiryDetail"
+      }
+    },
+    "urlTemplate": "https://ego.chinacoal.com/announcementInquiryDetail?id={id}",
+    "evidenceFields": [
+      "businessCode",
+      "subBeOrgName"
+    ],
+    "keywords": [
+      "干选",
+      "智能干选",
+      "干选机",
+      "智能分选",
+      "分选机",
+      "XRT",
+      "选矸",
+      "射线分选",
+      "光电分选"
+    ],
+    "columns": "公告查询（采购/变更/中选/采购公示全类型）",
+    "maxPages": 2,
+    "requestDelayMs": 2600,
+    "defaultRegion": "全国",
+    "coverNote": "中国中煤电商平台，免登录 JSON 检索接口（dyc/busicommon/noauth/qryArticleList）；命中后走 qryArticleInfo 取公告全文作为证据。接口有频率限制，单次请求间隔 2.6s。"
+  },
+  {
+    "id": "powerchina-notice",
+    "platformId": "powerchina",
+    "name": "中国电建采购招标数智化平台（招采公告）",
+    "adapter": "json-api",
+    "access": "anonymous",
+    "required": false,
+    "searchEndpoint": "https://bid.powerchina.cn/newcbs/recpro-newmember/BidAnnouncementSummary/list",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json;charset=UTF-8",
+      "Origin": "https://bid.powerchina.cn",
+      "Referer": "https://bid.powerchina.cn/consult/notice"
+    },
+    "pageParam": "pageNum",
+    "sizeParam": "pageSize",
+    "pageSize": 20,
+    "keywordParam": "keyWords",
+    "extraParams": {
+      "announcementType": "招采公告",
+      "companyType": "3"
+    },
+    "response": {
+      "rowsPath": "rows",
+      "totalPath": "total",
+      "titleField": "title",
+      "dateField": "publishTime",
+      "idField": "id",
+      "typeTextField": "titleTypeName"
+    },
+    "detail": {
+      "enabled": false
+    },
+    "urlTemplate": "https://bid.powerchina.cn/notice/detail?id={id}&type=招采公告",
+    "evidenceFields": [
+      "projectName",
+      "procuringEntity",
+      "submissionDeadline",
+      "bidOpenTime",
+      "source"
+    ],
+    "keywords": [
+      "干选",
+      "智能干选",
+      "分选",
+      "智能分选",
+      "XRT",
+      "选矸",
+      "排矸",
+      "射线分选",
+      "光电分选"
+    ],
+    "columns": "招采公告（招标/采购公告）",
+    "maxPages": 2,
+    "requestDelayMs": 2600,
+    "defaultRegion": "全国",
+    "coverNote": "中国电建数智化平台招采公告，免登录 JSON 接口（BidAnnouncementSummary/list）；详情为 PDF 附件，证据以官方接口字段锚定。"
+  },
+  {
+    "id": "powerchina-result",
+    "platformId": "powerchina",
+    "name": "中国电建采购招标数智化平台（中标/成交公示）",
+    "adapter": "json-api",
+    "access": "anonymous",
+    "required": false,
+    "searchEndpoint": "https://bid.powerchina.cn/newcbs/recpro-newmember/BidAnnouncementSummary/list",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json;charset=UTF-8",
+      "Origin": "https://bid.powerchina.cn",
+      "Referer": "https://bid.powerchina.cn/consult/publicity"
+    },
+    "pageParam": "pageNum",
+    "sizeParam": "pageSize",
+    "pageSize": 20,
+    "keywordParam": "keyWords",
+    "extraParams": {
+      "announcementType": "中标/成交公示",
+      "companyType": "3"
+    },
+    "response": {
+      "rowsPath": "rows",
+      "totalPath": "total",
+      "titleField": "title",
+      "dateField": "publishTime",
+      "idField": "id",
+      "typeTextField": "titleTypeName"
+    },
+    "detail": {
+      "enabled": false
+    },
+    "urlTemplate": "https://bid.powerchina.cn/notice/detail?id={id}&type=中标/成交公示",
+    "evidenceFields": [
+      "projectName",
+      "procuringEntity",
+      "submissionDeadline",
+      "bidOpenTime",
+      "source"
+    ],
+    "keywords": [
+      "干选",
+      "智能干选",
+      "分选",
+      "智能分选",
+      "XRT",
+      "选矸",
+      "排矸",
+      "射线分选",
+      "光电分选"
+    ],
+    "columns": "中标/成交公示",
+    "maxPages": 2,
+    "requestDelayMs": 2600,
+    "defaultRegion": "全国",
+    "coverNote": "中国电建数智化平台中标/成交公示，免登录 JSON 接口；标题命中后按官方字段锚定证据，中标人/金额需 PDF 附件（暂未解析）。"
+  },
+  {
+    "id": "cgs-zabxx",
+    "platformId": "cgs",
+    "name": "中国地质调查局（招标信息）",
+    "adapter": "html-list",
+    "access": "anonymous",
+    "required": false,
+    "listingUrl": "https://www.cgs.gov.cn/tzgg/zfcg_5637/zabxx/",
+    "pageTemplate": "https://www.cgs.gov.cn/tzgg/zfcg_5637/zabxx/",
+    "keywords": [
+      "干选",
+      "分选",
+      "XRT",
+      "智能分选",
+      "选矸",
+      "光电",
+      "智能选矸",
+      "射线分选",
+      "抛废"
+    ],
+    "columns": "政府采购-招标信息（第一页最新）",
+    "maxPages": 1,
+    "defaultRegion": "全国",
+    "coverNote": "中国地质调查局政府采购招标信息栏目，静态 HTML 可匿名浏览；先扫第一页最新，命中后回取公告详情抽取金额与中标人。"
+  },
+  {
+    "id": "cgs-zobxx",
+    "platformId": "cgs",
+    "name": "中国地质调查局（中标信息）",
+    "adapter": "html-list",
+    "access": "anonymous",
+    "required": false,
+    "listingUrl": "https://www.cgs.gov.cn/tzgg/zfcg_5637/zobxx/",
+    "pageTemplate": "https://www.cgs.gov.cn/tzgg/zfcg_5637/zobxx/",
+    "keywords": [
+      "干选",
+      "分选",
+      "XRT",
+      "智能分选",
+      "选矸",
+      "光电",
+      "智能选矸",
+      "射线分选",
+      "抛废"
+    ],
+    "columns": "政府采购-中标信息（第一页最新）",
+    "maxPages": 1,
+    "defaultRegion": "全国",
+    "coverNote": "中国地质调查局政府采购中标信息栏目，静态 HTML 可匿名浏览；先扫第一页最新，命中后回取公告详情抽取金额与中标人。"
   }
 ]

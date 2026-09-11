@@ -404,9 +404,164 @@ export async function runProbeAdapter(rule) {
   return result;
 }
 
+// —— 适配器：SPA 平台 JSON 检索接口（POST/GET 返回结构化公告；详情走各平台内容接口） ——
+function getPath(obj, path) {
+  if (!path) return obj;
+  return path.split('.').reduce((acc, key) => (acc == null ? undefined : acc[key]), obj);
+}
+
+function fillTemplate(template, vars) {
+  return String(template).replace(/\{(\w+)\}/g, (_, key) => (vars[key] != null ? String(vars[key]) : ''));
+}
+
+// 无独立详情接口时，用官方接口返回的公告字段合成证据锚（仍来自官方平台，非聚合站）。
+function synthesizeEvidence(candidate, rule) {
+  const row = candidate.rawRow || {};
+  const conf = rule.response || {};
+  const parts = [candidate.title];
+  const typeText = conf.typeTextField ? row[conf.typeTextField] : '';
+  if (typeText) parts.push(String(typeText));
+  const extra = [];
+  for (const key of (rule.evidenceFields || [])) {
+    if (row[key] != null && row[key] !== '') extra.push(`${key}=${String(row[key]).slice(0, 40)}`);
+  }
+  parts.push(`来源:${candidate.source}`);
+  if (candidate.publishDate) parts.push(`发布:${candidate.publishDate}`);
+  if (extra.length) parts.push(extra.join('｜'));
+  parts.push(`官方接口:${rule.searchEndpoint}`);
+  return parts.join('｜');
+}
+
+async function enrichJsonApiDetail(candidate, rule) {
+  const detail = rule.detail;
+  const id = candidate.rawRow?.[(rule.response || {}).idField] ?? '';
+  try {
+    if (detail && detail.enabled !== false && detail.endpoint) {
+      const url = fillTemplate(detail.endpoint, { id, ...(candidate.rawRow || {}) });
+      const headers = { 'content-type': 'application/json;charset=UTF-8', ...(rule.headers || {}), ...(detail.headers || {}) };
+      const method = (detail.method || 'POST').toUpperCase();
+      const body = method === 'POST' ? fillTemplate(detail.bodyTemplate || '{}', { id, ...(candidate.rawRow || {}) }) : undefined;
+      const response = await fetchText(url, { method, headers, body });
+      if (response.status === 200) {
+        let content = '';
+        try {
+          content = String(getPath(JSON.parse(response.text), detail.contentPath) || '');
+        } catch {
+          content = response.text;
+        }
+        if (content && content.length > 30) {
+          const text = /<[a-z][\s\S]*>/i.test(content) ? htmlToText(content) : content;
+          candidate.evidence = excerptEvidence(text);
+          candidate.evidenceCapturedAt = new Date().toISOString();
+          const amount = extractAmount(text);
+          const budget = extractBudget(text);
+          const buyer = extractBuyer(text);
+          const procurement = extractProcurement(text);
+          if (candidate.bidStatus === '已中标' || candidate.bidStatus === '中标候选人') {
+            if (amount) candidate.amount = amount.display;
+            else if (budget) candidate.amount = budget.display;
+            const winner = extractWinner(text);
+            if (winner) candidate.competitor = candidate.bidStatus === '中标候选人' ? `${winner}（第一候选人）` : winner;
+          } else if (candidate.bidStatus === '招标公告') {
+            if (amount) candidate.amount = amount.display;
+            else if (budget) candidate.amount = budget.display;
+            candidate.bidOpenDate = extractBidOpenDate(text) || null;
+          }
+          if (budget) candidate.budget = budget.display;
+          if (buyer) candidate.buyer = buyer;
+          if (procurement) candidate.procurement = procurement;
+          return candidate;
+        }
+      }
+    }
+  } catch {
+    /* 详情抓取失败：回退到官方字段合成，不阻断 */
+  }
+  if (!candidate.evidence) candidate.evidence = synthesizeEvidence(candidate, rule);
+  candidate.evidenceCapturedAt = candidate.evidenceCapturedAt || new Date().toISOString();
+  return candidate;
+}
+
+export async function runJsonApiAdapter(rule, window, limits = {}) {
+  const maxPages = limits.maxPages ?? rule.maxPages ?? 2;
+  const maxDetails = limits.maxDetails ?? 20;
+  const delay = rule.requestDelayMs ?? 2500;
+  const pageSize = rule.pageSize || 20;
+  const conf = rule.response || {};
+  const baseHeaders = { accept: 'application/json, text/plain, */*', ...(rule.headers || {}) };
+  const result = { pagesScanned: 0, discovered: 0, candidates: [], notes: [] };
+  const seen = new Set();
+
+  for (const keyword of rule.keywords) {
+    for (let page = 1; page <= maxPages; page += 1) {
+      const body = {
+        ...(rule.extraParams || {}),
+        [rule.pageParam || 'pageNo']: page,
+        [rule.sizeParam || 'pageSize']: pageSize,
+        [rule.keywordParam || 'keyword']: keyword,
+      };
+      let payload;
+      try {
+        const response = await fetchText(rule.searchEndpoint, {
+          method: rule.method || 'POST',
+          headers: baseHeaders,
+          body: JSON.stringify(body),
+        });
+        if (response.status !== 200) {
+          if (page === 1) throw new Error(`检索接口 HTTP ${response.status}`);
+          result.notes.push(`第${page}页抓取失败：HTTP ${response.status}`);
+          break;
+        }
+        payload = JSON.parse(response.text);
+      } catch (error) {
+        if (page === 1) throw error;
+        result.notes.push(`第${page}页抓取失败：${error.message}`);
+        break;
+      }
+      result.pagesScanned += 1;
+      const rows = getPath(payload, conf.rowsPath);
+      if (!Array.isArray(rows) || rows.length === 0) break;
+      for (const row of rows) {
+        const title = String(row[conf.titleField] || '').trim();
+        if (!title) continue;
+        const id = row[conf.idField];
+        const url = fillTemplate(rule.urlTemplate, { id, ...row });
+        if (!url || seen.has(url)) continue;
+        seen.add(url);
+        result.discovered += 1;
+        const candidate = makeCandidate({
+          title,
+          url,
+          source: rule.name,
+          publishDate: normalizeDate(row[conf.dateField]),
+          typeText: conf.typeTextField ? String(row[conf.typeTextField] || '') : '',
+          region: rule.defaultRegion,
+          sourceAuthority: rule.sourceAuthority || 'official',
+        });
+        candidate.rawRow = row;
+        result.candidates.push(candidate);
+      }
+      if (rows.length < pageSize) break;
+      await sleep(delay);
+    }
+    await sleep(delay);
+  }
+
+  let enriched = 0;
+  for (const candidate of result.candidates) {
+    if (!candidate.line || !candidate.bidStatus) continue;
+    if (enriched >= maxDetails) { result.notes.push('已达单次详情抓取上限，剩余候选下次运行继续'); break; }
+    await enrichJsonApiDetail(candidate, rule);
+    enriched += 1;
+    await sleep(delay);
+  }
+  return result;
+}
+
 export const ADAPTERS = {
   'ggzy-api': runGgzyApiAdapter,
   'html-list': runHtmlListAdapter,
   'home-scan': runHomeScanAdapter,
+  'json-api': runJsonApiAdapter,
   probe: runProbeAdapter,
 };
