@@ -1204,11 +1204,11 @@
       "智能分选",
       "射线分选"
     ],
-    "pageSize": 30,
+    "pageSize": 100,
     "maxPages": 4,
     "requestDelayMs": 700,
     "defaultRegion": "陕西",
-    "coverNote": "国泰新点 CMS 检索接口 POST /cms/api/dynamicData/queryContentPage，body={pageNo,pageSize,dto:{siteId:725,categoryId}}；响应 res.rows[] 含 title/url/text（**正文 HTML 直接返回，无需二次抓详情**）。发布日从 url 路径 /yyyyMMdd/ 提取。详情页 = /cms/default/webfile + row.url。陕煤集团本体，煤炭/矿业设备采购高频源。"
+    "coverNote": "国泰新点 CMS 检索接口 POST /cms/api/dynamicData/queryContentPage，body={pageNo,pageSize,dto:{siteId:725,categoryId}}；响应 res.rows[] 含 title/url/text（**正文 HTML 直接返回，无需二次抓详情**）。发布日从 url 路径 /yyyyMMdd/ 提取。详情页 = /cms/default/webfile + row.url。陕煤集团本体，煤炭/矿业设备采购高频源。pageSize=100 实测可用（100 条约覆盖 16 天）。"
   },
   {
     "id": "qinyuan-result",
@@ -1233,11 +1233,11 @@
       "智能分选",
       "射线分选"
     ],
-    "pageSize": 30,
+    "pageSize": 100,
     "maxPages": 4,
     "requestDelayMs": 700,
     "defaultRegion": "陕西",
-    "coverNote": "同上接口，取中标类两个栏目（中标公示 321 / 中标公告 322，各约 6800 条）。正文 HTML 随列表返回，可直接抽取中标人与成交金额，是陕煤系干选/XRT 设备中标的核心增量源。"
+    "coverNote": "同上接口，取中标类两个栏目（中标公示 321 / 中标公告 322，各约 6800 条）。正文 HTML 随列表返回，可直接抽取中标人与成交金额，是陕煤系干选/XRT 设备中标的核心增量源。pageSize=100。2026-09-11 全量深翻验证：5 栏目共翻 42 页（约 4200 条 2026 年公告），设备词命中 3 条，全部为「干灰分选」（粉煤灰分选，非智能干选/XRT），被 classifyLine 正确排除 → 陕煤 2026 年在秦源平台确无干选/XRT 整机采购，规则保留用于持续监测。"
   },
   {
     "id": "ceec-zbgg",
