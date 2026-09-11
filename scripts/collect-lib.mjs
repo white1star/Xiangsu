@@ -11,9 +11,9 @@ const GLOBAL_EXCLUDES = [
   /旋转磁场|磁场干选|磁选机采购/,
   /带式输送机|胶带输送机|皮带输送机/,
 ];
-const ORE_PATTERN = /(?<![A-Za-z0-9])XRT(?![A-Za-z0-9])|X\s*射线[^，。]{0,6}(分选|拣选|智能)|射线(智能)?分选/;
+const ORE_PATTERN = /(?<![A-Za-z0-9])XRT(?![A-Za-z0-9])|X\s*射线[^，。]{0,6}(分选|拣选|智能)|射线(智能)?分选|光电分选/;
 const COAL_PATTERN = /干选|干法选煤|干法分选|干法提质|复合干选/;
-const GENERIC_SORT_PATTERN = /智能(分选|拣选|选矸)/;
+const GENERIC_SORT_PATTERN = /智能[^，。；\s]{0,4}(分选|拣选|选矸)/;
 const MINING_CONTEXT = /矿|煤|选煤|洗选|矸|选厂|选矿/;
 const GENERIC_BLOCKLIST = /垃圾|果蔬|茶叶|种子|塑料|快递|包裹|细胞|医疗/;
 
@@ -635,11 +635,38 @@ async function enrichVendorDetail(candidate) {
   return candidate;
 }
 
+// 竞品官网列表解析：
+// - 默认走 <a> 锚点（可用 hrefPattern 过滤掉导航/产品页）。
+// - 若列表由内嵌 JS 数组或自定义区块渲染（金石 var news=[...]、好朋友 blog-post），
+//   用 itemRegex（命名组 url/title/date/file）+ urlBase + dateFromFile 直接解析原始 HTML。
+export function extractVendorItems(html, pageUrl, rule) {
+  const items = [];
+  if (rule.itemRegex) {
+    const re = new RegExp(rule.itemRegex, 'gi');
+    let m;
+    while ((m = re.exec(html)) !== null) {
+      const g = m.groups || {};
+      let url = g.url || '';
+      if (url && rule.urlBase) { try { url = new URL(url, rule.urlBase).href; } catch { /* 保留原值 */ } }
+      let date = g.date || null;
+      if (!date && rule.dateFromFile && g.file) date = `${g.file.slice(0, 4)}-${g.file.slice(4, 6)}-${g.file.slice(6, 8)}`;
+      const title = (g.title || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+      if (url && title) items.push({ url, title, date });
+      if (items.length >= 800) break;
+    }
+    return items;
+  }
+  const hrefRe = rule.hrefPattern ? new RegExp(rule.hrefPattern, 'i') : null;
+  for (const anchor of extractAnchors(html, pageUrl)) {
+    if (hrefRe && !hrefRe.test(anchor.url)) continue;
+    items.push({ url: anchor.url, title: anchor.title, date: anchor.date });
+  }
+  return items;
+}
+
 export async function runVendorNewsAdapter(rule, window, limits = {}) {
   const maxPages = limits.maxPages ?? rule.maxPages ?? 2;
   const maxDetails = limits.maxDetails ?? 15;
-  // 只认真正的新闻详情链接，滤掉导航/产品页/侧栏（如海纳的 /artzngxj.html 产品页）。
-  const hrefRe = rule.hrefPattern ? new RegExp(rule.hrefPattern, 'i') : null;
   const result = { pagesScanned: 0, discovered: 0, candidates: [], notes: [] };
   const seen = new Set();
   for (let page = 1; page <= maxPages; page += 1) {
@@ -659,22 +686,21 @@ export async function runVendorNewsAdapter(rule, window, limits = {}) {
       break;
     }
     result.pagesScanned += 1;
-    for (const anchor of extractAnchors(response.text, url)) {
-      if (seen.has(anchor.url)) continue;
-      if (hrefRe && !hrefRe.test(anchor.url)) continue;
-      const title = cleanVendorTitle(anchor.title);
+    for (const item of extractVendorItems(response.text, url, rule)) {
+      if (seen.has(item.url)) continue;
+      const title = cleanVendorTitle(item.title);
       if (!title || title.length < 8) continue;
       const line = canonicalLine(classifyLine(title));
       if (!line) continue;
       const signal = mapVendorSignal(title);
       if (!signal) continue;
-      seen.add(anchor.url);
+      seen.add(item.url);
       result.discovered += 1;
       result.candidates.push({
         title,
-        url: anchor.url,
+        url: item.url,
         source: rule.name,
-        publishDate: anchor.date || extractDateFromUrl(anchor.url),
+        publishDate: item.date || extractDateFromUrl(item.url),
         line,
         bidStatus: signal,
         bid: signal,

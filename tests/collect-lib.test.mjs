@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { buildWindow, canonicalLine, classifyLine, cleanVendorTitle, extractAmount, extractBidOpenDate, extractDateFromUrl, extractWinner, mapBidStatus, mapVendorSignal, normalizeDate, VENDOR_AUTHORITY } from '../scripts/collect-lib.mjs';
+import { buildWindow, canonicalLine, classifyLine, cleanVendorTitle, extractAmount, extractBidOpenDate, extractDateFromUrl, extractVendorItems, extractWinner, mapBidStatus, mapVendorSignal, normalizeDate, VENDOR_AUTHORITY } from '../scripts/collect-lib.mjs';
 import { mergePendingLeads } from '../scripts/weekly-run.mjs';
 
 test('normalizeDate handles Chinese and dash formats', () => {
@@ -113,4 +113,41 @@ test('extractDateFromUrl recovers publish dates from detail links', () => {
 test('VENDOR_AUTHORITY is a stable constant used as the medium-confidence source marker', () => {
   assert.equal(VENDOR_AUTHORITY, '官方自宣');
 });
+
+test('classifyLine recognises photoelectric/generic ore-sorting wording', () => {
+  assert.equal(classifyLine('好朋友科技省级有色金属智能光电分选技术创新中试平台正式揭牌'), 'XRT矿石分选设备');
+  assert.equal(classifyLine('交付荆门胡集，金石智能磷矿分选业绩再突破'), 'XRT矿石分选设备', '智能+限定词+分选也算矿石线');
+  assert.equal(classifyLine('金石光电分选给矿石做CT'), 'XRT矿石分选设备');
+  assert.equal(classifyLine('垃圾智能分选生产线采购'), null, '泛行业黑名单仍生效');
+});
+
+test('extractVendorItems parses embedded JS arrays and blog blocks via itemRegex', () => {
+  const js = "var news = [ { url:'https://mp.weixin.qq.com/s/AAA', img:'x.jpg', tag:'项目交付', title:'保康磷矿分选机圆满交付', date:'2026-06-04', display:'2026年6月4日' } ];";
+  const items = extractVendorItems(js, 'https://www.jinshisort.com/news.html', {
+    itemRegex: "url:\\s*'(?<url>https?://[^']+)'[\\s\\S]{0,300}?title:\\s*'(?<title>[^']*)'[\\s\\S]{0,200}?date:\\s*'(?<date>\\d{4}-\\d{2}-\\d{2})'",
+  });
+  assert.equal(items.length, 1);
+  assert.equal(items[0].url, 'https://mp.weixin.qq.com/s/AAA');
+  assert.equal(items[0].title, '保康磷矿分选机圆满交付');
+  assert.equal(items[0].date, '2026-06-04');
+
+  const blog = '<a href="news-pages/20260826.html" title="查看全文"><img src="x.webp" alt="好朋友科技光电分选平台揭牌" /></a>';
+  const b = extractVendorItems(blog, 'https://www.gzhpy.com/news.html', {
+    itemRegex: 'href="(?<url>news-pages/(?<file>\\d{8})\\.html)"[\\s\\S]{0,400}?alt="(?<title>[^"]*)"',
+    urlBase: 'https://www.gzhpy.com/',
+    dateFromFile: true,
+  });
+  assert.equal(b.length, 1);
+  assert.equal(b[0].url, 'https://www.gzhpy.com/news-pages/20260826.html');
+  assert.equal(b[0].title, '好朋友科技光电分选平台揭牌');
+  assert.equal(b[0].date, '2026-08-26', '文件名补日期');
+});
+
+test('extractVendorItems anchors mode honours hrefPattern', () => {
+  const html = '<a href="/news/display/1920">2026-04-23 泰禾智能红外AI亮相橡塑展</a><a href="/products/display/x">某产品</a>';
+  const items = extractVendorItems(html, 'https://www.chinataiho.com/info.php?class_id=105', { hrefPattern: '/news/display/\\d+' });
+  assert.equal(items.length, 1);
+  assert.equal(items[0].url, 'https://www.chinataiho.com/news/display/1920');
+});
+
 
