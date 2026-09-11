@@ -744,11 +744,240 @@ export async function runVendorNewsAdapter(rule, window, limits = {}) {
   return result;
 }
 
+// —— 公众号低置信线索（第三方数据源：搜狗微信收录 + 公众号直搜） ——
+// 口径：只取「标题 + 摘要 + 日期 + 公众号名 + 链接」；搜狗不提供正文，须点击链接人工查看。
+// 这批线索置信度固定为「低」（前端单独分区，易与高/中置信台账区分），仅作线索雷达，不替代官方公告。
+export const WECHAT_AUTHORITY = '公众号线索';
+
+export async function runSogouWechatAdapter(rule, window, limits = {}) {
+  const { searchWechatByKeyword } = await import('./wechat-sogou.mjs');
+  const num = limits.maxResults ?? rule.maxResults ?? 10;
+  const result = { pagesScanned: 0, discovered: 0, candidates: [], notes: [] };
+  const seen = new Set();
+  // 公众号雷达用滚动回看窗口（默认 120 天）：搜狗收录滞后约一周、行业低频，14 天窗会全落空；
+  // 已入池线索按标题去重，故加宽窗口不会重复入库。
+  const lookback = rule.lookbackDays ?? 120;
+  const cutoff = new Date(`${window.to}T00:00:00Z`);
+  cutoff.setUTCDate(cutoff.getUTCDate() - lookback);
+  let from = cutoff.toISOString().slice(0, 10);
+  if (from < MINIMUM_PUBLISH_DATE) from = MINIMUM_PUBLISH_DATE;
+  result.notes.push(`回看窗口：${from} ~ ${window.to}`);
+  // 两路检索：① 竞品短名（公众号直搜）② 设备词（搜狗第三方收录）；两路结果合并去重。
+  const groups = [
+    { list: rule.vendorKeywords || [], via: '公众号直搜' },
+    { list: rule.deviceKeywords || [], via: '搜狗收录' },
+  ];
+  for (const group of groups) {
+    for (const keyword of group.list) {
+      let articles = [];
+      try {
+        articles = await searchWechatByKeyword(keyword, { num, pages: 1 });
+      } catch (error) {
+        result.notes.push(`「${keyword}」检索失败：${error.message}`);
+        continue;
+      }
+      result.pagesScanned += 1;
+      for (const article of articles) {
+        const key = String(article.title || '').replace(/\s+/g, '');
+        if (!key || seen.has(key)) continue;
+        const line = classifyLine(`${article.title} ${article.summary || ''}`);
+        if (!line) continue;
+        const signal = mapVendorSignal(article.title) || mapVendorSignal(article.summary || '');
+        if (!signal) continue;
+        // 无日期的结果无法核验时效，不计入（搜狗收录通常带时间戳）。
+        if (!article.publishDate || article.publishDate < from) continue;
+        seen.add(key);
+        result.discovered += 1;
+        result.candidates.push({
+          title: article.title,
+          url: article.sogouUrl || article.url,
+          account: article.account || '',
+          source: article.account ? `微信公众号·${article.account}` : '微信公众号',
+          summary: article.summary || '',
+          publishDate: article.publishDate,
+          line: canonicalLine(line),
+          bidStatus: signal,
+          via: group.via,
+          query: keyword,
+          sourceAuthority: WECHAT_AUTHORITY,
+        });
+      }
+      await sleep(1200);
+    }
+  }
+  return result;
+}
+
+// —— 适配器：国泰新点 CMS 检索接口（/cms/api/dynamicData/queryContentPage）——
+// 适用：秦源招标（陕煤）、同模板的 Epoint 系平台。返回标题+正文 HTML，无需二次抓详情。
+export async function runCmsQueryAdapter(rule, window, limits = {}) {
+  const maxPages = limits.maxPages ?? rule.maxPages ?? 1;
+  const maxDetails = limits.maxDetails ?? 30;
+  const pageSize = rule.pageSize || 20;
+  const keyword = new RegExp(rule.keywords.join('|'), 'i');
+  const result = { pagesScanned: 0, discovered: 0, candidates: [], notes: [] };
+  const seen = new Set();
+  let enriched = 0;
+  for (const category of rule.categories || []) {
+    for (let page = 1; page <= maxPages; page += 1) {
+      const body = JSON.stringify({ pageNo: page, pageSize, dto: { siteId: rule.siteId, categoryId: category.categoryId } });
+      let payload;
+      try {
+        const { status, text } = await fetchText(rule.searchEndpoint, {
+          method: rule.method || 'POST',
+          headers: { 'content-type': 'application/json; charset=utf-8', 'x-requested-with': 'XMLHttpRequest', ...(rule.headers || {}) },
+          body,
+        });
+        if (status !== 200) { if (page === 1) throw new Error(`检索接口 HTTP ${status}`); break; }
+        payload = JSON.parse(text);
+      } catch (error) {
+        if (page === 1) { result.notes.push(`「${category.name}」检索失败：${error.message}`); }
+        break;
+      }
+      const rows = payload?.res?.rows || [];
+      result.pagesScanned += 1;
+      if (!rows.length) break;
+      let oldest = null;
+      for (const row of rows) {
+        const title = String(row.title || '').trim();
+        if (!title) continue;
+        const date = extractDateFromUrl(row.url) || normalizeDate(row.publishTime || '');
+        if (date && (!oldest || date < oldest)) oldest = date;
+        if (!keyword.test(title)) continue;
+        if (date && date < window.from) continue;
+        // row.url 常为站点根绝对路径（如 /zbgg/20260911/xxx.html），直接拼 urlBase 前缀更可靠。
+        const rawUrl = String(row.url || '');
+        let url = null;
+        try {
+          url = rawUrl.startsWith('/') ? String(rule.urlBase || '').replace(/\/+$/, '') + rawUrl : new URL(rawUrl, rule.urlBase).href;
+        } catch { continue; }
+        if (!url || seen.has(url)) continue;
+        seen.add(url);
+        result.discovered += 1;
+        const candidate = makeCandidate({
+          title, url, source: `${rule.name}· ${category.name}`, publishDate: date,
+          typeText: category.name, region: rule.defaultRegion, sourceAuthority: 'official',
+        });
+        candidate.rawRow = row;
+        result.candidates.push(candidate);
+      }
+      // 列表按发布时间倒序：整页都早于窗口下限时停止翻页。
+      if (oldest && oldest < window.from) break;
+      await sleep(rule.requestDelayMs ?? 800);
+    }
+  }
+  // 该接口的正文 HTML 已在列表响应里（row.text），直接就地抽取，无需再抓详情页。
+  for (const candidate of result.candidates) {
+    if (enriched >= maxDetails) { result.notes.push('已达单次抽取上限，剩余候选下次运行继续'); break; }
+    const body = htmlToText(candidate.rawRow?.text || '');
+    if (body.length > 30) {
+      candidate.evidence = excerptEvidence(body);
+      candidate.evidenceCapturedAt = new Date().toISOString();
+      const amount = extractAmount(body); const budget = extractBudget(body);
+      const buyer = extractBuyer(body); const procurement = extractProcurement(body);
+      if (candidate.bidStatus === '已中标' || candidate.bidStatus === '中标候选人') {
+        if (amount) candidate.amount = amount.display; else if (budget) candidate.amount = budget.display;
+        const winner = extractWinner(body);
+        if (winner) candidate.competitor = candidate.bidStatus === '中标候选人' ? `${winner}（第一候选人）` : winner;
+      } else if (candidate.bidStatus === '招标公告') {
+        if (amount) candidate.amount = amount.display; else if (budget) candidate.amount = budget.display;
+        candidate.bidOpenDate = extractBidOpenDate(body) || null;
+      }
+      if (budget) candidate.budget = budget.display;
+      if (buyer) candidate.buyer = buyer;
+      if (procurement) candidate.procurement = procurement;
+      enriched += 1;
+    }
+    delete candidate.rawRow;
+  }
+  return result;
+}
+
+// —— 适配器：AjaxPro 列表接口（ASP.NET AjaxPro，中国能建 ceec 等）——
+// 约定：POST {endpoint}，头 X-AjaxPro-Method={method}，body 为参数 JSON；
+// 响应是被引号包裹的 JSON 串（尾部带 ;/*），需剥离后再解析。
+function parseAjaxProPayload(text) {
+  let raw = String(text || '').trim();
+  raw = raw.replace(/^"|";\/\*[\s\S]*$|\/\*[\s\S]*$|\/\*$/g, '');
+  try { return JSON.parse(raw); } catch { /* 尝试反转义后再解析 */ }
+  try { return JSON.parse(raw.replace(/\\"/g, '"').replace(/\\\\/g, '\\')); } catch { return null; }
+}
+
+export async function runAjaxProAdapter(rule, window, limits = {}) {
+  const maxPages = limits.maxPages ?? rule.maxPages ?? 1;
+  const maxDetails = limits.maxDetails ?? 20;
+  const pageSize = rule.pageSize || 20;
+  const keyword = new RegExp(rule.keywords.join('|'), 'i');
+  const result = { pagesScanned: 0, discovered: 0, candidates: [], notes: [] };
+  const seen = new Set();
+  const b64u16 = s => Buffer.from(String(s), 'utf16le').toString('base64');
+  for (const category of rule.categories || []) {
+    for (let page = 1; page <= maxPages; page += 1) {
+      const body = JSON.stringify({
+        ...(rule.extraParams || {}),
+        [rule.codeParam || '_bigtype_base64']: b64u16(category.code),
+        [rule.smallParam || '_smalltype_base64']: '',
+        [rule.pageParam || '_pageIndex']: page,
+        [rule.sizeParam || '_pageSize']: pageSize,
+      });
+      let payload;
+      try {
+        const { status, text } = await fetchText(rule.searchEndpoint, {
+          method: 'POST',
+          headers: { 'content-type': 'text/plain; charset=UTF-8', 'x-ajaxpro-method': rule.ajaxMethod || 'getdata', referer: rule.referer || rule.entryUrl, ...(rule.headers || {}) },
+          body,
+        });
+        if (status !== 200) { if (page === 1) throw new Error(`检索接口 HTTP ${status}`); break; }
+        payload = parseAjaxProPayload(text);
+      } catch (error) {
+        if (page === 1) result.notes.push(`「${category.name}」检索失败：${error.message}`);
+        break;
+      }
+      const rows = payload?.maindata?.[0] || [];
+      result.pagesScanned += 1;
+      if (!rows.length) break;
+      let oldest = null;
+      for (const row of rows) {
+        const title = String(row.GongGaoBT || row.ZhaoBiaoXMMC || row.zbxmmc || row.ZhuanTiMC || '').trim();
+        if (!title) continue;
+        const date = normalizeDate(row.GongGaoFBSJ || row.fbsj || row.ShangBaoSJ || row.YuGaoFBSJ || '');
+        if (date && (!oldest || date < oldest)) oldest = date;
+        if (!keyword.test(title)) continue;
+        if (date && date < window.from) continue;
+        const id = row.sys_epsid || row.sys_id || row.zbxmbh || row.ZhaoBiaoXMBH || '';
+        const url = rule.urlTemplate
+          ? rule.urlTemplate.replace('{id}', encodeURIComponent(id)).replace('{code}', b64u16(category.code))
+          : null;
+        if (!url || seen.has(url)) continue;
+        seen.add(url);
+        result.discovered += 1;
+        result.candidates.push(makeCandidate({
+          title, url, source: `${rule.name}· ${category.name}`, publishDate: date,
+          typeText: category.name, region: rule.defaultRegion, sourceAuthority: 'official',
+        }));
+      }
+      if (oldest && oldest < window.from) break;
+      await sleep(rule.requestDelayMs ?? 900);
+    }
+  }
+  let enriched = 0;
+  for (const candidate of result.candidates) {
+    if (enriched >= maxDetails) { result.notes.push('已达单次详情抓取上限，剩余候选下次运行继续'); break; }
+    await enrichFromOfficialDetail(candidate, candidate.url);
+    enriched += 1;
+    await sleep(700);
+  }
+  return result;
+}
+
 export const ADAPTERS = {
   'ggzy-api': runGgzyApiAdapter,
   'html-list': runHtmlListAdapter,
   'home-scan': runHomeScanAdapter,
   'json-api': runJsonApiAdapter,
   'vendor-news': runVendorNewsAdapter,
+  'sogou-wechat': runSogouWechatAdapter,
+  'cms-query': runCmsQueryAdapter,
+  'ajaxpro-list': runAjaxProAdapter,
   probe: runProbeAdapter,
 };

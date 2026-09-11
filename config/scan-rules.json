@@ -1142,5 +1142,134 @@
     "dateFromUrl": true,
     "defaultRegion": "山东",
     "coverNote": "山东能源集团在线询比价平台询价结果公示栏目，静态可匿名浏览；结果类公告，日期从详情链接提取。"
+  },
+  {
+    "id": "sogou-wechat",
+    "platformId": "sogou-wechat",
+    "name": "微信公众号线索雷达（搜狗微信收录 + 公众号直搜）",
+    "adapter": "sogou-wechat",
+    "access": "anonymous",
+    "required": false,
+    "sourceAuthority": "公众号线索",
+    "vendorKeywords": [
+      "美腾科技",
+      "神州机械",
+      "海王科技",
+      "霍里思特",
+      "好朋友科技",
+      "泰禾卓海",
+      "海纳科技",
+      "东方测控",
+      "奥博特",
+      "金石智能",
+      "澳兰机械",
+      "升华智选",
+      "同方威视",
+      "吉瑞机械"
+    ],
+    "deviceKeywords": [
+      "智能干选",
+      "干选机",
+      "XRT分选",
+      "光电分选",
+      "智能选矸"
+    ],
+    "maxResults": 10,
+    "lookbackDays": 365,
+    "columns": "公众号文章（搜狗微信 type=2 文章检索）",
+    "defaultRegion": "全国",
+    "coverNote": "双路检索：① vendorKeywords（14 家在册竞品短名）走「公众号直搜」② deviceKeywords（设备词）走「搜狗收录（第三方数据源）」。两路结果按标题合并去重，只取标题+摘要+日期+公众号名+链接——搜狗不提供正文，须点击链接人工查看。本批线索置信度固定为「低」，单独入 src/data/wechat-leads.json，与高/中置信台账分区展示。实测搜狗收录滞后约一周；type=1 公众号搜索被验证码墙封死，不使用。"
+  },
+  {
+    "id": "qinyuan-invite",
+    "platformId": "qin-yuan",
+    "name": "秦源招标电子招标平台（陕煤·招标/非招标/变更公告）",
+    "adapter": "cms-query",
+    "access": "anonymous",
+    "required": false,
+    "searchEndpoint": "https://qyzb.shccmg.com/cms/api/dynamicData/queryContentPage",
+    "urlBase": "https://qyzb.shccmg.com/cms/default/webfile",
+    "siteId": "725",
+    "categories": [
+      { "code": "1ywgg", "name": "招标公告", "categoryId": "203" },
+      { "code": "2ywgg", "name": "非招标公告", "categoryId": "204" },
+      { "code": "3ywgg", "name": "变更公告", "categoryId": "205" }
+    ],
+    "keywords": [
+      "干选",
+      "分选",
+      "XRT",
+      "选矸",
+      "光电",
+      "智能分选",
+      "射线分选"
+    ],
+    "pageSize": 30,
+    "maxPages": 4,
+    "requestDelayMs": 700,
+    "defaultRegion": "陕西",
+    "coverNote": "国泰新点 CMS 检索接口 POST /cms/api/dynamicData/queryContentPage，body={pageNo,pageSize,dto:{siteId:725,categoryId}}；响应 res.rows[] 含 title/url/text（**正文 HTML 直接返回，无需二次抓详情**）。发布日从 url 路径 /yyyyMMdd/ 提取。详情页 = /cms/default/webfile + row.url。陕煤集团本体，煤炭/矿业设备采购高频源。"
+  },
+  {
+    "id": "qinyuan-result",
+    "platformId": "qin-yuan",
+    "name": "秦源招标电子招标平台（陕煤·中标公示/中标公告）",
+    "adapter": "cms-query",
+    "access": "anonymous",
+    "required": false,
+    "searchEndpoint": "https://qyzb.shccmg.com/cms/api/dynamicData/queryContentPage",
+    "urlBase": "https://qyzb.shccmg.com/cms/default/webfile",
+    "siteId": "725",
+    "categories": [
+      { "code": "zbgs", "name": "中标公示", "categoryId": "321" },
+      { "code": "zbgg", "name": "中标公告", "categoryId": "322" }
+    ],
+    "keywords": [
+      "干选",
+      "分选",
+      "XRT",
+      "选矸",
+      "光电",
+      "智能分选",
+      "射线分选"
+    ],
+    "pageSize": 30,
+    "maxPages": 4,
+    "requestDelayMs": 700,
+    "defaultRegion": "陕西",
+    "coverNote": "同上接口，取中标类两个栏目（中标公示 321 / 中标公告 322，各约 6800 条）。正文 HTML 随列表返回，可直接抽取中标人与成交金额，是陕煤系干选/XRT 设备中标的核心增量源。"
+  },
+  {
+    "id": "ceec-zbgg",
+    "platformId": "ceec",
+    "name": "中国能建电子采购平台（招标公告 / 资格预审公告）",
+    "adapter": "ajaxpro-list",
+    "access": "anonymous",
+    "required": false,
+    "entryUrl": "https://ec.ceec.net.cn/",
+    "referer": "https://ec.ceec.net.cn/HomeInfo/ProjectList.aspx",
+    "searchEndpoint": "https://ec.ceec.net.cn/ajaxpro/CeecBidWeb.HomeInfo.ProjectList,CeecBidWeb.ashx",
+    "ajaxMethod": "getdata",
+    "urlTemplate": "https://ec.ceec.net.cn/HomeInfo/ProjectDetail.aspx?bigtype={code}&threadID={id}",
+    "categories": [
+      { "code": "ZBGG", "name": "招标公告" },
+      { "code": "ZGYSGG", "name": "资格预审公告" }
+    ],
+    "keywords": [
+      "干选",
+      "分选",
+      "XRT",
+      "选矸",
+      "光电",
+      "智能分选",
+      "射线分选"
+    ],
+    "pageSize": 20,
+    "maxPages": 4,
+    "requestDelayMs": 900,
+    "defaultRegion": "全国",
+    "leadOnly": true,
+    "leadNote": "中国能建官方平台列表数据（AjaxPro），但公告详情页为 JS 空壳、正文接口 GetZhaoBiaoGG 需未知 ID 参数，拿不到原文证据，按数据铁律只作待复核线索。",
+    "coverNote": "ASP.NET AjaxPro 接口：POST /ajaxpro/CeecBidWeb.HomeInfo.ProjectList,CeecBidWeb.ashx，头 X-AjaxPro-Method=getdata，body 参数 _bigtype_base64（=Base64(UTF-16LE(栏目码))）/_pageIndex/_pageSize；响应为引号包裹的 JSON 串（尾部带 ;/*）。栏目码：ZBGG 招标公告、ZGYSGG 资格预审公告、CGYG 采购预告、XMXXGG 采购信息公示（id 字段为 sys_id）、CGGZDT(1270 条，分包商入库公示，非采购)。详情页 = /HomeInfo/ProjectDetail.aspx?bigtype=<code>&threadID=<sys_epsid>（匿名可读）。注：ZBGS/HXRGS/ZXGS 三类中标栏目经该接口返回 0 条，暂未破解。"
   }
 ]

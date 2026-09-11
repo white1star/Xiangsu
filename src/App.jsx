@@ -1,14 +1,16 @@
 import { useMemo, useState } from 'react';
 import { jsPDF } from 'jspdf';
 import rows from './data/intelligence.json';
+import wechatLeads from './data/wechat-leads.json';
 import crawlStamp from './data/crawl_stamp.json';
 import platformLibrary from '../config/platform-library.json';
 import './styles.css';
 import './table-fix.css';
 import './intelligence.css';
 import './platform-library.css';
+import './wechat.css';
 
-const icons = ['▣', '◉'];
+const icons = ['▣', '◉', '◍'];
 const PAGE_SIZE = 10;
 const PHASE_OPTIONS = ['全部', '待开标', '已开标', '未披露', '中标候选人', '已中标', '流标'];
 
@@ -50,7 +52,7 @@ export default function App() {
   return <main className="shell">
     <header className="topbar">
       <div className="brand"><span className="mark">◈</span><b>唐山像素智能</b></div>
-      <nav>{['情报台账', '数据源'].map((item, index) => <button className={page === item ? 'active' : ''} onClick={() => setPage(item)} key={item}><i>{icons[index]}</i>{item}</button>)}</nav>
+      <nav>{['情报台账', '公众号线索', '数据源'].map((item, index) => <button className={page === item ? 'active' : ''} onClick={() => setPage(item)} key={item}><i>{icons[index]}</i>{item}</button>)}</nav>
     </header>
     <section className="workspace">
       {page === '情报台账' ? <>
@@ -58,7 +60,7 @@ export default function App() {
         <div className="tablebox"><table><thead><tr>{['客户', '矿种', '产品线', '竞品', '金额', '成交方式', '发布日期', '来源', '置信度'].map(item => <th key={item}>{item}</th>)}</tr></thead><tbody>{pageRows.map(item => <tr key={item.url} onClick={() => setSelected(item)}>{[item.buyer || '未披露', item.mineral || '未披露', item.line, item.competitor, amountCell(item), dealTypeCell(item), item.date, <a href={item.url} target="_blank" rel="noreferrer" onClick={event => event.stopPropagation()}>{item.source} ↗</a>, item.confidence].map((value, index) => { const cls = index === 4 ? 'amt' : index === 5 ? 'deal' : index === 8 ? `confidence ${item.confidence}` : ''; return <td className={cls} key={index}>{value}</td>; })}</tr>)}</tbody></table></div>
         <footer><span>共 {filtered.length} 个项目（同项目招标/候选/中标公告已合并）　|　最近抓取：{lastCrawl}　|　第 {current}/{totalPages} 页</span><span className="pager"><button disabled={current <= 1} onClick={() => setPageNum(current - 1)}>上一页</button><button disabled={current >= totalPages} onClick={() => setPageNum(current + 1)}>下一页</button></span><span>点击任意记录查看证据摘要</span></footer>
         {selected && <Detail item={selected} onClose={() => setSelected(null)} />}
-      </> : <SourcePage />}
+      </> : page === '公众号线索' ? <WechatPage /> : <SourcePage />}
     </section>
   </main>;
 }
@@ -224,5 +226,38 @@ function SourcePage() {
       desc={free.length ? '需注册登录、但无需付费即可查看公告正文的平台。' : '当前实测暂无此类平台（实测已知平台要么可匿名、要么需付费会员）；后续发现「注册登录后免费可看正文」的平台将归入此类。'} />
     <SourceSection title="已排除·需付费会员" count={paid.length} entries={paid} tag="需付费会员（不收录）"
       desc="商业聚合/企业查询平台，公告正文需付费会员才能查看。按数据源口径排除：不从此类平台收录数据，仅作了解。" />
+  </div>;
+}
+
+// 公众号线索页（置信度=低）：只给标题+摘要+日期+公众号名+链接，正文须点开自看，不作为交易凭证。
+// 双路检索合并去重：① 竞品短名走「公众号直搜」② 设备词走「搜狗收录（第三方数据源）」。
+function WechatPage() {
+  const [line, setLine] = useState('全部');
+  const [via, setVia] = useState('全部');
+  const sorted = useMemo(() => [...wechatLeads].sort((a, b) => String(b.publishDate || '').localeCompare(String(a.publishDate || ''))), []);
+  const filtered = sorted.filter(item => (line === '全部' || item.line === line) && (via === '全部' || item.via === via));
+  const options = key => ['全部', ...new Set(sorted.map(item => item[key]).filter(Boolean))];
+  const select = (value, setter, key) => <select value={value} onChange={event => setter(event.target.value)}>{options(key).map(item => <option key={item}>{item}</option>)}</select>;
+  const viaTag = value => value === '公众号直搜' ? 'wx-via-account' : value === '搜狗收录' ? 'wx-via-sogou' : 'wx-via-account';
+  return <div className="wechat-page">
+    <div className="wx-banner">
+      <b>公众号线索雷达（置信度：低）</b>
+      <span>只采标题 / 摘要 / 日期 / 公众号名 / 链接——搜索引擎不提供公众号正文，请点击标题跳转原文自行查看。本区仅作线索雷达，<b>不作为交易凭证</b>，正式入账须回官方公告核验。</span>
+      <span className="wx-legend">
+        <i className="wx-dot wx-via-account"></i>公众号直搜（竞品名）
+        <i className="wx-dot wx-via-sogou"></i>搜狗收录（第三方数据源）
+      </span>
+    </div>
+    <div className="filters"><label>产品线{select(line, setLine, 'line')}</label><label>检索路径{select(via, setVia, 'via')}</label><span className="wx-total">共 {filtered.length} 条线索</span></div>
+    <div className="tablebox"><table><thead><tr>{['发布日期', '公众号', '标题（点击看原文）', '产品线', '信号', '检索路径'].map(item => <th key={item}>{item}</th>)}</tr></thead>
+      <tbody>{filtered.map(item => <tr key={item.url}>
+        <td>{item.publishDate}</td>
+        <td>{item.account || '未披露'}</td>
+        <td className="wx-title"><a href={item.url} target="_blank" rel="noreferrer">{item.title} ↗</a>{item.summary ? <span className="wx-summary">{item.summary}</span> : null}</td>
+        <td>{item.line}</td>
+        <td><span className="wx-signal">{item.bidStatus}</span></td>
+        <td><span className={`wx-via ${viaTag(item.via)}`}>{item.via}</span></td>
+      </tr>)}</tbody></table></div>
+    <footer><span>公众号线索共 {filtered.length} 条　|　正文不可得：点标题跳转原文查看</span></footer>
   </div>;
 }

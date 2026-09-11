@@ -654,5 +654,17 @@
     "status": "待复核",
     "note": "仅公开聚合索引，须反查官方原文后才能入高置信台账",
     "firstSeenAt": "2026-09-11T08:27:04.612Z"
+  },
+  {
+    "title": "内蒙采购部9月神州干选机配件采购公告",
+    "line": "煤炭智能干选设备",
+    "bidStatus": "招标公告",
+    "source": "乙方宝招标网（招标/采购检索·线索）",
+    "publishDate": "2026-09-11",
+    "url": "https://www.yfbzb.com/inviteBid/detail/20260911_630353437.html",
+    "confidence": "中",
+    "status": "待复核",
+    "note": "仅公开聚合索引，须反查官方原文后才能入高置信台账",
+    "firstSeenAt": "2026-09-11T09:33:29.475Z"
   }
 ]
