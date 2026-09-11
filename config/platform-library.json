@@ -294,7 +294,7 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "煤炭采购、交易公告和燃料线索",
-    "auditNote": "公告可匿名查看（实测：竞价公告列表公开可见）；参与交易需账号。"
+    "auditNote": "公告可匿名查看（实测：竞价公告列表公开可见）；参与交易需账号。2026-09-11 已接入 scan-rules（datang-coal-bulletin：竞价公告列表静态可抓；以煤炭竞价为主，干选/XRT 设备采购为低频增量）。"
   },
   {
     "id": "qin-yuan",
@@ -321,7 +321,7 @@
     "category": "coal_owner",
     "access": "anonymous",
     "coverage": "询比价、物资采购和结果线索",
-    "auditNote": "询比价公告可匿名浏览（实测入口200）；完整询报价内容和参与交易需账号。"
+    "auditNote": "询比价公告可匿名浏览（实测入口200）；完整询报价内容和参与交易需账号。2026-09-11 已接入 scan-rules（sdny-xunjia=询价公告 categoryId16 / sdny-result=询价结果公示 categoryId14，静态分页可抓）。"
   },
   {
     "id": "huaihe",
@@ -438,7 +438,7 @@
     "category": "authentication",
     "access": "anonymous",
     "coverage": "招标、中标、采购商及项目线索",
-    "auditNote": "2026-08-03 实测：公告详情页中标人全名+中标金额完整可见（仅联系方式需登录），归公开数据源。"
+    "auditNote": "2026-08-03 实测：公告详情页中标人全名+中标金额完整可见（仅联系方式需登录），归公开数据源。2026-09-11 已接入 scan-rules（yfbzb-invite / yfbzb-win：keyword=干选 检索全国招标/中标，实测命中大量智能干选机/干选改造项目；商业聚合站，标 aggregator 仅作线索）。"
   },
   {
     "id": "bibenet",

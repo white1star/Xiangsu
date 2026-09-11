@@ -205,7 +205,11 @@ export function excerptEvidence(text, maxLength = 220) {
 export function extractAnchors(html, baseUrl) {
   const anchors = [];
   for (const match of html.matchAll(/<a\b[^>]*href=["']([^"'#]+)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
-    const title = match[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    const title = match[2]
+      .replace(/<[^>]+>/g, '')
+      .replace(/["']\s*[\w-]+\s*=\s*["'][^"']*["']\s*>/g, ' ') // 清除残缺标签属性残留（个别站点 a 标签未闭合）
+      .replace(/\s+/g, ' ')
+      .trim();
     if (!title || title.length < 8) continue;
     let url = null;
     try { url = new URL(match[1], baseUrl).href; } catch { continue; }
@@ -218,6 +222,14 @@ export function extractAnchors(html, baseUrl) {
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
+// 按响应头 charset 解码（部分政企平台为 gb2312/gbk；fetch 默认按 UTF-8 会乱码）
+function decodeBody(buffer, contentType) {
+  const charset = (String(contentType || '').match(/charset=["']?([\w-]+)/i)?.[1] || 'utf-8').toLowerCase();
+  const label = { 'gb2312': 'gb18030', 'gbk': 'gb18030', 'gb18030': 'gb18030', 'utf8': 'utf-8' }[charset] || charset;
+  if (label === 'utf-8') return buffer.toString('utf8');
+  try { return new TextDecoder(label).decode(buffer); } catch { return buffer.toString('utf8'); }
+}
+
 async function fetchText(url, options = {}) {
   const response = await fetch(url, {
     headers: { 'user-agent': USER_AGENT, ...(options.headers || {}) },
@@ -226,7 +238,8 @@ async function fetchText(url, options = {}) {
     redirect: 'follow',
     signal: AbortSignal.timeout(options.timeout || 30000),
   });
-  const text = await response.text();
+  const buffer = Buffer.from(await response.arrayBuffer());
+  const text = decodeBody(buffer, response.headers.get('content-type'));
   return { status: response.status, text, ok: response.ok };
 }
 
@@ -346,7 +359,8 @@ export async function runHtmlListAdapter(rule, window, limits = {}) {
       result.discovered += 1;
       result.candidates.push(makeCandidate({
         title: anchor.title, url: anchor.url, source: rule.name,
-        publishDate: anchor.date, region: rule.defaultRegion, sourceAuthority: rule.sourceAuthority || 'official',
+        publishDate: anchor.date || (rule.dateFromUrl ? extractDateFromUrl(anchor.url) : undefined),
+        region: rule.defaultRegion, sourceAuthority: rule.sourceAuthority || 'official',
       }));
     }
     await sleep(800);
@@ -607,8 +621,14 @@ export function cleanVendorTitle(raw) {
 // 从 URL 反推发布日期（如 /xinwen/20260805.html → 2026-08-05）。
 export function extractDateFromUrl(url) {
   if (!url) return null;
-  const m = String(url).match(/(20\d{2})(\d{2})(\d{2})/);
-  return m ? `${m[1]}-${m[2]}-${m[3]}` : null;
+  const s = String(url);
+  const compact = s.match(/(20\d{2})(\d{2})(\d{2})/);
+  if (compact) return `${compact[1]}-${compact[2]}-${compact[3]}`;
+  const dashed = s.match(/(20\d{2})[-/](\d{1,2})[-/](\d{1,2})/);
+  if (dashed) return `${dashed[1]}-${dashed[2].padStart(2, '0')}-${dashed[3].padStart(2, '0')}`;
+  const ymd = s.match(/(20\d{2})\/[a-z]+\/(\d{2})(\d{2})\//);
+  if (ymd) return `${ymd[1]}-${ymd[2]}-${ymd[3]}`;
+  return null;
 }
 
 async function enrichVendorDetail(candidate) {
