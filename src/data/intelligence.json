@@ -1,5 +1,43 @@
 [
   {
+    "title": "新疆能源公司沙吉海煤矿智能干选项目成功投用",
+    "url": "http://www.shenhuachina.com/zgshww/gsxw/202609/1b722b15cc4e435aa2ee0f4252396dd1.shtml",
+    "source": "中国神华官网（国家能源集团新疆能源公司）",
+    "publishDate": "2026-09-14",
+    "line": "煤炭智能干选设备",
+    "bid": "已投运",
+    "bidStatus": "已投运",
+    "region": "新疆",
+    "sourceAuthority": "官方自宣",
+    "amount": "未披露",
+    "amountNote": "业主方官方新闻未披露设备采购金额，仅披露智能干选机台数与原煤提质效果",
+    "confidence": "中",
+    "evidence": "中国神华官网 2026-09-14《新疆能源公司沙吉海煤矿智能干选项目成功投用》：9月8日，中国神华所属新疆能源公司沙吉海煤矿原煤提质项目顺利启动重载试运行。项目在改造原有1台50—300毫米智能干选机的基础上，新增2台同型号设备及3台25—50毫米智能干选机，同步新建矸石仓及配套栈桥。投运后原煤发热量由3800Kcal/kg提升至4735Kcal/kg。",
+    "competitor": "未披露",
+    "winner": null,
+    "buyer": "国家能源集团新疆能源公司沙吉海煤矿",
+    "mineral": "煤",
+    "date": "2026-09-14",
+    "procurement": "业主方官方新闻未披露设备采购金额，仅披露智能干选机台数与原煤提质效果",
+    "id": "auto-aHR0cDovL3d3dy5zaGVuaH",
+    "evidenceCapturedAt": "2026-09-15T05:23:18.308Z",
+    "openStatus": "未披露",
+    "resultGap": false,
+    "projectKey": "新疆能源公司沙吉海煤矿智能干选项目成功投用",
+    "timeline": [
+      {
+        "date": "2026-09-14",
+        "bid": "已投运",
+        "title": "新疆能源公司沙吉海煤矿智能干选项目成功投用",
+        "amount": "未披露",
+        "url": "http://www.shenhuachina.com/zgshww/gsxw/202609/1b722b15cc4e435aa2ee0f4252396dd1.shtml",
+        "source": "中国神华官网（国家能源集团新疆能源公司）",
+        "amountNote": "业主方官方新闻未披露设备采购金额，仅披露智能干选机台数与原煤提质效果"
+      }
+    ],
+    "stages": 1
+  },
+  {
     "id": "auto-aHR0cHM6Ly93d3",
     "title": "[洛直工货招标(2026)0023号-1]安沟钼多金属矿选矿工程智能抛废（X射线智能分选）工艺运营合作项目招标",
     "line": "XRT矿石分选设备",
