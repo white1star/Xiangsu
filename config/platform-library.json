@@ -51,7 +51,7 @@
     "category": "province",
     "access": "anonymous",
     "coverage": "山西煤矿、矿业权、工程和设备招标",
-    "auditNote": "产煤核心省份官方平台。"
+    "auditNote": "2026-09-15：prec.sxzwfw.gov.cn 不可达（socket/timeout）；山西已由全国公共资源交易平台接口（national-ggzy covers）覆盖，不构成覆盖缺口。"
   },
   {
     "id": "shaanxi-ggzy",

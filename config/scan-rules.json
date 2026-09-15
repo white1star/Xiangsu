@@ -277,7 +277,7 @@
     "columns": "交易信息列表（第一页最新）",
     "maxPages": 1,
     "defaultRegion": "山西",
-    "coverNote": "省级公共资源交易平台静态列表页，匿名可看；先扫第一页最新数据，分页模板待确认后补。"
+    "coverNote": "省级公共资源交易平台静态列表页，匿名可看；先扫第一页最新数据。2026-09-15 起 prec.sxzwfw.gov.cn 不可达（socket/timeout，站点侧问题）；山西已在 national-ggzy covers 内，本条待站点恢复后继续。"
   },
   {
     "id": "shaanxi-ggzy-zb",
@@ -1355,9 +1355,21 @@
     "urlBase": "https://qyzb.shccmg.com/cms/default/webfile",
     "siteId": "725",
     "categories": [
-      { "code": "1ywgg", "name": "招标公告", "categoryId": "203" },
-      { "code": "2ywgg", "name": "非招标公告", "categoryId": "204" },
-      { "code": "3ywgg", "name": "变更公告", "categoryId": "205" }
+      {
+        "code": "1ywgg",
+        "name": "招标公告",
+        "categoryId": "203"
+      },
+      {
+        "code": "2ywgg",
+        "name": "非招标公告",
+        "categoryId": "204"
+      },
+      {
+        "code": "3ywgg",
+        "name": "变更公告",
+        "categoryId": "205"
+      }
     ],
     "keywords": [
       "干选",
@@ -1385,8 +1397,16 @@
     "urlBase": "https://qyzb.shccmg.com/cms/default/webfile",
     "siteId": "725",
     "categories": [
-      { "code": "zbgs", "name": "中标公示", "categoryId": "321" },
-      { "code": "zbgg", "name": "中标公告", "categoryId": "322" }
+      {
+        "code": "zbgs",
+        "name": "中标公示",
+        "categoryId": "321"
+      },
+      {
+        "code": "zbgg",
+        "name": "中标公告",
+        "categoryId": "322"
+      }
     ],
     "keywords": [
       "干选",
@@ -1416,8 +1436,14 @@
     "ajaxMethod": "getdata",
     "urlTemplate": "https://ec.ceec.net.cn/HomeInfo/ProjectDetail.aspx?bigtype={code}&threadID={id}",
     "categories": [
-      { "code": "ZBGG", "name": "招标公告" },
-      { "code": "ZGYSGG", "name": "资格预审公告" }
+      {
+        "code": "ZBGG",
+        "name": "招标公告"
+      },
+      {
+        "code": "ZGYSGG",
+        "name": "资格预审公告"
+      }
     ],
     "keywords": [
       "干选",
@@ -1445,8 +1471,18 @@
     "required": false,
     "searchEndpoint": "http://www.cninfo.com.cn/new/hisAnnouncement/query",
     "stocks": [
-      { "code": "688420", "orgId": "nssc1000863", "name": "美腾科技", "vendorName": "天津美腾科技股份有限公司" },
-      { "code": "603656", "orgId": "9900030419", "name": "泰禾智能", "vendorName": "合肥泰禾智能科技集团股份有限公司" }
+      {
+        "code": "688420",
+        "orgId": "nssc1000863",
+        "name": "美腾科技",
+        "vendorName": "天津美腾科技股份有限公司"
+      },
+      {
+        "code": "603656",
+        "orgId": "9900030419",
+        "name": "泰禾智能",
+        "vendorName": "合肥泰禾智能科技集团股份有限公司"
+      }
     ],
     "column": "szse",
     "pageSize": 30,
