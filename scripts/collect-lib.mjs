@@ -505,21 +505,35 @@ export async function runJsonApiAdapter(rule, window, limits = {}) {
   const baseHeaders = { accept: 'application/json, text/plain, */*', ...(rule.headers || {}) };
   const result = { pagesScanned: 0, discovered: 0, candidates: [], notes: [] };
   const seen = new Set();
+  const categories = rule.categoryValues && rule.categoryValues.length ? rule.categoryValues : [null];
+  const pageStart = rule.pageStart ?? 1;
 
+  const blockPatterns = (rule.titleBlocklist || []).map((source) => new RegExp(source));
+  for (const category of categories) {
   for (const keyword of rule.keywords) {
-    for (let page = 1; page <= maxPages; page += 1) {
-      const body = {
+    for (let page = pageStart; page < pageStart + maxPages; page += 1) {
+      const rawBody = {
         ...(rule.extraParams || {}),
         [rule.pageParam || 'pageNo']: page,
         [rule.sizeParam || 'pageSize']: pageSize,
         [rule.keywordParam || 'keyword']: keyword,
       };
+      if (rule.categoryParam && category) rawBody[rule.categoryParam] = category;
+      let body;
+      let headers = baseHeaders;
+      if (rule.bodyFormat === 'form') {
+        body = new URLSearchParams(rawBody).toString();
+        headers = { 'content-type': 'application/x-www-form-urlencoded; charset=UTF-8', ...baseHeaders };
+      } else {
+        body = JSON.stringify(rawBody);
+        headers = { 'content-type': 'application/json;charset=UTF-8', ...baseHeaders };
+      }
       let payload;
       try {
         const response = await fetchText(rule.searchEndpoint, {
           method: rule.method || 'POST',
-          headers: baseHeaders,
-          body: JSON.stringify(body),
+          headers,
+          body,
         });
         if (response.status !== 200) {
           if (page === 1) throw new Error(`检索接口 HTTP ${response.status}`);
@@ -538,6 +552,7 @@ export async function runJsonApiAdapter(rule, window, limits = {}) {
       for (const row of rows) {
         const title = String(row[conf.titleField] || '').trim();
         if (!title) continue;
+        if (blockPatterns.some((re) => re.test(title))) continue;
         const id = row[conf.idField];
         const url = fillTemplate(rule.urlTemplate, { id, ...row });
         if (!url || seen.has(url)) continue;
@@ -559,6 +574,7 @@ export async function runJsonApiAdapter(rule, window, limits = {}) {
       await sleep(delay);
     }
     await sleep(delay);
+  }
   }
 
   let enriched = 0;

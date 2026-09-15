@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T04:06:36.962Z",
+  "generatedAt": "2026-09-15T04:49:55.156Z",
   "mode": "weekly",
   "window": {
     "from": "2026-09-01",
@@ -7,12 +7,12 @@
   },
   "coverage": {
     "publishable": true,
-    "checked": 47,
+    "checked": 51,
     "required": 5,
     "missing": []
   },
   "bidOpenAudit": {
-    "generatedAt": "2026-09-15T04:06:36.962Z",
+    "generatedAt": "2026-09-15T04:49:55.156Z",
     "today": "2026-09-15",
     "backfilledOpenDates": 0,
     "summary": {
@@ -252,7 +252,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T03:59:48.478Z"
+      "checkedAt": "2026-09-15T04:38:15.209Z"
     },
     {
       "id": "ccteg-goods",
@@ -263,7 +263,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:00:19.730Z"
+      "checkedAt": "2026-09-15T04:38:42.288Z"
     },
     {
       "id": "ccteg-all",
@@ -274,7 +274,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:00:24.239Z"
+      "checkedAt": "2026-09-15T04:38:46.616Z"
     },
     {
       "id": "gsei-results",
@@ -285,7 +285,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:00:28.535Z"
+      "checkedAt": "2026-09-15T04:38:50.879Z"
     },
     {
       "id": "chnenergy-zbgg",
@@ -296,7 +296,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:00:31.183Z"
+      "checkedAt": "2026-09-15T04:38:53.800Z"
     },
     {
       "id": "zmzb-hw",
@@ -307,18 +307,20 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:00:32.618Z"
+      "checkedAt": "2026-09-15T04:38:55.291Z"
     },
     {
       "id": "mtzbw-leads",
       "name": "中国煤炭招标网（聚合线索）",
-      "status": "failed",
-      "pagesScanned": 0,
+      "status": "ok",
+      "pagesScanned": 1,
       "discovered": 0,
       "accepted": 0,
-      "failReason": "The operation was aborted due to timeout",
-      "notes": [],
-      "checkedAt": "2026-09-15T04:00:36.897Z"
+      "failReason": null,
+      "notes": [
+        "行业聚合站，只产出待复核线索，必须反查官方原文后才能入高置信台账。"
+      ],
+      "checkedAt": "2026-09-15T04:38:59.948Z"
     },
     {
       "id": "ccgp-search",
@@ -329,7 +331,7 @@
       "accepted": 0,
       "failReason": "平台反爬拦截（频繁访问/验证提示），未绕过，等待下次重试",
       "notes": [],
-      "checkedAt": "2026-09-15T04:01:06.898Z"
+      "checkedAt": "2026-09-15T04:39:25.963Z"
     },
     {
       "id": "gsnhcg-zbgg",
@@ -340,7 +342,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:01:07.001Z"
+      "checkedAt": "2026-09-15T04:39:26.141Z"
     },
     {
       "id": "gsnhcg-zhb",
@@ -351,7 +353,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:01:10.204Z"
+      "checkedAt": "2026-09-15T04:39:28.812Z"
     },
     {
       "id": "gsnhcg-zjgg",
@@ -362,18 +364,18 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:01:12.834Z"
+      "checkedAt": "2026-09-15T04:39:31.400Z"
     },
     {
       "id": "shanxi-ggzy-gc",
       "name": "山西公共资源交易平台（工程建设）",
-      "status": "failed",
-      "pagesScanned": 0,
+      "status": "ok",
+      "pagesScanned": 1,
       "discovered": 0,
       "accepted": 0,
-      "failReason": "fetch failed",
+      "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:01:15.466Z"
+      "checkedAt": "2026-09-15T04:39:34.122Z"
     },
     {
       "id": "shaanxi-ggzy-zb",
@@ -384,7 +386,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:01:27.691Z"
+      "checkedAt": "2026-09-15T04:39:42.277Z"
     },
     {
       "id": "shaanxi-ggzy-zj",
@@ -395,7 +397,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:01:28.639Z"
+      "checkedAt": "2026-09-15T04:39:43.221Z"
     },
     {
       "id": "nmg-ggzy-jy",
@@ -406,7 +408,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:01:29.526Z"
+      "checkedAt": "2026-09-15T04:39:44.102Z"
     },
     {
       "id": "xinjiang-ggzy-jy",
@@ -417,7 +419,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:01:30.849Z"
+      "checkedAt": "2026-09-15T04:39:45.139Z"
     },
     {
       "id": "guizhou-ggzy-gc",
@@ -428,7 +430,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:01:32.000Z"
+      "checkedAt": "2026-09-15T04:39:46.648Z"
     },
     {
       "id": "hlj-ggzy-zb",
@@ -439,7 +441,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:01:33.055Z"
+      "checkedAt": "2026-09-15T04:39:47.742Z"
     },
     {
       "id": "hlj-ggzy-zj",
@@ -450,7 +452,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:01:34.072Z"
+      "checkedAt": "2026-09-15T04:39:48.678Z"
     },
     {
       "id": "sichuan-ggzy-jy",
@@ -461,7 +463,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:01:34.930Z"
+      "checkedAt": "2026-09-15T04:39:49.521Z"
     },
     {
       "id": "liaoning-ggzy-jy",
@@ -472,7 +474,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:01:36.033Z"
+      "checkedAt": "2026-09-15T04:39:50.617Z"
     },
     {
       "id": "qinghai-ggzy-jy",
@@ -483,7 +485,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:01:37.510Z"
+      "checkedAt": "2026-09-15T04:39:52.095Z"
     },
     {
       "id": "jinneng-ggzy-gg",
@@ -494,7 +496,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:01:39.520Z"
+      "checkedAt": "2026-09-15T04:39:53.048Z"
     },
     {
       "id": "xjyg-ggzy-zb",
@@ -505,7 +507,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:01:40.644Z"
+      "checkedAt": "2026-09-15T04:39:54.156Z"
     },
     {
       "id": "xjyg-ggzy-zj",
@@ -516,7 +518,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:01:41.889Z"
+      "checkedAt": "2026-09-15T04:39:55.389Z"
     },
     {
       "id": "ego-chinacoal-notice",
@@ -527,7 +529,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:01:42.855Z"
+      "checkedAt": "2026-09-15T04:39:56.326Z"
     },
     {
       "id": "powerchina-notice",
@@ -538,7 +540,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:02:31.466Z"
+      "checkedAt": "2026-09-15T04:40:45.437Z"
     },
     {
       "id": "powerchina-result",
@@ -549,7 +551,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:03:00.899Z"
+      "checkedAt": "2026-09-15T04:41:14.720Z"
     },
     {
       "id": "cgs-zabxx",
@@ -560,7 +562,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:03:30.480Z"
+      "checkedAt": "2026-09-15T04:41:43.608Z"
     },
     {
       "id": "cgs-zobxx",
@@ -571,7 +573,29 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:03:31.563Z"
+      "checkedAt": "2026-09-15T04:41:44.624Z"
+    },
+    {
+      "id": "baohua-invite",
+      "name": "宝华智慧招标共享平台（招标公告）",
+      "status": "ok",
+      "pagesScanned": 27,
+      "discovered": 12,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-09-15T04:41:45.561Z"
+    },
+    {
+      "id": "baohua-result",
+      "name": "宝华智慧招标共享平台（中标候选人/结果公示）",
+      "status": "ok",
+      "pagesScanned": 27,
+      "discovered": 8,
+      "accepted": 0,
+      "failReason": null,
+      "notes": [],
+      "checkedAt": "2026-09-15T04:43:29.542Z"
     },
     {
       "id": "vendor-meiteng",
@@ -582,7 +606,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:03:32.451Z"
+      "checkedAt": "2026-09-15T04:45:01.136Z"
     },
     {
       "id": "vendor-shenzhou",
@@ -593,7 +617,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:03:35.801Z"
+      "checkedAt": "2026-09-15T04:45:04.542Z"
     },
     {
       "id": "vendor-haiwang",
@@ -604,7 +628,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:03:38.529Z"
+      "checkedAt": "2026-09-15T04:45:07.560Z"
     },
     {
       "id": "vendor-holysort",
@@ -615,7 +639,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:03:39.575Z"
+      "checkedAt": "2026-09-15T04:45:08.572Z"
     },
     {
       "id": "vendor-haina2001",
@@ -626,7 +650,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:03:42.270Z"
+      "checkedAt": "2026-09-15T04:45:12.618Z"
     },
     {
       "id": "vendor-dfmc",
@@ -637,7 +661,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:03:43.579Z"
+      "checkedAt": "2026-09-15T04:45:14.006Z"
     },
     {
       "id": "vendor-abtrobot",
@@ -648,7 +672,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:03:45.384Z"
+      "checkedAt": "2026-09-15T04:45:15.822Z"
     },
     {
       "id": "vendor-nuctech",
@@ -659,7 +683,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:03:46.301Z"
+      "checkedAt": "2026-09-15T04:45:17.477Z"
     },
     {
       "id": "vendor-jinshisort",
@@ -670,7 +694,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:03:48.648Z"
+      "checkedAt": "2026-09-15T04:45:20.862Z"
     },
     {
       "id": "vendor-gzhpy",
@@ -681,7 +705,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:03:53.501Z"
+      "checkedAt": "2026-09-15T04:45:25.012Z"
     },
     {
       "id": "vendor-chinataiho",
@@ -692,7 +716,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:03:54.656Z"
+      "checkedAt": "2026-09-15T04:45:26.103Z"
     },
     {
       "id": "yfbzb-invite",
@@ -703,7 +727,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:03:55.638Z"
+      "checkedAt": "2026-09-15T04:45:27.403Z"
     },
     {
       "id": "yfbzb-win",
@@ -714,7 +738,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:03:56.728Z"
+      "checkedAt": "2026-09-15T04:45:28.495Z"
     },
     {
       "id": "datang-coal-bulletin",
@@ -725,7 +749,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:03:57.842Z"
+      "checkedAt": "2026-09-15T04:45:29.624Z"
     },
     {
       "id": "sdny-xunjia",
@@ -736,7 +760,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:04:02.110Z"
+      "checkedAt": "2026-09-15T04:45:32.947Z"
     },
     {
       "id": "sdny-result",
@@ -747,20 +771,20 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:04:05.447Z"
+      "checkedAt": "2026-09-15T04:45:38.382Z"
     },
     {
       "id": "sogou-wechat",
       "name": "微信公众号线索雷达（搜狗微信收录 + 公众号直搜）",
       "status": "ok",
       "pagesScanned": 5,
-      "discovered": 4,
+      "discovered": 3,
       "accepted": 0,
       "failReason": null,
       "notes": [
         "回看窗口：2026-01-01 ~ 2026-09-15"
       ],
-      "checkedAt": "2026-09-15T04:04:08.405Z"
+      "checkedAt": "2026-09-15T04:45:41.602Z"
     },
     {
       "id": "qinyuan-invite",
@@ -771,18 +795,20 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:04:17.704Z"
+      "checkedAt": "2026-09-15T04:45:50.581Z"
     },
     {
       "id": "qinyuan-result",
       "name": "秦源招标电子招标平台（陕煤·中标公示/中标公告）",
       "status": "ok",
-      "pagesScanned": 2,
+      "pagesScanned": 1,
       "discovered": 0,
       "accepted": 0,
       "failReason": null,
-      "notes": [],
-      "checkedAt": "2026-09-15T04:04:34.879Z"
+      "notes": [
+        "「中标公示」检索失败：The operation was aborted due to timeout"
+      ],
+      "checkedAt": "2026-09-15T04:47:11.487Z"
     },
     {
       "id": "ceec-zbgg",
@@ -793,7 +819,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-09-15T04:04:38.778Z"
+      "checkedAt": "2026-09-15T04:47:47.736Z"
     }
   ],
   "coveredByNational": [
@@ -816,18 +842,18 @@
   ],
   "wechatRadar": {
     "note": "skill 路径命中 0 条",
-    "screened": 4,
-    "added": 2,
+    "screened": 3,
+    "added": 0,
     "total": 4
   },
   "totals": {
-    "discovered": 98,
+    "discovered": 117,
     "accepted": 0,
     "acceptedWithAmount": 0,
     "vendorAccepted": 0,
-    "pendingReviewAdded": 8,
-    "wechatLeadAdded": 2,
-    "rejected": 28,
+    "pendingReviewAdded": 0,
+    "wechatLeadAdded": 0,
+    "rejected": 48,
     "reEnriched": 80
   },
   "rejected": [
@@ -853,6 +879,42 @@
       "title": "XRT矿石分选机X射线辐射检测服务询价通知",
       "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1172548367011704832",
       "source": "中煤易购采购一体化平台（公告查询）",
+      "reason": "发布日期早于2026-01-01"
+    },
+    {
+      "title": "太原钢铁（集团）有限公司矿业分公司尖山铁矿胶带排岩系统破碎站第三次移设及配套干选系统工程干选系统[招标公告]",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001001/018001001002/20220507/3b545fa4-a676-4f86-91db-dc689ca14624.html",
+      "source": "宝华智慧招标共享平台（招标公告）",
+      "reason": "发布日期早于2026-01-01"
+    },
+    {
+      "title": "南山矿和尚桥铁矿围岩综合利用干选技改项目[招标公告]",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001001/018001001002/20211021/35545d64-2bc1-4417-aa36-0f67d232d215.html",
+      "source": "宝华智慧招标共享平台（招标公告）",
+      "reason": "发布日期早于2026-01-01"
+    },
+    {
+      "title": "八钢矿业蒙库矿选矿厂单筒高效粉矿干选机成套设备采购招标公告",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001002/018001002002/20240930/7e26a385-03f7-4e9e-a204-ffee673dd74d.html",
+      "source": "宝华智慧招标共享平台（招标公告）",
+      "reason": "发布日期早于2026-01-01"
+    },
+    {
+      "title": "安徽马钢矿业资源集团南山矿业有限公司和尚桥铁矿围岩综合利用干选技改项目胶带机设备招标公告(重新招标第1次)",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001002/018001002002/20220208/8e949fe2-1e5b-45d9-9d9d-ab9da2015f89.html",
+      "source": "宝华智慧招标共享平台（招标公告）",
+      "reason": "发布日期早于2026-01-01"
+    },
+    {
+      "title": "安徽马钢矿业资源集团南山矿业有限公司和尚桥铁矿围岩综合利用干选技改项目胶带机设备招标公告<font color='red'>[已作废]</font>",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001002/018001002002/20220118/3772a401-8927-4264-ac4a-89d84c68d4a2.html",
+      "source": "宝华智慧招标共享平台（招标公告）",
+      "reason": "发布日期早于2026-01-01"
+    },
+    {
+      "title": "焦煤集团1890煤矿智能选矸建设项目BT[招标公告]",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001003/018001003002/20210323/763b225e-2263-4611-8767-4d99e25c81d2.html",
+      "source": "宝华智慧招标共享平台（招标公告）",
       "reason": "发布日期早于2026-01-01"
     },
     {
@@ -997,6 +1059,90 @@
       "title": "中国电建中南院中风化岩高效加工利用关键技术研究项目破碎产品微裂纹分析、机制砂云母剔除的分选试验及中风化岩泥土特性分析采购项目 成交结果公示",
       "url": "https://bid.powerchina.cn/notice/detail?id=2409423772&type=中标/成交公示",
       "source": "中国电建采购招标数智化平台（中标/成交公示）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "山西太钢不锈钢股份有限公司炼钢一厂产品结构优化绿色智能升级改造项目前期地下通信管线及光电缆迁建工程[招标公告]",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001001/018001001002/20220514/bece7d33-c6ea-4699-b3b5-292f2b7423b7.html",
+      "source": "宝华智慧招标共享平台（招标公告）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "山西太钢不锈钢股份有限公司炼钢一厂产品结构优化绿色智能升级改造项目前期地下通信管线及光电缆迁建工程[招标公告]",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001001/018001001002/20220505/bad1c272-cb21-4820-b35a-5f19db947f9b.html",
+      "source": "宝华智慧招标共享平台（招标公告）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "罗河矿干抛废石堆场全封闭项目网架防腐和采光板更换项目[招标公告]",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001001/018001001002/20260902/323417c3-fec6-4ef0-880d-85661da32be3.html",
+      "source": "宝华智慧招标共享平台（招标公告）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "罗河矿干抛废石中铁、硫回收技改工程[招标公告]",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001001/018001001002/20251024/4add172d-f079-404e-b4e8-92cce8da07e8.html",
+      "source": "宝华智慧招标共享平台（招标公告）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "通力磁材厂视觉分选机设备采购[招标公告]",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001002/018001002002/20260812/9c669aad-b6ab-42e0-8f0b-012173c31960.html",
+      "source": "宝华智慧招标共享平台（招标公告）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "罗河矿干抛废石中铁、硫回收技改工程项目建设监理服务[招标公告]",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001003/018001003002/20251021/b443816d-f43e-43f1-bed5-96014b4c9d45.html",
+      "source": "宝华智慧招标共享平台（招标公告）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "太原钢铁（集团）有限公司矿业分公司尖山铁矿胶带排岩系统破碎站第三次移设及配套干选系统工程干选系统",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001001/018001001003/20220713/77ae1b45-0b8f-4167-bab0-00baddcf3606.html",
+      "source": "宝华智慧招标共享平台（中标候选人/结果公示）",
+      "reason": "公告类型不在收录范围（如流标/废标/资格预审）"
+    },
+    {
+      "title": "南山矿和尚桥铁矿围岩综合利用干选技改项目",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001001/018001001003/20211119/bd288505-6f10-479c-a734-7a155f27fb1a.html",
+      "source": "宝华智慧招标共享平台（中标候选人/结果公示）",
+      "reason": "公告类型不在收录范围（如流标/废标/资格预审）"
+    },
+    {
+      "title": "罗河矿干抛废石堆场全封闭项目网架防腐和采光板更换项目中标候选人公示[中标候选人公示]",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001001/018001001003/20260914/5a9403b8-a125-4861-8c82-e36c61bda0ca.html",
+      "source": "宝华智慧招标共享平台（中标候选人/结果公示）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "罗河矿干抛废石中铁、硫回收技改工程",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001001/018001001003/20251118/a094a435-807e-4f1b-b5c5-84851e565884.html",
+      "source": "宝华智慧招标共享平台（中标候选人/结果公示）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "八钢矿业蒙库矿选矿厂单筒高效粉矿干选机成套设备采购",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001002/018001002003/20241025/8661a154-3b4a-4e45-8880-30bd86a92989.html",
+      "source": "宝华智慧招标共享平台（中标候选人/结果公示）",
+      "reason": "公告类型不在收录范围（如流标/废标/资格预审）"
+    },
+    {
+      "title": "安徽马钢矿业资源集团南山矿业有限公司和尚桥铁矿围岩综合利用干选技改项目胶带机设备",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001002/018001002003/20220301/1f89d7bc-4ec3-4e48-9671-2e951ce9da97.html",
+      "source": "宝华智慧招标共享平台（中标候选人/结果公示）",
+      "reason": "公告类型不在收录范围（如流标/废标/资格预审）"
+    },
+    {
+      "title": "通力磁材厂视觉分选机设备采购[中标候选人公示]",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001002/018001002003/20260831/8f244b7f-97e0-46cb-9a8a-f6265142d5e5.html",
+      "source": "宝华智慧招标共享平台（中标候选人/结果公示）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "罗河矿干抛废石中铁、硫回收技改工程项目建设监理服务",
+      "url": "https://www.baohuabidding.cn/shbhgjzb/jyxx/018001/018001003/018001003003/20251029/6d23a817-50f9-4dfb-8c24-2a0b922d4415.html",
+      "source": "宝华智慧招标共享平台（中标候选人/结果公示）",
       "reason": "与两类设备无关或命中排除规则"
     }
   ]

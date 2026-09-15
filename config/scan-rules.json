@@ -821,6 +821,170 @@
     "coverNote": "中国地质调查局政府采购中标信息栏目，静态 HTML 可匿名浏览；先扫第一页最新，命中后回取公告详情抽取金额与中标人。"
   },
   {
+    "id": "baohua-invite",
+    "platformId": "baohua",
+    "name": "宝华智慧招标共享平台（招标公告）",
+    "adapter": "json-api",
+    "access": "anonymous",
+    "required": false,
+    "searchEndpoint": "https://www.baohuabidding.cn/EWB-FRONT-5.4.2-sp1/rest/GgSearchActionNew/getJyInfoMationList",
+    "method": "POST",
+    "bodyFormat": "form",
+    "headers": {
+      "Origin": "https://www.baohuabidding.cn",
+      "Referer": "https://www.baohuabidding.cn/shbhgjzb/",
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    "pageParam": "pageIndex",
+    "sizeParam": "pageSize",
+    "pageStart": 0,
+    "pageSize": 50,
+    "keywordParam": "kw",
+    "categoryParam": "categoryNum",
+    "categoryValues": [
+      "018001001002",
+      "018001002002",
+      "018001003002"
+    ],
+    "extraParams": {
+      "siteGuid": "7eb5f7f1-9041-43ad-8e13-8fcb82ea831a",
+      "zbjg": "",
+      "YZM": "",
+      "ImgGuid": ""
+    },
+    "response": {
+      "rowsPath": "custom",
+      "totalPath": "AllCount",
+      "titleField": "title",
+      "dateField": "infodate",
+      "idField": "infourl",
+      "typeTextField": "title"
+    },
+    "detail": {
+      "enabled": true,
+      "endpoint": "https://www.baohuabidding.cn/shbhgjzb{infourl}",
+      "method": "GET"
+    },
+    "urlTemplate": "https://www.baohuabidding.cn/shbhgjzb{infourl}",
+    "evidenceFields": [
+      "title",
+      "infodate"
+    ],
+    "keywords": [
+      "干选",
+      "分选",
+      "XRT",
+      "选矸",
+      "排矸",
+      "光电",
+      "抛废",
+      "智能分选",
+      "射线分选"
+    ],
+    "columns": "工程/货物/服务 招标公告（宝武体系）",
+    "maxPages": 2,
+    "requestDelayMs": 1600,
+    "defaultRegion": "全国",
+    "titleBlocklist": [
+      "干选[一二三四五六七八九十]?[厂车工段]",
+      "干选[一二三四五六七八九十]、[一二三四五六七八九十]",
+      "干选废石",
+      "干选皮带",
+      "干选混块",
+      "干选.{0,10}(运输|倒运|维保|维修|整改|防腐|封闭|硬化|储能|劳务|承包|服务|销售|拍卖|竞价|监理|检测|设计|勘察|施工|安装|大修|技改工程)",
+      "干选系统.{0,8}(空调|风机|网架|防腐|皮带|封闭|硬化|建设)",
+      "(废钢|工业垃圾|垃圾|闲废|固废|钢渣|渣钢|磁材|磁选机|磁滚筒|磁系|CTX)分选",
+      "磁选机|磁滚筒|磁系电机|CTX",
+      "分选.{0,6}(加工|仓储|配送|外包|承揽|协力|劳务|处置)",
+      "X射线光电子能谱仪",
+      "分选技术研究",
+      "加工管理平台"
+    ],
+    "coverNote": "上海宝华国际招标（中国宝武体系：马钢矿业、太钢矿业、八钢矿业、昆钢、大冶铁矿、宝武环科）招标公告。免登录 form 检索接口，kw 关键词覆盖全库历史，pageIndex 从 0 起。详情为静态 HTML 直取全文。"
+  },
+  {
+    "id": "baohua-result",
+    "platformId": "baohua",
+    "name": "宝华智慧招标共享平台（中标候选人/结果公示）",
+    "adapter": "json-api",
+    "access": "anonymous",
+    "required": false,
+    "searchEndpoint": "https://www.baohuabidding.cn/EWB-FRONT-5.4.2-sp1/rest/GgSearchActionNew/getJyInfoMationList",
+    "method": "POST",
+    "bodyFormat": "form",
+    "headers": {
+      "Origin": "https://www.baohuabidding.cn",
+      "Referer": "https://www.baohuabidding.cn/shbhgjzb/",
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    "pageParam": "pageIndex",
+    "sizeParam": "pageSize",
+    "pageStart": 0,
+    "pageSize": 50,
+    "keywordParam": "kw",
+    "categoryParam": "categoryNum",
+    "categoryValues": [
+      "018001001003",
+      "018001002003",
+      "018001003003"
+    ],
+    "extraParams": {
+      "siteGuid": "7eb5f7f1-9041-43ad-8e13-8fcb82ea831a",
+      "zbjg": "",
+      "YZM": "",
+      "ImgGuid": ""
+    },
+    "response": {
+      "rowsPath": "custom",
+      "totalPath": "AllCount",
+      "titleField": "title",
+      "dateField": "infodate",
+      "idField": "infourl",
+      "typeTextField": "title"
+    },
+    "detail": {
+      "enabled": true,
+      "endpoint": "https://www.baohuabidding.cn/shbhgjzb{infourl}",
+      "method": "GET"
+    },
+    "urlTemplate": "https://www.baohuabidding.cn/shbhgjzb{infourl}",
+    "evidenceFields": [
+      "title",
+      "infodate"
+    ],
+    "keywords": [
+      "干选",
+      "分选",
+      "XRT",
+      "选矸",
+      "排矸",
+      "光电",
+      "抛废",
+      "智能分选",
+      "射线分选"
+    ],
+    "columns": "工程/货物/服务 中标候选人·结果公示（宝武体系）",
+    "maxPages": 2,
+    "requestDelayMs": 1600,
+    "defaultRegion": "全国",
+    "titleBlocklist": [
+      "干选[一二三四五六七八九十]?[厂车工段]",
+      "干选[一二三四五六七八九十]、[一二三四五六七八九十]",
+      "干选废石",
+      "干选皮带",
+      "干选混块",
+      "干选.{0,10}(运输|倒运|维保|维修|整改|防腐|封闭|硬化|储能|劳务|承包|服务|销售|拍卖|竞价|监理|检测|设计|勘察|施工|安装|大修|技改工程)",
+      "干选系统.{0,8}(空调|风机|网架|防腐|皮带|封闭|硬化|建设)",
+      "(废钢|工业垃圾|垃圾|闲废|固废|钢渣|渣钢|磁材|磁选机|磁滚筒|磁系|CTX)分选",
+      "磁选机|磁滚筒|磁系电机|CTX",
+      "分选.{0,6}(加工|仓储|配送|外包|承揽|协力|劳务|处置)",
+      "X射线光电子能谱仪",
+      "分选技术研究",
+      "加工管理平台"
+    ],
+    "coverNote": "同上接口，取三个结果公示栏目（工程 018001001003 / 货物 018001002003 / 服务 018001003003）。可抽中标人与成交金额，是宝武系矿业分选设备结果的直接来源。"
+  },
+  {
     "id": "vendor-meiteng",
     "platformId": "vendor-meiteng",
     "name": "美腾科技官网·美腾新闻",
