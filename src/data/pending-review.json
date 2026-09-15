@@ -762,5 +762,17 @@
     "status": "待复核",
     "note": "仅公开聚合索引，须反查官方原文后才能入高置信台账",
     "firstSeenAt": "2026-09-15T04:05:08.658Z"
+  },
+  {
+    "title": "干选一厂安全整改完善项目中标公告",
+    "line": "煤炭智能干选设备",
+    "bidStatus": "已中标",
+    "source": "乙方宝招标网（中标结果检索·线索）",
+    "publishDate": "2026-09-15",
+    "url": "https://www.yfbzb.com/winbid/detail/20260915_631196486.html",
+    "confidence": "中",
+    "status": "待复核",
+    "note": "仅公开聚合索引，须反查官方原文后才能入高置信台账",
+    "firstSeenAt": "2026-09-15T07:11:10.843Z"
   }
 ]
