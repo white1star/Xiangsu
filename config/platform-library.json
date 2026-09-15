@@ -240,7 +240,7 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "国家电投及内蒙古能源煤炭相关招标公告",
-    "auditNote": "公告可匿名查看（实测：搜索引擎直接抓到 openFileById 招标公告全文，未登录可见）；下载文件、报名和投标需供应商注册。"
+    "auditNote": "2026-09-15 复测：无头浏览器渲染为空（正文 0 字节、无 XHR），暂不可达。"
   },
   {
     "id": "powerchina",
@@ -276,7 +276,7 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "煤业、煤电、选煤相关设备及工程采购",
-    "auditNote": "公告可匿名查看（实测未登录即见采购公告/招标公告正文；WAF偶发412但非登录墙）；下载文件和投标需供应商注册。"
+    "auditNote": "2026-09-15 复测：node 与无头 Chromium 访问首页/列表均返 HTTP 412（WAF），未取到列表正文；暂不可爬，未接入。"
   },
   {
     "id": "huadian",
@@ -285,7 +285,7 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "煤炭、火电及相关设备采购",
-    "auditNote": "公告可匿名查看（实测：/detailNewZbhxrgs 评标/中标公示全文未登录可见；WAF偶发412非登录墙）；下载和投标需注册。"
+    "auditNote": "2026-09-15 复测：列表页可渲染菜单，但进入公告列表需『游客身份验证』（页面提示去验证），属身份验证墙，按铁律不绕过；未接入。"
   },
   {
     "id": "datang",
@@ -294,7 +294,7 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "煤电、燃料和设备采购公告",
-    "auditNote": "公告可匿名查看（实测：/notice/moreController/xjdhtml 采购结果公告全文未登录可见）；下载和投标需注册。"
+    "auditNote": "2026-09-15 已探明：列表 JSON 接口 GET /cpu-bidauction/bidauctionBulletin/bulletinList?bulletinType=1(招标)/2(结果) 可匿名调用（字段 title/pushTime/code/id）；但详情跳 SSO（tangyhtsso）且正文接口未打通，仅列表级可达，暂未接入。"
   },
   {
     "id": "datang-coal",
@@ -339,7 +339,7 @@
     "category": "coal_owner",
     "access": "anonymous",
     "coverage": "淮南矿业/淮河能源设备采购和中标公告",
-    "auditNote": "公告可匿名查看（实测：/cms/channel/ywgg5hw 中标公告全文未登录可见）；正式文件、报名和投标需登录。"
+    "auditNote": "2026-09-15 复测：WebMirror 站点，node/无头浏览器均只返回 IE 退役提示壳（1166B），未取到列表，暂不可爬。"
   },
   {
     "id": "huaibei",
@@ -348,7 +348,7 @@
     "category": "coal_owner",
     "access": "anonymous",
     "coverage": "淮北矿业干选机及配件采购公告",
-    "auditNote": "公告详情页可匿名访问（如涡北中标），但列表页需JS动态加载（实测空壳）；正式文件及投标需注册。"
+    "auditNote": "2026-09-15 探测：前端为 qiankun 微应用；列表接口 POST /website-manage/mscene/getNoticeListByCompany 可匿名调用（total 3000+）；详情接口参数未解出，暂未接入。"
   },
   {
     "id": "qcc",
@@ -411,7 +411,7 @@
     "category": "authentication",
     "access": "login_free",
     "coverage": "招标、中标、业主监控和企业投标画像",
-    "auditNote": "2026-08-03 用户确认可用：注册登录后可免费查看公告正文（无需付费会员），归入\"登录后免费可看\"数据源。"
+    "auditNote": "2026-09-15 探测：列表/详情为 JS 渲染（node 仅得 3.5KB 壳，浏览器可读），采集流水线无浏览器运行环境，暂未接入。"
   },
   {
     "id": "xunbiaobao",
@@ -429,7 +429,7 @@
     "category": "authentication",
     "access": "login_free",
     "coverage": "招标公告、中标结果和项目订阅",
-    "auditNote": "2026-08-03 用户确认可用：注册登录后可免费查看公告正文（无需付费会员），归入\"登录后免费可看\"数据源。"
+    "auditNote": "2026-09-15 探测：栏目页可匿名；检索入口触发人机验证（search.bidcenter.com.cn），按铁律不绕过，未接入。"
   },
   {
     "id": "ebnew",
@@ -438,7 +438,7 @@
     "category": "authentication",
     "access": "login_free",
     "coverage": "招标采购、国际招标和中标信息",
-    "auditNote": "2026-08-03 用户确认可用：注册登录后可免费查看公告正文（无需付费会员），归入\"登录后免费可看\"数据源。"
+    "auditNote": "2026-09-15 已接入 scan-rules（ebnew-search：关键词检索页 + 详情正文，sourceAuthority=公开，中置信）。检索页分页参数不生效，按关键词取最新一页，适合周更增量。"
   },
   {
     "id": "yfbzb",
@@ -492,7 +492,7 @@
     "category": "mirror",
     "access": "anonymous",
     "coverage": "转引各地招标公告（甘肃新洲钨矿光电预选等）",
-    "auditNote": "2026-08-03 实测公告正文可匿名查看（新洲钨矿中标758万）；属公开镜像。"
+    "auditNote": "2026-09-15 复测：既有搜索路径 404/超时，暂未打通。"
   },
   {
     "id": "disclosure-cninfo",
@@ -501,7 +501,7 @@
     "category": "disclosure",
     "access": "anonymous",
     "coverage": "A股上市公司定期/临时公告：重大合同、中标、订单（美腾科技 688420、泰禾智能 603011 等竞品主体及股东方）",
-    "auditNote": "证监会指定信息披露平台，公告 PDF 原文可匿名抓取，权威官方来源（同港交所之于 H 股）。检索需带公司名；竞品大额合同/中标公告以此为首选出处（实例：美腾莱煤智能 2886.18 万智能干选机合同 2026-030）。"
+    "auditNote": "2026-09-15 已接入 scan-rules（cninfo-listed：美腾 688420 / 泰禾 603656 公告，pdf-parse 解析 PDF 正文后按设备线入账，官方自宣、中置信）。"
   },
   {
     "id": "vendor-meiteng",

@@ -1435,5 +1435,54 @@
     "leadOnly": true,
     "leadNote": "中国能建官方平台列表数据（AjaxPro），但公告详情页为 JS 空壳、正文接口 GetZhaoBiaoGG 需未知 ID 参数，拿不到原文证据，按数据铁律只作待复核线索。",
     "coverNote": "ASP.NET AjaxPro 接口：POST /ajaxpro/CeecBidWeb.HomeInfo.ProjectList,CeecBidWeb.ashx，头 X-AjaxPro-Method=getdata，body 参数 _bigtype_base64（=Base64(UTF-16LE(栏目码))）/_pageIndex/_pageSize；响应为引号包裹的 JSON 串（尾部带 ;/*）。栏目码：ZBGG 招标公告、ZGYSGG 资格预审公告、CGYG 采购预告、XMXXGG 采购信息公示（id 字段为 sys_id）、CGGZDT(1270 条，分包商入库公示，非采购)。详情页 = /HomeInfo/ProjectDetail.aspx?bigtype=<code>&threadID=<sys_epsid>（匿名可读）。注：ZBGS/HXRGS/ZXGS 三类中标栏目经该接口返回 0 条，暂未破解。"
+  },
+  {
+    "id": "cninfo-listed",
+    "platformId": "disclosure-cninfo",
+    "name": "巨潮资讯网（上市公司公告·美腾/泰禾）",
+    "adapter": "cninfo",
+    "access": "anonymous",
+    "required": false,
+    "searchEndpoint": "http://www.cninfo.com.cn/new/hisAnnouncement/query",
+    "stocks": [
+      { "code": "688420", "orgId": "nssc1000863", "name": "美腾科技", "vendorName": "天津美腾科技股份有限公司" },
+      { "code": "603656", "orgId": "9900030419", "name": "泰禾智能", "vendorName": "合肥泰禾智能科技集团股份有限公司" }
+    ],
+    "column": "szse",
+    "pageSize": 30,
+    "maxPages": 4,
+    "maxPdf": 10,
+    "requestDelayMs": 1200,
+    "defaultRegion": "全国",
+    "coverNote": "公开 JSON 接口 POST /new/hisAnnouncement/query（form: pageNum/pageSize/column/stock=<code>,<orgId>/seDate=时间窗）；返回 announcements[]（announcementTitle/announcementTime/adjunctUrl）。公告原文为 PDF（static.cninfo.com.cn），适配器用 pdf-parse 提取正文后按 classifyLine 判定设备线、extractAmount 抽金额——解析失败或非目标设备线一律不入账。覆盖美腾 688420（含控股子公司山东莱芜煤机智能科技）与泰禾智能 603656 的日常经营重大合同/中标/签约类披露；源权威=上市公司公告（官方自宣，置信度中，交易形态按『直接销售合同』计入）。"
+  },
+  {
+    "id": "ebnew-search",
+    "platformId": "ebnew",
+    "name": "必联网（关键词检索）",
+    "adapter": "html-list",
+    "access": "login_free",
+    "required": false,
+    "sourceAuthority": "公开",
+    "normalizeHttps": true,
+    "headers": {
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+    },
+    "searchTemplate": "https://ss.ebnew.com/tradingSearch/index.htm?key={kw}",
+    "itemRegex": "<a[^>]*href=\"(?<url>http://www\\.ebnew\\.com/businessShow/(?<file>\\d+)\\.html)\"[^>]*title=\"(?<title>[^\"]*)\"[\\s\\S]{0,1600}?(?:发布日期|发布时间)[：:]\\s*(?<date>20\\d{2}-\\d{2}-\\d{2})",
+    "keywords": [
+      "干选",
+      "智能干选",
+      "XRT",
+      "选矸",
+      "智能选矸",
+      "光电分选",
+      "智能分选",
+      "射线分选"
+    ],
+    "maxPages": 1,
+    "requestDelayMs": 1200,
+    "defaultRegion": "全国",
+    "coverNote": "公开检索页 GET https://ss.ebnew.com/tradingSearch/index.htm?key=<关键词>（静态 HTML，匿名可看；登录后免费）；列表项 = <a href=http://www.ebnew.com/businessShow/<id>.html title=完整标题> + 『发布日期:YYYY-MM-DD』；详情页 http://www.ebnew.com/businessShow/<id>.html 可匿名取正文（金额/中标人随正文抽取）。检索页分页参数未生效（始终第一页），故只扫最新一页/关键词，周更增量够用（『干选』共 410 条）。来源=第三方招标信息平台，置信度中（sourceAuthority=公开），按『登录后免费可看正文』口径收录。"
   }
 ]

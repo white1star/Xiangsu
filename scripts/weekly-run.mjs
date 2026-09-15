@@ -37,7 +37,8 @@ export function validateCandidate(candidate) {
   const missing = required.filter(key => !candidate[key]);
   if (missing.length) return { valid: false, reason: `缺少${missing.join('、')}` };
   const isVendor = candidate.sourceAuthority === VENDOR_AUTHORITY;
-  if (candidate.sourceAuthority !== 'official' && !isVendor) return { valid: false, reason: '缺少官方原文验证，聚合来源只能作为线索' };
+  const isMirror = candidate.sourceAuthority === '公开';
+  if (candidate.sourceAuthority !== 'official' && !isVendor && !isMirror) return { valid: false, reason: '缺少官方原文验证，聚合来源只能作为线索' };
   if (candidate.publishDate < MINIMUM_PUBLISH_DATE) return { valid: false, reason: `发布日期早于${MINIMUM_PUBLISH_DATE}` };
   if (candidate.evidence.replace(/\s/g, '').length < 16) return { valid: false, reason: '原文证据摘录过短' };
   // 官网/官方自媒体自宣：只认交易信号（中标/签约/交付/投运），置信度中；官方招采平台：招标/候选/中标，置信度高。
@@ -58,6 +59,7 @@ export function mergeCandidates(existing, candidates) {
     if (knownUrls.has(candidate.url) || knownKeys.has(key)) continue;
     knownUrls.add(candidate.url); knownKeys.add(key);
     const isVendor = candidate.sourceAuthority === VENDOR_AUTHORITY;
+    const isMirror = candidate.sourceAuthority === '公开';
     const record = {
       id: `auto-${Buffer.from(candidate.url).toString('base64url').slice(0, 14)}`,
       title: candidate.title,
@@ -74,10 +76,10 @@ export function mergeCandidates(existing, candidates) {
       bid: candidate.bidStatus,
       bidStatus: candidate.bidStatus,
       source: candidate.source,
-      sourceAuthority: isVendor ? VENDOR_AUTHORITY : '官方公开',
+      sourceAuthority: isVendor ? VENDOR_AUTHORITY : (isMirror ? '公开' : '官方公开'),
       date: candidate.publishDate,
       publishDate: candidate.publishDate,
-      confidence: isVendor ? '中' : '高',
+      confidence: (isVendor || isMirror) ? '中' : '高',
       url: candidate.url,
       evidence: candidate.evidence,
     };
@@ -314,7 +316,8 @@ async function main() {
       // leadOnly：官方平台但只能拿到列表级数据（详情正文 JS 渲染/接口不可读），
       // 按数据铁律不进高置信台账，只作待复核线索。
       if (rule.leadOnly) { aggregatorLeads.push({ ...candidate, note: rule.leadNote || null }); continue; }
-      if ((rule.sourceAuthority || 'official') === 'official' && candidate.sourceAuthority === 'official') officialCandidates.push(candidate);
+      // sourceAuthority=公开 为「登录后免费可看正文」的第三方平台（必联网等），按收录口径入台账（中置信）。
+      if (candidate.sourceAuthority === 'official' || candidate.sourceAuthority === '公开') officialCandidates.push(candidate);
       else aggregatorLeads.push(candidate);
     }
   }

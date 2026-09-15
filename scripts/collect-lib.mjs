@@ -343,31 +343,42 @@ export async function runHtmlListAdapter(rule, window, limits = {}) {
   const keyword = new RegExp(rule.keywords.join('|'), 'i');
   const result = { pagesScanned: 0, discovered: 0, candidates: [], notes: [] };
   const seen = new Set();
-  for (let page = 1; page <= maxPages; page += 1) {
-    const url = page === 1 ? rule.listingUrl : rule.pageTemplate.replace('{n}', String(page));
-    let response;
-    try { response = await fetchText(url); } catch (error) {
-      if (page === 1) throw error;
-      result.notes.push(`第${page}页抓取失败：${error.message}`); break;
+  // searchTemplate：按关键词逐个检索（模板 {kw}），用于只有检索页、没有稳定栏目的平台。
+  const sources = rule.searchTemplate
+    ? rule.keywords.map(kw => ({ base: rule.searchTemplate.replace('{kw}', encodeURIComponent(kw)), kw }))
+    : [{ base: rule.listingUrl, kw: null }];
+  for (const source of sources) {
+    for (let page = 1; page <= maxPages; page += 1) {
+      const url = page === 1
+        ? source.base
+        : String(rule.pageTemplate || source.base).replace('{kw}', encodeURIComponent(source.kw || '')).replace('{n}', String(page));
+      let response;
+      try { response = await fetchText(url, rule.headers ? { headers: rule.headers } : undefined); } catch (error) {
+        if (page === 1) throw error;
+        result.notes.push(`第${page}页抓取失败：${error.message}`); break;
+      }
+      if (response.status === 404) { if (page === 1) throw new Error('列表页 404'); break; }
+      if (response.status !== 200) { if (page === 1) throw new Error(`列表页 HTTP ${response.status}`); break; }
+      result.pagesScanned += 1;
+      const items = rule.itemRegex ? extractVendorItems(response.text, url, rule) : extractAnchors(response.text, url);
+      for (const anchor of items) {
+        if (rule.normalizeHttps && anchor.url && anchor.url.startsWith('http://')) anchor.url = anchor.url.replace('http://', 'https://');
+        if (!keyword.test(anchor.title) || seen.has(anchor.url)) continue;
+        seen.add(anchor.url);
+        result.discovered += 1;
+        result.candidates.push(makeCandidate({
+          title: anchor.title, url: anchor.url, source: rule.name,
+          publishDate: anchor.date || (rule.dateFromUrl ? extractDateFromUrl(anchor.url) : undefined),
+          region: rule.defaultRegion, sourceAuthority: rule.sourceAuthority || 'official',
+        }));
+      }
+      await sleep(rule.requestDelayMs ?? 800);
     }
-    if (response.status === 404) { if (page === 1) throw new Error('列表页 404'); break; }
-    if (response.status !== 200) { if (page === 1) throw new Error(`列表页 HTTP ${response.status}`); break; }
-    result.pagesScanned += 1;
-    for (const anchor of extractAnchors(response.text, url)) {
-      if (!keyword.test(anchor.title) || seen.has(anchor.url)) continue;
-      seen.add(anchor.url);
-      result.discovered += 1;
-      result.candidates.push(makeCandidate({
-        title: anchor.title, url: anchor.url, source: rule.name,
-        publishDate: anchor.date || (rule.dateFromUrl ? extractDateFromUrl(anchor.url) : undefined),
-        region: rule.defaultRegion, sourceAuthority: rule.sourceAuthority || 'official',
-      }));
-    }
-    await sleep(800);
   }
   let enriched = 0;
   for (const candidate of result.candidates) {
-    if (!candidate.line || !candidate.bidStatus || candidate.sourceAuthority !== 'official') continue;
+    if (!candidate.line || !candidate.bidStatus) continue;
+    if (candidate.sourceAuthority !== 'official' && candidate.sourceAuthority !== '公开') continue;
     if (enriched >= maxDetails) break;
     await enrichFromOfficialDetail(candidate, candidate.url);
     enriched += 1;
@@ -986,6 +997,91 @@ export async function runAjaxProAdapter(rule, window, limits = {}) {
   return result;
 }
 
+// —— 适配器：巨潮资讯网上市公司公告（美腾/泰禾等，日常经营合同/中标/签约） ——
+// 公开 JSON 检索接口；公告原文为 PDF，用 pdf-parse 提取正文后再判定设备线与金额，
+// 解析失败或不命中设备线的一律不入账（避免凭标题误收）。
+const CNINFO_INCLUDE = /合同|订单|中标|签约|销售|供货|采购|交付|验收|投产|投运/;
+const CNINFO_EXCLUDE = /激励|董事|监事|股东|回购|质押|问询|投资者|业绩|年度报告|半年度报告|季度报告|审计|章程|议事规则|选举|辞职|减持|增持|募集|独立董事|保荐|限售|诉讼|处罚|担保|现金管理|闲置|会计政策|风险提示|更正|补充公告|说明会|接待|调研|高级管理人员/;
+export async function runCninfoAdapter(rule, window, limits = {}) {
+  const maxPages = limits.maxPages ?? rule.maxPages ?? 3;
+  const pageSize = rule.pageSize || 30;
+  const maxPdf = limits.maxDetails ?? rule.maxPdf ?? 12;
+  const result = { pagesScanned: 0, discovered: 0, candidates: [], notes: [] };
+  const seen = new Set();
+  let parsePdf = null;
+  try { parsePdf = (await import('pdf-parse/lib/pdf-parse.js')).default; } catch (error) { result.notes.push(`未安装 pdf-parse，公告 PDF 正文无法解析，本轮跳过全部候选（${error.message}）`); }
+  let parsed = 0;
+  for (const stock of rule.stocks || []) {
+    for (let page = 1; page <= maxPages; page += 1) {
+      const body = new URLSearchParams({
+        pageNum: String(page), pageSize: String(pageSize), column: rule.column || 'szse',
+        tabName: 'fulltext', plate: '', stock: `${stock.code},${stock.orgId}`,
+        searchkey: '', secid: '', category: '', trade: '',
+        seDate: `${window.from}~${window.to}`, sortName: '', sortType: '', isHLtitle: 'true',
+      });
+      let payload;
+      try {
+        const response = await fetchText(rule.searchEndpoint, {
+          method: 'POST',
+          headers: { 'content-type': 'application/x-www-form-urlencoded; charset=UTF-8', 'x-requested-with': 'XMLHttpRequest', referer: 'http://www.cninfo.com.cn/new/commonUrl?url=disclosure/list/notice' },
+          body: body.toString(),
+        });
+        if (response.status !== 200) { if (page === 1) throw new Error(`检索接口 HTTP ${response.status}`); break; }
+        payload = JSON.parse(response.text);
+      } catch (error) {
+        if (page === 1) throw error;
+        result.notes.push(`第${page}页抓取失败：${error.message}`);
+        break;
+      }
+      result.pagesScanned += 1;
+      const rows = payload.announcements || [];
+      if (!rows.length) break;
+      for (const row of rows) {
+        const title = String(row.announcementTitle || '').replace(/<[^>]+>/g, '').trim();
+        if (!title || !CNINFO_INCLUDE.test(title) || CNINFO_EXCLUDE.test(title)) continue;
+        const path = String(row.adjunctUrl || '');
+        if (!path) continue;
+        const url = /^https?:/.test(path) ? path.replace(/^http:/, 'https:') : `https://static.cninfo.com.cn/${path}`;
+        if (seen.has(url)) continue;
+        seen.add(url);
+        const publishDate = new Date(Number(row.announcementTime)).toISOString().slice(0, 10);
+        if (publishDate < window.from) continue;
+        result.discovered += 1;
+        if (!parsePdf || parsed >= maxPdf) continue;
+        parsed += 1;
+        let bodyText = '';
+        try {
+          const resp = await fetch(url, { headers: { 'user-agent': USER_AGENT }, signal: AbortSignal.timeout(30000) });
+          if (resp.ok) bodyText = String((await parsePdf(Buffer.from(await resp.arrayBuffer()))).text || '');
+        } catch (error) { result.notes.push(`PDF 解析失败《${title.slice(0, 24)}》：${error.message}`); }
+        await sleep(500);
+        if (bodyText.length < 60) continue;
+        const line = canonicalLine(classifyLine(`${title} ${bodyText.slice(0, 4000)}`));
+        if (!line) continue;
+        const signal = mapVendorSignal(title) || (/中标/.test(title) ? '已中标' : /交付|验收|发运/.test(title) ? '已交付' : /投运|投产/.test(title) ? '已投运' : '已签约');
+        const candidate = makeCandidate({
+          title, url, source: `${rule.name}（${stock.name}）`, publishDate,
+          typeText: '', region: rule.defaultRegion, sourceAuthority: VENDOR_AUTHORITY,
+        });
+        candidate.line = line;
+        candidate.bidStatus = signal;
+        candidate.bid = signal;
+        candidate.competitor = stock.vendorName || '未披露';
+        candidate.evidence = excerptEvidence(bodyText.replace(/\s+/g, ' '));
+        candidate.evidenceCapturedAt = new Date().toISOString();
+        const amount = extractAmount(bodyText);
+        candidate.amount = amount ? amount.display : '未披露';
+        if (!amount) candidate.amountNote = '上市公司公告 PDF 原文未载明成交金额或未自动识别，详见公告原文';
+        result.candidates.push(candidate);
+        await sleep(rule.requestDelayMs ?? 1200);
+      }
+      if (rows.length < pageSize) break;
+      await sleep(rule.requestDelayMs ?? 1200);
+    }
+  }
+  return result;
+}
+
 export const ADAPTERS = {
   'ggzy-api': runGgzyApiAdapter,
   'html-list': runHtmlListAdapter,
@@ -995,5 +1091,6 @@ export const ADAPTERS = {
   'sogou-wechat': runSogouWechatAdapter,
   'cms-query': runCmsQueryAdapter,
   'ajaxpro-list': runAjaxProAdapter,
+  cninfo: runCninfoAdapter,
   probe: runProbeAdapter,
 };
