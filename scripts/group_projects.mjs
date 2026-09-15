@@ -44,6 +44,7 @@ const HINTS = [
   [/雁宝.*蒙东.*智能干选设备/, 'HINT::雁宝蒙东智能干选设备'],
   [/安沟钼多金属矿.*智能抛废/, 'HINT::洛阳安沟钼矿智能抛废XRT运营合作'],
   [/石头梅.*干选机采购|选煤工艺改造项目-干选机/, 'HINT::石头梅一号选煤工艺改造干选机采购'],
+  [/百贯沟煤业.*TDS智能选矸系统/, 'HINT::崇信百贯沟TDS智能选矸系统'],
 ];
 function keyOf(r) {
   const t = r.title || '';
@@ -143,6 +144,18 @@ for (const [k, arr] of groups) {
     proj.bid = '中标候选人';
     proj.bidStatus = '中标候选人';
     proj.statusNote = '公告未明确中标人，按候选阶段保守标注';
+  }
+
+  // ---- 结果缺口提示（resultGap）----
+  // 仍停留在招标/候选阶段、且发布日已超过 30 天（开标应已结束）的项目，
+  // 前端据此显示"已开标但台账未收录对应中标结果，建议反查官方原文"。
+  // 阈值随数据推进，取"执行日 - 30 天"的近似固定值，避免每次运行结果漂移。
+  const GAP_CUTOFF = '2026-08-16';
+  const stage = proj.bidStatus || proj.bid || '';
+  proj.resultGap = ['招标公告', '中标候选人', '资格预审', '询价公告'].includes(stage)
+    && (proj.date || '') <= GAP_CUTOFF;
+  if (proj.resultGap) {
+    proj.openStatus = proj.openStatus || '未披露';
   }
 
   projects.push(proj);
