@@ -81,8 +81,6 @@
 .detail .d-head { display: flex; align-items: flex-start; gap: 14px; margin: 0 0 18px; padding-right: 6px; }
 .detail .d-head > h2 { flex: 1; min-width: 0; margin: 0; padding: 0; }
 .detail .d-toolbar { display: flex; align-items: center; gap: 10px; flex-shrink: 0; padding-top: 4px; }
-.detail .d-toolbar .d-export { width: auto; height: 32px; border: 1px solid #1267c9; background: #fff; color: #1267c9; font-size: 13px; border-radius: 4px; padding: 0 14px; cursor: pointer; font-weight: 600; white-space: nowrap; }
-.detail .d-toolbar .d-export:hover { background: #1267c9; color: #fff; }
 .detail .d-toolbar .d-close { width: 32px; height: 32px; border: 1px solid #dbe4ef; background: #fff; color: #6a7887; font-size: 22px; line-height: 1; border-radius: 4px; cursor: pointer; padding: 0; font-weight: 400; }
 .detail .d-toolbar .d-close:hover { background: #f2434d; color: #fff; border-color: #f2434d; }
 .detail .d-foot .hint { margin-top: 8px; font-size: 12px; line-height: 1.7; }
