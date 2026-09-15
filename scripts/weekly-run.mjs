@@ -401,16 +401,18 @@ async function main() {
   await writeFile(reportFile, JSON.stringify(report, null, 2) + '\n');
   await writeFile(stateFile, JSON.stringify(scanState, null, 2) + '\n');
 
+  // 线索池（公众号低置信）不属于发布台账，先落盘——避免必查平台偶发失败时整批线索丢失。
+  wechat.leads.sort((a, b) => String(b.publishDate || '').localeCompare(String(a.publishDate || '')));
+  await writeFile(wechatFile, JSON.stringify(wechat.leads, null, 2) + '\n');
+
   if (!coverage.publishable) {
-    console.error(`覆盖率不达标，缺少必查平台成功记录：${coverage.missing.join('、')}`);
+    console.error(`覆盖率不达标，缺少必查平台成功记录：${coverage.missing.join('、')}（公众号线索已先行落盘）`);
     process.exitCode = 2;
     return;
   }
   merged.records.sort((a, b) => String(b.publishDate || b.date).localeCompare(String(a.publishDate || a.date)));
-  wechat.leads.sort((a, b) => String(b.publishDate || '').localeCompare(String(a.publishDate || '')));
   await writeFile(flatFile, JSON.stringify(merged.records, null, 2) + '\n');
   await writeFile(pendingFile, JSON.stringify(pending.leads, null, 2) + '\n');
-  await writeFile(wechatFile, JSON.stringify(wechat.leads, null, 2) + '\n');
   // 固定末级步骤：按项目分组生成前端消费的 intelligence.json
   const { execFileSync } = await import('node:child_process');
   execFileSync(process.execPath, [path.join(root, 'scripts', 'group_projects.mjs')], { cwd: root, stdio: 'inherit' });
