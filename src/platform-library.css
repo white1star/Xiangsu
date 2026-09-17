@@ -1,6 +1,62 @@
-.source-count{font-weight:700;color:#1766cb!important}.source-page td:first-child{font-weight:700}.source-page td:nth-child(2),.source-page td:nth-child(3){white-space:normal;line-height:1.6}
-.access-tag{display:inline-block;padding:3px 8px;border-radius:999px;background:#fff3dd;color:#9a5d00;font-size:12px;font-weight:700;white-space:nowrap}
-.src-group{margin-bottom:30px}
-.src-group h2{font-size:18px;margin:0 0 4px;display:flex;align-items:baseline;gap:10px}
-.src-group h2 .src-count{font-size:13px;font-weight:700;color:#1766cb}
-.src-desc{color:#52667b;margin:0 0 12px;line-height:1.7}
+/* 数据源页（分组卡片化） */
+
+.source-page { display: flex; flex-direction: column; gap: 16px; }
+
+.src-group {
+  padding: 18px 20px 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  animation: cardIn .28s ease both;
+  transition: box-shadow .2s ease, border-color .2s ease;
+}
+
+.src-group:hover {
+  border-color: #cfe7d8;
+  box-shadow: 0 4px 16px rgba(16, 24, 40, .09);
+}
+
+.src-group h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+
+.src-group h2 .src-count, .source-count { font-size: 13px; font-weight: 700; color: var(--brand) !important; }
+
+.src-desc { margin: 0 0 12px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+
+.src-group table { min-width: 0; }
+
+.src-group th {
+  height: 40px;
+  font-size: 12px;
+  background: #fafbfb;
+}
+
+.src-group td {
+  padding: 12px 14px;
+  font-size: 13px;
+  white-space: normal;
+  line-height: 1.6;
+}
+
+.src-group tbody tr { animation: none; }
+.src-group tbody tr:hover { background: #f3f9f5; }
+.src-group td:first-child { font-weight: 700; color: var(--text); }
+.src-group td:nth-child(2), .src-group td:nth-child(3) { white-space: normal; line-height: 1.6; }
+
+.access-tag {
+  display: inline-block;
+  padding: 1px 9px;
+  border-radius: 5px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 11px;
+  line-height: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+}
