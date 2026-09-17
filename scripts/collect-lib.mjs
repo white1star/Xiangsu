@@ -218,6 +218,9 @@ export function extractAnchors(html, baseUrl) {
     const title = match[2]
       .replace(/<[^>]+>/g, '')
       .replace(/["']\s*[\w-]+\s*=\s*["'][^"']*["']\s*>/g, ' ') // 清除残缺标签属性残留（个别站点 a 标签未闭合）
+      .replace(/&#x[e-fE-F][0-9a-fA-F]{3};/g, '') // 清除图标字体私有区实体（如 ccteg 的 &#xe638;）
+      .replace(/&nbsp;/gi, ' ')
+      .replace(/&amp;/gi, '&')
       .replace(/\s+/g, ' ')
       .trim();
     if (!title || title.length < 8) continue;
@@ -383,7 +386,7 @@ export async function runHtmlListAdapter(rule, window, limits = {}) {
         result.candidates.push(makeCandidate({
           title: anchor.title, url: anchor.url, source: rule.name,
           publishDate: anchor.date || (rule.dateFromUrl ? extractDateFromUrl(anchor.url) : undefined),
-          region: rule.defaultRegion, sourceAuthority: rule.sourceAuthority || 'official',
+          typeText: rule.defaultTypeText || '', region: rule.defaultRegion, sourceAuthority: rule.sourceAuthority || 'official',
         }));
       }
       await sleep(rule.requestDelayMs ?? 800);

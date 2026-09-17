@@ -1571,5 +1571,32 @@
     "detailDelayMs": 1200,
     "defaultRegion": "全国",
     "coverNote": "华能采购专栏为 Vue SPA（node 直连被 412 WAF 拦截），本规则经 Scrapling 隐身浏览器渲染检索页并发起关键词搜索，捕获 queryAnnouncementByTitle JSON（标题/类型/时间/ID）；详情页捕获 announcementDetail JSON 提取正文金额/中标人/证据。仅取匿名可见页，不碰登录与验证码；单个关键词仅取首屏 10 条，靠多关键词覆盖；CI 无浏览器环境时自动跳过并记备注。"
+  },
+  {
+    "id": "ccteg-invite-goods",
+    "platformId": "ccteg",
+    "name": "中国煤科电子采购平台（物资招标公告）",
+    "adapter": "html-list",
+    "access": "anonymous",
+    "required": false,
+    "sourceAuthority": "official",
+    "defaultTypeText": "招标公告",
+    "listingUrl": "https://cg.ccteg.cn/cms/channel/ywgg1hw/index.htm",
+    "pageTemplate": "https://cg.ccteg.cn/cms/channel/ywgg1hw/index.htm?pageNo={n}",
+    "keywords": [
+      "干选",
+      "智能分选",
+      "XRT",
+      "分选机",
+      "选矸",
+      "光电分选",
+      "抛废"
+    ],
+    "maxPages": 8,
+    "requestDelayMs": 900,
+    "defaultRegion": "全国",
+    "coverNote": "物资招标公告栏目（ywgg1hw），?pageNo=N 分页；2026-09-17 复核发现此前只扫结果栏目导致多条干选整机采购漏抓（神东保德 EPC 两阶段、贵州白布 EPC），本规则补接入；标题以“项目公告”结尾时按 defaultTypeText=招标公告 判型。",
+    "urlBase": "https://cg.ccteg.cn",
+    "itemRegex": "href=\"(?<url>/cms/channel/ywgg1hw/\\d+\\.htm)\"[^>]*title=\"(?<title>[^\"]+)\"[\\s\\S]{0,900}?<em>\\s*(?<date>20\\d{2}-\\d{2}-\\d{2})"
   }
 ]

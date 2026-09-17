@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { applyDetailBody, buildWindow, canonicalLine, classifyLine, cleanVendorTitle, extractAmount, extractBidOpenDate, extractDateFromUrl, extractVendorItems, extractWinner, mapBidStatus, mapVendorSignal, normalizeDate, parseScraplingJsonRows, VENDOR_AUTHORITY } from '../scripts/collect-lib.mjs';
+import { applyDetailBody, buildWindow, canonicalLine, classifyLine, cleanVendorTitle, extractAmount, extractAnchors, extractBidOpenDate, extractDateFromUrl, extractVendorItems, extractWinner, mapBidStatus, mapVendorSignal, normalizeDate, parseScraplingJsonRows, VENDOR_AUTHORITY } from '../scripts/collect-lib.mjs';
 import { mergePendingLeads } from '../scripts/weekly-run.mjs';
 
 test('normalizeDate handles Chinese and dash formats', () => {
@@ -187,6 +187,14 @@ test('applyDetailBody fills evidence/amount/winner from the official notice text
   assert.equal(candidate.competitor, '唐山神州机械集团有限公司');
   assert.match(candidate.evidence, /中标人/);
   assert.ok(candidate.evidenceCapturedAt, '必须记录证据采集时间');
+});
+
+test('extractAnchors strips icon-font entities and decodes common entities', () => {
+  const html = '<a href="/cms/channel/ywgg1hw/87606.htm"><i class="icon">&#xe638;</i>【沈阳设计院】某矿干选机采购&nbsp;项目公告</a>';
+  const items = extractAnchors(html, 'https://cg.ccteg.cn/');
+  assert.equal(items.length, 1);
+  assert.equal(items[0].title, '【沈阳设计院】某矿干选机采购 项目公告');
+  assert.equal(items[0].url, 'https://cg.ccteg.cn/cms/channel/ywgg1hw/87606.htm');
 });
 
 
