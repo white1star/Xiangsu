@@ -80,6 +80,12 @@ nav {
   align-items: center;
   gap: 2px;
   height: 54px;
+}
+
+.head-right {
+  display: flex;
+  align-items: center;
+  height: 100%;
   margin-left: auto;
 }
 
@@ -119,8 +125,9 @@ nav i { font-style: normal; font-size: 13px; opacity: .78; }
 a.nav-center {
   display: inline-flex;
   align-items: center;
-  margin-left: 14px;
-  padding-left: 14px;
+  height: 100%;
+  margin-left: 10px;
+  padding-left: 16px;
   border-left: 1px solid var(--line);
   color: var(--muted);
   font-size: 13px;
