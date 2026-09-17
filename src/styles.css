@@ -413,3 +413,68 @@ footer {
   .tablebox table { min-width: 0; }
   .tablebox th, .tablebox td { font-size: 10px; }
 }
+
+/* ============ 反馈按钮（与矿业资讯站一致） ============ */
+.feedback-fab {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 20px;
+  border: 0;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--brand);
+  box-shadow: 0 6px 16px rgba(16, 24, 40, .18);
+  cursor: pointer;
+  transition: transform .15s ease, background .15s ease;
+}
+
+.feedback-fab:hover { background: var(--brand-dark); transform: scale(1.06); }
+.feedback-fab:active { transform: scale(1.02); }
+
+.fb-dialog {
+  border: none;
+  border-radius: 12px;
+  padding: 0;
+  width: min(92vw, 460px);
+  color: var(--text);
+  background: var(--card);
+  box-shadow: 0 10px 40px rgba(16, 24, 40, .18);
+}
+
+.fb-dialog::backdrop { background: rgba(17, 20, 24, .45); }
+.fb-dialog form { display: flex; flex-direction: column; gap: 10px; padding: 20px; }
+.fb-dialog h3 { margin: 0 0 4px; font-size: 16px; }
+.fb-dialog label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--muted); }
+.fb-dialog input, .fb-dialog textarea { font: inherit; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; resize: vertical; color: var(--text); background: #fff; outline: none; transition: border-color .15s ease; }
+.fb-dialog input:focus, .fb-dialog textarea:focus { border-color: var(--brand); }
+.fb-dialog textarea { min-height: 110px; }
+.fb-row { display: flex; align-items: center; gap: 10px; }
+.fb-count { margin-right: auto; color: #98a1ac; font-size: 12px; font-variant-numeric: tabular-nums; }
+.fb-cancel { padding: 7px 14px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: #3d4650; cursor: pointer; transition: border-color .15s ease, color .15s ease; }
+.fb-cancel:hover { border-color: var(--brand); color: var(--brand); }
+.fb-submit { padding: 8px 18px; border: none; border-radius: 8px; background: var(--brand); color: #fff; font-weight: 600; cursor: pointer; transition: background .15s ease; }
+.fb-submit:hover { background: var(--brand-dark); }
+.fb-submit[disabled] { opacity: .6; cursor: default; }
+.fb-msg { margin: 0; font-size: 13px; color: #1a8f4c; }
+.fb-msg.err { color: #d23f31; }
+
+/* ============ 移动端（头部两行：品牌 / 导航） ============ */
+@media (max-width: 760px) {
+  .topbar { flex-wrap: wrap; height: auto; padding: 0 14px; gap: 0; }
+  .brand { padding: 8px 0; }
+  .brand b { font-size: 15px; white-space: nowrap; }
+  .head-right { width: 100%; margin-left: 0; justify-content: space-between; border-top: 1px solid var(--line); }
+  nav { flex: 1; min-width: 0; overflow-x: auto; height: 46px; }
+  nav button { height: 46px; white-space: nowrap; }
+  nav button.active::after { bottom: 0; }
+  a.nav-center { flex: none; height: 46px; margin-left: 8px; padding-left: 10px; font-size: 12px; }
+  .feedback-fab { right: 14px; bottom: 14px; padding: 10px 17px; font-size: 13px; }
+}

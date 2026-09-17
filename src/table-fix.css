@@ -13,3 +13,54 @@
 .tablebox th:nth-child(7), .tablebox td:nth-child(7) { width: 150px; }
 .tablebox th:nth-child(8), .tablebox td:nth-child(8) { width: 110px; }
 .tablebox th:nth-child(9), .tablebox td:nth-child(9) { width: 80px; }
+
+/* ============ 移动端：表格卡片化（每行一张卡，字段带标签） ============ */
+@media (max-width: 760px) {
+  .tablebox { background: transparent; border: 0; border-radius: 0; box-shadow: none; overflow: visible; animation: none; }
+  .tablebox:hover { box-shadow: none; }
+  .tablebox table { display: block; min-width: 0; table-layout: auto; }
+  .tablebox thead { display: none; }
+  .tablebox tbody { display: block; }
+  .tablebox tbody tr {
+    display: block;
+    margin-bottom: 10px;
+    padding: 12px 14px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    animation: none;
+  }
+  .tablebox tbody tr:hover { background: var(--card); }
+  .tablebox th, .tablebox td { white-space: normal; overflow: visible; text-overflow: clip; }
+  .tablebox td {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    width: auto !important;
+    height: auto;
+    padding: 3px 0;
+    border-bottom: 0;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .tablebox td::before {
+    content: attr(data-label);
+    flex: 0 0 64px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.65;
+  }
+  .tablebox:not(.wx-tablebox) td:first-child {
+    display: block;
+    margin-bottom: 6px;
+    padding: 0 0 7px;
+    border-bottom: 1px dashed var(--line);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .tablebox:not(.wx-tablebox) td:first-child::before { display: none; }
+  .tablebox td.amt, .tablebox td.deal,
+  .tablebox tbody td:nth-child(2), .tablebox tbody td:nth-child(7) { white-space: normal; }
+}

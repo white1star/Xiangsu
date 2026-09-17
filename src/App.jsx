@@ -12,6 +12,8 @@ import './wechat.css';
 const icons = ['▣', '◉', '◍'];
 const PAGE_SIZE = 10;
 const PHASE_OPTIONS = ['全部', '待开标', '已开标', '未披露', '中标候选人', '已中标', '流标'];
+const LEDGER_COLUMNS = ['客户', '矿种', '产品线', '竞品', '金额', '成交方式', '发布日期', '来源', '置信度'];
+const WECHAT_COLUMNS = ['发布日期', '公众号', '标题（点击看原文）', '产品线', '信号', '检索路径'];
 
 // 金额列：已披露带阶段标签；未披露带出复核原因（避免表格看起来一片空白）
 function amountCell(item) {
@@ -27,6 +29,62 @@ function amountCell(item) {
 function phaseOf(item) {
   if (item.bid === '招标公告') return item.openStatus || '未披露';
   return item.bid;
+}
+
+// 反馈按钮：与矿业资讯站样式/行为一致（web3forms 提交）
+function Feedback() {
+  const dialogRef = useRef(null);
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState(null);
+  const [sending, setSending] = useState(false);
+
+  const open = () => { setStatus(null); dialogRef.current?.showModal(); };
+  const close = () => dialogRef.current?.close();
+
+  const submit = async event => {
+    event.preventDefault();
+    setSending(true);
+    setStatus(null);
+    const data = new FormData();
+    data.append('access_key', '1a0e2eb4-7458-4ab9-aea0-3ffdbdf05ae3');
+    data.append('subject', '竞品情报分析反馈');
+    data.append('from_name', '竞品情报分析');
+    data.append('page_url', location.href);
+    if (name.trim()) data.append('name', name.trim());
+    data.append('message', message);
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      const payload = await response.json();
+      if (!payload || !payload.success) throw new Error('fail');
+      setStatus({ ok: true, text: '已收到，谢谢！' });
+      setTimeout(() => { dialogRef.current?.close(); setName(''); setMessage(''); setStatus(null); }, 1500);
+    } catch {
+      setStatus({ ok: false, text: '提交失败，请稍后再试' });
+    } finally {
+      setSending(false);
+    }
+  };
+
+  return <>
+    <button className="feedback-fab" type="button" aria-haspopup="dialog" onClick={open}>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      <span>反馈</span>
+    </button>
+    <dialog className="fb-dialog" ref={dialogRef}>
+      <form onSubmit={submit}>
+        <h3>意见反馈</h3>
+        <label>怎么称呼你（可选）<input value={name} maxLength={30} autoComplete="off" onChange={event => setName(event.target.value)} /></label>
+        <label>说点什么……<textarea value={message} required maxLength={500} onChange={event => setMessage(event.target.value)} /></label>
+        <div className="fb-row">
+          <span className="fb-count">{message.length}/500</span>
+          <button type="button" className="fb-cancel" onClick={close}>取消</button>
+          <button type="submit" className="fb-submit" disabled={sending}>提交</button>
+        </div>
+        {status ? <p className={`fb-msg${status.ok ? '' : ' err'}`}>{status.text}</p> : null}
+      </form>
+    </dialog>
+  </>;
 }
 
 export default function App() {
@@ -62,11 +120,12 @@ export default function App() {
           <div className="f-item"><span>招标状态</span>{phaseSelect}</div>
           <div className="f-item"><span>置信度</span>{select(confidence, setConfidence, 'confidence')}</div>
         </div>
-        <div className="tablebox"><table><thead><tr>{['客户', '矿种', '产品线', '竞品', '金额', '成交方式', '发布日期', '来源', '置信度'].map(item => <th key={item}>{item}</th>)}</tr></thead><tbody>{pageRows.map(item => <tr key={item.url} onClick={() => setSelected(item)}>{[item.buyer || '未披露', item.mineral || '未披露', item.line, item.competitor, amountCell(item), dealTypeCell(item), item.date, <a href={item.url} target="_blank" rel="noreferrer" onClick={event => event.stopPropagation()}>{item.source} ↗</a>, item.confidence].map((value, index) => { const cls = index === 4 ? 'amt' : index === 5 ? 'deal' : index === 8 ? `confidence ${item.confidence}` : ''; return <td className={cls} key={index}>{value}</td>; })}</tr>)}</tbody></table></div>
+        <div className="tablebox"><table><thead><tr>{LEDGER_COLUMNS.map(item => <th key={item}>{item}</th>)}</tr></thead><tbody>{pageRows.map(item => <tr key={item.url} onClick={() => setSelected(item)}>{[item.buyer || '未披露', item.mineral || '未披露', item.line, item.competitor, amountCell(item), dealTypeCell(item), item.date, <a href={item.url} target="_blank" rel="noreferrer" onClick={event => event.stopPropagation()}>{item.source} ↗</a>, item.confidence].map((value, index) => { const cls = index === 4 ? 'amt' : index === 5 ? 'deal' : index === 8 ? `confidence ${item.confidence}` : ''; return <td className={cls} key={index} data-label={LEDGER_COLUMNS[index]}>{value}</td>; })}</tr>)}</tbody></table></div>
         <footer><span>共 {filtered.length} 个项目（同项目招标/候选/中标公告已合并）　|　最近抓取：{lastCrawl}　|　第 {current}/{totalPages} 页</span><span className="pager"><button disabled={current <= 1} onClick={() => setPageNum(current - 1)}>上一页</button><button disabled={current >= totalPages} onClick={() => setPageNum(current + 1)}>下一页</button></span><span>点击任意记录查看证据摘要</span></footer>
         {selected && <Detail item={selected} onClose={() => setSelected(null)} />}
       </> : page === '公众号线索' ? <WechatPage /> : <SourcePage />}
     </section>
+    <Feedback />
   </main>;
 }
 
@@ -252,14 +311,14 @@ function WechatPage() {
       <div className="f-item"><span>检索路径</span>{select(via, setVia, 'via')}</div>
       <span className="wx-total">共 {filtered.length} 条线索</span>
     </div>
-    <div className="tablebox"><table><thead><tr>{['发布日期', '公众号', '标题（点击看原文）', '产品线', '信号', '检索路径'].map(item => <th key={item}>{item}</th>)}</tr></thead>
+    <div className="tablebox wx-tablebox"><table><thead><tr>{WECHAT_COLUMNS.map(item => <th key={item}>{item}</th>)}</tr></thead>
       <tbody>{filtered.map(item => <tr key={item.url}>
-        <td>{item.publishDate}</td>
-        <td>{item.account || '未披露'}</td>
-        <td className="wx-title"><a href={item.url} target="_blank" rel="noreferrer">{item.title} ↗</a>{item.summary ? <span className="wx-summary">{item.summary}</span> : null}</td>
-        <td>{item.line}</td>
-        <td><span className="wx-signal">{item.bidStatus}</span></td>
-        <td><span className={`wx-via ${viaTag(item.via)}`}>{item.via}</span></td>
+        <td data-label="发布日期">{item.publishDate}</td>
+        <td data-label="公众号">{item.account || '未披露'}</td>
+        <td className="wx-title" data-label="标题">{<a href={item.url} target="_blank" rel="noreferrer">{item.title} ↗</a>}{item.summary ? <span className="wx-summary">{item.summary}</span> : null}</td>
+        <td data-label="产品线">{item.line}</td>
+        <td data-label="信号"><span className="wx-signal">{item.bidStatus}</span></td>
+        <td data-label="检索路径"><span className={`wx-via ${viaTag(item.via)}`}>{item.via}</span></td>
       </tr>)}</tbody></table></div>
     <footer><span>公众号线索共 {filtered.length} 条　|　正文不可得：点标题跳转原文查看</span></footer>
   </div>;
