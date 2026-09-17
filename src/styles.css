@@ -147,7 +147,7 @@ nav i { font-style: normal; font-size: 13px; opacity: .78; }
   box-shadow: 0 4px 14px rgba(16, 24, 40, .08);
 }
 
-.filters label {
+.f-item {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -156,9 +156,17 @@ nav i { font-style: normal; font-size: 13px; opacity: .78; }
   min-width: 0;
 }
 
-.filters select {
-  flex: 1;
-  min-width: 0;
+.f-item > span { flex: none; }
+
+/* ============ 自定义下拉（顺滑展开 + 整洁面板） ============ */
+.dd { position: relative; flex: 1; min-width: 0; }
+
+.dd-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
   height: 36px;
   padding: 0 10px;
   border: 1px solid var(--line);
@@ -166,17 +174,79 @@ nav i { font-style: normal; font-size: 13px; opacity: .78; }
   background: #fff;
   color: var(--text);
   font-size: 13px;
-  outline: none;
   cursor: pointer;
   transition: border-color .15s ease, box-shadow .15s ease;
 }
 
-.filters select:hover { border-color: #b9dcc5; }
+.dd-btn:hover { border-color: #b9dcc5; }
+.dd.open .dd-btn { border-color: var(--brand); box-shadow: 0 0 0 3px rgba(40, 144, 72, .12); }
 
-.filters select:focus {
-  border-color: var(--brand);
-  box-shadow: 0 0 0 3px rgba(40, 144, 72, .12);
+.dd-value {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+
+.dd-caret {
+  flex: none;
+  font-size: 10px;
+  color: var(--muted);
+  transition: transform .22s ease;
+}
+
+.dd.open .dd-caret { transform: rotate(180deg); }
+
+.dd-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 25;
+  padding: 6px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(16, 24, 40, .14), 0 2px 6px rgba(16, 24, 40, .06);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: max-height .22s ease, opacity .18s ease, transform .22s ease;
+}
+
+.dd.open .dd-panel {
+  max-height: 300px;
+  opacity: 1;
+  overflow-y: auto;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dd-panel::-webkit-scrollbar { width: 8px; }
+.dd-panel::-webkit-scrollbar-thumb { background: #d8e0e5; border-radius: 999px; }
+.dd-panel::-webkit-scrollbar-thumb:hover { background: #c3ced6; }
+
+.dd-opt {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 7px;
+  background: none;
+  color: #2a3139;
+  font-size: 13px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: background .12s ease, color .12s ease;
+}
+
+.dd-opt:hover { background: #f3f9f5; color: var(--brand-dark); }
+.dd-opt.active { background: var(--brand-soft); color: var(--brand-dark); font-weight: 700; }
 
 /* ============ 台账表格卡片 ============ */
 .tablebox {

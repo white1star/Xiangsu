@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import rows from './data/intelligence.json';
 import wechatLeads from './data/wechat-leads.json';
 import crawlStamp from './data/crawl_stamp.json';
@@ -43,10 +43,8 @@ export default function App() {
   const pageRows = filtered.slice((current - 1) * PAGE_SIZE, current * PAGE_SIZE);
   const latestUpdate = useMemo(() => { const ds = rows.map(r => r.date).filter(Boolean).sort(); return ds.length ? ds[ds.length - 1] : '—'; }, []);
   const lastCrawl = (crawlStamp.lastCrawl || '').replace('T', ' ').slice(0, 16) || '—';
-  const resetPage = fn => event => { fn(event.target.value); setPageNum(1); };
-  const options = key => ['全部', ...new Set(rows.map(item => item[key]))];
-  const select = (value, setter, key) => <select value={value} onChange={resetPage(setter)}>{options(key).map(item => <option key={item}>{item}</option>)}</select>;
-  const phaseSelect = <select value={phase} onChange={resetPage(setPhase)}>{PHASE_OPTIONS.map(item => <option key={item}>{item}</option>)}</select>;
+  const select = (value, setter, key) => <Dropdown value={value} options={filterOptions(key)} onChange={next => { setter(next); setPageNum(1); }} />;
+  const phaseSelect = <Dropdown value={phase} options={PHASE_OPTIONS} onChange={next => { setPhase(next); setPageNum(1); }} />;
 
   return <main className="shell">
     <header className="topbar">
@@ -55,7 +53,12 @@ export default function App() {
     </header>
     <section className="workspace">
       {page === '情报台账' ? <>
-        <div className="filters"><label>产品线{select(line, setLine, 'line')}</label><label>竞品{select(competitor, setCompetitor, 'competitor')}</label><label>招标状态{phaseSelect}</label><label>置信度{select(confidence, setConfidence, 'confidence')}</label></div>
+        <div className="filters">
+          <div className="f-item"><span>产品线</span>{select(line, setLine, 'line')}</div>
+          <div className="f-item"><span>竞品</span>{select(competitor, setCompetitor, 'competitor')}</div>
+          <div className="f-item"><span>招标状态</span>{phaseSelect}</div>
+          <div className="f-item"><span>置信度</span>{select(confidence, setConfidence, 'confidence')}</div>
+        </div>
         <div className="tablebox"><table><thead><tr>{['客户', '矿种', '产品线', '竞品', '金额', '成交方式', '发布日期', '来源', '置信度'].map(item => <th key={item}>{item}</th>)}</tr></thead><tbody>{pageRows.map(item => <tr key={item.url} onClick={() => setSelected(item)}>{[item.buyer || '未披露', item.mineral || '未披露', item.line, item.competitor, amountCell(item), dealTypeCell(item), item.date, <a href={item.url} target="_blank" rel="noreferrer" onClick={event => event.stopPropagation()}>{item.source} ↗</a>, item.confidence].map((value, index) => { const cls = index === 4 ? 'amt' : index === 5 ? 'deal' : index === 8 ? `confidence ${item.confidence}` : ''; return <td className={cls} key={index}>{value}</td>; })}</tr>)}</tbody></table></div>
         <footer><span>共 {filtered.length} 个项目（同项目招标/候选/中标公告已合并）　|　最近抓取：{lastCrawl}　|　第 {current}/{totalPages} 页</span><span className="pager"><button disabled={current <= 1} onClick={() => setPageNum(current - 1)}>上一页</button><button disabled={current >= totalPages} onClick={() => setPageNum(current + 1)}>下一页</button></span><span>点击任意记录查看证据摘要</span></footer>
         {selected && <Detail item={selected} onClose={() => setSelected(null)} />}
@@ -66,6 +69,48 @@ export default function App() {
 
 function Field({ label, span, children }) {
   return <div className={`d-field${span ? ' span2' : ''}`}><span className="d-label">{label}</span><div className="d-value">{children}</div></div>;
+}
+
+// 自定义下拉：面板展开/收起带过渡，选项有序；替代原生 select（原生弹层无法做动效且样式杂乱）
+function Dropdown({ value, options, onChange }) {
+  const [open, setOpen] = useState(false);
+  const boxRef = useRef(null);
+  useEffect(() => {
+    if (!open) return undefined;
+    const closeOnOutside = event => { if (boxRef.current && !boxRef.current.contains(event.target)) setOpen(false); };
+    const closeOnEscape = event => { if (event.key === 'Escape') setOpen(false); };
+    document.addEventListener('mousedown', closeOnOutside);
+    document.addEventListener('keydown', closeOnEscape);
+    return () => { document.removeEventListener('mousedown', closeOnOutside); document.removeEventListener('keydown', closeOnEscape); };
+  }, [open]);
+  return <div className={`dd${open ? ' open' : ''}`} ref={boxRef}>
+    <button type="button" className="dd-btn" aria-expanded={open} onClick={() => setOpen(next => !next)}>
+      <span className="dd-value">{value}</span>
+      <span className="dd-caret" aria-hidden="true">▾</span>
+    </button>
+    <div className="dd-panel" role="listbox">
+      {options.map(option => <button type="button" role="option" aria-selected={option === value} className={`dd-opt${option === value ? ' active' : ''}`} key={option} onClick={() => { onChange(option); setOpen(false); }}>{option}</button>)}
+    </div>
+  </div>;
+}
+
+// 筛选选项排序：产品线按固定语义序；竞品按项目数降序、占位值（未披露/未定标）排最后；置信度按 高→中→低
+const ALL_OPTION = '全部';
+const PLACEHOLDER_VALUES = new Set(['未披露', '未定标', '待核实']);
+const LINE_ORDER = { '煤炭智能干选设备': 0, '矿石XRT光电分选设备': 1 };
+const CONFIDENCE_ORDER = { 高: 0, 中: 1, 低: 2 };
+function filterOptions(key) {
+  const values = [...new Set(rows.map(item => item[key]).filter(Boolean))].filter(value => value !== ALL_OPTION);
+  if (key === 'competitor') {
+    const counts = new Map();
+    for (const item of rows) counts.set(item[key], (counts.get(item[key]) || 0) + 1);
+    values.sort((a, b) => (Number(PLACEHOLDER_VALUES.has(a)) - Number(PLACEHOLDER_VALUES.has(b))) || (counts.get(b) - counts.get(a)) || a.localeCompare(b, 'zh'));
+  } else if (key === 'line') {
+    values.sort((a, b) => (LINE_ORDER[a] ?? 9) - (LINE_ORDER[b] ?? 9));
+  } else if (key === 'confidence') {
+    values.sort((a, b) => (CONFIDENCE_ORDER[a] ?? 9) - (CONFIDENCE_ORDER[b] ?? 9));
+  }
+  return [ALL_OPTION, ...values];
 }
 
 // 成交方式推导：招投标进度类 vs 非招投标成交类（直签/租赁/BOT/EPC分包等）
@@ -188,7 +233,7 @@ function WechatPage() {
   const sorted = useMemo(() => [...wechatLeads].sort((a, b) => String(b.publishDate || '').localeCompare(String(a.publishDate || ''))), []);
   const filtered = sorted.filter(item => (line === '全部' || item.line === line) && (via === '全部' || item.via === via));
   const options = key => ['全部', ...new Set(sorted.map(item => item[key]).filter(Boolean))];
-  const select = (value, setter, key) => <select value={value} onChange={event => setter(event.target.value)}>{options(key).map(item => <option key={item}>{item}</option>)}</select>;
+  const select = (value, setter, key) => <Dropdown value={value} options={options(key)} onChange={setter} />;
   const viaTag = value => value === '公众号直搜' ? 'wx-via-account' : value === '搜狗收录' ? 'wx-via-sogou' : 'wx-via-account';
   return <div className="wechat-page">
     <div className="wx-banner">
@@ -199,7 +244,11 @@ function WechatPage() {
         <i className="wx-dot wx-via-sogou"></i>搜狗收录（第三方数据源）
       </span>
     </div>
-    <div className="filters"><label>产品线{select(line, setLine, 'line')}</label><label>检索路径{select(via, setVia, 'via')}</label><span className="wx-total">共 {filtered.length} 条线索</span></div>
+    <div className="filters">
+      <div className="f-item"><span>产品线</span>{select(line, setLine, 'line')}</div>
+      <div className="f-item"><span>检索路径</span>{select(via, setVia, 'via')}</div>
+      <span className="wx-total">共 {filtered.length} 条线索</span>
+    </div>
     <div className="tablebox"><table><thead><tr>{['发布日期', '公众号', '标题（点击看原文）', '产品线', '信号', '检索路径'].map(item => <th key={item}>{item}</th>)}</tr></thead>
       <tbody>{filtered.map(item => <tr key={item.url}>
         <td>{item.publishDate}</td>
