@@ -1,9 +1,6 @@
-name: 每周竞品情报更新
+name: 每周竞品情报更新（已停用自动触发，仅手动运行）
 
 on:
-  schedule:
-    - cron: '10 1 * * 1'
-      timezone: Asia/Shanghai
   workflow_dispatch:
 
 permissions:
