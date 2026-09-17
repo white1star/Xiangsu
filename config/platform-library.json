@@ -610,5 +610,14 @@
     "access": "anonymous",
     "coverage": "14 家在册竞品的微信公众号文章线索（标题/摘要/日期/公众号名/链接，type=2 短词搜索）",
     "auditNote": "2026-09-11 已接入自动流水线（scan-rules 规则 sogou-wechat，adapter=sogou-wechat）。双路检索：竞品短名走「公众号直搜」、设备词走「搜狗收录」；结果按标题合并去重，产出 src/data/wechat-leads.json，置信度固定为「低」（前端「公众号线索」页单独分区）。只取标题/摘要/日期/公众号名/链接——搜狗不提供公众号正文，须点击链接人工查看；不作为交易凭证。实测 type=2 短词搜索可用但收录滞后约一周；type=1 公众号搜索被验证码墙封死，不使用。"
+  },
+  {
+    "id": "ebidding",
+    "name": "国信e采招标投标交易平台",
+    "entryUrl": "https://www.e-bidding.org/",
+    "category": "authentication",
+    "access": "anonymous",
+    "coverage": "国信招标集团客户（能源、煤炭、金融、粮食等央企/国企）招标采购公告",
+    "auditNote": "2026-09-17 实测：公告列表与详情页均匿名可读（node 直连 200），word 关键词检索 + page 分页；已接入 scan-rules（ebidding-search，中置信）；2026 年暂无干选/XRT 条目，属预埋覆盖。"
   }
 ]

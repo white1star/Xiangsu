@@ -1643,5 +1643,32 @@
     "defaultRegion": "安徽",
     "coverNote": "货物类交易信息（NoticeType 1=招标公告 / 2=中标公告 / 3=中标候选人公示），POST JSON {PageIndex,PageSize,NoticeType,...} 匿名可读列表；服务端不支持关键词检索，规则级 titleInclude 客户端收敛；详情需登录，仅作线索池。",
     "filterWindow": true
+  },
+  {
+    "id": "ebidding-search",
+    "platformId": "ebidding",
+    "name": "国信e采招标投标交易平台（关键词检索）",
+    "adapter": "html-list",
+    "access": "anonymous",
+    "required": false,
+    "sourceAuthority": "公开",
+    "searchTemplate": "https://www.e-bidding.org/cms/category/bulletinList.html?searchDate=2026-01-01&dates=300&word={kw}&categoryId=88&exactSearch=&industryName=&status=&tabName=&page=1",
+    "pageTemplate": "https://www.e-bidding.org/cms/category/bulletinList.html?searchDate=2026-01-01&dates=300&word={kw}&categoryId=88&exactSearch=&industryName=&status=&tabName=&page={n}",
+    "urlBase": "https://www.e-bidding.org",
+    "itemRegex": "href=\"(?<url>//www\\.e-bidding\\.org/biddingBulletin/[^\"]+)\"[^>]*title=\"(?<title>[^\"]+)\"[\\s\\S]{0,900}?class=\"newsDate\"[\\s\\S]{0,80}?(?<date>20\\d{2}-\\d{2}-\\d{2})",
+    "keywords": [
+      "干选",
+      "智能分选",
+      "XRT",
+      "分选机",
+      "智能选矸",
+      "选矸",
+      "光电分选",
+      "抛废"
+    ],
+    "maxPages": 2,
+    "requestDelayMs": 1200,
+    "defaultRegion": "全国",
+    "coverNote": "国信e采（国信招标集团电子交易平台，e-bidding.org）公告公示列表：GET 静态 HTML 可匿名访问，word=关键词 检索、page=N 分页；详情页 /biddingBulletin/日期/ID.html 正文匿名可读（含招标人、代理机构、公告内容）。2026-09-17 接入（第三方平台，sourceAuthority=公开、中置信）；实测 2026 年平台暂无干选/XRT 条目，属预埋覆盖，以后有新公告自动进台账。"
   }
 ]
