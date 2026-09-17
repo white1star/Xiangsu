@@ -116,6 +116,20 @@ nav button.active::after {
 
 nav i { font-style: normal; font-size: 13px; opacity: .78; }
 
+nav a.nav-center {
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 14px;
+  margin-left: 6px;
+  border-left: 1px solid var(--line);
+  color: #6c7784;
+  font-size: 13px;
+  transition: color .15s ease;
+}
+
+nav a.nav-center:hover { color: var(--brand); }
+
 @keyframes navIn {
   from { transform: scaleX(.3); opacity: 0; }
   to { transform: scaleX(1); opacity: 1; }
