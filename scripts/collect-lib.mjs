@@ -537,6 +537,7 @@ export async function runJsonApiAdapter(rule, window, limits = {}) {
   const pageStart = rule.pageStart ?? 1;
 
   const blockPatterns = (rule.titleBlocklist || []).map((source) => new RegExp(source));
+  const includePattern = rule.titleInclude ? new RegExp(rule.titleInclude, 'i') : null;
   for (const category of categories) {
   for (const keyword of rule.keywords) {
     for (let page = pageStart; page < pageStart + maxPages; page += 1) {
@@ -581,16 +582,21 @@ export async function runJsonApiAdapter(rule, window, limits = {}) {
         const title = String(row[conf.titleField] || '').trim();
         if (!title) continue;
         if (blockPatterns.some((re) => re.test(title))) continue;
+        // 服务端不支持关键词检索的平台（如淮北矿业），用规则级 titleInclude 在客户端收敛。
+        if (includePattern && !includePattern.test(title)) continue;
         const id = row[conf.idField];
         const url = fillTemplate(rule.urlTemplate, { id, ...row });
         if (!url || seen.has(url)) continue;
         seen.add(url);
+        const publishDate = normalizeDate(row[conf.dateField]);
+        // 服务端排序不可控时，按规则开启时间窗过滤（默认关闭，保持既有规则行为不变）。
+        if (rule.filterWindow && publishDate && (publishDate < window.from || publishDate > window.to)) continue;
         result.discovered += 1;
         const candidate = makeCandidate({
           title,
           url,
           source: rule.name,
-          publishDate: normalizeDate(row[conf.dateField]),
+          publishDate,
           typeText: conf.typeTextField ? String(row[conf.typeTextField] || '') : '',
           region: rule.defaultRegion,
           sourceAuthority: rule.sourceAuthority || 'official',

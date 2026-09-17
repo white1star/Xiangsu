@@ -1598,5 +1598,50 @@
     "coverNote": "物资招标公告栏目（ywgg1hw），?pageNo=N 分页；2026-09-17 复核发现此前只扫结果栏目导致多条干选整机采购漏抓（神东保德 EPC 两阶段、贵州白布 EPC），本规则补接入；标题以“项目公告”结尾时按 defaultTypeText=招标公告 判型。",
     "urlBase": "https://cg.ccteg.cn",
     "itemRegex": "href=\"(?<url>/cms/channel/ywgg1hw/\\d+\\.htm)\"[^>]*title=\"(?<title>[^\"]+)\"[\\s\\S]{0,900}?<em>\\s*(?<date>20\\d{2}-\\d{2}-\\d{2})"
+  },
+  {
+    "id": "hbcoal-notice",
+    "platformId": "huaibei",
+    "name": "淮北矿业电子招标采购平台（交易信息·线索）",
+    "adapter": "json-api",
+    "access": "anonymous",
+    "required": false,
+    "leadOnly": true,
+    "leadNote": "淮北矿业公开列表接口可匿名读取（标题/类型/日期/项目编号），公告详情页与详情接口均需登录，按铁律不绕过；本条为列表级线索，须反查官方原文或其他公开源后才能入高置信台账。",
+    "sourceAuthority": "official",
+    "searchEndpoint": "https://zbcg.hbcoal.com/website-manage/mscene/getNoticeListByCompany",
+    "method": "POST",
+    "pageParam": "PageIndex",
+    "sizeParam": "PageSize",
+    "pageSize": 50,
+    "pageStart": 1,
+    "keywords": [
+      "全部"
+    ],
+    "extraParams": {
+      "NoticeCateId": "1,2,3",
+      "projectType": "1",
+      "domainName": "zbcg.hbcoal.com",
+      "dataType": 1
+    },
+    "categoryParam": "NoticeType",
+    "categoryValues": [
+      "1",
+      "2",
+      "3"
+    ],
+    "titleInclude": "干选|分选|选矸|XRT|光电|抛废",
+    "response": {
+      "rowsPath": "data.list",
+      "titleField": "noticeTitle",
+      "idField": "noticeId",
+      "dateField": "createTime"
+    },
+    "urlTemplate": "https://zbcg.hbcoal.com/company-pages/hbky/notice/detail?id={noticeId}&noticeCateId={noticeCateId}",
+    "maxPages": 2,
+    "requestDelayMs": 800,
+    "defaultRegion": "安徽",
+    "coverNote": "货物类交易信息（NoticeType 1=招标公告 / 2=中标公告 / 3=中标候选人公示），POST JSON {PageIndex,PageSize,NoticeType,...} 匿名可读列表；服务端不支持关键词检索，规则级 titleInclude 客户端收敛；详情需登录，仅作线索池。",
+    "filterWindow": true
   }
 ]

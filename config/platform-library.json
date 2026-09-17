@@ -294,7 +294,7 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "煤电、燃料和设备采购公告",
-    "auditNote": "2026-09-15 已探明：列表 JSON 接口 GET /cpu-bidauction/bidauctionBulletin/bulletinList?bulletinType=1(招标)/2(结果) 可匿名调用（字段 title/pushTime/code/id）；但详情跳 SSO（tangyhtsso）且正文接口未打通，仅列表级可达，暂未接入。"
+    "auditNote": "2026-09-17 复核：bulletinList JSON 匿名可取（约 8770/3903 条），title 关键词参数可用（干选 0 命中）；内容以废旧物资/竞拍为主，详情走 SSO → 暂不接入。"
   },
   {
     "id": "datang-coal",
@@ -348,7 +348,7 @@
     "category": "coal_owner",
     "access": "anonymous",
     "coverage": "淮北矿业干选机及配件采购公告",
-    "auditNote": "2026-09-15 探测：前端为 qiankun 微应用；列表接口 POST /website-manage/mscene/getNoticeListByCompany 可匿名调用（total 3000+）；详情接口参数未解出，暂未接入。"
+    "auditNote": "2026-09-17 复核：列表接口 getNoticeListByCompany 匿名可取（NoticeType 1/2/3=招标公告/中标公告/候选人公示，共 3200+ 条），但详情页与详情接口均需登录 → 已接入为线索级（待复核池，不做高置信记录）。"
   },
   {
     "id": "qcc",
@@ -393,7 +393,7 @@
     "category": "authentication",
     "access": "anonymous",
     "coverage": "商业招投标聚合和订阅",
-    "auditNote": "2026-08-03 实测：公告详情页（pageInfoSsr）正文含中标人+金额可匿名完整查看，归公开数据源；联系方式/附件仍需会员。"
+    "auditNote": "2026-09-17 复核：Scrapling 隐身浏览器可过 521 WAF 取首页；标讯搜索页为 Nuxt SPA（直连 404，前端路由/接口逆向未完成）；关联域含 e-bidding.org、shop.yjsc.com.cn 数据接口，待续攻。"
   },
   {
     "id": "qianlima",

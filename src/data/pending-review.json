@@ -870,5 +870,29 @@
     "status": "待复核",
     "note": "仅公开聚合索引，须反查官方原文后才能入高置信台账",
     "firstSeenAt": "2026-09-17T04:50:59.218Z"
+  },
+  {
+    "title": "安徽神源煤化工有限公司智能选矸系统土建工程项目招标公告",
+    "line": "煤炭智能干选设备",
+    "bidStatus": "招标公告",
+    "source": "淮北矿业电子招标采购平台（交易信息·线索）",
+    "publishDate": "2026-09-08",
+    "url": "https://zbcg.hbcoal.com/company-pages/hbky/notice/detail?id=34501001-cbfe-4759-8a39-6dcd617b3bbe&noticeCateId=1",
+    "confidence": "中",
+    "status": "待复核",
+    "note": "淮北矿业公开列表接口可匿名读取（标题/类型/日期/项目编号），公告详情页与详情接口均需登录，按铁律不绕过；本条为列表级线索，须反查官方原文或其他公开源后才能入高置信台账。",
+    "firstSeenAt": "2026-09-17T06:59:15.388Z"
+  },
+  {
+    "title": "安徽神源煤化工有限公司智能选矸系统土建工程中标候选人公示",
+    "line": "煤炭智能干选设备",
+    "bidStatus": "中标候选人",
+    "source": "淮北矿业电子招标采购平台（交易信息·线索）",
+    "publishDate": "2026-09-16",
+    "url": "https://zbcg.hbcoal.com/company-pages/hbky/notice/detail?id=4641deb6-b358-4522-8533-0cdea2465c9d&noticeCateId=1",
+    "confidence": "中",
+    "status": "待复核",
+    "note": "淮北矿业公开列表接口可匿名读取（标题/类型/日期/项目编号），公告详情页与详情接口均需登录，按铁律不绕过；本条为列表级线索，须反查官方原文或其他公开源后才能入高置信台账。",
+    "firstSeenAt": "2026-09-17T06:59:15.388Z"
   }
 ]

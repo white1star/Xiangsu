@@ -56,6 +56,8 @@
     "confidence": "高",
     "url": "https://cg.ccteg.cn/cms/channel/ywgg1hw/87606.htm",
     "evidence": "中国煤科电子采购平台 2026-09-15 发布《【沈阳设计院】贵州天润矿业有限公司白布煤矿选煤厂项目EPC总承包-干选机采购项目公告》：招标编号 GCG2026-064；招标人 中煤科工集团沈阳设计研究院有限公司；招标范围 本工程智能干选机供货、运输、含指导安装、调试、技术服务；建设地点 贵州省大方县对江镇石桅村白布煤矿；递交截止 2026-10-08 13:30。",
+    "openStatus": "待开标",
+    "resultGap": false,
     "projectKey": "沈阳设计院贵州天润矿业有限公司白布煤矿选煤厂项目EPC总承包干选机采购项目",
     "timeline": [
       {
@@ -67,8 +69,7 @@
         "source": "中国煤科电子采购平台（cg.ccteg.cn）：中煤科工官方渠道，匿名可看"
       }
     ],
-    "stages": 1,
-    "resultGap": false
+    "stages": 1
   },
   {
     "title": "新疆能源公司沙吉海煤矿智能干选项目成功投用",
@@ -3517,6 +3518,7 @@
     "resultGap": false,
     "projectKey": "神东保德干选改造EPC",
     "amountStage": "中标/签约价",
+    "bidOpenDate": "2026-02-05",
     "timeline": [
       {
         "date": "2026-01-15",
