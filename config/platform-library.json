@@ -276,7 +276,7 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "煤业、煤电、选煤相关设备及工程采购",
-    "auditNote": "2026-09-15 复测：node 与无头 Chromium 访问首页/列表均返 HTTP 412（WAF），未取到列表正文；暂不可爬，未接入。"
+    "auditNote": "2026-09-15 node/无头 Chromium 均被 412 WAF 拦截；2026-09-17 改用 Scrapling 隐身浏览器接入：检索页 #/search?value=<关键词> 匿名可检索全类型公告，详情页可读正文（已验证山寨煤矿末煤干选中标 2836.929 万/唐山神州）；node 直连仍 412，由 scrapling 适配器兜底。"
   },
   {
     "id": "huadian",
@@ -285,7 +285,7 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "煤炭、火电及相关设备采购",
-    "auditNote": "2026-09-15 复测：列表页可渲染菜单，但进入公告列表需『游客身份验证』（页面提示去验证），属身份验证墙，按铁律不绕过；未接入。"
+    "auditNote": "2026-09-15 列表页被渲染拦截、提示游客身份验证；2026-09-17 Scrapling 复测：首页与静态详情页（/staticPage/zhaobiaogg/...）可匿名读，但公告列表全部在 iframe + 游客验证墙（visitorCheckChcode.jsp）后，按铁律不绕过、不接入；仅首页 staticPage 预览（最新 10 条）可读，不作数据来源。"
   },
   {
     "id": "datang",

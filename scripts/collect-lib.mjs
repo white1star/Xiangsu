@@ -2,6 +2,12 @@
 // 范围：XRT 矿石智能分选设备、煤炭智能干选设备的招采信息（2026-01-01 起）。
 // 铁律：不绕过登录/验证码/付费墙；金额与供应商只取公告原文，缺失填“未披露”。
 
+import { spawnSync } from 'node:child_process';
+import { existsSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 export const MINIMUM_PUBLISH_DATE = '2026-01-01';
 export const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36 Pixel-Intelligence-Monitor/2.0';
 
@@ -73,11 +79,11 @@ export function extractAmount(text) {
 export function extractWinner(text) {
   if (!text) return null;
   const patterns = [
-    /(?:第一(?:中标)?候选人|中标候选人1|候选人一)[^：:]{0,10}[：:名称]*\s*([^，。；、：:\s<]{4,42}?(?:公司|集团|厂|研究院|研究所|中心|合伙企业))/,
-    /(?:中标(?:单位|人|供应商)|成交(?:单位|人|供应商)|供应商名称)[（(]?[^：:）)]{0,8}[）)]?[：:为]\s*([^，。；、：:\s<]{4,42}?(?:公司|集团|厂|研究院|研究所|中心|合伙企业))/,
-    /(?:中标|成交)(?:单位|人|供应商)(?:名称)?\s+([^\s，。；、：:<]{4,42}?(?:公司|集团|厂|研究院|研究所|中心|合伙企业))/,
-    /第一名\s*(?:单位名称)?\s*[：:]?\s*([^\s，。；、：:<]{4,42}?(?:公司|集团|厂|研究院|研究所|中心|合伙企业))/,
-    /(?:排序|名次)[\s\S]{0,120}?\b0*1\s+([^\s，。；、：:<\d]{4,42}?(?:公司|集团|厂|研究院|研究所|中心|合伙企业))/,
+    /(?:第一(?:中标)?候选人|中标候选人1|候选人一)[^：:]{0,10}[：:名称]*\s*([^，。；、：:\s<]{4,42}?(?:股份有限公司|有限公司|公司|集团|厂|研究院|研究所|中心|合伙企业))/,
+    /(?:中标(?:单位|人|供应商)|成交(?:单位|人|供应商)|供应商名称)[（(]?[^：:）)]{0,8}[）)]?[：:为]\s*([^，。；、：:\s<]{4,42}?(?:股份有限公司|有限公司|公司|集团|厂|研究院|研究所|中心|合伙企业))/,
+    /(?:中标|成交)(?:单位|人|供应商)(?:名称)?\s+([^\s，。；、：:<]{4,42}?(?:股份有限公司|有限公司|公司|集团|厂|研究院|研究所|中心|合伙企业))/,
+    /第一名\s*(?:单位名称)?\s*[：:]?\s*([^\s，。；、：:<]{4,42}?(?:股份有限公司|有限公司|公司|集团|厂|研究院|研究所|中心|合伙企业))/,
+    /(?:排序|名次)[\s\S]{0,120}?\b0*1\s+([^\s，。；、：:<\d]{4,42}?(?:股份有限公司|有限公司|公司|集团|厂|研究院|研究所|中心|合伙企业))/,
     /([^\s，。；、：:<]{4,42}?(?:公司|集团|研究院|研究所|中心|合伙企业))\s+(?:[\u4e00-\u9fa5]{2,4}\s+)?[\d,，]+(?:\.\d+)?\s*(?:万元|元)/,
   ];
   const hasResultContext = /中标|成交|候选人/.test(text);
@@ -88,7 +94,11 @@ export function extractWinner(text) {
     const name = match[1]
       .replace(/^(?:中标候选人|中标人|中标单位|成交供应商|供应商|单位)?名称[*＊：:]?/, '')
       .replace(/^[*＊·、]+/, '');
-    if (name.length >= 4) return name;
+    // “集团/厂/研究院”等短后缀可能截断法定名称；若其后紧跟“有限公司”等则续接完整。
+    const tail = text.slice((match.index ?? 0) + match[0].length);
+    const continuation = tail.match(/^(?:有限公司|有限责任公司|股份有限公司)/);
+    const fullName = continuation && /(?:集团|厂|中心|研究院|研究所|大学|学院)$/.test(name) ? name + continuation[0] : name;
+    if (fullName.length >= 4) return fullName;
   }
   return null;
 }
@@ -249,34 +259,38 @@ function makeCandidate({ title, url, source, publishDate, typeText = '', region,
   return { title, url, source, publishDate, line, bidStatus, region: region || '待核实', sourceAuthority };
 }
 
+// 用详情正文（公告原文纯文本）补全候选：证据摘录、金额/预算/采购人/采购内容/中标人/开标日期。
+export function applyDetailBody(candidate, body) {
+  candidate.evidence = excerptEvidence(body);
+  candidate.evidenceCapturedAt = new Date().toISOString();
+  // 无论招标/结果，都尽力抽取预算、采购人、采购内容，减少“未披露”。
+  const amount = extractAmount(body);
+  const budget = extractBudget(body);
+  const buyer = extractBuyer(body);
+  const procurement = extractProcurement(body);
+  if (candidate.bidStatus === '已中标' || candidate.bidStatus === '中标候选人') {
+    // 结果类优先填成交价；拿不到成交价但有控制价时回退，避免空着。
+    if (amount) candidate.amount = amount.display;
+    else if (budget) candidate.amount = budget.display;
+    const winner = extractWinner(body);
+    if (winner) candidate.competitor = candidate.bidStatus === '中标候选人' ? `${winner}（第一候选人）` : winner;
+  } else if (candidate.bidStatus === '招标公告') {
+    // 招标公告无成交价，金额填控制价/预算（若有），并抽取开标日期。
+    if (amount) candidate.amount = amount.display;
+    else if (budget) candidate.amount = budget.display;
+    candidate.bidOpenDate = extractBidOpenDate(body) || null;
+  }
+  if (budget) candidate.budget = budget.display;
+  if (buyer) candidate.buyer = buyer;
+  if (procurement) candidate.procurement = procurement;
+  return candidate;
+}
+
 export async function enrichFromOfficialDetail(candidate, detailUrl) {
   try {
     const { status, text } = await fetchText(detailUrl, { timeout: 25000 });
     if (status !== 200 || text.length < 500) return candidate;
-    const body = htmlToText(text);
-    candidate.evidence = excerptEvidence(body);
-    candidate.evidenceCapturedAt = new Date().toISOString();
-    // 无论招标/结果，都尽力抽取预算、采购人、采购内容，减少“未披露”。
-    const amount = extractAmount(body);
-    const budget = extractBudget(body);
-    const buyer = extractBuyer(body);
-    const procurement = extractProcurement(body);
-    if (candidate.bidStatus === '已中标' || candidate.bidStatus === '中标候选人') {
-      // 结果类优先填成交价；拿不到成交价但有控制价时回退，避免空着。
-      if (amount) candidate.amount = amount.display;
-      else if (budget) candidate.amount = budget.display;
-      const winner = extractWinner(body);
-      if (winner) candidate.competitor = candidate.bidStatus === '中标候选人' ? `${winner}（第一候选人）` : winner;
-    } else if (candidate.bidStatus === '招标公告') {
-      // 招标公告无成交价，金额填控制价/预算（若有），并抽取开标日期。
-      if (amount) candidate.amount = amount.display;
-      else if (budget) candidate.amount = budget.display;
-      candidate.bidOpenDate = extractBidOpenDate(body) || null;
-    }
-    if (budget) candidate.budget = budget.display;
-    if (buyer) candidate.buyer = buyer;
-    if (procurement) candidate.procurement = procurement;
-    return candidate;
+    return applyDetailBody(candidate, htmlToText(text));
   } catch {
     return candidate;
   }
@@ -1082,6 +1096,148 @@ export async function runCninfoAdapter(rule, window, limits = {}) {
   return result;
 }
 
+// —— 适配器：Scrapling 隐身浏览器桥（WAF/指纹反爬平台的公开检索页与详情页） ——
+// 依赖本地 .venv 内的 Scrapling（scripts/scrapling_fetch.py 为桥）；CI 无环境时跳过并记备注。
+const SCRAPLING_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+
+// 定位 Scrapling 运行环境：规则 pythonPath > 环境变量 > 项目根目录旁的 .venv（Windows/Unix）。
+export function resolveScraplingPython(explicitPath) {
+  const candidates = [
+    explicitPath,
+    process.env.SCRAPLING_PYTHON,
+    path.join(SCRAPLING_ROOT, '..', '.venv', 'Scripts', 'python.exe'),
+    path.join(SCRAPLING_ROOT, '..', '.venv', 'bin', 'python'),
+  ].filter(Boolean);
+  return candidates.find(candidate => existsSync(candidate)) || null;
+}
+
+function runScraplingBridge(python, spec) {
+  const dir = mkdtempSync(path.join(os.tmpdir(), 'scrapling-bridge-'));
+  const specFile = path.join(dir, 'spec.json');
+  writeFileSync(specFile, JSON.stringify(spec), 'utf8');
+  try {
+    const bridge = path.join(SCRAPLING_ROOT, 'scripts', 'scrapling_fetch.py');
+    const result = spawnSync(python, ['-X', 'utf8', bridge, specFile], {
+      encoding: 'utf8',
+      timeout: (spec.timeout || 90000) + 30000,
+      maxBuffer: 64 * 1024 * 1024,
+      env: { ...process.env, PYTHONIOENCODING: 'utf-8', PYTHONUTF8: '1' },
+    });
+    if (result.error) throw result.error;
+    if (result.status !== 0) throw new Error(`桥接退出码 ${result.status}：${String(result.stderr || '').trim().slice(0, 200)}`);
+    const start = String(result.stdout).indexOf('{');
+    if (start < 0) throw new Error('桥接未返回 JSON');
+    const payload = JSON.parse(String(result.stdout).slice(start));
+    if (!payload.ok) throw new Error(payload.error || '桥接返回失败');
+    return payload;
+  } finally {
+    try { rmSync(dir, { recursive: true, force: true }); } catch { /* 临时目录清理失败可忽略 */ }
+  }
+}
+
+// 从桥接捕获的 XHR JSON 中解析公告行（纯函数，便于离线测试）。
+export function parseScraplingJsonRows(payload, rule) {
+  const rows = [];
+  for (const xhr of payload.xhr || []) {
+    let data;
+    try { data = JSON.parse(xhr.body); } catch { continue; }
+    const list = getPath(data, rule.jsonListPath || '');
+    if (!Array.isArray(list)) continue;
+    for (const item of list) {
+      const title = String(item[rule.titleField] ?? '').replace(/\s+/g, ' ').trim();
+      if (!title) continue;
+      const rawDate = item[rule.dateField];
+      let publishDate = null;
+      if (rule.epochMs && rawDate !== null && rawDate !== undefined && rawDate !== '') {
+        // 平台时间戳为 UTC 毫秒，按规则声明的时区偏移（小时）换算成当地发布日期。
+        const date = new Date(Number(rawDate) + (rule.timezoneOffset || 0) * 3600 * 1000);
+        if (!Number.isNaN(date.getTime())) publishDate = date.toISOString().slice(0, 10);
+      } else {
+        publishDate = normalizeDate(rawDate);
+      }
+      const id = rule.idField ? item[rule.idField] : null;
+      if (!publishDate || id === null || id === undefined) continue;
+      rows.push({
+        title,
+        publishDate,
+        url: fillTemplate(rule.urlTemplate || '{id}', { id: String(id) }),
+        typeText: (rule.typeMap && rule.typeMap[String(item[rule.typeField])]) || '',
+      });
+    }
+  }
+  return rows;
+}
+
+export async function runScraplingAdapter(rule, window, limits = {}) {
+  // 浏览器详情抓取耗时高：以规则自身 maxDetails 为硬上限，避免 backfill 大限额拖垮整轮。
+  const detailCap = rule.maxDetails ?? 8;
+  const maxDetails = Math.min(limits.maxDetails ?? detailCap, detailCap);
+  const result = { pagesScanned: 0, discovered: 0, candidates: [], notes: [] };
+  const python = resolveScraplingPython(rule.pythonPath);
+  if (!python) {
+    result.notes.push('未找到 Scrapling 运行环境（本地 .venv），本规则跳过（CI 环境预期）');
+    return result;
+  }
+  const include = rule.includeRegex ? new RegExp(rule.includeRegex, 'i') : null;
+  const exclude = rule.excludeRegex ? new RegExp(rule.excludeRegex, 'i') : null;
+  const seen = new Set();
+  const sources = rule.searchTemplate
+    ? (rule.keywords || []).map(keyword => ({ url: rule.searchTemplate.replace('{kw}', encodeURIComponent(keyword)), keyword }))
+    : [{ url: rule.listingUrl, keyword: null }];
+  for (const source of sources) {
+    let payload;
+    try {
+      payload = runScraplingBridge(python, {
+        url: source.url,
+        capture: rule.captureXhr,
+        timeout: rule.timeoutMs || 90000,
+        actions: rule.actions,
+      });
+    } catch (error) {
+      result.notes.push(`「${source.keyword || source.url}」抓取失败：${error.message}`);
+      continue;
+    }
+    result.pagesScanned += 1;
+    const rows = rule.jsonListPath ? parseScraplingJsonRows(payload, rule) : [];
+    for (const row of rows) {
+      if (row.publishDate < window.from || row.publishDate > window.to) continue;
+      if (include && !include.test(row.title)) continue;
+      if (exclude && exclude.test(row.title)) continue;
+      if (seen.has(row.url)) continue;
+      seen.add(row.url);
+      result.discovered += 1;
+      result.candidates.push(makeCandidate({
+        title: row.title, url: row.url, source: rule.name, publishDate: row.publishDate,
+        typeText: row.typeText, region: rule.defaultRegion, sourceAuthority: rule.sourceAuthority || 'official',
+      }));
+    }
+    await sleep(rule.requestDelayMs ?? 1500);
+  }
+  let enriched = 0;
+  for (const candidate of result.candidates) {
+    if (!candidate.line || !candidate.bidStatus) continue;
+    if (enriched >= maxDetails) { result.notes.push('已达单次详情抓取上限，剩余候选下次运行继续'); break; }
+    if (rule.detail) {
+      try {
+        const payload = runScraplingBridge(python, {
+          url: candidate.url, capture: rule.detail.captureXhr, timeout: rule.timeoutMs || 90000,
+        });
+        const data = payload.xhr?.length ? JSON.parse(payload.xhr[0].body) : null;
+        const html = data ? getPath(data, rule.detail.htmlPath || '') : null;
+        if (html) applyDetailBody(candidate, htmlToText(String(html)));
+        else result.notes.push(`详情正文未捕获《${candidate.title.slice(0, 24)}》`);
+      } catch (error) {
+        result.notes.push(`详情抓取失败《${candidate.title.slice(0, 24)}》：${error.message}`);
+      }
+    } else {
+      await enrichFromOfficialDetail(candidate, candidate.url);
+    }
+    enriched += 1;
+    await sleep(rule.detailDelayMs ?? 1200);
+  }
+  return result;
+}
+
 export const ADAPTERS = {
   'ggzy-api': runGgzyApiAdapter,
   'html-list': runHtmlListAdapter,
@@ -1093,4 +1249,5 @@ export const ADAPTERS = {
   'ajaxpro-list': runAjaxProAdapter,
   cninfo: runCninfoAdapter,
   probe: runProbeAdapter,
+  scrapling: runScraplingAdapter,
 };

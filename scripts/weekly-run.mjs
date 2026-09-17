@@ -65,6 +65,7 @@ export function mergeCandidates(existing, candidates) {
       title: candidate.title,
       line: candidate.line || '待核实',
       competitor: candidate.competitor || '未披露',
+      winner: candidate.bidStatus === '已中标' && candidate.competitor && candidate.competitor !== '未披露' ? candidate.competitor : undefined,
       region: candidate.region || '待核实',
       mineral: candidate.mineral || '未披露',
       amount: candidate.amount || '未披露',
@@ -84,6 +85,7 @@ export function mergeCandidates(existing, candidates) {
       evidence: candidate.evidence,
     };
     if (!record.amountNote) delete record.amountNote;
+    if (!record.winner) delete record.winner;
     added.push(record);
   }
   return { records: [...existing, ...added], added, rejected };

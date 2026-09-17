@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { buildWindow, canonicalLine, classifyLine, cleanVendorTitle, extractAmount, extractBidOpenDate, extractDateFromUrl, extractVendorItems, extractWinner, mapBidStatus, mapVendorSignal, normalizeDate, VENDOR_AUTHORITY } from '../scripts/collect-lib.mjs';
+import { applyDetailBody, buildWindow, canonicalLine, classifyLine, cleanVendorTitle, extractAmount, extractBidOpenDate, extractDateFromUrl, extractVendorItems, extractWinner, mapBidStatus, mapVendorSignal, normalizeDate, parseScraplingJsonRows, VENDOR_AUTHORITY } from '../scripts/collect-lib.mjs';
 import { mergePendingLeads } from '../scripts/weekly-run.mjs';
 
 test('normalizeDate handles Chinese and dash formats', () => {
@@ -148,6 +148,45 @@ test('extractVendorItems anchors mode honours hrefPattern', () => {
   const items = extractVendorItems(html, 'https://www.chinataiho.com/info.php?class_id=105', { hrefPattern: '/news/display/\\d+' });
   assert.equal(items.length, 1);
   assert.equal(items[0].url, 'https://www.chinataiho.com/news/display/1920');
+});
+
+test('parseScraplingJsonRows maps WAF-platform XHR JSON into dated rows', () => {
+  const payload = {
+    xhr: [{
+      body: JSON.stringify({
+        totalCount: 2,
+        root: [
+          {
+            announcementId: 12900803,
+            announcementType: '104',
+            announcementTitle: '[华能煤业公司华亭煤业公司山寨煤矿末煤干选设备租赁委外运营（框架协议3年）] 中标结果公示',
+            createtime: 1781539200000,
+          },
+          { announcementId: 12933078, announcementType: '107', announcementTitle: '某厂物资询比采购公告', createtime: 1789621562000 },
+        ],
+      }),
+    }],
+  };
+  const rows = parseScraplingJsonRows(payload, {
+    jsonListPath: 'root', titleField: 'announcementTitle', dateField: 'createtime', epochMs: true,
+    timezoneOffset: 8,
+    idField: 'announcementId', urlTemplate: 'https://ec.chng.com.cn/channel/home/#/detail?id={id}',
+    typeField: 'announcementType', typeMap: { '104': '中标结果公示', '107': '询比公告' },
+  });
+  assert.equal(rows.length, 2);
+  assert.equal(rows[0].publishDate, '2026-06-16', 'epoch 毫秒转 ISO 日期');
+  assert.equal(rows[0].typeText, '中标结果公示');
+  assert.equal(rows[0].url, 'https://ec.chng.com.cn/channel/home/#/detail?id=12900803');
+  assert.equal(rows[1].publishDate, '2026-09-17');
+});
+
+test('applyDetailBody fills evidence/amount/winner from the official notice text', () => {
+  const candidate = { bidStatus: '已中标', title: '山寨煤矿末煤干选设备租赁委外运营中标结果公示' };
+  applyDetailBody(candidate, '华能煤业公司华亭煤业公司山寨煤矿末煤干选设备租赁委外运营（框架协议3年）中标结果公示（招标编号：HNZB2026-04-2-179）一、中标人信息：中标人：唐山神州机械集团有限公司 中标金额：28369290元 二、其他');
+  assert.equal(candidate.amount, '2836.93万元');
+  assert.equal(candidate.competitor, '唐山神州机械集团有限公司');
+  assert.match(candidate.evidence, /中标人/);
+  assert.ok(candidate.evidenceCapturedAt, '必须记录证据采集时间');
 });
 
 

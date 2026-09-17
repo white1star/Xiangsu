@@ -113,6 +113,17 @@ test('tender announcements are labelled 招标公告 with 未披露 competitor (
   assert.equal(added[0].competitor, '未披露');
 });
 
+test('auto-added 已中标 records carry winner so the project status guard stays green', () => {
+  const { added } = mergeCandidates([], [
+    {
+      url: 'https://example.com/w', title: '某煤矿末煤干选设备租赁委外运营中标结果公示', source: '官方平台',
+      publishDate: '2026-06-16', bidStatus: '已中标', sourceAuthority: 'official', competitor: '唐山神州机械集团有限公司',
+      line: '煤炭智能干选设备', evidence: '中标人：唐山神州机械集团有限公司 中标金额：28369290元', evidenceCapturedAt: '2026-07-02T01:00:00Z',
+    },
+  ]);
+  assert.equal(added[0].winner, '唐山神州机械集团有限公司');
+});
+
 test('deduplicates same notice appearing on two official platforms by title and date', () => {
   const existing = [{ id: 'old', url: 'https://province.example/x', title: '某矿干选机中标结果公告', publishDate: '2026-06-01' }];
   const result = mergeCandidates(existing, [

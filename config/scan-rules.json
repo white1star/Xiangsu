@@ -1520,5 +1520,56 @@
     "requestDelayMs": 1200,
     "defaultRegion": "全国",
     "coverNote": "公开检索页 GET https://ss.ebnew.com/tradingSearch/index.htm?key=<关键词>（静态 HTML，匿名可看；登录后免费）；列表项 = <a href=http://www.ebnew.com/businessShow/<id>.html title=完整标题> + 『发布日期:YYYY-MM-DD』；详情页 http://www.ebnew.com/businessShow/<id>.html 可匿名取正文（金额/中标人随正文抽取）。检索页分页参数未生效（始终第一页），故只扫最新一页/关键词，周更增量够用（『干选』共 410 条）。来源=第三方招标信息平台，置信度中（sourceAuthority=公开），按『登录后免费可看正文』口径收录。"
+  },
+  {
+    "id": "huaneng-search",
+    "platformId": "huaneng",
+    "name": "华能电子商务平台（采购专栏检索）",
+    "adapter": "scrapling",
+    "access": "anonymous",
+    "required": false,
+    "sourceAuthority": "official",
+    "searchTemplate": "https://ec.chng.com.cn/channel/home/#/search?value={kw}",
+    "captureXhr": "queryAnnouncementByTitle",
+    "jsonListPath": "root",
+    "titleField": "announcementTitle",
+    "dateField": "createtime",
+    "epochMs": true,
+    "timezoneOffset": 8,
+    "idField": "announcementId",
+    "urlTemplate": "https://ec.chng.com.cn/channel/home/#/detail?id={id}",
+    "typeField": "announcementType",
+    "typeMap": {
+      "103": "招标公告",
+      "105": "资格预审公告",
+      "ZBHXRGG": "中标候选人公示",
+      "104": "中标结果公示",
+      "107": "询比公告",
+      "133": "谈判公告",
+      "127": "竞价公告",
+      "111": "直接采购项目公示",
+      "108": "询比结果公告",
+      "131": "直接采购结果公告",
+      "132": "谈判结果公告",
+      "128": "竞价结果公告"
+    },
+    "keywords": [
+      "干选",
+      "XRT",
+      "光电分选",
+      "智能分选",
+      "TDS",
+      "选矸"
+    ],
+    "excludeRegex": "可研|可行性研究|可行性",
+    "maxDetails": 6,
+    "detail": {
+      "captureXhr": "announcementDetail",
+      "htmlPath": "data.announcement.announcementHtml"
+    },
+    "requestDelayMs": 1500,
+    "detailDelayMs": 1200,
+    "defaultRegion": "全国",
+    "coverNote": "华能采购专栏为 Vue SPA（node 直连被 412 WAF 拦截），本规则经 Scrapling 隐身浏览器渲染检索页并发起关键词搜索，捕获 queryAnnouncementByTitle JSON（标题/类型/时间/ID）；详情页捕获 announcementDetail JSON 提取正文金额/中标人/证据。仅取匿名可见页，不碰登录与验证码；单个关键词仅取首屏 10 条，靠多关键词覆盖；CI 无浏览器环境时自动跳过并记备注。"
   }
 ]
