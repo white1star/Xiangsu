@@ -34,7 +34,8 @@
 ## 数据与脚本
 
 - 台账：`src/data/intelligence.flat.json`（主数据，数组）→ `scripts/group_projects.mjs` → `src/data/intelligence.json`（前端按项目合并）。
-- 抓取：`scripts/weekly-run.mjs`（52 条规则，读 `config/scan-rules.json`），适配器见 `scripts/collect-lib.mjs`。
+- 抓取：`scripts/weekly-run.mjs`（59 条规则，读 `config/scan-rules.json`），适配器见 `scripts/collect-lib.mjs`。
+- 定向反查（旧账更新）：`scripts/recheck_unresolved.mjs [--apply] [--limit N]`——对台账未完结项目在 ggzy/必联/国信e采/十环做定向复查，报告落 `reports/recheck-<日期>.json`；`--apply` 时仅官方/公开源结果公告可回填（十环为聚合线索不回填），自动备份 + 重生成分组。
 - 公众号线索：`scripts/gzh_ingest.mjs --query "<短词>" -n 8 --after <日期>`。
 - **禁止改全局分类器 `classifyLine`**（已验证会误伤 39/113 条正确条目）。要过滤噪音一律用**规则级 `titleBlocklist`**。
 - 平台清单：`config/platform-library.json`（分类/可爬性备注，不等于已接入）。

@@ -1844,5 +1844,34 @@
     "requestDelayMs": 1200,
     "defaultRegion": "全国",
     "coverNote": "国信e采（国信招标集团电子交易平台，e-bidding.org）公告公示列表：GET 静态 HTML 可匿名访问，word=关键词 检索、page=N 分页；详情页 /biddingBulletin/日期/ID.html 正文匿名可读（含招标人、代理机构、公告内容）。2026-09-17 接入（第三方平台，sourceAuthority=公开、中置信）；实测 2026 年平台暂无干选/XRT 条目，属预埋覆盖，以后有新公告自动进台账。"
+  },
+  {
+    "id": "shihuan-search",
+    "platformId": "shihuan",
+    "name": "十环招标网（关键词检索·线索）",
+    "adapter": "html-list",
+    "access": "anonymous",
+    "required": false,
+    "leadOnly": true,
+    "leadNote": "十环招标网为聚合整理站（详情页标注“十环招标网整理”），按口径仅作待复核线索；须反查官方原文后才能入高置信台账。",
+    "searchTemplate": "https://bid.10huan.com/e/search/index.php",
+    "searchMethod": "POST",
+    "searchBodyTemplate": "keyboard={kw}&show=title&tbname=news&tempid=1",
+    "itemRegex": "href=\"(?<url>https://bid\\.10huan\\.com/\\d{4}/[^\"]+\\.html)\"[^>]*target=\"_blank\">(?<title>[^<]{8,140})</a>[\\s\\S]{0,900}?<span class=\"a\">[^<]*? - (?<date>20\\d{2}-\\d{2}-\\d{2})</span>",
+    "titleStrip": "^20\\d{2}年\\d{1,2}月\\d{1,2}日",
+    "keywords": [
+      "干选",
+      "智能干选",
+      "XRT",
+      "智能分选",
+      "选矸",
+      "智能选矸",
+      "光电分选",
+      "抛废"
+    ],
+    "maxPages": 1,
+    "requestDelayMs": 900,
+    "defaultRegion": "全国",
+    "coverNote": "帝国CMS 搜索接口：POST /e/search/index.php（keyboard/show=title/tbname=news/tempid=1）匿名可用（node 直连 200）；结果页静态 HTML，itemRegex 解析标题/链接/日期并去掉标题内嵌日期前缀；聚合整理站，仅作线索池。"
   }
 ]

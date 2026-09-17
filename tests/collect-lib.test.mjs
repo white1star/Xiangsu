@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { applyDetailBody, buildWindow, canonicalLine, classifyLine, cleanVendorTitle, extractAmount, extractAnchors, extractBidOpenDate, extractDateFromUrl, extractVendorItems, extractWinner, mapBidStatus, mapVendorSignal, normalizeDate, parseScraplingJsonRows, VENDOR_AUTHORITY } from '../scripts/collect-lib.mjs';
+import { applyDetailBody, buildWindow, canonicalLine, classifyLine, cleanVendorTitle, extractAmount, extractAnchors, extractBidOpenDate, extractDateFromUrl, extractVendorItems, extractWinner, mapBidStatus, mapVendorSignal, normalizeDate, parseScraplingJsonRows, parseScraplingRenderedItems, VENDOR_AUTHORITY } from '../scripts/collect-lib.mjs';
 import { mergePendingLeads } from '../scripts/weekly-run.mjs';
 
 test('normalizeDate handles Chinese and dash formats', () => {
@@ -195,6 +195,19 @@ test('extractAnchors strips icon-font entities and decodes common entities', () 
   assert.equal(items.length, 1);
   assert.equal(items[0].title, '【沈阳设计院】某矿干选机采购 项目公告');
   assert.equal(items[0].url, 'https://cg.ccteg.cn/cms/channel/ywgg1hw/87606.htm');
+});
+
+test('parseScraplingRenderedItems parses rendered SPA list HTML via itemRegex', () => {
+  const html = '<h2><a href="https://bid.10huan.com/2026/gz/0206/gz17822.html" target="_blank">2026年2月6日某矿智能干选系统公开招标公告</a></h2>'
+    + '<span class="a">https://bid.10huan.com/2026/gz/0206/gz17822.html - 2026-02-06</span>';
+  const rows = parseScraplingRenderedItems(html, 'https://bid.10huan.com/', {
+    itemRegex: 'href="(?<url>https://bid\\.10huan\\.com/\\d{4}/[^"]+\\.html)"[^>]*target="_blank">(?<title>[^<]{8,140})</a>[\\s\\S]{0,900}?<span class="a">[^<]*? - (?<date>20\\d{2}-\\d{2}-\\d{2})</span>',
+    normalizeHttps: true,
+  });
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].publishDate, '2026-02-06');
+  assert.equal(rows[0].url, 'https://bid.10huan.com/2026/gz/0206/gz17822.html');
+  assert.match(rows[0].title, /智能干选/);
 });
 
 

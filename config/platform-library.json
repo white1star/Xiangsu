@@ -240,7 +240,7 @@
     "category": "energy_owner",
     "access": "anonymous",
     "coverage": "国家电投及内蒙古能源煤炭相关招标公告",
-    "auditNote": "2026-09-15 复测：无头浏览器渲染为空（正文 0 字节、无 XHR），暂不可达。"
+    "auditNote": "2026-09-17 复测：站点采用「远程盾」JS 挑战（remote-shield 加密接口），node 不可达；隐身浏览器渲染后可见栏目与近期公告列表（133KB），但列表项无静态链接（全站仅 1 个非 JS href），无法低成本提取公告 URL → 暂不接入，待逆向其 SPA 路由/接口。"
   },
   {
     "id": "powerchina",
@@ -619,5 +619,14 @@
     "access": "anonymous",
     "coverage": "国信招标集团客户（能源、煤炭、金融、粮食等央企/国企）招标采购公告",
     "auditNote": "2026-09-17 实测：公告列表与详情页均匿名可读（node 直连 200），word 关键词检索 + page 分页；已接入 scan-rules（ebidding-search，中置信）；2026 年暂无干选/XRT 条目，属预埋覆盖。"
+  },
+  {
+    "id": "shihuan",
+    "name": "十环招标网",
+    "entryUrl": "https://bid.10huan.com/",
+    "category": "authentication",
+    "access": "anonymous",
+    "coverage": "全国招标公告/中标结果聚合整理（帝国CMS）",
+    "auditNote": "2026-09-17 实测：POST /e/search/index.php 关键词检索匿名可用（node 直连 200），详情页可读；聚合整理站，仅作线索源接入（规则 shihuan-search，进待复核池）。"
   }
 ]

@@ -366,11 +366,21 @@ export async function runHtmlListAdapter(rule, window, limits = {}) {
     : [{ base: rule.listingUrl, kw: null }];
   for (const source of sources) {
     for (let page = 1; page <= maxPages; page += 1) {
+      const isPostSearch = rule.searchMethod === 'POST' && source.kw != null;
       const url = page === 1
-        ? source.base
+        ? (isPostSearch ? rule.searchTemplate : source.base)
         : String(rule.pageTemplate || source.base).replace('{kw}', encodeURIComponent(source.kw || '')).replace('{n}', String(page));
       let response;
-      try { response = await fetchText(url, rule.headers ? { headers: rule.headers } : undefined); } catch (error) {
+      try {
+        const options = {};
+        if (rule.headers) options.headers = rule.headers;
+        if (isPostSearch) {
+          options.method = 'POST';
+          options.headers = { 'content-type': 'application/x-www-form-urlencoded', ...(rule.headers || {}) };
+          options.body = String(rule.searchBodyTemplate || 'keyword={kw}').replace('{kw}', encodeURIComponent(source.kw));
+        }
+        response = await fetchText(url, options);
+      } catch (error) {
         if (page === 1) throw error;
         result.notes.push(`第${page}页抓取失败：${error.message}`); break;
       }
@@ -379,6 +389,7 @@ export async function runHtmlListAdapter(rule, window, limits = {}) {
       result.pagesScanned += 1;
       const items = rule.itemRegex ? extractVendorItems(response.text, url, rule) : extractAnchors(response.text, url);
       for (const anchor of items) {
+        if (rule.titleStrip && anchor.title) anchor.title = anchor.title.replace(new RegExp(rule.titleStrip), '').trim();
         if (rule.normalizeHttps && anchor.url && anchor.url.startsWith('http://')) anchor.url = anchor.url.replace('http://', 'https://');
         if (!keyword.test(anchor.title) || seen.has(anchor.url)) continue;
         seen.add(anchor.url);
@@ -1177,6 +1188,16 @@ export function parseScraplingJsonRows(payload, rule) {
   return rows;
 }
 
+// 渲染后 HTML 解析：SPA 列表页由隐身浏览器渲染出真实 DOM 后，按 itemRegex/锚点提取（纯函数，便于离线测试）。
+export function parseScraplingRenderedItems(html, pageUrl, rule) {
+  return extractVendorItems(html || '', pageUrl, rule).map(item => ({
+    title: (item.title || '').trim(),
+    url: rule.normalizeHttps && item.url && item.url.startsWith('http://') ? item.url.replace('http://', 'https://') : item.url,
+    publishDate: item.date ? normalizeDate(item.date) : null,
+    typeText: rule.defaultTypeText || '',
+  }));
+}
+
 export async function runScraplingAdapter(rule, window, limits = {}) {
   // 浏览器详情抓取耗时高：以规则自身 maxDetails 为硬上限，避免 backfill 大限额拖垮整轮。
   const detailCap = rule.maxDetails ?? 8;
@@ -1207,9 +1228,14 @@ export async function runScraplingAdapter(rule, window, limits = {}) {
       continue;
     }
     result.pagesScanned += 1;
-    const rows = rule.jsonListPath ? parseScraplingJsonRows(payload, rule) : [];
+    const rows = rule.jsonListPath
+      ? parseScraplingJsonRows(payload, rule)
+      : (rule.parseRendered ? parseScraplingRenderedItems(payload.html || '', payload.url || source.url, rule) : []);
+    const keywordPattern = rule.keywords && rule.keywords.length ? new RegExp(rule.keywords.join('|'), 'i') : null;
     for (const row of rows) {
+      if (!row.publishDate) continue;
       if (row.publishDate < window.from || row.publishDate > window.to) continue;
+      if (keywordPattern && !keywordPattern.test(row.title)) continue;
       if (include && !include.test(row.title)) continue;
       if (exclude && exclude.test(row.title)) continue;
       if (seen.has(row.url)) continue;
@@ -1232,7 +1258,8 @@ export async function runScraplingAdapter(rule, window, limits = {}) {
           url: candidate.url, capture: rule.detail.captureXhr, timeout: rule.timeoutMs || 90000,
         });
         const data = payload.xhr?.length ? JSON.parse(payload.xhr[0].body) : null;
-        const html = data ? getPath(data, rule.detail.htmlPath || '') : null;
+        let html = data ? getPath(data, rule.detail.htmlPath || '') : null;
+        if (!html && rule.detail.rendered && payload.html) html = payload.html;
         if (html) applyDetailBody(candidate, htmlToText(String(html)));
         else result.notes.push(`详情正文未捕获《${candidate.title.slice(0, 24)}》`);
       } catch (error) {
