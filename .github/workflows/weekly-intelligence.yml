@@ -1,7 +1,9 @@
-name: 每周竞品情报更新（已停用自动触发，仅手动运行）
+name: 每日竞品情报更新
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '30 21 * * *'
 
 permissions:
   contents: write
