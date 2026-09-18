@@ -10,7 +10,7 @@
 
 ## 每周自动更新
 
-`每周竞品情报更新` 在每周一 09:10（Asia/Shanghai）执行，也可在 Actions 页面手动点击 **Run workflow**。
+`每日竞品情报更新` 每天 05:30（Asia/Shanghai）自动执行（抓取→提交→构建部署一条龙），也可在 Actions 页面手动点击 **Run workflow**。
 
 采集规则定义在 `config/scan-rules.json`（真实采集规则：入口、检索接口、栏目、关键词、分页上限、适配器类型），执行 `scripts/weekly-run.mjs`：
 
