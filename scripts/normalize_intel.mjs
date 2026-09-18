@@ -13,6 +13,8 @@ const out = [];
 
 for (const r of raw) {
   const rec = { ...r };
+  // 公众号线索一律不进台账（只保留在公众号线索栏）
+  if (rec.gzhOnly || /微信公众号/.test(String(rec.source || ''))) continue;
   // 字段补齐
   rec.bid = rec.bid || rec.bidStatus || '未披露';
   rec.bidStatus = rec.bidStatus || rec.bid;
