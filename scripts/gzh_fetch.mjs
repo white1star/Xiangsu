@@ -22,6 +22,7 @@
  */
 import { createRequire } from 'node:module';
 import { writeFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 const require = createRequire(import.meta.url);
@@ -173,4 +174,8 @@ async function main() {
   console.error(`完成：命中 ${results.length} 条公众号文章（含正文提取 ${results.filter(r => r.article && r.article.textLength > 0).length} 条）`);
 }
 
-main().catch(e => { console.error('执行失败:', e.message); process.exit(1); });
+export { fetchArticle, extractFromArticleHtml };
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch(e => { console.error('执行失败:', e.message); process.exit(1); });
+}
