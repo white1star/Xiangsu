@@ -7,10 +7,19 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   collect-and-validate:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -32,3 +41,11 @@ jobs:
           git add src/data/intelligence.json src/data/pending-review.json public/data/latest-run.json public/data/scan-state.json public/data/platform-audit.json
           git diff --cached --quiet || git commit -m "data: weekly intelligence update"
           git push
+      - name: 构建公开工作台
+        run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/client
+      - id: deployment
+        uses: actions/deploy-pages@v4
