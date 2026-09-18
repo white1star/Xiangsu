@@ -1,19 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="像素智能 · 竞品情报">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" role="img" aria-label="像素智能 · 竞品情报">
   <title>像素智能 · 竞品情报</title>
-  <rect width="64" height="64" rx="14" fill="#289048"/>
-  <g fill="#ffffff">
-    <rect x="7.5" y="27.5" width="9" height="9" rx="1.6"/>
-    <rect x="17.5" y="17.5" width="9" height="9" rx="1.6"/>
-    <rect x="17.5" y="27.5" width="9" height="9" rx="1.6"/>
-    <rect x="17.5" y="37.5" width="9" height="9" rx="1.6"/>
-    <rect x="27.5" y="7.5" width="9" height="9" rx="1.6"/>
-    <rect x="27.5" y="17.5" width="9" height="9" rx="1.6"/>
-    <rect x="27.5" y="27.5" width="9" height="9" rx="1.6"/>
-    <rect x="27.5" y="37.5" width="9" height="9" rx="1.6"/>
-    <rect x="27.5" y="47.5" width="9" height="9" rx="1.6"/>
-    <rect x="37.5" y="17.5" width="9" height="9" rx="1.6"/>
-    <rect x="37.5" y="27.5" width="9" height="9" rx="1.6"/>
-    <rect x="37.5" y="37.5" width="9" height="9" rx="1.6"/>
-    <rect x="47.5" y="27.5" width="9" height="9" rx="1.6"/>
-  </g>
+  <rect width="16" height="16" rx="4" fill="#289048"/>
 </svg>
