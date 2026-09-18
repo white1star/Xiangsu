@@ -287,7 +287,7 @@ function SourcePage() {
   </div>;
 }
 
-// 公众号线索页（置信度=低）：只给标题+摘要+日期+公众号名+链接，正文须点开自看，不作为交易凭证。
+// 公众号线索页（置信度=低）：微信公众号不开放接口，只给标题+摘要+日期+公众号名+链接，正文须点开自看，不作为交易凭证。
 // 双路检索合并去重：① 竞品短名走「公众号直搜」② 设备词走「搜狗收录（第三方数据源）」。
 function WechatPage() {
   const [line, setLine] = useState('全部');
@@ -300,7 +300,7 @@ function WechatPage() {
   return <div className="wechat-page">
     <div className="wx-banner">
       <b>公众号线索雷达（置信度：低）</b>
-      <span>只采标题 / 摘要 / 日期 / 公众号名 / 链接——搜索引擎不提供公众号正文，请点击标题跳转原文自行查看。本区仅作线索雷达，<b>不作为交易凭证</b>，正式入账须回官方公告核验。</span>
+      <span>只采标题 / 摘要 / 日期 / 公众号名 / 链接——微信公众号不开放接口（官方不提供文章检索与正文获取），搜索引擎也只能收录标题与摘要，请点击标题跳转原文自行查看。本区仅作线索雷达，<b>不作为交易凭证</b>，正式入账须回官方公告核验。</span>
       <span className="wx-legend">
         <i className="wx-dot wx-via-account"></i>公众号直搜（竞品名）
         <i className="wx-dot wx-via-sogou"></i>搜狗收录（第三方数据源）
@@ -320,6 +320,6 @@ function WechatPage() {
         <td data-label="信号"><span className="wx-signal">{item.bidStatus}</span></td>
         <td data-label="检索路径"><span className={`wx-via ${viaTag(item.via)}`}>{item.via}</span></td>
       </tr>)}</tbody></table></div>
-    <footer><span>公众号线索共 {filtered.length} 条　|　正文不可得：点标题跳转原文查看</span></footer>
+    <footer><span>公众号线索共 {filtered.length} 条　|　微信公众号不开放接口，点标题跳转原文查看</span></footer>
   </div>;
 }
