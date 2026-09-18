@@ -33,7 +33,12 @@ jobs:
       - name: 复审平台入口可达性
         run: npm run audit:platforms
       - name: 抓取匿名公开来源并执行覆盖率校验
-        run: npm run update:intelligence
+        run: |
+          npm run update:intelligence || {
+            echo "::warning::首次抓取未达标（可能遇到平台偶发失败），60 秒后自动重试一次"
+            sleep 60
+            npm run update:intelligence
+          }
       - name: 更新抓取时间戳
         run: |
           node -e "const fs=require('fs');const d=new Date(Date.now()+8*3600*1000).toISOString().slice(0,19)+'+08:00';fs.writeFileSync('src/data/crawl_stamp.json', JSON.stringify({lastCrawl:d})+String.fromCharCode(10))"
