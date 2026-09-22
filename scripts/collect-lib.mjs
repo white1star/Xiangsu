@@ -843,8 +843,8 @@ export async function runSogouWechatAdapter(rule, window, limits = {}) {
         if (!key || seen.has(key)) continue;
         const line = classifyLine(`${article.title} ${article.summary || ''}`);
         if (!line) continue;
+        // 相关即收（2026-09-22 口径）：命中范围即收录；有交易信号标信号，否则记「非交易动态」。
         const signal = mapVendorSignal(article.title) || mapVendorSignal(article.summary || '');
-        if (!signal) continue;
         // 无日期的结果无法核验时效，不计入（搜狗收录通常带时间戳）。
         if (!article.publishDate || article.publishDate < from) continue;
         seen.add(key);
@@ -857,7 +857,7 @@ export async function runSogouWechatAdapter(rule, window, limits = {}) {
           summary: article.summary || '',
           publishDate: article.publishDate,
           line: canonicalLine(line),
-          bidStatus: signal,
+          bidStatus: signal || '非交易动态',
           via: group.via,
           query: keyword,
           sourceAuthority: WECHAT_AUTHORITY,

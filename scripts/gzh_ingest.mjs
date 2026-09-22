@@ -7,7 +7,7 @@
 //   ① skill(wechat-article-search) 抓公众号标题+链接（搜狗 type=2，同第三方数据源）
 //   ② 对能解析出 mp 直链的文章，尝试抓正文（gzh_fetch.mjs 已封装，时灵时不灵）
 //   ③ 与高/中置信台账、聚合线索池、既有公众号线索三方去重（mergeWechatLeads）
-//   ④ 命中交易信号词 → 写入 wechat-leads.json；confidence=低，须官方公告核验后才可入台账
+//   ④ 相关即收：命中范围词 → 写入 wechat-leads.json（有交易信号标信号，否则「非交易动态」）；confidence=低，须官方公告核验后才可入台账
 //
 // 用法：
 //   node scripts/gzh_ingest.mjs --query "天津美腾科技 中标" [-n 10] [--after 2026-01-01] [--dry-run]
@@ -56,11 +56,12 @@ function mapBid(title) {
   return '已中标'; // 兜底：命中交易词但无更具体语义，按已中标（需人工复核）
 }
 
+// 相关即收口径（2026-09-22）：标题命中范围词即收；命中交易词且非展会/荣誉类软文 → 交易信号，
+// 否则记「非交易动态」（仍只进公众号线索页，不入台账）。
 function classifyTitle(title) {
-  if (NON_TRADE_WORDS.test(title)) return { hit: false, reason: '非交易内容（展会/荣誉/软文）' };
-  if (!TRADE_WORDS.test(title)) return { hit: false, reason: '标题无交易信号词' };
   if (!SCOPE_WORDS.test(title)) return { hit: false, reason: '不在本情报范围（非分选/干选设备）' };
-  return { hit: true };
+  const trade = TRADE_WORDS.test(title) && !NON_TRADE_WORDS.test(title);
+  return { hit: true, trade };
 }
 
 // 从 gzh_fetch.mjs 的 JSON 报告解析文章列表（兼容直接喂 skill 原始输出）
@@ -127,7 +128,7 @@ async function main() {
   const existingLeads = readJson(WECHAT, []);
 
   const candidates = [];
-  const skipped = { notTrade: 0, outOfScope: 0 };
+  const skipped = { notScope: 0, outOfScope: 0 };
   const afterTs = new Date(args.after + 'T00:00:00+08:00').getTime();
 
   for (const a of articles) {
@@ -137,7 +138,7 @@ async function main() {
     if (ts && ts < afterTs) { skipped.outOfScope++; continue; }
 
     const cls = classifyTitle(a.title);
-    if (!cls.hit) { skipped.notTrade++; continue; }
+    if (!cls.hit) { skipped.notScope++; continue; }
 
     candidates.push({
       title: a.title,
@@ -146,7 +147,7 @@ async function main() {
       summary: a.summary || (a.textLength > 0 ? a.text.slice(0, 120) : '标题含交易信号词，正文未抓取，须点原文自看'),
       publishDate: date === '未披露' ? MINIMUM_PUBLISH_DATE : date,
       line: /煤|干法选煤|干选|选煤/.test(a.title) ? '煤炭智能干选设备' : '矿石XRT光电分选设备',
-      bidStatus: mapBid(a.title),
+      bidStatus: cls.trade ? mapBid(a.title) : '非交易动态',
       via: '搜狗收录',
       query: args.query || '',
       source: `微信公众号·${a.account}`,
@@ -159,7 +160,7 @@ async function main() {
   const added = mergedLeads.added;
   const dup = candidates.length - added.length;
 
-  console.log(`\n分类结果：新增 ${added.length} 条 | 去重 ${dup} | 非交易 ${skipped.notTrade} | 超窗/无日期 ${skipped.outOfScope}`);
+  console.log(`\n分类结果：新增 ${added.length} 条 | 去重 ${dup} | 范围外 ${skipped.notScope} | 超窗/无日期 ${skipped.outOfScope}`);
 
   if (args.dryRun) {
     console.log('\n=== 试运行（--dry-run，不写文件）新增明细 ===');

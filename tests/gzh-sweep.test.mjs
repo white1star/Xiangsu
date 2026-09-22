@@ -2,11 +2,13 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { buildQueryMatrix, pickQueries } from '../scripts/gzh_sweep.mjs';
 
-test('buildQueryMatrix covers 14 vendors + 4 devices with 22 unique queries', () => {
+test('buildQueryMatrix covers 14 vendors + 4 devices with 30 unique queries', () => {
   const matrix = buildQueryMatrix();
-  assert.equal(matrix.length, 22);
+  assert.equal(matrix.length, 30);
   assert.ok(matrix.includes('天津美腾科技 中标'));
   assert.ok(matrix.includes('XRT 智能分选 签约'));
+  assert.ok(matrix.includes('智能干选 喜报'));
+  assert.ok(matrix.includes('光电分选 交付'));
   assert.equal(new Set(matrix).size, matrix.length);
 });
 

@@ -24,12 +24,14 @@ const stateFile = path.join(root, 'reports', 'gzh-sweep-state.json');
 const VENDORS = ['天津美腾科技', '唐山神州机械', '霍里思特', '合肥泰禾卓海', '好朋友科技', '威海海王科技', '枣庄海纳科技', '东方测控', '合肥奥博特', '湖北金石智能', '河北澳兰', '湖南升华智选', '同方威视', '赣州吉瑞'];
 const DEVICES = ['智能干选', 'XRT 智能分选', '光电分选', 'TDS 智能选矸'];
 
-// 查询矩阵：14 家竞品 × 中标 + 4 产品词 × 中标/签约（共 22 个）
+// 查询矩阵：14 家竞品 × 中标 + 4 产品词 × 中标/签约/喜报/交付（共 30 个）
 export function buildQueryMatrix() {
   return [
     ...VENDORS.map(name => `${name} 中标`),
     ...DEVICES.map(name => `${name} 中标`),
     ...DEVICES.map(name => `${name} 签约`),
+    ...DEVICES.map(name => `${name} 喜报`),
+    ...DEVICES.map(name => `${name} 交付`),
   ];
 }
 

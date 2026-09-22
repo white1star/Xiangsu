@@ -174,13 +174,14 @@ export async function collectWechatViaSkill(script, keywords, from) {
     for (const article of payload.articles || []) {
       const rawLine = classifyLine(`${article.title} ${article.summary || ''}`);
       if (!rawLine) continue;
+      // 相关即收（2026-09-22 口径）：命中范围即收录；有交易信号标信号，否则记「非交易动态」。
       const signal = mapVendorSignal(article.title) || mapVendorSignal(article.summary || '');
       const publishDate = (article.datetime || '').slice(0, 10) || null;
-      if (!signal || !publishDate || publishDate < from) continue;
+      if (!publishDate || publishDate < from) continue;
       candidates.push({
         title: article.title, url: article.url, account: article.source || '',
         source: article.source ? `微信公众号·${article.source}` : '微信公众号',
-        summary: article.summary || '', publishDate, line: canonicalLine(rawLine), bidStatus: signal,
+        summary: article.summary || '', publishDate, line: canonicalLine(rawLine), bidStatus: signal || '非交易动态',
         via: '公众号直搜', query: keyword, sourceAuthority: WECHAT_AUTHORITY,
       });
     }

@@ -292,20 +292,25 @@ function SourcePage() {
   </div>;
 }
 
-// 公众号线索页（置信度=低）：微信公众号不开放接口，只给标题+摘要+日期+公众号名+链接，正文须点开自看，不作为交易凭证。
-// 双路检索合并去重：① 竞品短名走「公众号直搜」② 设备词走「搜狗收录（第三方数据源）」。
+// 公众号线索页（相关即收：设备/竞品相关都收，交易信号单独标注）：只给标题+摘要+日期+公众号名+链接，
+// 正文须点开自看，不作为交易凭证。双路检索合并去重：① 竞品短名走「公众号直搜」② 设备词走「搜狗收录」。
+const TRADE_STATUSES = new Set(['招标公告', '中标候选人', '已中标', '已签约', '已交付', '已投运']);
 function WechatPage() {
   const [line, setLine] = useState('全部');
   const [via, setVia] = useState('全部');
+  const [signalType, setSignalType] = useState('全部');
   const sorted = useMemo(() => [...wechatLeads].sort((a, b) => String(b.publishDate || '').localeCompare(String(a.publishDate || ''))), []);
-  const filtered = sorted.filter(item => (line === '全部' || item.line === line) && (via === '全部' || item.via === via));
+  const filtered = sorted.filter(item =>
+    (line === '全部' || item.line === line)
+    && (via === '全部' || item.via === via)
+    && (signalType === '全部' || (signalType === '交易信号' ? TRADE_STATUSES.has(item.bidStatus) : !TRADE_STATUSES.has(item.bidStatus))));
   const options = key => ['全部', ...new Set(sorted.map(item => item[key]).filter(Boolean))];
   const select = (value, setter, key) => <Dropdown value={value} options={options(key)} onChange={setter} />;
   const viaTag = value => value === '公众号直搜' ? 'wx-via-account' : value === '搜狗收录' ? 'wx-via-sogou' : 'wx-via-account';
   return <div className="wechat-page">
     <div className="wx-banner">
-      <b>公众号线索雷达（置信度：低）</b>
-      <span>只采标题 / 摘要 / 日期 / 公众号名 / 链接——微信公众号不开放接口（官方不提供文章检索与正文获取），搜索引擎也只能收录标题与摘要，请点击标题跳转原文自行查看。本区仅作线索雷达，<b>不作为交易凭证</b>，正式入账须回官方公告核验。</span>
+      <b>公众号线索雷达（相关即收）</b>
+      <span>设备/竞品相关的公众号文章都收录，只采标题 / 摘要 / 日期 / 公众号名 / 链接——微信公众号不开放接口（官方不提供文章检索与正文获取），搜索引擎也只能收录标题与摘要，请点击标题跳转原文自行查看。交易信号单独标注（"信号"列可筛选），<b>本区仅作线索雷达，不作为交易凭证</b>，正式入账须回官方公告核验。</span>
       <span className="wx-legend">
         <i className="wx-dot wx-via-account"></i>公众号直搜（竞品名）
         <i className="wx-dot wx-via-sogou"></i>搜狗收录（第三方数据源）
@@ -314,6 +319,7 @@ function WechatPage() {
     <div className="filters">
       <div className="f-item"><span>产品线</span>{select(line, setLine, 'line')}</div>
       <div className="f-item"><span>检索路径</span>{select(via, setVia, 'via')}</div>
+      <div className="f-item"><span>信号</span><Dropdown value={signalType} options={['全部', '交易信号', '非交易动态']} onChange={setSignalType} /></div>
       <span className="wx-total">共 {filtered.length} 条线索</span>
     </div>
     <div className="tablebox wx-tablebox"><table><thead><tr>{WECHAT_COLUMNS.map(item => <th key={item}>{item}</th>)}</tr></thead>
