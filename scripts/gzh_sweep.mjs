@@ -130,7 +130,7 @@ async function main() {
     }
   }
   console.log(`\n本轮完成：${plan.length} 个词，新增线索 ${totalAdded} 条（今日累计 ${state.dailyCount}/${args.dailyCap}）。`);
-  if (totalAdded > 0) console.log('提醒：有新增 → 需跑 node scripts/group_projects.mjs 并推送。');
+  if (totalAdded > 0) console.log('提醒：有新增 → 提交推送 src/data/wechat-leads.json（「公众号线索」页展示，不入台账）。');
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

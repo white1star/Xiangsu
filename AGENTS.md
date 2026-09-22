@@ -11,13 +11,14 @@
 5. **来源黑名单（硬拒，不做来源也不做交叉核验）**：企查查、天眼查、爱企查、启信宝、千里马、寻标宝、比比网、招投标信息网、中招联合、中国招标网（付费墙部分）。入库函数必须直接 reject 这些域名。
 6. **不绕过登录/验证码/付费墙**。被拦截就如实记失败，不许伪造数据。
 
-## 置信度两档（只此两档，公众号线索另计）
+## 置信度两档（台账只此两档；公众号线索不入台账）
 
 | 值 | 条件 |
 |---|---|
 | `高` | `sourceAuthority=official`，官方招采平台，`bidStatus ∈ {招标公告, 中标候选人, 已中标}` |
 | `中` | `sourceAuthority=官方自宣`，竞品官网/官方自媒体，`bidStatus ∈ {已中标, 中标候选人, 已签约, 已交付, 已投运}` |
-| `低` | 公众号标题线索（`gzh_ingest.mjs` 产出，只有标题+链接） |
+
+**公众号线索（confidence=低）不入台账**（用户口径 2026-09-22）：只存 `src/data/wechat-leads.json`（前端「公众号线索」页展示，标题+摘要+日期+公众号名+链接），须官方公告核验后才可升级入台账。
 
 来源分级：`anonymous`（公开）/ `login_free`（登录后免费可看正文）/ `login_paid`（付费，**整体排除**）。
 
@@ -36,7 +37,7 @@
 - 台账：`src/data/intelligence.flat.json`（主数据，数组）→ `scripts/group_projects.mjs` → `src/data/intelligence.json`（前端按项目合并）。
 - 抓取：`scripts/weekly-run.mjs`（59 条规则，读 `config/scan-rules.json`），适配器见 `scripts/collect-lib.mjs`。
 - 定向反查（旧账更新）：`scripts/recheck_unresolved.mjs [--apply] [--limit N]`——对台账未完结项目在 ggzy/必联/国信e采/十环做定向复查，报告落 `reports/recheck-<日期>.json`；`--apply` 时仅官方/公开源结果公告可回填（十环为聚合线索不回填），自动备份 + 重生成分组。
-- 公众号线索：单次 `scripts/gzh_ingest.mjs --query "<短词>" -n 8 --after <日期>`；日常轮询用 `scripts/gzh_sweep.mjs`（22 词矩阵，默认每次 3 词、间隔 65s、每日上限 12 次，状态存 `reports/gzh-sweep-state.json`）。⚠ 搜狗的时间排序（tsn/sort）、账号主页（type=1）、搜索引擎补漏（百度验证/必应降级/360 无收录/Google JS 壳）2026-09-18 全部实测失效，不要重复尝试；扩充只能靠矩阵轮询频率与（若有）自有公众号后台超链接搜索。
+- 公众号线索：单次 `scripts/gzh_ingest.mjs --query "<短词>" -n 8 --after <日期>`；日常轮询用 `scripts/gzh_sweep.mjs`（22 词矩阵，默认每次 3 词、间隔 65s、每日上限 12 次，状态存 `reports/gzh-sweep-state.json`）。产出只写 `src/data/wechat-leads.json`（不入台账）。⚠ 搜狗的时间排序（tsn/sort）、账号主页（type=1）、搜索引擎补漏（百度验证/必应降级/360 无收录/Google JS 壳）2026-09-18 全部实测失效，不要重复尝试；扩充只能靠矩阵轮询频率与（若有）自有公众号后台超链接搜索。
 - **禁止改全局分类器 `classifyLine`**（已验证会误伤 39/113 条正确条目）。要过滤噪音一律用**规则级 `titleBlocklist`**。
 - 平台清单：`config/platform-library.json`（分类/可爬性备注，不等于已接入）。
 - 前端读 `intelligence.json`，改数据后**必须 `npm run build`** 才生效。

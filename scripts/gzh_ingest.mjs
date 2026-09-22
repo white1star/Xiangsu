@@ -1,12 +1,13 @@
-// gzh_ingest.mjs — 公众号线索落库（竞品情报流程 步骤 2.6 的落库闭环）
-// 用途：把「skill 抓公众号标题/链接 + 搜狗第三方源」的结果，与官方台账合并去重后，
-//       以 confidence=低 落库（无正文时只保留标题+链接，需点原文自看）。
+// gzh_ingest.mjs — 公众号线索收集（竞品情报流程 步骤 2.6 的收录闭环）
+// 用途：把「skill 抓公众号标题/链接 + 搜狗第三方源」的结果，与台账/线索池三方去重后，
+//       写入独立线索文件 src/data/wechat-leads.json（前端「公众号线索」页展示）。
+//       ⚠ 公众号内容**不入台账**（用户口径 2026-09-22）：只保留标题+摘要+日期+公众号名+链接。
 //
-// 流程（对应用户口径 2026-09-09 定案）：
+// 流程：
 //   ① skill(wechat-article-search) 抓公众号标题+链接（搜狗 type=2，同第三方数据源）
 //   ② 对能解析出 mp 直链的文章，尝试抓正文（gzh_fetch.mjs 已封装，时灵时不灵）
-//   ③ 与官方台账 intelligence.flat.json 按 url / title+date 合并去重
-//   ④ 命中交易信号词 → 落库；无正文仅标题链接；confidence=低（与官方=高/官网自宣=中 区分）
+//   ③ 与高/中置信台账、聚合线索池、既有公众号线索三方去重（mergeWechatLeads）
+//   ④ 命中交易信号词 → 写入 wechat-leads.json；confidence=低，须官方公告核验后才可入台账
 //
 // 用法：
 //   node scripts/gzh_ingest.mjs --query "天津美腾科技 中标" [-n 10] [--after 2026-01-01] [--dry-run]
@@ -16,10 +17,18 @@ import { createRequire } from 'node:module';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { mergeWechatLeads } from './weekly-run.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
 const FLAT = path.resolve(__dirname, '../src/data/intelligence.flat.json');
+const PENDING = path.resolve(__dirname, '../src/data/pending-review.json');
+const WECHAT = path.resolve(__dirname, '../src/data/wechat-leads.json');
+
+function readJson(file, fallback) {
+  try { return JSON.parse(readFileSync(file, 'utf8')); }
+  catch { return fallback; }
+}
 
 const MINIMUM_PUBLISH_DATE = '2026-01-01';
 
@@ -111,14 +120,14 @@ async function main() {
   }
 
   const articles = normalizeArticles(report);
-  console.log(`抓取到 ${articles.length} 条公众号文章，开始与台账去重 ...`);
+  console.log(`抓取到 ${articles.length} 条公众号文章，开始与台账/线索池去重 ...`);
 
   const ledger = loadLedger();
-  const knownUrls = new Set(ledger.map(r => r.url));
-  const knownKeys = new Set(ledger.map(r => `${r.title}|${r.publishDate || r.date}`));
+  const pending = readJson(PENDING, []);
+  const existingLeads = readJson(WECHAT, []);
 
-  const added = [];
-  const skipped = { dup: 0, notTrade: 0, outOfScope: 0 };
+  const candidates = [];
+  const skipped = { notTrade: 0, outOfScope: 0 };
   const afterTs = new Date(args.after + 'T00:00:00+08:00').getTime();
 
   for (const a of articles) {
@@ -130,55 +139,39 @@ async function main() {
     const cls = classifyTitle(a.title);
     if (!cls.hit) { skipped.notTrade++; continue; }
 
-    const url = a.mpUrl || a.sogouUrl;
-    const key = `${a.title}|${date}`;
-    if (knownUrls.has(url) || knownKeys.has(key)) { skipped.dup++; continue; }
-    knownUrls.add(url); knownKeys.add(key);
-
-    const hasBody = a.textLength > 0;
-    added.push({
-      id: 'auto-gzh-' + Buffer.from(url).toString('base64url').slice(0, 18),
+    candidates.push({
       title: a.title,
-      line: /煤|干法选煤|干选|选煤/.test(a.title) ? '煤炭智能干选设备' : '矿石XRT光电分选设备',
-      competitor: '未披露',
-      region: '未披露',
-      amount: '未披露',
-      amountNote: hasBody ? '公众号正文线索，金额未核实' : '公众号仅标题线索，正文未抓取，需点击原文链接自看',
-      buyer: null,
-      procurement: hasBody ? a.text.slice(0, 120) : '公众号标题线索，未抓取正文',
-      bid: mapBid(a.title),
-      bidStatus: mapBid(a.title),
-      source: `微信公众号（搜狗收录，${a.account}）`,
-      sourceAuthority: '公众号自宣',
-      date,
+      url: a.mpUrl || a.sogouUrl,
+      account: a.account,
+      summary: a.summary || (a.textLength > 0 ? a.text.slice(0, 120) : '标题含交易信号词，正文未抓取，须点原文自看'),
       publishDate: date === '未披露' ? MINIMUM_PUBLISH_DATE : date,
+      line: /煤|干法选煤|干选|选煤/.test(a.title) ? '煤炭智能干选设备' : '矿石XRT光电分选设备',
+      bidStatus: mapBid(a.title),
+      via: '搜狗收录',
+      query: args.query || '',
+      source: `微信公众号·${a.account}`,
       confidence: '低',
-      url,
-      evidence: hasBody
-        ? `公众号「${a.account}」${a.datetime || ''} 发布《${a.title}》（搜狗收录）。${a.summary ? '摘要：' + a.summary + '。' : ''}正文线索：${a.text.slice(0, 200)}`
-        : `公众号「${a.account}」${a.datetime || ''} 发布《${a.title}》（搜狗收录，标题含交易信号词）。正文未抓取成功，此为标题线索（置信度低，未经官方核验），需点击原文链接自看。`,
-      evidenceCapturedAt: new Date().toISOString(),
-      openStatus: '未披露',
-      resultGap: false,
-      gzhOnly: true,
     });
   }
 
-  console.log(`\n分类结果：新增 ${added.length} 条 | 去重 ${skipped.dup} | 非交易 ${skipped.notTrade} | 超窗/无日期 ${skipped.outOfScope}`);
+  // 与 高/中置信台账、聚合线索池、既有公众号线索三方去重后写入独立线索文件（不入台账）。
+  const mergedLeads = mergeWechatLeads(existingLeads, ledger, pending, candidates);
+  const added = mergedLeads.added;
+  const dup = candidates.length - added.length;
+
+  console.log(`\n分类结果：新增 ${added.length} 条 | 去重 ${dup} | 非交易 ${skipped.notTrade} | 超窗/无日期 ${skipped.outOfScope}`);
 
   if (args.dryRun) {
-    console.log('\n=== 试运行（--dry-run，不写库）新增明细 ===');
-    added.forEach(a => console.log(`- [${a.date}] ${a.bid} | ${a.confidence} | ${a.title.slice(0, 50)}`));
+    console.log('\n=== 试运行（--dry-run，不写文件）新增明细 ===');
+    added.forEach(a => console.log(`- [${a.publishDate}] ${a.bidStatus} | ${a.title.slice(0, 50)}`));
     process.exit(0);
   }
 
-  if (added.length === 0) { console.log('无新增，台账不变'); process.exit(0); }
+  if (added.length === 0) { console.log('无新增，公众号线索不变'); process.exit(0); }
 
-  const merged = [...ledger, ...added];
-  merged.sort((a, b) => String(b.publishDate || b.date).localeCompare(String(a.publishDate || a.date)));
-  writeFileSync(FLAT, JSON.stringify(merged, null, 2) + '\n');
-  console.log(`\n已写入 ${FLAT}：台账 ${ledger.length} → ${merged.length} 条（新增 ${added.length} 条低置信度公众号线索）`);
-  console.log('提醒：落库后需跑 group_projects.mjs 重新生成分组视图；公众号线索 confidence=低，须后续官方核验升档。');
+  writeFileSync(WECHAT, JSON.stringify(mergedLeads.leads, null, 2) + '\n');
+  console.log(`\n已写入 ${WECHAT}：公众号线索 ${existingLeads.length} → ${mergedLeads.leads.length} 条（新增 ${added.length} 条，仅进「公众号线索」页，不入台账）`);
+  console.log('提醒：前端构建/推送后生效；线索须官方公告核验后才可入台账。');
 }
 
 main().catch(e => { console.error('执行失败:', e.message); process.exit(1); });
