@@ -109,7 +109,7 @@ export default function App() {
       <div className="brand"><span className="mark">◈</span><b>唐山像素智能</b></div>
       <div className="head-right">
         <nav>{['情报台账', '公众号线索', '数据源'].map((item, index) => <button className={page === item ? 'active' : ''} onClick={() => setPage(item)} key={item}><i>{icons[index]}</i>{item}</button>)}</nav>
-        <a className="nav-center" href="https://white1star.github.io/">← 信息中心</a>
+        <a className="nav-center" href="/">← 信息中心</a>
       </div>
     </header>
     <section className="workspace">
