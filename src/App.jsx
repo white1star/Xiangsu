@@ -46,17 +46,22 @@ function Feedback() {
     event.preventDefault();
     setSending(true);
     setStatus(null);
-    const data = new FormData();
-    data.append('access_key', '1a0e2eb4-7458-4ab9-aea0-3ffdbdf05ae3');
-    data.append('subject', '竞品情报分析反馈');
-    data.append('from_name', '竞品情报分析');
-    data.append('page_url', location.href);
-    if (name.trim()) data.append('name', name.trim());
-    data.append('message', message);
+    const endpoint = 'https://formsubmit.co/ajax/' + atob('MzEwMzYzMTU2MUBxcS5jb20=');
     try {
-      const response = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          _subject: '竞品情报分析反馈',
+          _template: 'table',
+          _captcha: 'false',
+          称呼: name.trim() || '（未填）',
+          反馈内容: message,
+          页面: location.href,
+        }),
+      });
       const payload = await response.json();
-      if (!payload || !payload.success) throw new Error('fail');
+      if (!payload || String(payload.success) !== 'true') throw new Error('fail');
       setStatus({ ok: true, text: '已收到，谢谢！' });
       setTimeout(() => { dialogRef.current?.close(); setName(''); setMessage(''); setStatus(null); }, 1500);
     } catch {
