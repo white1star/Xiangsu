@@ -1,38 +1,20 @@
 {
-  "checkedAt": "2026-09-22T23:45:21.561Z",
+  "checkedAt": "2026-09-24T06:05:19.189Z",
   "total": 70,
-  "reachable": 40,
+  "reachable": 58,
   "unavailable": [
-    "中国招标投标公共服务平台",
     "中国煤炭招标网",
-    "山西省公共资源交易平台",
     "全国公共资源交易平台（陕西省）",
-    "内蒙古自治区公共资源交易网",
-    "新疆公共资源交易网",
-    "安徽省公共资源交易集团",
-    "山东省公共资源交易中心",
     "河南省公共资源交易中心",
     "河北省公共资源交易服务平台",
-    "贵州省公共资源交易中心",
     "甘肃省公共资源交易网",
-    "宁夏回族自治区公共资源交易网",
-    "黑龙江省公共资源交易网",
-    "全国公共资源交易平台（四川省）",
-    "辽宁省公共资源交易平台",
-    "青海省公共资源交易网",
     "中国华能集团电子商务平台",
     "中国华电集团电子商务平台",
-    "中国大唐电子商务平台",
     "山东能源集团交易平台",
-    "天眼查",
-    "启信宝",
     "中国采购与招标网",
     "比比网",
     "招投标信息网",
-    "新疆阳光采购平台",
-    "晋能控股招标采购平台",
-    "威海海王科技官网 · 新闻资讯",
-    "合肥奥博特官网 · 新闻资讯"
+    "威海海王科技官网 · 新闻资讯"
   ],
   "results": [
     {
@@ -42,16 +24,16 @@
       "entryUrl": "https://www.ggzy.gov.cn/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:42:10.205Z"
+      "checkedAt": "2026-09-24T06:04:25.598Z"
     },
     {
       "id": "ceb-public",
       "name": "中国招标投标公共服务平台",
       "access": "anonymous",
       "entryUrl": "https://www.cebpubservice.com/",
-      "status": 405,
-      "reachable": false,
-      "checkedAt": "2026-09-22T23:42:11.485Z"
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-09-24T06:04:25.711Z"
     },
     {
       "id": "ccgp",
@@ -60,7 +42,7 @@
       "entryUrl": "https://www.ccgp.gov.cn/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:42:12.680Z"
+      "checkedAt": "2026-09-24T06:04:25.877Z"
     },
     {
       "id": "cgs-procurement",
@@ -69,7 +51,7 @@
       "entryUrl": "https://www.cgs.gov.cn/tzgg/zfcg_5637/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:42:14.918Z"
+      "checkedAt": "2026-09-24T06:04:26.049Z"
     },
     {
       "id": "mtzbw",
@@ -78,16 +60,16 @@
       "entryUrl": "https://www.mtzbw.cn/",
       "reachable": false,
       "error": "The operation was aborted due to timeout",
-      "checkedAt": "2026-09-22T23:42:15.839Z"
+      "checkedAt": "2026-09-24T06:04:26.246Z"
     },
     {
       "id": "shanxi-ggzy",
       "name": "山西省公共资源交易平台",
       "access": "anonymous",
       "entryUrl": "https://prec.sxzwfw.gov.cn/",
-      "reachable": false,
-      "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:42:35.841Z"
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-09-24T06:04:46.252Z"
     },
     {
       "id": "shaanxi-ggzy",
@@ -96,43 +78,43 @@
       "entryUrl": "https://www.sxggzyjy.cn/",
       "reachable": false,
       "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:42:45.961Z"
+      "checkedAt": "2026-09-24T06:04:46.445Z"
     },
     {
       "id": "inner-mongolia-ggzy",
       "name": "内蒙古自治区公共资源交易网",
       "access": "anonymous",
       "entryUrl": "https://ggzyjy.nmg.gov.cn/",
-      "reachable": false,
-      "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:42:46.594Z"
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-09-24T06:04:46.609Z"
     },
     {
       "id": "xinjiang-ggzy",
       "name": "新疆公共资源交易网",
       "access": "anonymous",
       "entryUrl": "https://ggzy.xinjiang.gov.cn/",
-      "reachable": false,
-      "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:42:47.171Z"
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-09-24T06:04:47.012Z"
     },
     {
       "id": "anhui-ggzy",
       "name": "安徽省公共资源交易集团",
       "access": "anonymous",
       "entryUrl": "https://www.ahggzyjy.cn/",
-      "status": 418,
-      "reachable": false,
-      "checkedAt": "2026-09-22T23:42:48.208Z"
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-09-24T06:04:47.535Z"
     },
     {
       "id": "shandong-ggzy",
       "name": "山东省公共资源交易中心",
       "access": "anonymous",
       "entryUrl": "https://ggzyjy.shandong.gov.cn/",
-      "reachable": false,
-      "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:42:50.052Z"
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-09-24T06:04:47.737Z"
     },
     {
       "id": "henan-ggzy",
@@ -141,7 +123,7 @@
       "entryUrl": "https://hnsggzyjy.henan.gov.cn/",
       "reachable": false,
       "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:43:00.543Z"
+      "checkedAt": "2026-09-24T06:04:47.957Z"
     },
     {
       "id": "hebei-ggzy",
@@ -150,25 +132,25 @@
       "entryUrl": "https://www.hebpr.cn/",
       "reachable": false,
       "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:43:01.590Z"
+      "checkedAt": "2026-09-24T06:04:48.050Z"
     },
     {
       "id": "guizhou-ggzy",
       "name": "贵州省公共资源交易中心",
       "access": "anonymous",
       "entryUrl": "https://ggzy.guizhou.gov.cn/",
-      "reachable": false,
-      "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:43:12.037Z"
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-09-24T06:04:58.609Z"
     },
     {
       "id": "gansu-ggzy",
       "name": "甘肃省公共资源交易网",
       "access": "anonymous",
       "entryUrl": "https://ggzyjy.gansu.gov.cn/",
+      "status": 412,
       "reachable": false,
-      "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:43:12.791Z"
+      "checkedAt": "2026-09-24T06:04:59.467Z"
     },
     {
       "id": "gsei",
@@ -177,25 +159,25 @@
       "entryUrl": "https://www.gsei.com.cn/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:43:14.010Z"
+      "checkedAt": "2026-09-24T06:04:59.976Z"
     },
     {
       "id": "ningxia-ggzy",
       "name": "宁夏回族自治区公共资源交易网",
       "access": "anonymous",
       "entryUrl": "https://www.nxggzyjy.org/",
-      "reachable": false,
-      "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:43:15.980Z"
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-09-24T06:05:00.496Z"
     },
     {
       "id": "heilongjiang-ggzy",
       "name": "黑龙江省公共资源交易网",
       "access": "anonymous",
       "entryUrl": "https://ggzyjyw.hlj.gov.cn/",
-      "reachable": false,
-      "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:43:16.620Z"
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-09-24T06:05:01.241Z"
     },
     {
       "id": "yunnan-ggzy",
@@ -204,34 +186,34 @@
       "entryUrl": "https://ggzy.yn.gov.cn/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:43:17.515Z"
+      "checkedAt": "2026-09-24T06:05:01.418Z"
     },
     {
       "id": "sichuan-ggzy",
       "name": "全国公共资源交易平台（四川省）",
       "access": "anonymous",
       "entryUrl": "https://ggzyjy.sc.gov.cn/",
-      "reachable": false,
-      "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:43:18.571Z"
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-09-24T06:05:01.772Z"
     },
     {
       "id": "liaoning-ggzy",
       "name": "辽宁省公共资源交易平台",
       "access": "anonymous",
       "entryUrl": "https://ggzy.ln.gov.cn/",
-      "reachable": false,
-      "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:43:19.224Z"
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-09-24T06:05:02.082Z"
     },
     {
       "id": "qinghai-ggzy",
       "name": "青海省公共资源交易网",
       "access": "anonymous",
       "entryUrl": "https://www.qhggzyjy.gov.cn/",
-      "reachable": false,
-      "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:43:20.027Z"
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-09-24T06:05:02.357Z"
     },
     {
       "id": "ccteg",
@@ -240,7 +222,7 @@
       "entryUrl": "https://cg.ccteg.cn/cms/index.htm",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:43:30.061Z"
+      "checkedAt": "2026-09-24T06:05:02.763Z"
     },
     {
       "id": "chnenergy",
@@ -249,7 +231,7 @@
       "entryUrl": "https://www.chnenergybidding.com.cn/bidweb/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:43:31.417Z"
+      "checkedAt": "2026-09-24T06:05:02.968Z"
     },
     {
       "id": "zmzb",
@@ -258,7 +240,7 @@
       "entryUrl": "https://www.zmzb.com/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:43:34.972Z"
+      "checkedAt": "2026-09-24T06:05:03.255Z"
     },
     {
       "id": "ego-chinacoal",
@@ -267,7 +249,7 @@
       "entryUrl": "https://ego.chinacoal.com/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:43:36.351Z"
+      "checkedAt": "2026-09-24T06:05:03.376Z"
     },
     {
       "id": "spic-ebid",
@@ -276,7 +258,7 @@
       "entryUrl": "https://ebid.espic.com.cn/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:43:38.049Z"
+      "checkedAt": "2026-09-24T06:05:03.485Z"
     },
     {
       "id": "powerchina",
@@ -285,7 +267,7 @@
       "entryUrl": "https://bid.powerchina.cn/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:43:39.673Z"
+      "checkedAt": "2026-09-24T06:05:03.698Z"
     },
     {
       "id": "baohua",
@@ -294,7 +276,7 @@
       "entryUrl": "https://www.baohuabidding.cn/shbhgjzb/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:43:41.215Z"
+      "checkedAt": "2026-09-24T06:05:03.913Z"
     },
     {
       "id": "ceec",
@@ -303,16 +285,16 @@
       "entryUrl": "https://ec.ceec.net.cn/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:43:42.481Z"
+      "checkedAt": "2026-09-24T06:05:04.259Z"
     },
     {
       "id": "huaneng",
       "name": "中国华能集团电子商务平台",
       "access": "anonymous",
       "entryUrl": "https://ec.chng.com.cn/",
+      "status": 412,
       "reachable": false,
-      "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:43:43.981Z"
+      "checkedAt": "2026-09-24T06:05:04.455Z"
     },
     {
       "id": "huadian",
@@ -321,16 +303,16 @@
       "entryUrl": "https://www.chdtp.com/",
       "status": 412,
       "reachable": false,
-      "checkedAt": "2026-09-22T23:43:44.551Z"
+      "checkedAt": "2026-09-24T06:05:04.644Z"
     },
     {
       "id": "datang",
       "name": "中国大唐电子商务平台",
       "access": "anonymous",
       "entryUrl": "https://www.cdt-ec.com/",
-      "status": 405,
-      "reachable": false,
-      "checkedAt": "2026-09-22T23:43:46.352Z"
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-09-24T06:05:04.765Z"
     },
     {
       "id": "datang-coal",
@@ -339,7 +321,7 @@
       "entryUrl": "https://www.dtrlcg.com/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:43:47.877Z"
+      "checkedAt": "2026-09-24T06:05:04.986Z"
     },
     {
       "id": "qin-yuan",
@@ -348,7 +330,7 @@
       "entryUrl": "https://qyzb.shccmg.com/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:43:48.994Z"
+      "checkedAt": "2026-09-24T06:05:05.159Z"
     },
     {
       "id": "shandong-energy",
@@ -357,7 +339,7 @@
       "entryUrl": "https://www.snjtds.com/",
       "reachable": false,
       "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:43:50.759Z"
+      "checkedAt": "2026-09-24T06:05:05.605Z"
     },
     {
       "id": "shandong-inquiry",
@@ -366,7 +348,7 @@
       "entryUrl": "https://snxy.minegoods.com/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:43:52.062Z"
+      "checkedAt": "2026-09-24T06:05:06.171Z"
     },
     {
       "id": "huaihe",
@@ -375,7 +357,7 @@
       "entryUrl": "https://www.hhnycg.com/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:43:53.131Z"
+      "checkedAt": "2026-09-24T06:05:06.348Z"
     },
     {
       "id": "huaibei",
@@ -384,7 +366,7 @@
       "entryUrl": "https://zbcg.hbcoal.com/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:43:56.111Z"
+      "checkedAt": "2026-09-24T06:05:06.651Z"
     },
     {
       "id": "qcc",
@@ -393,16 +375,16 @@
       "entryUrl": "https://www.qcc.com/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:43:58.457Z"
+      "checkedAt": "2026-09-24T06:05:06.968Z"
     },
     {
       "id": "tianyancha",
       "name": "天眼查",
       "access": "login_paid",
       "entryUrl": "https://www.tianyancha.com/",
-      "status": 419,
-      "reachable": false,
-      "checkedAt": "2026-09-22T23:43:59.520Z"
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-09-24T06:05:07.215Z"
     },
     {
       "id": "aiqicha",
@@ -411,16 +393,16 @@
       "entryUrl": "https://aiqicha.baidu.com/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:44:00.497Z"
+      "checkedAt": "2026-09-24T06:05:07.350Z"
     },
     {
       "id": "qixin",
       "name": "启信宝",
       "access": "login_paid",
       "entryUrl": "https://www.qixin.com/home",
-      "status": 451,
-      "reachable": false,
-      "checkedAt": "2026-09-22T23:44:05.778Z"
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-09-24T06:05:07.593Z"
     },
     {
       "id": "chinabidding-commercial",
@@ -429,7 +411,7 @@
       "entryUrl": "https://www.chinabidding.com/",
       "status": 521,
       "reachable": false,
-      "checkedAt": "2026-09-22T23:44:06.902Z"
+      "checkedAt": "2026-09-24T06:05:08.307Z"
     },
     {
       "id": "qianlima",
@@ -438,7 +420,7 @@
       "entryUrl": "https://www.qianlima.com/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:44:08.233Z"
+      "checkedAt": "2026-09-24T06:05:08.417Z"
     },
     {
       "id": "jianyu",
@@ -447,7 +429,7 @@
       "entryUrl": "https://www.jianyu360.cn/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:44:10.446Z"
+      "checkedAt": "2026-09-24T06:05:08.498Z"
     },
     {
       "id": "xunbiaobao",
@@ -456,7 +438,7 @@
       "entryUrl": "https://xunbiaobao.baidu.com/s",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:44:12.158Z"
+      "checkedAt": "2026-09-24T06:05:09.125Z"
     },
     {
       "id": "bidcenter",
@@ -465,7 +447,7 @@
       "entryUrl": "https://www.bidcenter.com.cn/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:44:14.831Z"
+      "checkedAt": "2026-09-24T06:05:09.409Z"
     },
     {
       "id": "ebnew",
@@ -474,7 +456,7 @@
       "entryUrl": "https://www.ebnew.com/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:44:16.432Z"
+      "checkedAt": "2026-09-24T06:05:09.593Z"
     },
     {
       "id": "yfbzb",
@@ -483,16 +465,16 @@
       "entryUrl": "https://www.yfbzb.com/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:44:18.037Z"
+      "checkedAt": "2026-09-24T06:05:09.912Z"
     },
     {
       "id": "bibenet",
       "name": "比比网",
       "access": "login_paid",
       "entryUrl": "https://www.bibenet.com/",
-      "status": 403,
       "reachable": false,
-      "checkedAt": "2026-09-22T23:44:21.234Z"
+      "error": "fetch failed",
+      "checkedAt": "2026-09-24T06:05:10.309Z"
     },
     {
       "id": "ztb8",
@@ -501,25 +483,25 @@
       "entryUrl": "https://www.ztb8.com/",
       "reachable": false,
       "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:44:22.283Z"
+      "checkedAt": "2026-09-24T06:05:11.062Z"
     },
     {
       "id": "xinjiang-sunshine",
       "name": "新疆阳光采购平台",
       "access": "anonymous",
       "entryUrl": "https://www.xjygcg.com/",
-      "reachable": false,
-      "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:44:25.518Z"
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-09-24T06:05:14.154Z"
     },
     {
       "id": "jinneng-ggzy",
       "name": "晋能控股招标采购平台",
       "access": "anonymous",
       "entryUrl": "https://dzzb.jnkgjtdzzbgs.com/",
-      "reachable": false,
-      "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:44:35.773Z"
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-09-24T06:05:14.510Z"
     },
     {
       "id": "shihuan-bid",
@@ -528,7 +510,7 @@
       "entryUrl": "https://bid.10huan.com/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:44:46.262Z"
+      "checkedAt": "2026-09-24T06:05:14.736Z"
     },
     {
       "id": "disclosure-cninfo",
@@ -537,7 +519,7 @@
       "entryUrl": "https://www.cninfo.com.cn/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:44:49.642Z"
+      "checkedAt": "2026-09-24T06:05:14.898Z"
     },
     {
       "id": "vendor-meiteng",
@@ -546,7 +528,7 @@
       "entryUrl": "https://www.tjmeiteng.com/web/news",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:44:54.750Z"
+      "checkedAt": "2026-09-24T06:05:15.152Z"
     },
     {
       "id": "vendor-shenzhou",
@@ -555,7 +537,7 @@
       "entryUrl": "https://www.tsshenzhou.com/xinwen/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:44:56.173Z"
+      "checkedAt": "2026-09-24T06:05:15.424Z"
     },
     {
       "id": "vendor-haiwang",
@@ -564,7 +546,7 @@
       "entryUrl": "https://haiwangkeji.com",
       "reachable": false,
       "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:44:59.095Z"
+      "checkedAt": "2026-09-24T06:05:15.757Z"
     },
     {
       "id": "vendor-holysort",
@@ -573,7 +555,7 @@
       "entryUrl": "https://c.m.163.com/news/sub/T1772531517520.html",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:44:59.977Z"
+      "checkedAt": "2026-09-24T06:05:16.216Z"
     },
     {
       "id": "vendor-gzhpy",
@@ -582,7 +564,7 @@
       "entryUrl": "https://www.gzhpy.com",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:45:01.248Z"
+      "checkedAt": "2026-09-24T06:05:16.793Z"
     },
     {
       "id": "vendor-taiho",
@@ -591,7 +573,7 @@
       "entryUrl": "https://www.chinataiho.com/info.php?class_id=105",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:45:02.549Z"
+      "checkedAt": "2026-09-24T06:05:17.228Z"
     },
     {
       "id": "vendor-haina2001",
@@ -600,7 +582,7 @@
       "entryUrl": "https://www.haina2001.com/gsxw.html",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:45:04.763Z"
+      "checkedAt": "2026-09-24T06:05:17.510Z"
     },
     {
       "id": "vendor-dfmc",
@@ -609,16 +591,16 @@
       "entryUrl": "https://www.dfmc.cc/shichangxinwen/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:45:07.369Z"
+      "checkedAt": "2026-09-24T06:05:17.844Z"
     },
     {
       "id": "vendor-abtrobot",
       "name": "合肥奥博特官网 · 新闻资讯",
       "access": "anonymous",
       "entryUrl": "http://abtrobot.com",
-      "reachable": false,
-      "error": "fetch failed",
-      "checkedAt": "2026-09-22T23:45:08.398Z"
+      "status": 200,
+      "reachable": true,
+      "checkedAt": "2026-09-24T06:05:17.996Z"
     },
     {
       "id": "vendor-jinshisort",
@@ -627,7 +609,7 @@
       "entryUrl": "https://www.jinshisort.com",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:45:11.287Z"
+      "checkedAt": "2026-09-24T06:05:18.202Z"
     },
     {
       "id": "vendor-nuctech",
@@ -636,7 +618,7 @@
       "entryUrl": "https://www.nuctech.com",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:45:12.441Z"
+      "checkedAt": "2026-09-24T06:05:18.374Z"
     },
     {
       "id": "sogou-wechat",
@@ -645,7 +627,7 @@
       "entryUrl": "https://weixin.sogou.com/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:45:17.890Z"
+      "checkedAt": "2026-09-24T06:05:18.821Z"
     },
     {
       "id": "ebidding",
@@ -654,7 +636,7 @@
       "entryUrl": "https://www.e-bidding.org/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:45:19.064Z"
+      "checkedAt": "2026-09-24T06:05:18.954Z"
     },
     {
       "id": "shihuan",
@@ -663,7 +645,7 @@
       "entryUrl": "https://bid.10huan.com/",
       "status": 200,
       "reachable": true,
-      "checkedAt": "2026-09-22T23:45:20.384Z"
+      "checkedAt": "2026-09-24T06:05:19.070Z"
     }
   ]
 }
