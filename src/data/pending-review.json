@@ -1122,5 +1122,41 @@
     "status": "待复核",
     "note": "仅公开聚合索引，须反查官方原文后才能入高置信台账",
     "firstSeenAt": "2026-09-24T06:02:38.091Z"
+  },
+  {
+    "title": "焦化公司蒙西棋盘井洗煤厂2026年9月智能干选机配件（有附件）询价采购",
+    "line": "煤炭智能干选设备",
+    "bidStatus": "招标公告",
+    "source": "乙方宝招标网（招标/采购检索·线索）",
+    "publishDate": "2026-09-24",
+    "url": "https://www.yfbzb.com/inviteBid/detail/20260924_634513278.html",
+    "confidence": "中",
+    "status": "待复核",
+    "note": "仅公开聚合索引，须反查官方原文后才能入高置信台账",
+    "firstSeenAt": "2026-09-24T09:10:44.699Z"
+  },
+  {
+    "title": "贵州达旺矿业有限公司汪家寨煤矿新建智能干选系统项目EPC总承包招标公告",
+    "line": "煤炭智能干选设备",
+    "bidStatus": "招标公告",
+    "source": "乙方宝招标网（招标/采购检索·线索）",
+    "publishDate": "2026-09-24",
+    "url": "https://www.yfbzb.com/inviteBid/detail/20260924_634414804.html",
+    "confidence": "中",
+    "status": "待复核",
+    "note": "仅公开聚合索引，须反查官方原文后才能入高置信台账",
+    "firstSeenAt": "2026-09-24T09:10:44.700Z"
+  },
+  {
+    "title": "干选机配件结果公告 智能干选机配件结果公告",
+    "line": "煤炭智能干选设备",
+    "bidStatus": "已中标",
+    "source": "乙方宝招标网（中标结果检索·线索）",
+    "publishDate": "2026-09-24",
+    "url": "https://www.yfbzb.com/winbid/detail/20260924_634454743.html",
+    "confidence": "中",
+    "status": "待复核",
+    "note": "仅公开聚合索引，须反查官方原文后才能入高置信台账",
+    "firstSeenAt": "2026-09-24T09:10:44.700Z"
   }
 ]
