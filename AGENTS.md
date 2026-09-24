@@ -47,7 +47,7 @@
 
 1. 抓 → 2. 按 `title` 去重追加进 flat → 3. 更新 `crawl_stamp.json` → 4. `node scripts/group_projects.mjs`（须输出状态校验通过）→ 5. `npx vite build` 验证 → 6. `git add src/data/... && git commit && git push origin main:main`。
 > 推送后 GitHub Actions 自动构建部署到 Pages。**核验部署**：抓 `https://white1star.github.io/Xiangsu/data/latest-run.json` 比对 `generatedAt`（勿用 api.github.com/actions，已 403）。
-> **自动抓取已停用（2026-09-17 用户决定）**：本机 WorkBuddy 周一 09:00 定时任务已取消，GitHub Actions 的星期定时触发也已移除（仅保留手动 workflow_dispatch）。抓取改为按需人工发起，交付流程不变。
+> **每日自动抓取已迁移到北京服务器（2026-09-24）**：服务器 `/opt/xiangsu/daily_update.sh` 每天 05:30（北京时间）抓取 → 提交推送 main（GitHub Pages 自动重建）→ 本地构建并覆盖门户 `39.96.27.206/Xiangsu/`。GitHub Actions 云端定时已停用（仅保留手动 workflow_dispatch 兜底）；运维记录见 `E:\矿_news\.superpowers\sdd\server_deploy.md`。
 
 ## 入库前自检（缺一不可）
 
