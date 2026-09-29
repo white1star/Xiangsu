@@ -8,7 +8,7 @@
 
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import os from 'node:os';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
@@ -222,6 +222,28 @@ export function auditBidOpen(records, today = new Date().toISOString().slice(0, 
   return { records: resultRecords, audit, summary: { total: audit.length, opened, upcoming, undisclosed, resultGap: audit.filter(a => a.resultGap).length } };
 }
 
+// 静默平台：抓取成功但连续 3 天零发现（源站改版/被反爬的典型表现：不报错、只是没数据）
+export function silentPlatforms(scanState, days = 3, now = new Date()) {
+  const limitMs = days * 86400_000;
+  const out = [];
+  for (const [id, st] of Object.entries(scanState || {})) {
+    if (!st || st.lastStatus !== 'ok') continue;          // 失败由覆盖率门禁负责报
+    const since = st.lastNonZeroAt || st.firstSeenAt;
+    if (!since) continue;                                  // 没有起点信息就不猜
+    if (now.getTime() - new Date(since).getTime() >= limitMs) out.push(id);
+  }
+  return out.sort();
+}
+
+// 规则版本号：回答"这批数据是哪版规则抓的"（dir 可传入，便于测试）
+export function rulesVersion(dir = path.join(root, 'config')) {
+  const files = ['scan-rules.json', 'platform-library.json']
+    .map(f => path.join(dir, f)).filter(existsSync).sort();
+  const h = createHash('sha256');
+  for (const f of files) { h.update(path.basename(f)); h.update(readFileSync(f)); }
+  return 'rv-' + h.digest('hex').slice(0, 10);
+}
+
 // 补全缺失的开标日期：对“招标公告”且缺 bidOpenDate 的记录重新抓取官方原文抽取。
 async function backfillBidOpenDates(records, limit = 30) {
   let done = 0;
@@ -286,6 +308,7 @@ async function main() {
   const mode = process.argv.includes('--backfill') ? 'backfill' : 'weekly';
   const window = buildWindow(mode);
   const rules = await readJson(rulesFile, []);
+  const rv = rulesVersion();
   const existing = await readJson(flatFile, []);
   const existingPending = await readJson(pendingFile, []);
   const previousState = await readJson(stateFile, {});
@@ -299,6 +322,7 @@ async function main() {
   let skillNote = skillScript ? '待执行' : '未检测到公众号搜索技能脚本，竞品名并入适配器检索';
 
   console.log(`模式：${mode}，时间窗：${window.from} ~ ${window.to}，规则数：${rules.length}`);
+  console.log(`规则版本 ${rv}`);
   const checks = [];
   for (const rule of rules) {
     console.log(`扫描 ${rule.name} …`);
@@ -358,16 +382,23 @@ async function main() {
   const allRejected = [...merged.rejected, ...scopeRejected];
   const scanState = { ...previousState };
   for (const check of checks) {
+    const prev = previousState[check.sourceId] || {};
     scanState[check.sourceId] = {
       name: check.name, lastScanAt: check.checkedAt, lastStatus: check.status,
       pagesScanned: check.pagesScanned, discovered: check.discovered,
+      firstSeenAt: prev.firstSeenAt || check.checkedAt,
+      lastNonZeroAt: check.discovered > 0 ? check.checkedAt : (prev.lastNonZeroAt || null),
       failReason: check.error || null, notes: check.notes,
     };
   }
+  const silent = silentPlatforms(scanState);
+  if (silent.length) console.warn(`静默平台告警（近 3 天零发现）：${silent.map(id => scanState[id]?.name || id).join('、')}`);
+  coverage.silent = silent;
 
   const report = {
     generatedAt: new Date().toISOString(),
     mode,
+    rulesVersion: rv,
     window,
     coverage,
     bidOpenAudit: {

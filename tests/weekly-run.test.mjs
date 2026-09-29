@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import test from 'node:test';
-import { auditBidOpen, evaluateCoverage, mergeCandidates, validateCandidate } from '../scripts/weekly-run.mjs';
+import { auditBidOpen, evaluateCoverage, mergeCandidates, rulesVersion, silentPlatforms, validateCandidate } from '../scripts/weekly-run.mjs';
 
 const mandatory = [
   { id: 'ccteg', name: '中国煤科电子采购平台', required: true },
@@ -130,4 +133,33 @@ test('deduplicates same notice appearing on two official platforms by title and 
     { url: 'https://national.example/x', title: '某矿干选机中标结果公告', source: '全国平台', publishDate: '2026-06-01', bidStatus: '已中标', sourceAuthority: 'official', line: '煤炭智能干选设备', evidence: '中标人：某公司；中标价格：100万元。', evidenceCapturedAt: '2026-07-02T01:00:00Z' },
   ]);
   assert.equal(result.added.length, 0);
+});
+
+test('silentPlatforms 报出 3 天零产出的平台', () => {
+  const now = new Date('2026-09-29T06:00:00Z');
+  const state = {
+    a: { lastStatus: 'ok', discovered: 0, firstSeenAt: '2026-09-01T00:00:00Z', lastNonZeroAt: '2026-09-25T06:00:00Z' },
+    b: { lastStatus: 'ok', discovered: 3, firstSeenAt: '2026-09-01T00:00:00Z', lastNonZeroAt: '2026-09-29T06:00:00Z' },
+  };
+  assert.deepEqual(silentPlatforms(state, 3, now), ['a']);
+});
+
+test('silentPlatforms 不报从未见过的平台（未扫描不等于静默）', () => {
+  const state = { c: { lastStatus: 'failed', firstSeenAt: '2026-09-01T00:00:00Z' } };
+  assert.deepEqual(silentPlatforms(state, 3, new Date('2026-09-29T06:00:00Z')), []);
+});
+
+test('silentPlatforms 从 firstSeenAt 起算（新加入的平台不立刻报警）', () => {
+  const state = { d: { lastStatus: 'ok', discovered: 0, firstSeenAt: '2026-09-28T00:00:00Z' } };
+  assert.deepEqual(silentPlatforms(state, 3, new Date('2026-09-29T06:00:00Z')), []);
+});
+
+test('rulesVersion 同内容同版本、改内容即变', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'rv-'));
+  fs.writeFileSync(path.join(dir, 'scan-rules.json'), '[]');
+  const v1 = rulesVersion(dir);
+  assert.match(v1, /^rv-[0-9a-f]{10}$/);
+  assert.strictEqual(v1, rulesVersion(dir));            // 同内容稳定
+  fs.writeFileSync(path.join(dir, 'scan-rules.json'), '[{}]');
+  assert.notStrictEqual(v1, rulesVersion(dir));         // 改内容即变
 });
