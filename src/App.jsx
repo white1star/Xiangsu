@@ -307,6 +307,8 @@ function WechatPage() {
   const options = key => ['全部', ...new Set(sorted.map(item => item[key]).filter(Boolean))];
   const select = (value, setter, key) => <Dropdown value={value} options={options(key)} onChange={setter} />;
   const viaTag = value => value === '公众号直搜' ? 'wx-via-account' : value === '搜狗收录' ? 'wx-via-sogou' : 'wx-via-account';
+  // 搜狗中转是短链，几天后基本都会失效或撞上反爬页；mp.weixin 才是永久链接
+  const isDurableLink = url => /mp\.weixin\.qq\.com/i.test(url || '');
   return <div className="wechat-page">
     <div className="wx-banner">
       <b>公众号线索雷达（相关即收）</b>
@@ -314,6 +316,7 @@ function WechatPage() {
       <span className="wx-legend">
         <i className="wx-dot wx-via-account"></i>公众号直搜（竞品名）
         <i className="wx-dot wx-via-sogou"></i>搜狗收录（第三方数据源）
+        <b className="wx-legend-tip">搜狗收录的是中转短链，发布几天后基本都会失效——遇到打不开的，按标题下方提示在微信里搜公众号名看历史消息即可。</b>
       </span>
     </div>
     <div className="filters">
@@ -326,11 +329,15 @@ function WechatPage() {
       <tbody>{filtered.map(item => <tr key={item.url}>
         <td data-label="发布日期">{item.publishDate}</td>
         <td data-label="公众号">{item.account || '未披露'}</td>
-        <td className="wx-title" data-label="标题">{<a href={item.url} target="_blank" rel="noreferrer">{item.title} ↗</a>}{item.summary ? <span className="wx-summary">{item.summary}</span> : null}</td>
+        <td className="wx-title" data-label="标题">{isDurableLink(item.url)
+          ? <a href={item.url} target="_blank" rel="noreferrer">{item.title} ↗</a>
+          : <a className="wx-temp-link" href={item.url} target="_blank" rel="noreferrer">{item.title} ↗</a>}
+          {!isDurableLink(item.url) && <span className="wx-link-note">搜狗中转短链，多数发布后几天即失效。请在微信「搜一搜」{item.account ? `公众号「${item.account}」` : '该公众号'}，查看历史消息里的原文。</span>}
+          {item.summary ? <span className="wx-summary">{item.summary}</span> : null}</td>
         <td data-label="产品线">{item.line}</td>
         <td data-label="信号"><span className="wx-signal">{item.bidStatus}</span></td>
         <td data-label="检索路径"><span className={`wx-via ${viaTag(item.via)}`}>{item.via}</span></td>
       </tr>)}</tbody></table></div>
-    <footer><span>公众号线索共 {filtered.length} 条　|　微信公众号不开放接口，点标题跳转原文查看</span></footer>
+    <footer><span>公众号线索共 {filtered.length} 条　|　微信公众号不开放接口，点标题跳转原文查看　|　搜狗中转短链会失效，打不开请按标题下方提示在微信里搜公众号名</span></footer>
   </div>;
 }

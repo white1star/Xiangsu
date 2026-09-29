@@ -40,6 +40,18 @@
 .wechat-page .wx-title { max-width: 520px; line-height: 1.55; }
 .wechat-page .wx-title a { color: var(--brand); font-weight: 700; }
 .wechat-page .wx-title a:hover { color: var(--brand-dark); text-decoration: underline; }
+.wechat-page .wx-title a.wx-temp-link { color: #c2751a; }
+.wechat-page .wx-title a.wx-temp-link:hover { color: #9a580f; }
+.wechat-page .wx-link-note {
+  display: block;
+  margin-top: 3px;
+  padding-left: 8px;
+  border-left: 2px solid #f0dcbc;
+  color: #9a6a26;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.wechat-page .wx-legend-tip { margin-left: 10px; color: #9a6a26; font-weight: 600; }
 .wechat-page .wx-summary { display: block; margin-top: 3px; color: #7b8794; font-size: 12px; }
 
 .wechat-page .wx-signal {
