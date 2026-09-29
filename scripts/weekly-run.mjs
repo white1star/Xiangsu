@@ -222,6 +222,24 @@ export function auditBidOpen(records, today = new Date().toISOString().slice(0, 
   return { records: resultRecords, audit, summary: { total: audit.length, opened, upcoming, undisclosed, resultGap: audit.filter(a => a.resultGap).length } };
 }
 
+// 更新 scan-state：按本轮 checks 计算每个平台的最新扫描状态（纯函数，入参出参均为普通对象，不碰文件系统）。
+// firstSeenAt 只在首次扫描时写入；lastNonZeroAt 只在本轮有发现时刷新——零发现时必须保持旧起点不动，
+// 否则静默检测（连续 3 天零发现）将永远无法触发，失去「抓取挂了没人发现」的告警能力。
+export function nextScanState(previousState, checks) {
+  const state = { ...(previousState || {}) };
+  for (const check of checks) {
+    const prev = (previousState || {})[check.sourceId] || {};
+    state[check.sourceId] = {
+      name: check.name, lastScanAt: check.checkedAt, lastStatus: check.status,
+      pagesScanned: check.pagesScanned, discovered: check.discovered,
+      firstSeenAt: prev.firstSeenAt || check.checkedAt,
+      lastNonZeroAt: check.discovered > 0 ? check.checkedAt : (prev.lastNonZeroAt || null),
+      failReason: check.error || null, notes: check.notes,
+    };
+  }
+  return state;
+}
+
 // 静默平台：抓取成功但连续 3 天零发现（源站改版/被反爬的典型表现：不报错、只是没数据）
 export function silentPlatforms(scanState, days = 3, now = new Date()) {
   const limitMs = days * 86400_000;
@@ -380,18 +398,12 @@ async function main() {
 
   const coverage = evaluateCoverage(rules, checks);
   const allRejected = [...merged.rejected, ...scopeRejected];
-  const scanState = { ...previousState };
-  for (const check of checks) {
-    const prev = previousState[check.sourceId] || {};
-    scanState[check.sourceId] = {
-      name: check.name, lastScanAt: check.checkedAt, lastStatus: check.status,
-      pagesScanned: check.pagesScanned, discovered: check.discovered,
-      firstSeenAt: prev.firstSeenAt || check.checkedAt,
-      lastNonZeroAt: check.discovered > 0 ? check.checkedAt : (prev.lastNonZeroAt || null),
-      failReason: check.error || null, notes: check.notes,
-    };
-  }
-  const silent = silentPlatforms(scanState);
+  const scanState = nextScanState(previousState, checks);
+  // 静默检测只针对当前规则里仍在用的平台：规则中已删除的平台即便留有历史 firstSeenAt，
+  // 也不再参与告警（否则停用 3 天后会被永久误报为静默）。
+  const activeRuleIds = new Set(rules.map(rule => rule.id));
+  const activeState = Object.fromEntries(Object.entries(scanState).filter(([id]) => activeRuleIds.has(id)));
+  const silent = silentPlatforms(activeState);
   if (silent.length) console.warn(`静默平台告警（近 3 天零发现）：${silent.map(id => scanState[id]?.name || id).join('、')}`);
   coverage.silent = silent;
 

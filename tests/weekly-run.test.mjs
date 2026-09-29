@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
-import { auditBidOpen, evaluateCoverage, mergeCandidates, rulesVersion, silentPlatforms, validateCandidate } from '../scripts/weekly-run.mjs';
+import { auditBidOpen, evaluateCoverage, mergeCandidates, nextScanState, rulesVersion, silentPlatforms, validateCandidate } from '../scripts/weekly-run.mjs';
 
 const mandatory = [
   { id: 'ccteg', name: '中国煤科电子采购平台', required: true },
@@ -133,6 +133,40 @@ test('deduplicates same notice appearing on two official platforms by title and 
     { url: 'https://national.example/x', title: '某矿干选机中标结果公告', source: '全国平台', publishDate: '2026-06-01', bidStatus: '已中标', sourceAuthority: 'official', line: '煤炭智能干选设备', evidence: '中标人：某公司；中标价格：100万元。', evidenceCapturedAt: '2026-07-02T01:00:00Z' },
   ]);
   assert.equal(result.added.length, 0);
+});
+
+test('nextScanState 首次扫描写入 firstSeenAt，尚无产出时 lastNonZeroAt 为 null', () => {
+  const next = nextScanState({}, [
+    { sourceId: 'a', name: '甲平台', status: 'ok', checkedAt: '2026-09-29T06:00:00Z', pagesScanned: 2, discovered: 0, notes: [] },
+  ]);
+  assert.equal(next.a.firstSeenAt, '2026-09-29T06:00:00Z');
+  assert.equal(next.a.lastNonZeroAt, null);
+});
+
+test('nextScanState 零发现不刷新 lastNonZeroAt（静默告警的数据地基）', () => {
+  const previous = { a: { firstSeenAt: '2026-09-01T00:00:00Z', lastNonZeroAt: '2026-09-25T06:00:00Z' } };
+  const next = nextScanState(previous, [
+    { sourceId: 'a', name: '甲平台', status: 'ok', checkedAt: '2026-09-29T06:00:00Z', pagesScanned: 3, discovered: 0, notes: [] },
+    { sourceId: 'b', name: '乙平台', status: 'ok', checkedAt: '2026-09-29T06:00:00Z', pagesScanned: 3, discovered: 2, notes: [] },
+  ]);
+  assert.equal(next.a.lastNonZeroAt, '2026-09-25T06:00:00Z', '零发现必须保留旧起点，否则静默告警永远不会触发');
+  assert.equal(next.a.firstSeenAt, '2026-09-01T00:00:00Z', '已有 firstSeenAt 不被覆盖');
+  assert.equal(next.b.lastNonZeroAt, '2026-09-29T06:00:00Z', '有发现时刷新起点');
+  assert.equal(next.b.firstSeenAt, '2026-09-29T06:00:00Z');
+});
+
+test('silentPlatforms 边界：firstSeenAt 恰好 3 天整即报出（>=）', () => {
+  const now = new Date('2026-09-29T06:00:00Z');
+  const state = { a: { lastStatus: 'ok', discovered: 0, firstSeenAt: '2026-09-26T06:00:00Z', lastNonZeroAt: null } };
+  assert.deepEqual(silentPlatforms(state, 3, now), ['a']);
+});
+
+test('silentPlatforms 默认阈值就是 3 天：3 天整报出、2.5 天不报', () => {
+  const now = new Date('2026-09-29T06:00:00Z');
+  const threeDays = { a: { lastStatus: 'ok', discovered: 0, firstSeenAt: '2026-09-26T06:00:00Z', lastNonZeroAt: null } };
+  const twoAndHalfDays = { b: { lastStatus: 'ok', discovered: 0, firstSeenAt: '2026-09-26T18:00:00Z', lastNonZeroAt: null } };
+  assert.deepEqual(silentPlatforms(threeDays, undefined, now), ['a'], '默认 days 下 3 天整必须报出（>=）');
+  assert.deepEqual(silentPlatforms(twoAndHalfDays, undefined, now), [], '2.5 天不应报出（默认值不是 2）');
 });
 
 test('silentPlatforms 报出 3 天零产出的平台', () => {

@@ -208,7 +208,9 @@ function dealTypeCell(item) {
 // 进展 = 开标状态 + 结果缺口；让"已开标却迟迟没结果"的项目在列表就能看见
 const progressCell = item => {
   const st = item.openStatus || '未披露';
-  return <span className={`prog prog-${st}`}>{st}{item.resultGap ? <i className="prog-gap">待结果</i> : null}</span>;
+  // 「未披露 + 待结果」是公告没写开标日期、又迟迟没有结果的组合，悬停解释避免被误读为“还在等开标”。
+  const gapTitle = st === '未披露' ? '公告未披露开标日期，且发布已超 30 天仍无结果' : undefined;
+  return <span className={`prog prog-${st}`}>{st}{item.resultGap ? <i className="prog-gap" title={gapTitle}>待结果</i> : null}</span>;
 };
 
 // 发布日期距今天数：详情页「距今 N 天」用（N ≥ 30 标红提示可能已陈旧）
@@ -233,7 +235,7 @@ function AuditBar({ gapOnly, onToggleGap }) {
       .catch(() => { /* 静默：报告缺失时隐藏整条 */ });
     return () => { alive = false; };
   }, []);
-  if (!summary) return null;
+  if (!summary || summary.total == null) return null;
   return <div className="audit-bar">
     <b>开标审计：</b>
     <span>共 {summary.total} 个项目</span><i>·</i>
@@ -241,7 +243,7 @@ function AuditBar({ gapOnly, onToggleGap }) {
     <span>待开标 {summary.upcoming}</span><i>·</i>
     <span>未披露 {summary.undisclosed}</span><i>·</i>
     <button type="button" className={`audit-gap${gapOnly ? ' active' : ''}`} aria-pressed={gapOnly}
-      title={gapOnly ? '点击取消筛选' : '点击只看「已开标但无结果」的项目'} onClick={onToggleGap}>
+      title={`${gapOnly ? '点击取消筛选' : '点击只看「已开标但无结果」的项目'}；点击后按项目分组去重，行数可能少于未分组记录数`} onClick={onToggleGap}>
       已开标但无结果 {summary.resultGap}{gapOnly ? ' ✕' : ''}
     </button>
     <span className="audit-hint">按最新一轮抓取报告统计（未分组）</span>
