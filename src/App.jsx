@@ -12,7 +12,7 @@ import './wechat.css';
 const icons = ['▣', '◉', '◍'];
 const PAGE_SIZE = 10;
 const PHASE_OPTIONS = ['全部', '待开标', '已开标', '未披露', '中标候选人', '已中标', '流标'];
-const LEDGER_COLUMNS = ['客户', '矿种', '产品线', '竞品', '金额', '成交方式', '发布日期', '来源', '置信度'];
+const LEDGER_COLUMNS = ['客户', '矿种', '产品线', '竞品', '金额', '成交方式', '进展', '发布日期', '来源', '置信度'];
 const WECHAT_COLUMNS = ['发布日期', '公众号', '标题（点击看原文）', '产品线', '信号', '检索路径'];
 
 // 金额列：已披露带阶段标签；未披露带出复核原因（避免表格看起来一片空白）
@@ -97,10 +97,11 @@ export default function App() {
   const [competitor, setCompetitor] = useState('全部');
   const [confidence, setConfidence] = useState('全部');
   const [phase, setPhase] = useState('全部');
+  const [gapOnly, setGapOnly] = useState(false);
   const [page, setPage] = useState('情报台账');
   const [pageNum, setPageNum] = useState(1);
   const [selected, setSelected] = useState(null);
-  const filtered = useMemo(() => rows.filter(item => (line === '全部' || item.line === line) && (competitor === '全部' || item.competitor === competitor) && (confidence === '全部' || item.confidence === confidence) && (phase === '全部' || phaseOf(item) === phase)), [line, competitor, confidence, phase]);
+  const filtered = useMemo(() => rows.filter(item => (line === '全部' || item.line === line) && (competitor === '全部' || item.competitor === competitor) && (confidence === '全部' || item.confidence === confidence) && (phase === '全部' || phaseOf(item) === phase) && (!gapOnly || item.resultGap)), [line, competitor, confidence, phase, gapOnly]);
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const current = Math.min(Math.max(1, pageNum), totalPages);
   const pageRows = filtered.slice((current - 1) * PAGE_SIZE, current * PAGE_SIZE);
@@ -125,7 +126,8 @@ export default function App() {
           <div className="f-item"><span>招标状态</span>{phaseSelect}</div>
           <div className="f-item"><span>置信度</span>{select(confidence, setConfidence, 'confidence')}</div>
         </div>
-        <div className="tablebox"><table><thead><tr>{LEDGER_COLUMNS.map(item => <th key={item}>{item}</th>)}</tr></thead><tbody>{pageRows.map(item => <tr key={item.url} onClick={() => setSelected(item)}>{[item.buyer || '未披露', item.mineral || '未披露', item.line, item.competitor, amountCell(item), dealTypeCell(item), item.date, <a href={item.url} target="_blank" rel="noreferrer" onClick={event => event.stopPropagation()}>{item.source} ↗</a>, item.confidence].map((value, index) => { const cls = index === 4 ? 'amt' : index === 5 ? 'deal' : index === 8 ? `confidence ${item.confidence}` : ''; return <td className={cls} key={index} data-label={LEDGER_COLUMNS[index]}>{value}</td>; })}</tr>)}</tbody></table></div>
+        <AuditBar gapOnly={gapOnly} onToggleGap={() => { setGapOnly(next => !next); setPageNum(1); }} />
+        <div className="tablebox"><table><thead><tr>{LEDGER_COLUMNS.map(item => <th key={item}>{item}</th>)}</tr></thead><tbody>{pageRows.map(item => <tr key={item.url} onClick={() => setSelected(item)}>{[item.buyer || '未披露', item.mineral || '未披露', item.line, item.competitor, amountCell(item), dealTypeCell(item), progressCell(item), item.date, <a href={item.url} target="_blank" rel="noreferrer" onClick={event => event.stopPropagation()}>{item.source} ↗</a>, item.confidence].map((value, index) => { const cls = index === 4 ? 'amt' : index === 5 ? 'deal' : index === 6 ? 'prog-cell' : index === 9 ? `confidence ${item.confidence}` : ''; return <td className={cls} key={index} data-label={LEDGER_COLUMNS[index]}>{value}</td>; })}</tr>)}</tbody></table></div>
         <footer><span>共 {filtered.length} 个项目（同项目招标/候选/中标公告已合并）　|　最近抓取：{lastCrawl}　|　第 {current}/{totalPages} 页</span><span className="pager"><button disabled={current <= 1} onClick={() => setPageNum(current - 1)}>上一页</button><button disabled={current >= totalPages} onClick={() => setPageNum(current + 1)}>下一页</button></span><span>点击任意记录查看证据摘要</span></footer>
         {selected && <Detail item={selected} onClose={() => setSelected(null)} />}
       </> : page === '公众号线索' ? <WechatPage /> : <SourcePage />}
@@ -203,6 +205,49 @@ function dealTypeCell(item) {
   </span>;
 }
 
+// 进展 = 开标状态 + 结果缺口；让"已开标却迟迟没结果"的项目在列表就能看见
+const progressCell = item => {
+  const st = item.openStatus || '未披露';
+  return <span className={`prog prog-${st}`}>{st}{item.resultGap ? <i className="prog-gap">待结果</i> : null}</span>;
+};
+
+// 发布日期距今天数：详情页「距今 N 天」用（N ≥ 30 标红提示可能已陈旧）
+function daysSince(date) {
+  if (!date) return null;
+  const now = new Date();
+  const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const then = new Date(`${date}T00:00:00`);
+  if (Number.isNaN(then.getTime())) return null;
+  return Math.max(0, Math.round((start - then) / 86400_000));
+}
+
+// 开标审计摘要条：数据来自 public/data/latest-run.json 的 bidOpenAudit.summary；
+// 读取失败整条静默隐藏，不影响主表。
+function AuditBar({ gapOnly, onToggleGap }) {
+  const [summary, setSummary] = useState(null);
+  useEffect(() => {
+    let alive = true;
+    fetch(`${import.meta.env.BASE_URL}data/latest-run.json`)
+      .then(response => (response.ok ? response.json() : null))
+      .then(data => { if (alive && data?.bidOpenAudit?.summary) setSummary(data.bidOpenAudit.summary); })
+      .catch(() => { /* 静默：报告缺失时隐藏整条 */ });
+    return () => { alive = false; };
+  }, []);
+  if (!summary) return null;
+  return <div className="audit-bar">
+    <b>开标审计：</b>
+    <span>共 {summary.total} 个项目</span><i>·</i>
+    <span>已开标 {summary.opened}</span><i>·</i>
+    <span>待开标 {summary.upcoming}</span><i>·</i>
+    <span>未披露 {summary.undisclosed}</span><i>·</i>
+    <button type="button" className={`audit-gap${gapOnly ? ' active' : ''}`} aria-pressed={gapOnly}
+      title={gapOnly ? '点击取消筛选' : '点击只看「已开标但无结果」的项目'} onClick={onToggleGap}>
+      已开标但无结果 {summary.resultGap}{gapOnly ? ' ✕' : ''}
+    </button>
+    <span className="audit-hint">按最新一轮抓取报告统计（未分组）</span>
+  </div>;
+}
+
 function Block({ title, extra, children }) {
   return <div className="d-block"><h3>{title}{extra && <span className="d-extra">{extra}</span>}</h3>{children}</div>;
 }
@@ -210,6 +255,7 @@ function Block({ title, extra, children }) {
 function Detail({ item, onClose }) {
   const [showNotes, setShowNotes] = useState(false);
   const amountMissing = !item.amount || /未披露/.test(item.amount);
+  const daysAgo = daysSince(item.date);
 
   return <div className="detail"><div>
     <div className="d-head">
@@ -227,7 +273,7 @@ function Detail({ item, onClose }) {
       </div>
       <div className="d-metrics">
         <div className="d-metric"><span>金额</span><b className={amountMissing ? 'undisclosed' : ''}>{item.amount || '未披露'}</b>{item.amountStage ? <i>{item.amountStage}</i> : null}</div>
-        <div className="d-metric"><span>发布日期</span><b>{item.date || '未披露'}</b></div>
+        <div className="d-metric"><span>发布日期</span><b>{item.date || '未披露'}</b>{daysAgo === null ? null : <i className={daysAgo >= 30 ? 'stale' : ''} title={daysAgo >= 30 ? '发布已超过 30 天，请留意是否已有更新公告' : ''}>距今 {daysAgo} 天</i>}</div>
         <div className="d-metric"><span>开标日期</span><b>{item.bidOpenDate || '未披露'}</b>{item.openStatus ? <i>{item.openStatus}</i> : null}</div>
       </div>
     </div>

@@ -7,7 +7,7 @@
 /* ============ 金额列 ============ */
 .tablebox td.amt { white-space: nowrap; }
 .tablebox tbody td:nth-child(2),
-.tablebox tbody td:nth-child(7) { white-space: nowrap; }
+.tablebox tbody td:nth-child(8) { white-space: nowrap; }
 
 .amt-undisclosed { color: #b3261e; font-weight: 600; }
 .amt-undisclosed .amt-why { color: #9aa3ad; font-weight: 400; font-size: 12px; margin-left: 2px; }
@@ -43,6 +43,72 @@
 .deal-badge.dt-other { background: #fef3c7; color: #92400e; }
 
 .deal-phase { font-size: 12px; color: #8a94a3; }
+
+/* ============ 进展列（开标状态 + 结果缺口） ============ */
+.tablebox td.prog-cell { white-space: nowrap; }
+
+.prog {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 1px 9px;
+  border-radius: 5px;
+  font-size: 11px;
+  line-height: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.prog-已开标 { background: var(--brand-soft); color: #1c7234; }
+.prog-待开标 { background: #e8f0fe; color: #1a56db; }
+.prog-未披露 { background: #f1f3f5; color: #6c7784; }
+
+.prog-gap {
+  font-style: normal;
+  padding: 0 5px;
+  border-radius: 4px;
+  background: #fdecea;
+  color: #c0392b;
+  font-size: 10px;
+  line-height: 15px;
+  font-weight: 700;
+}
+
+/* ============ 开标审计摘要条（列表筛选器下方） ============ */
+.audit-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 9px 14px;
+  margin-bottom: 14px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.audit-bar b { color: var(--text); font-weight: 600; }
+.audit-bar i { font-style: normal; color: #c3ced6; }
+.audit-bar .audit-hint { margin-left: auto; color: #a9b3bd; font-size: 11px; }
+
+.audit-gap {
+  padding: 1px 9px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: #fdecea;
+  color: #c0392b;
+  font-size: 11px;
+  line-height: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.audit-gap:hover { border-color: #eeb4ae; }
+.audit-gap.active { border-color: #c0392b; box-shadow: 0 0 0 3px rgba(192, 57, 43, .12); }
 
 /* ============ 详情弹窗 ============ */
 .detail {
@@ -164,6 +230,7 @@
 .detail .d-metric b { font-size: 16px; font-weight: 600; color: var(--text); word-break: break-all; line-height: 1.35; }
 .detail .d-metric b.undisclosed { color: #b3261e; font-size: 14px; }
 .detail .d-metric i { display: block; font-style: normal; font-size: 12px; color: #9aa3ad; margin-top: 2px; line-height: 1.5; }
+.detail .d-metric i.stale { color: #c0392b; font-weight: 600; }
 
 /* ============ 提示块 ============ */
 .detail .d-notes { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }

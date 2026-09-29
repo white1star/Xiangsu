@@ -3,16 +3,17 @@
 .tablebox th, .tablebox td { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .tablebox td { height: 62px; }
 
-/* 9 列：客户 / 矿种 / 产品线 / 竞品 / 金额 / 成交方式 / 发布日期 / 来源 / 置信度 */
-.tablebox th:nth-child(1), .tablebox td:nth-child(1) { width: 360px; white-space: normal; line-height: 1.5; }
-.tablebox th:nth-child(2), .tablebox td:nth-child(2) { width: 80px; }
-.tablebox th:nth-child(3), .tablebox td:nth-child(3) { width: 120px; }
-.tablebox th:nth-child(4), .tablebox td:nth-child(4) { width: 165px; }
-.tablebox th:nth-child(5), .tablebox td:nth-child(5) { width: 130px; }
+/* 10 列：客户 / 矿种 / 产品线 / 竞品 / 金额 / 成交方式 / 进展 / 发布日期 / 来源 / 置信度 */
+.tablebox th:nth-child(1), .tablebox td:nth-child(1) { width: 330px; white-space: normal; line-height: 1.5; }
+.tablebox th:nth-child(2), .tablebox td:nth-child(2) { width: 72px; }
+.tablebox th:nth-child(3), .tablebox td:nth-child(3) { width: 108px; }
+.tablebox th:nth-child(4), .tablebox td:nth-child(4) { width: 150px; }
+.tablebox th:nth-child(5), .tablebox td:nth-child(5) { width: 120px; }
 .tablebox th:nth-child(6), .tablebox td:nth-child(6) { width: 120px; }
-.tablebox th:nth-child(7), .tablebox td:nth-child(7) { width: 150px; }
-.tablebox th:nth-child(8), .tablebox td:nth-child(8) { width: 110px; }
-.tablebox th:nth-child(9), .tablebox td:nth-child(9) { width: 80px; }
+.tablebox th:nth-child(7), .tablebox td:nth-child(7) { width: 125px; }
+.tablebox th:nth-child(8), .tablebox td:nth-child(8) { width: 105px; }
+.tablebox th:nth-child(9), .tablebox td:nth-child(9) { width: 100px; }
+.tablebox th:nth-child(10), .tablebox td:nth-child(10) { width: 70px; }
 
 /* ============ 移动端：表格卡片化（每行一张卡，字段带标签） ============ */
 @media (max-width: 760px) {
@@ -62,5 +63,5 @@
   }
   .tablebox:not(.wx-tablebox) td:first-child::before { display: none; }
   .tablebox td.amt, .tablebox td.deal,
-  .tablebox tbody td:nth-child(2), .tablebox tbody td:nth-child(7) { white-space: normal; }
+  .tablebox tbody td:nth-child(2), .tablebox tbody td:nth-child(8) { white-space: normal; }
 }
