@@ -140,8 +140,9 @@
     "columns": "招标投标-中标结果（栏目1337）",
     "maxPages": 6,
     "defaultRegion": "甘肃",
-    "coverNote": "官方背景信息网中标结果栏目，静态分页可匿名浏览。",
-    "minDiscover": 1
+    "coverNote": "【2026-09-30 修正】原判断「JS 渲染读不到」有误：页面为服务端渲染，公告在 HTML 内，真实原因是标题放在 a[title] 属性而文本节点被 span/em 污染，已修 extractAnchors。官方背景信息网中标结果栏目，静态分页可匿名浏览。",
+    "minDiscover": 0,
+    "zeroReason": "标题解析已修复；甘肃经济信息网中标结果栏目当期 56 条均为医院/学校类，无选矿干选相关公告（平台无货，非抓取失效）"
   },
   {
     "id": "chnenergy-zbgg",
