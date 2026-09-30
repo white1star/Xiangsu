@@ -197,6 +197,35 @@ test('extractAnchors strips icon-font entities and decodes common entities', () 
   assert.equal(items[0].url, 'https://cg.ccteg.cn/cms/channel/ywgg1hw/87606.htm');
 });
 
+// 真实回归：ccteg 公告把标题放在 title 属性里，文本节点被 <span><i><em> 包着并混入日期，
+// 纯取文本会得到一堆碎片，导致关键词全不命中、整源 0 产出（2026-09-30 实测）。
+test('extractAnchors prefers the title attribute when text is polluted', () => {
+  const html = '<li name="li_name">'
+    + '<a id="0" href="/cms/channel/ywgg4hw/88826.htm" title="【天地王坡】煤矿用钢骨架纤维增强树脂管(含接头)及配套卡箍闸阀采购项目【重新招标】中标候选人公示" target="_blank" style="">'
+    + '<span><i class="iconfont">&#xe638;</i><em style="width:6.5em"></em>【天地王坡】煤矿用钢骨架纤维增强树脂管(含接头)</span>'
+    + '<em>2026-09-30</em></a></li>';
+  const items = extractAnchors(html, 'https://cg.ccteg.cn/cms/channel/ywgg4hw/index.htm');
+  assert.equal(items.length, 1);
+  assert.match(items[0].title, /中标候选人公示$/, '标题应来自 title 属性，带完整公告类型');
+  assert.equal(items[0].url, 'https://cg.ccteg.cn/cms/channel/ywgg4hw/88826.htm');
+  assert.equal(items[0].date, '2026-09-30');
+});
+
+test('extractAnchors keeps text-derived titles when no title attribute exists', () => {
+  const html = '<a href="/a/1.htm"><i class="icon">&#xe638;</i>某矿智能干选系统采购公告</a>';
+  const items = extractAnchors(html, 'https://cg.ccteg.cn/');
+  assert.equal(items.length, 1);
+  assert.match(items[0].title, /智能干选系统采购公告/);
+});
+
+test('extractAnchors does not let a polluted text override a clean title attribute', () => {
+  // 文本只剩图标和日期碎片时，必须回退到 title 属性
+  const html = '<a href="/a/2.htm" title="某矿干法分选系统采购中标公告"><span><i>&#xe638;</i><em></em></span><em>2026-09-30</em></a>';
+  const items = extractAnchors(html, 'https://cg.ccteg.cn/');
+  assert.equal(items.length, 1);
+  assert.equal(items[0].title, '某矿干法分选系统采购中标公告');
+});
+
 test('parseScraplingRenderedItems parses rendered SPA list HTML via itemRegex', () => {
   const html = '<h2><a href="https://bid.10huan.com/2026/gz/0206/gz17822.html" target="_blank">2026年2月6日某矿智能干选系统公开招标公告</a></h2>'
     + '<span class="a">https://bid.10huan.com/2026/gz/0206/gz17822.html - 2026-02-06</span>';

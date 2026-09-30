@@ -212,20 +212,36 @@ export function excerptEvidence(text, maxLength = 220) {
   return text.slice(0, maxLength).trim();
 }
 
+// 清洗 <a> 内文本：去标签、去图标字体私有区实体、解码常见实体、压空白
+function cleanAnchorText(raw) {
+  return raw
+    .replace(/<[^>]+>/g, '')
+    .replace(/["']\s*[\w-]+\s*=\s*["'][^"']*["']\s*>/g, ' ') // 清除残缺标签属性残留（个别站点 a 标签未闭合）
+    .replace(/&#x[e-fE-F][0-9a-fA-F]{3};/g, '') // 清除图标字体私有区实体（如 ccteg 的 &#xe638;）
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// 纯日期/图标碎片（如只剩 "2026-09-30"）不算标题
+function looksLikeTitleFragment(text) {
+  return text.length < 8 || /^[\d\s\-/.年月日]+$/.test(text);
+}
+
 export function extractAnchors(html, baseUrl) {
   const anchors = [];
-  for (const match of html.matchAll(/<a\b[^>]*href=["']([^"'#]+)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
-    const title = match[2]
-      .replace(/<[^>]+>/g, '')
-      .replace(/["']\s*[\w-]+\s*=\s*["'][^"']*["']\s*>/g, ' ') // 清除残缺标签属性残留（个别站点 a 标签未闭合）
-      .replace(/&#x[e-fE-F][0-9a-fA-F]{3};/g, '') // 清除图标字体私有区实体（如 ccteg 的 &#xe638;）
-      .replace(/&nbsp;/gi, ' ')
-      .replace(/&amp;/gi, '&')
-      .replace(/\s+/g, ' ')
-      .trim();
-    if (!title || title.length < 8) continue;
+  // 捕获 a 标签的开始标签（含 title 属性）。部分站点把完整公告标题放在 title 里，
+  // 文本节点被 <span><i><em> 包着并混入日期（如 cg.ccteg.cn）——只看文本会整源 0 产出。
+  for (const match of html.matchAll(/<a\b([^>]*?)href=["']([^"'#]+)["']([^>]*)>([\s\S]*?)<\/a>/gi)) {
+    const attrs = `${match[1]} ${match[3]}`;
+    const titleAttr = attrs.match(/\btitle=["']([^"']{8,300})["']/i)?.[1]?.trim() || '';
+    const textTitle = cleanAnchorText(match[4]);
+    // title 属性优先；属性缺失或明显是碎片时才用文本
+    const title = titleAttr && !looksLikeTitleFragment(titleAttr) ? titleAttr : textTitle;
+    if (!title || looksLikeTitleFragment(title)) continue;
     let url = null;
-    try { url = new URL(match[1], baseUrl).href; } catch { continue; }
+    try { url = new URL(match[2], baseUrl).href; } catch { continue; }
     if (!/^https?:/.test(url)) continue;
     const context = html.slice(Math.max(0, match.index - 260), match.index + match[0].length + 260);
     anchors.push({ title, url, date: normalizeDate(context.match(/20\d{2}[-/.年]\s*\d{1,2}[-/.月]\s*\d{1,2}/)?.[0]) });
