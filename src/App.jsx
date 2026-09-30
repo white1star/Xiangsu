@@ -9,7 +9,6 @@ import './intelligence.css';
 import './platform-library.css';
 import './wechat.css';
 
-const icons = ['▣', '◉', '◍'];
 const PAGE_SIZE = 10;
 const PHASE_OPTIONS = ['全部', '待开标', '已开标', '未披露', '中标候选人', '已中标', '流标'];
 const LEDGER_COLUMNS = ['客户', '矿种', '产品线', '竞品', '金额', '成交方式', '发布日期', '来源', '置信度'];
@@ -113,7 +112,7 @@ export default function App() {
     <header className="topbar">
       <div className="brand"><span className="mark">◈</span><b>唐山像素智能</b></div>
       <div className="head-right">
-        <nav>{['情报台账', '公众号线索', '数据源'].map((item, index) => <button className={page === item ? 'active' : ''} onClick={() => setPage(item)} key={item}><i>{icons[index]}</i>{item}</button>)}</nav>
+        <nav>{['情报台账', '公众号线索', '数据源'].map(item => <button className={page === item ? 'active' : ''} onClick={() => setPage(item)} key={item}>{item}</button>)}</nav>
         <a className="nav-center" href="/">← 信息中心</a>
       </div>
     </header>

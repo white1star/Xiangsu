@@ -120,8 +120,6 @@ nav button.active::after {
   animation: navIn .22s ease both;
 }
 
-nav i { font-style: normal; font-size: 13px; opacity: .78; }
-
 a.nav-center {
   display: inline-flex;
   align-items: center;
