@@ -341,15 +341,6 @@ tbody tr:last-child td { border-bottom: 0; }
 .bid.招标公告, .bid.招标中 { color: #1a56db; font-weight: 700; }
 .bid.中标候选人, .bid.待核实, .confidence.中 { color: #92400e; font-weight: 700; }
 .bid.未中标, .confidence.低 { color: #c0392b; font-weight: 700; }
-
-/* 项目阶段列：六档配色，终止/待定标最需要被看见 */
-.stage-col { white-space: nowrap; }
-.stage { display: inline-block; padding: 1px 9px; border-radius: 5px; font-size: 12px; font-weight: 600; }
-.stage-已中标 { background: #e6f4ea; color: #1c7234; }
-.stage-已完成 { background: #eef2f6; color: #4a5a68; }
-.stage-招标中 { background: #e8f0fe; color: #1a56db; }
-.stage-待定标 { background: #fdf0e0; color: #92400e; }
-.stage-已终止 { background: #f6f7f8; color: #8a8f98; text-decoration: line-through; }
 .bid.流标 {
   color: #8a8f98;
   font-weight: 700;
