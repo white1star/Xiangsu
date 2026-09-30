@@ -1,6 +1,6 @@
-import assert from 'node:assert/strict';
+﻿import assert from 'node:assert/strict';
 import test from 'node:test';
-import { applyDetailBody, buildWindow, canonicalLine, classifyLine, cleanVendorTitle, extractAmount, extractAnchors, extractBidOpenDate, extractDateFromUrl, extractVendorItems, extractWinner, mapBidStatus, mapVendorSignal, normalizeDate, parseScraplingJsonRows, parseScraplingRenderedItems, VENDOR_AUTHORITY } from '../scripts/collect-lib.mjs';
+import { applyDetailBody, buildWindow, canonicalLine, classifyLine, cleanVendorTitle, extractAmount, extractAnchors, extractBidOpenDate, extractDateFromUrl, extractVendorItems, extractWinner, fetchText, mapBidStatus, mapVendorSignal, normalizeDate, parseScraplingJsonRows, parseScraplingRenderedItems, VENDOR_AUTHORITY } from '../scripts/collect-lib.mjs';
 import { mergePendingLeads } from '../scripts/weekly-run.mjs';
 
 test('normalizeDate handles Chinese and dash formats', () => {
@@ -224,6 +224,55 @@ test('extractAnchors does not let a polluted text override a clean title attribu
   const items = extractAnchors(html, 'https://cg.ccteg.cn/');
   assert.equal(items.length, 1);
   assert.equal(items[0].title, '某矿干法分选系统采购中标公告');
+});
+
+// —— 网络抖动重试：服务器偶发 fetch failed 曾让 ggzy（唯一全国兜底源）单轮失败、整天不发布 ——
+test('fetchText retries once on a transient network failure and then succeeds', async () => {
+  const original = globalThis.fetch;
+  let calls = 0;
+  globalThis.fetch = async () => {
+    calls += 1;
+    if (calls === 1) throw new TypeError('fetch failed');
+    return new Response('<html>ok</html>', { status: 200, headers: { 'content-type': 'text/html' } });
+  };
+  try {
+    const result = await fetchText('https://www.ggzy.gov.cn/x', { retryDelayMs: 1 });
+    assert.equal(result.status, 200);
+    assert.equal(calls, 2, '第一次失败后应重试一次');
+  } finally {
+    globalThis.fetch = original;
+  }
+});
+
+test('fetchText gives up after the retry budget and rethrows', async () => {
+  const original = globalThis.fetch;
+  let calls = 0;
+  globalThis.fetch = async () => { calls += 1; throw new TypeError('fetch failed'); };
+  await assert.rejects(
+    () => fetchText('https://www.ggzy.gov.cn/x', { retryDelayMs: 1 }),
+    /fetch failed/,
+  );
+  assert.equal(calls, 2, '默认只重试 1 次，总共 2 次尝试');
+  globalThis.fetch = original;
+});
+
+test('fetchText does not retry non-network errors', async () => {
+  const original = globalThis.fetch;
+  let calls = 0;
+  globalThis.fetch = async () => { calls += 1; throw new Error('boom: 非网络类错误'); };
+  await assert.rejects(() => fetchText('https://x.test/', { retryDelayMs: 1 }));
+  assert.equal(calls, 1, '非网络类错误不重试');
+  globalThis.fetch = original;
+});
+
+test('fetchText does not retry an HTTP error response', async () => {
+  const original = globalThis.fetch;
+  let calls = 0;
+  globalThis.fetch = async () => { calls += 1; return new Response('nope', { status: 500 }); };
+  const result = await fetchText('https://x.test/', { retryDelayMs: 1 });
+  assert.equal(result.status, 500);
+  assert.equal(calls, 1, 'HTTP 5xx 重试也没用，不重试');
+  globalThis.fetch = original;
 });
 
 test('parseScraplingRenderedItems parses rendered SPA list HTML via itemRegex', () => {

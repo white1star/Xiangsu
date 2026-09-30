@@ -259,17 +259,42 @@ function decodeBody(buffer, contentType) {
   try { return new TextDecoder(label).decode(buffer); } catch { return buffer.toString('utf8'); }
 }
 
-async function fetchText(url, options = {}) {
-  const response = await fetch(url, {
-    headers: { 'user-agent': USER_AGENT, ...(options.headers || {}) },
-    method: options.method || 'GET',
-    body: options.body,
-    redirect: 'follow',
-    signal: AbortSignal.timeout(options.timeout || 30000),
-  });
-  const buffer = Buffer.from(await response.arrayBuffer());
-  const text = decodeBody(buffer, response.headers.get('content-type'));
-  return { status: response.status, text, ok: response.ok };
+// 网络类失败（连接被重置/超时/DNS 抖动）重试；HTTP 4xx/5xx 不重试（重试也不会变好）。
+// 背景：服务器偶发 fetch failed 曾让唯一的"全国兜底源"ggzy 单轮失败，当天整批不发布。
+// 这里把"抖动"和"真挂了"分开：抖几次能过去，真挂才由门禁拦下。
+const RETRYABLE_MESSAGES = /fetch failed|ECONNRESET|ETIMEDOUT|ENOTFOUND|EAI_AGAIN|ECONNREFUSED|socket hang up|network/i;
+
+function isRetryableError(error) {
+  const message = `${error?.cause?.code || ''} ${error?.code || ''} ${error?.message || error}`;
+  return RETRYABLE_MESSAGES.test(message);
+}
+
+// 导出以便测试覆盖重试行为（生产代码行为不变）
+export async function fetchText(url, options = {}) {
+  const retries = Number.isInteger(options.retries) ? options.retries : 1;
+  const retryDelayMs = options.retryDelayMs ?? 30_000;
+  let lastError = null;
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    try {
+      const response = await fetch(url, {
+        headers: { 'user-agent': USER_AGENT, ...(options.headers || {}) },
+        method: options.method || 'GET',
+        body: options.body,
+        redirect: 'follow',
+        signal: AbortSignal.timeout(options.timeout || 30000),
+      });
+      const buffer = Buffer.from(await response.arrayBuffer());
+      const text = decodeBody(buffer, response.headers.get('content-type'));
+      return { status: response.status, text, ok: response.ok };
+    } catch (error) {
+      lastError = error;
+      const canRetry = attempt < retries && isRetryableError(error);
+      if (!canRetry) break;
+      console.log(`  网络异常，${retryDelayMs / 1000}s 后重试（第 ${attempt + 1} 次）：${error.message}`);
+      await sleep(retryDelayMs);
+    }
+  }
+  throw lastError;
 }
 
 function makeCandidate({ title, url, source, publishDate, typeText = '', region, sourceAuthority }) {
