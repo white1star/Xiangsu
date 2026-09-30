@@ -11,15 +11,80 @@ const mandatory = [
 ];
 
 test('blocks publication when a mandatory public source was not checked', () => {
-  const report = evaluateCoverage(mandatory, [{ sourceId: 'ccteg', status: 'ok', checkedAt: '2026-07-29T01:00:00Z' }]);
+  const report = evaluateCoverage(mandatory, [{ sourceId: 'ccteg', status: 'ok', checkedAt: '2026-07-29T01:00:00Z', discovered: 3 }]);
   assert.equal(report.publishable, false);
   assert.deepEqual(report.missing, ['国能e招']);
 });
 
 test('allows publication only after every mandatory source has a successful check', () => {
-  const report = evaluateCoverage(mandatory, mandatory.map(source => ({ sourceId: source.id, status: 'ok', checkedAt: '2026-07-29T01:00:00Z' })));
+  const report = evaluateCoverage(mandatory, mandatory.map(source => ({ sourceId: source.id, status: 'ok', checkedAt: '2026-07-29T01:00:00Z', discovered: 2 })));
   assert.equal(report.publishable, true);
   assert.equal(report.checked, 2);
+});
+
+// —— 门禁分层：能访问 ≠ 抓到东西 ——
+test('a mandatory source that returns nothing blocks publication', () => {
+  const checks = [
+    { sourceId: 'ccteg', status: 'ok', checkedAt: '2026-07-29T01:00:00Z', discovered: 5 },
+    { sourceId: 'chnenergy', status: 'ok', checkedAt: '2026-07-29T01:00:00Z', discovered: 0 },
+  ];
+  const report = evaluateCoverage(mandatory, checks);
+  assert.equal(report.publishable, false, '抓到 0 条的必查源不能算通过');
+  assert.deepEqual(report.missing, ['国能e招']);
+});
+
+test('zero-output mandatory sources are listed separately with their reason', () => {
+  const sources = [
+    { id: 'chnenergy', name: '国能e招', required: true },
+    { id: 'zmzb', name: '中煤招标网', required: true, minDiscover: 0, zeroReason: '平台当期无相关公告' },
+  ];
+  const checks = [
+    { sourceId: 'chnenergy', status: 'ok', checkedAt: '2026-07-29T01:00:00Z', discovered: 0 },
+    { sourceId: 'zmzb', status: 'ok', checkedAt: '2026-07-29T01:00:00Z', discovered: 0 },
+  ];
+  const report = evaluateCoverage(sources, checks);
+  assert.equal(report.publishable, false);
+  assert.deepEqual(report.missing, ['国能e招']);
+  assert.deepEqual(report.zeroOutput, [
+    { name: '国能e招', id: 'chnenergy', discovered: 0, exempt: false, reason: '' },
+    { name: '中煤招标网', id: 'zmzb', discovered: 0, exempt: true, reason: '平台当期无相关公告' },
+  ], '零产出必查源全部列出，用 exempt 区分是否放行');
+});
+
+test('a mandatory source exempted with minDiscover 0 does not block publication', () => {
+  const sources = [
+    { id: 'chnenergy', name: '国能e招', required: true },
+    { id: 'zmzb', name: '中煤招标网', required: true, minDiscover: 0, zeroReason: '平台当期无相关公告' },
+  ];
+  const checks = [
+    { sourceId: 'chnenergy', status: 'ok', checkedAt: '2026-07-29T01:00:00Z', discovered: 4 },
+    { sourceId: 'zmzb', status: 'ok', checkedAt: '2026-07-29T01:00:00Z', discovered: 0 },
+  ];
+  const report = evaluateCoverage(sources, checks);
+  assert.equal(report.publishable, true, '显式豁免的源允许 0 产出');
+  assert.deepEqual(report.missing, []);
+  assert.deepEqual(report.zeroOutput, [
+    { name: '中煤招标网', id: 'zmzb', discovered: 0, exempt: true, reason: '平台当期无相关公告' },
+  ]);
+});
+
+test('a failed mandatory source is still missing even when exempt', () => {
+  const sources = [{ id: 'zmzb', name: '中煤招标网', required: true, minDiscover: 0, zeroReason: '平台当期无相关公告' }];
+  const checks = [{ sourceId: 'zmzb', status: 'failed', checkedAt: '2026-07-29T01:00:00Z', discovered: 0, failReason: '反爬拦截' }];
+  const report = evaluateCoverage(sources, checks);
+  assert.equal(report.publishable, false, '豁免只针对"抓得到但没货"，抓不到仍然阻塞');
+  assert.deepEqual(report.missing, ['中煤招标网']);
+  assert.deepEqual(report.zeroOutput, [], '访问失败的源不算零产出，归入 missing');
+});
+
+test('checks without discovered are treated as zero output', () => {
+  const checks = [
+    { sourceId: 'ccteg', status: 'ok', checkedAt: '2026-07-29T01:00:00Z', discovered: 1 },
+    { sourceId: 'chnenergy', status: 'ok', checkedAt: '2026-07-29T01:00:00Z' },
+  ];
+  const report = evaluateCoverage(mandatory, checks);
+  assert.equal(report.publishable, false, '没有 discovered 字段的老数据不能默认算通过');
+  assert.deepEqual(report.missing, ['国能e招']);
 });
 
 test('rejects a candidate without an official original page and verbatim evidence', () => {

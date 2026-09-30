@@ -25,11 +25,42 @@ const stateFile = path.join(root, 'public', 'data', 'scan-state.json');
 
 export const MINIMUM_PUBLISH_DATE = MIN_DATE;
 
+// 覆盖门禁：必查平台必须"访问成功"且"真的抓到东西"。
+// 历史教训：只判 status==='ok' 会让"访问得到但连续空列表"的平台长期算通过，
+// 报告却显示 5/5 全绿，台账的完整性是假的。
+// 规则可显式豁免零产出（minDiscover: 0 + zeroReason），豁免只针对"抓得到但平台当期没货"，
+// 访问失败（反爬/超时/改版）一律阻塞，并保留在 missing 里。
 export function evaluateCoverage(sources, checks) {
   const required = sources.filter(source => source.required);
-  const successful = new Set(checks.filter(check => check.status === 'ok').map(check => check.sourceId));
-  const missing = required.filter(source => !successful.has(source.id)).map(source => source.name);
-  return { publishable: missing.length === 0, checked: successful.size, required: required.length, missing };
+  const byId = new Map(checks.map(check => [check.sourceId, check]));
+  const missing = [];
+  const zeroOutput = [];
+  for (const source of required) {
+    const check = byId.get(source.id);
+    if (!check || check.status !== 'ok') {
+      missing.push(source.name);
+      continue;
+    }
+    const discovered = Number(check.discovered ?? 0);
+    if (discovered > 0) continue;
+    const exempt = Number(source.minDiscover ?? 1) === 0;
+    zeroOutput.push({
+      name: source.name,
+      id: source.id,
+      discovered,
+      exempt,
+      reason: exempt ? (source.zeroReason || '') : '',
+    });
+    if (!exempt) missing.push(source.name);
+  }
+  const accessible = new Set(checks.filter(check => check.status === 'ok').map(check => check.sourceId));
+  return {
+    publishable: missing.length === 0,
+    checked: accessible.size,
+    required: required.length,
+    missing,
+    zeroOutput,
+  };
 }
 
 export function validateCandidate(candidate) {
@@ -455,9 +486,17 @@ async function main() {
   await writeFile(wechatFile, JSON.stringify(wechat.leads, null, 2) + '\n');
 
   if (!coverage.publishable) {
-    console.error(`覆盖率不达标，缺少必查平台成功记录：${coverage.missing.join('、')}（公众号线索已先行落盘）`);
+    // 区分"没检查到"和"检查到但空转"：后者是抓取失效/平台无货，必须写清楚是哪一种
+    const kinds = coverage.missing.map(name => {
+      const zero = coverage.zeroOutput.find(row => row.name === name);
+      return zero ? `${name}（访问成功但零产出${zero.exempt ? '·已豁免' : ''}）` : `${name}（未成功检查）`;
+    });
+    console.error(`覆盖率不达标，必查平台未真正取到数据：${kinds.join('、')}（公众号线索已先行落盘）`);
     process.exitCode = 2;
     return;
+  }
+  for (const zero of coverage.zeroOutput) {
+    console.log(`[必查·零产出] ${zero.name}：抓到 0 条${zero.exempt ? `（已豁免：${zero.reason || '规则标注' }）` : ''}`);
   }
   merged.records.sort((a, b) => String(b.publishDate || b.date).localeCompare(String(a.publishDate || a.date)));
   await writeFile(flatFile, JSON.stringify(merged.records, null, 2) + '\n');

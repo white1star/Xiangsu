@@ -49,7 +49,8 @@
       "sichuan-ggzy",
       "liaoning-ggzy",
       "qinghai-ggzy"
-    ]
+    ],
+    "minDiscover": 1
   },
   {
     "id": "ccteg-goods",
@@ -76,7 +77,8 @@
     ],
     "columns": "业务公告-结果公告-货物（ywgg4hw）",
     "maxPages": 6,
-    "coverNote": "官方栏目静态分页可匿名浏览；命中标题后回取公告详情提取金额。"
+    "coverNote": "官方栏目静态分页可匿名浏览；命中标题后回取公告详情提取金额。",
+    "minDiscover": 1
   },
   {
     "id": "ccteg-all",
@@ -130,7 +132,8 @@
     "columns": "招标投标-中标结果（栏目1337）",
     "maxPages": 6,
     "defaultRegion": "甘肃",
-    "coverNote": "官方背景信息网中标结果栏目，静态分页可匿名浏览。"
+    "coverNote": "官方背景信息网中标结果栏目，静态分页可匿名浏览。",
+    "minDiscover": 1
   },
   {
     "id": "chnenergy-zbgg",
@@ -157,7 +160,9 @@
     ],
     "columns": "招标公告（001002 栏目，公开 .jspx/.html 列表）",
     "maxPages": 3,
-    "coverNote": "公开 JSP 列表页（实测 .jspx/fullsearch.html 均 200 可匿名访问，无需登录）；后端搜索接口 RowCount:0，2026 平台暂无干选/XRT 招标记录。"
+    "coverNote": "公开 JSP 列表页（实测 .jspx/fullsearch.html 均 200 可匿名访问，无需登录）；后端搜索接口 RowCount:0，2026 平台暂无干选/XRT 招标记录。",
+    "minDiscover": 0,
+    "zeroReason": "国能e招公告接口当期返回 0 条相关记录（平台侧无相关公告，非抓取失效）"
   },
   {
     "id": "zmzb-hw",
@@ -184,7 +189,9 @@
     ],
     "columns": "业务公告-货物（ywgg1hw~ywgg6hw 六栏目）",
     "maxPages": 3,
-    "coverNote": "公开 CMS 静态列表页（实测 200 可匿名访问，无需登录）；2026 上半年实测无干选/XRT 命中。"
+    "coverNote": "公开 CMS 静态列表页（实测 200 可匿名访问，无需登录）；2026 上半年实测无干选/XRT 命中。",
+    "minDiscover": 0,
+    "zeroReason": "中煤招标网当期公告中无智能干选/XRT 相关记录（平台侧无货，非抓取失效）"
   },
   {
     "id": "mtzbw-leads",
@@ -1708,17 +1715,17 @@
     "typeField": "announcementType",
     "typeMap": {
       "103": "招标公告",
-      "105": "资格预审公告",
-      "ZBHXRGG": "中标候选人公示",
       "104": "中标结果公示",
+      "105": "资格预审公告",
       "107": "询比公告",
-      "133": "谈判公告",
-      "127": "竞价公告",
-      "111": "直接采购项目公示",
       "108": "询比结果公告",
+      "111": "直接采购项目公示",
+      "127": "竞价公告",
+      "128": "竞价结果公告",
       "131": "直接采购结果公告",
       "132": "谈判结果公告",
-      "128": "竞价结果公告"
+      "133": "谈判公告",
+      "ZBHXRGG": "中标候选人公示"
     },
     "keywords": [
       "干选",
