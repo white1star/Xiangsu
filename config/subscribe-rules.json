@@ -10,10 +10,12 @@
     "columns": [
       {
         "url": "https://www.chnenergybidding.com.cn/bidweb/001/001002/moreinfo.html",
+        "pages": "https://www.chnenergybidding.com.cn/bidweb/001/001002/{n}.html",
         "stage": "招标公告"
       },
       {
         "url": "https://www.chnenergybidding.com.cn/bidweb/001/001005/moreinfo.html",
+        "pages": "https://www.chnenergybidding.com.cn/bidweb/001/001005/{n}.html",
         "stage": "中标公告"
       }
     ],
@@ -58,12 +60,12 @@
     "columns": [
       {
         "url": "https://www.zmzb.com/cms/channel/ywgg1hw/index.htm",
-        "pages": "https://www.zmzb.com/cms/channel/ywgg1hw/index_{n}.htm",
+        "pages": "https://www.zmzb.com/cms/channel/ywgg1hw/index.htm?pageNo={n}",
         "stage": "招标公告"
       },
       {
         "url": "https://www.zmzb.com/cms/channel/ywgg2hw/index.htm",
-        "pages": "https://www.zmzb.com/cms/channel/ywgg2hw/index_{n}.htm",
+        "pages": "https://www.zmzb.com/cms/channel/ywgg2hw/index.htm?pageNo={n}",
         "stage": "中标公告"
       }
     ],
@@ -108,12 +110,12 @@
     "columns": [
       {
         "url": "https://cg.ccteg.cn/cms/channel/ywgg4hw/index.htm",
-        "pages": "https://cg.ccteg.cn/cms/channel/ywgg4hw/index_{n}.htm",
+        "pages": "https://cg.ccteg.cn/cms/channel/ywgg4hw/index.htm?pageNo={n}",
         "stage": "招标公告"
       },
       {
         "url": "https://cg.ccteg.cn/cms/channel/ywgg1hw/index.htm",
-        "pages": "https://cg.ccteg.cn/cms/channel/ywgg1hw/index_{n}.htm",
+        "pages": "https://cg.ccteg.cn/cms/channel/ywgg1hw/index.htm?pageNo={n}",
         "stage": "中标结果公告"
       }
     ],
@@ -150,46 +152,48 @@
   {
     "id": "sub-jzbidding",
     "name": "冀中能源电子招标（订阅）",
-    "adapter": "subscribe-list",
+    "adapter": "json-api",
     "sourceAuthority": "official",
     "defaultRegion": "河北",
-    "maxPages": 3,
+    "maxPages": 2,
     "maxAgeDays": 45,
-    "columns": [
-      {
-        "url": "https://www.jzbidding.com/",
-        "stage": "招标公告"
+    "searchEndpoint": "https://www.jzbidding.com/cms/api/dynamicData/queryContentPage",
+    "method": "POST",
+    "pageParam": "pageNo",
+    "sizeParam": "pageSize",
+    "keywordParam": null,
+    "pageSize": 20,
+    "keywords": [
+      "x"
+    ],
+    "categoryParam": "dto.categoryId",
+    "categoryValues": [
+      "5030",
+      "5033",
+      "5034",
+      "5036"
+    ],
+    "extraParams": {
+      "dto": {
+        "siteId": "747",
+        "categoryId": "",
+        "bidType": "",
+        "province": "",
+        "city": "",
+        "county": "",
+        "publishDays": "",
+        "isIndex": "1",
+        "limitNum": 20
       }
-    ],
-    "include": [
-      "干选",
-      "干法选煤",
-      "干法分选",
-      "干法提质",
-      "复合干选",
-      "XRT",
-      "射线分选",
-      "光电分选",
-      "智能分选",
-      "智能选矸",
-      "选矸机",
-      "分选机",
-      "色选机"
-    ],
-    "exclude": [
-      "输送带",
-      "胶带输送",
-      "皮带输送",
-      "磁选机",
-      "浮选",
-      "展会",
-      "博览会",
-      "论坛",
-      "峰会",
-      "宣传",
-      "品牌发布",
-      "唐山像素"
-    ]
+    },
+    "response": {
+      "rowsPath": "res.rows",
+      "titleField": "title",
+      "dateField": "publishDate"
+    },
+    "urlTemplate": "https://www.jzbidding.com{url}",
+    "titleInclude": "干选|干法选煤|干法分选|干法提质|复合干选|XRT|射线分选|光电分选|智能分选|智能选矸|选矸|分选机|色选机|抛废|光选|TDS",
+    "filterWindow": true
   },
   {
     "id": "sub-gsnhcg",
@@ -201,8 +205,19 @@
     "maxAgeDays": 45,
     "columns": [
       {
-        "url": "https://www.gsnhcg.com/",
-        "stage": "招标公告"
+        "url": "https://www.gsnhcg.com/cgxx/002001/002001001/purchase_info.html",
+        "pages": "https://www.gsnhcg.com/cgxx/002001/002001001/{n}.html",
+        "stage": "招标预审公告"
+      },
+      {
+        "url": "https://www.gsnhcg.com/cgxx/002001/002001003/purchase_info.html",
+        "pages": "https://www.gsnhcg.com/cgxx/002001/002001003/{n}.html",
+        "stage": "中标候选人公示"
+      },
+      {
+        "url": "https://www.gsnhcg.com/cgxx/002001/002001006/purchase_info.html",
+        "pages": "https://www.gsnhcg.com/cgxx/002001/002001006/{n}.html",
+        "stage": "中标结果公告"
       }
     ],
     "include": [
@@ -286,12 +301,13 @@
     "adapter": "subscribe-list",
     "sourceAuthority": "official",
     "defaultRegion": "山西",
-    "maxPages": 3,
+    "maxPages": 5,
     "maxAgeDays": 45,
     "columns": [
       {
-        "url": "https://prec.sxzwfw.gov.cn/jyxxgc/index.jhtml",
-        "stage": "交易公告"
+        "url": "http://prec.sxzwfw.gov.cn/jyxxgc/index.jhtml",
+        "pages": "http://prec.sxzwfw.gov.cn/jyxxgc/index_{n}.jhtml",
+        "stage": "工程建设·招标公告"
       }
     ],
     "include": [
@@ -327,46 +343,68 @@
   {
     "id": "sub-sxbid",
     "name": "陕西公共资源交易网（订阅）",
-    "adapter": "subscribe-list",
+    "adapter": "json-api",
     "sourceAuthority": "official",
     "defaultRegion": "陕西",
-    "maxPages": 3,
+    "maxPages": 2,
     "maxAgeDays": 45,
-    "columns": [
-      {
-        "url": "https://www.sxbid.com.cn/",
-        "stage": "交易公告"
-      }
+    "searchEndpoint": "http://www.sxggzyjy.cn/inteligentsearch_new/rest/esinteligentsearch/getFullTextDataNew",
+    "method": "POST",
+    "pageParam": "pn",
+    "pageOffsetMode": true,
+    "sizeParam": "rn",
+    "pageSize": 100,
+    "keywordParam": null,
+    "keywords": [
+      "x"
     ],
-    "include": [
-      "干选",
-      "干法选煤",
-      "干法分选",
-      "干法提质",
-      "复合干选",
-      "XRT",
-      "射线分选",
-      "光电分选",
-      "智能分选",
-      "智能选矸",
-      "选矸机",
-      "分选机",
-      "色选机"
-    ],
-    "exclude": [
-      "输送带",
-      "胶带输送",
-      "皮带输送",
-      "磁选机",
-      "浮选",
-      "展会",
-      "博览会",
-      "论坛",
-      "峰会",
-      "宣传",
-      "品牌发布",
-      "唐山像素"
-    ]
+    "extraParams": {
+      "esdsid": "1",
+      "token": "",
+      "sdt": "",
+      "edt": "",
+      "wd": "",
+      "inc_wd": "",
+      "exc_wd": "",
+      "fields": "title",
+      "cnum": "001",
+      "sort": "{\"webdate\":\"0\"}",
+      "ssort": "title",
+      "cl": 1000,
+      "cutIngore": "title;linkurl",
+      "terminal": "",
+      "condition": [
+        {
+          "fieldName": "categorynum",
+          "equal": null,
+          "notEqual": null,
+          "equalList": [
+            "001001001001",
+            "001001001003"
+          ],
+          "notEqualList": null,
+          "isLike": false,
+          "likeType": 2
+        }
+      ],
+      "time": [],
+      "highlights": "title",
+      "statistics": null,
+      "unionCondition": null,
+      "accuracy": false,
+      "noParticiple": false,
+      "searchRange": "",
+      "isBusiness": "1"
+    },
+    "response": {
+      "contentJson": "content",
+      "rowsPath": "result.records",
+      "titleField": "title",
+      "dateField": "webdate"
+    },
+    "urlTemplate": "http://www.sxggzyjy.cn{linkurl}",
+    "titleInclude": "干选|干法选煤|干法分选|干法提质|复合干选|XRT|射线分选|光电分选|智能分选|智能选矸|选矸|分选机|色选机|抛废|光选|TDS",
+    "filterWindow": true
   },
   {
     "id": "sub-ebnew",
@@ -374,12 +412,12 @@
     "adapter": "subscribe-list",
     "sourceAuthority": "公开",
     "defaultRegion": "全国",
-    "maxPages": 4,
-    "maxAgeDays": 45,
+    "maxPages": 1,
+    "maxAgeDays": 30,
     "columns": [
       {
-        "url": "https://www.ebnew.com/",
-        "stage": "招标公告"
+        "url": "https://ss.ebnew.com/tradingSearch/index.htm?key=%E5%B9%B2%E9%80%89",
+        "stage": "检索：干选"
       }
     ],
     "include": [
@@ -410,7 +448,8 @@
       "宣传",
       "品牌发布",
       "唐山像素"
-    ]
+    ],
+    "itemRegex": "<a[^>]*href=\"(?<url>https?://www\\.ebnew\\.com/businessShow/(?<file>\\d+)\\.html)\"[^>]*title=\"(?<title>[^\"]*)\"[\\s\\S]{0,1600}?(?:发布日期|发布时间)[：:]\\s*(?<date>20\\d{2}-\\d{2}-\\d{2})"
   },
   {
     "id": "sub-vendor-tsshenzhou",
@@ -422,7 +461,7 @@
     "maxAgeDays": 180,
     "columns": [
       {
-        "url": "http://www.tsshenzhou.com/xinwen/",
+        "url": "https://www.tsshenzhou.com/xinwen/",
         "stage": "新闻动态"
       }
     ],
@@ -456,7 +495,8 @@
       "品牌发布",
       "唐山像素"
     ],
-    "vendorName": "唐山神州机械集团有限公司"
+    "vendorName": "唐山神州机械集团有限公司",
+    "hrefPattern": "/xinwen/20\\d{6}\\.html"
   },
   {
     "id": "sub-vendor-haiwang",
@@ -468,8 +508,8 @@
     "maxAgeDays": 180,
     "columns": [
       {
-        "url": "http://www.haiwang.com.cn/",
-        "stage": "新闻中心"
+        "url": "https://haiwangkeji.com/",
+        "stage": "新闻资讯"
       }
     ],
     "include": [
@@ -502,7 +542,9 @@
       "品牌发布",
       "唐山像素"
     ],
-    "vendorName": "威海市海王科技有限公司"
+    "vendorName": "威海市海王科技有限公司",
+    "hrefPattern": "/news/show-\\d+\\.aspx",
+    "coverNote": "官网 hai wangkeji.com 近期连接失败（域名疑似变更/停用）；haiwang.com.cn 为停放页。失败时如实记录，等待官网恢复或找到新域名后更新。"
   },
   {
     "id": "sub-vendor-haina",
@@ -514,11 +556,7 @@
     "maxAgeDays": 180,
     "columns": [
       {
-        "url": "http://www.haina2001.com/",
-        "stage": "公司新闻"
-      },
-      {
-        "url": "http://www.haina2001.com/gsxw/N.html",
+        "url": "https://www.haina2001.com/gsxw.html",
         "stage": "公司新闻"
       }
     ],
@@ -553,7 +591,8 @@
       "品牌发布",
       "唐山像素"
     ],
-    "vendorName": "枣庄海纳科技有限公司"
+    "vendorName": "枣庄海纳科技有限公司",
+    "hrefPattern": "/gsxw/\\d+\\.html"
   },
   {
     "id": "sub-vendor-dfmc",
@@ -565,7 +604,7 @@
     "maxAgeDays": 180,
     "columns": [
       {
-        "url": "http://www.dfmc.com.cn/",
+        "url": "https://www.dfmc.cc/shichangxinwen/",
         "stage": "市场新闻"
       }
     ],
@@ -599,7 +638,8 @@
       "品牌发布",
       "唐山像素"
     ],
-    "vendorName": "丹东东方测控技术股份有限公司"
+    "vendorName": "丹东东方测控技术股份有限公司",
+    "hrefPattern": "/shichangxinwen/\\d+\\.html"
   },
   {
     "id": "sub-vendor-jinshi",
@@ -611,7 +651,7 @@
     "maxAgeDays": 180,
     "columns": [
       {
-        "url": "https://www.jinshisort.com/",
+        "url": "https://www.jinshisort.com/news.html",
         "stage": "资讯动态"
       }
     ],
@@ -645,53 +685,8 @@
       "品牌发布",
       "唐山像素"
     ],
-    "vendorName": "湖北金石智能装备有限公司"
-  },
-  {
-    "id": "sub-vendor-hbaolan",
-    "name": "河北澳兰机械（订阅）",
-    "adapter": "subscribe-list",
-    "sourceAuthority": "官方自宣",
-    "defaultRegion": "河北",
-    "maxPages": 3,
-    "maxAgeDays": 180,
-    "columns": [
-      {
-        "url": "http://www.hbaolan.com/",
-        "stage": "公司新闻"
-      }
-    ],
-    "include": [
-      "干选",
-      "干法选煤",
-      "干法分选",
-      "干法提质",
-      "复合干选",
-      "XRT",
-      "射线分选",
-      "光电分选",
-      "智能分选",
-      "智能选矸",
-      "选矸机",
-      "分选机",
-      "色选机",
-      "跳汰机",
-      "重介"
-    ],
-    "exclude": [
-      "输送带",
-      "胶带输送",
-      "皮带输送",
-      "磁选机",
-      "展会",
-      "博览会",
-      "论坛",
-      "峰会",
-      "宣传",
-      "品牌发布",
-      "唐山像素"
-    ],
-    "vendorName": "河北澳兰机械设备进出口有限公司"
+    "vendorName": "湖北金石智能装备有限公司",
+    "itemRegex": "url:\\s*'(?<url>https?://[^']+)'[\\s\\S]{0,500}?title:\\s*'(?<title>[^']*)'[\\s\\S]{0,300}?date:\\s*'(?<date>\\d{4}-\\d{2}-\\d{2})'"
   },
   {
     "id": "sub-vendor-nuctech",
@@ -703,7 +698,7 @@
     "maxAgeDays": 180,
     "columns": [
       {
-        "url": "https://www.nuctech.com/",
+        "url": "https://www.nuctech.com/news-center",
         "stage": "新闻中心"
       }
     ],
@@ -741,53 +736,8 @@
       "CT",
       "X光机"
     ],
-    "vendorName": "同方威视技术股份有限公司"
-  },
-  {
-    "id": "sub-vendor-jirui",
-    "name": "赣州吉瑞机械（订阅）",
-    "adapter": "subscribe-list",
-    "sourceAuthority": "官方自宣",
-    "defaultRegion": "江西",
-    "maxPages": 3,
-    "maxAgeDays": 180,
-    "columns": [
-      {
-        "url": "http://www.jiruijx.com/",
-        "stage": "新闻中心"
-      }
-    ],
-    "include": [
-      "干选",
-      "干法选煤",
-      "干法分选",
-      "干法提质",
-      "复合干选",
-      "XRT",
-      "射线分选",
-      "光电分选",
-      "智能分选",
-      "智能选矸",
-      "选矸机",
-      "分选机",
-      "色选机",
-      "跳汰机",
-      "重介"
-    ],
-    "exclude": [
-      "输送带",
-      "胶带输送",
-      "皮带输送",
-      "磁选机",
-      "展会",
-      "博览会",
-      "论坛",
-      "峰会",
-      "宣传",
-      "品牌发布",
-      "唐山像素"
-    ],
-    "vendorName": "赣州吉瑞机械设备有限公司"
+    "vendorName": "同方威视技术股份有限公司",
+    "hrefPattern": "/news\\?id="
   },
   {
     "id": "sub-vendor-gzfriend",
@@ -799,8 +749,8 @@
     "maxAgeDays": 180,
     "columns": [
       {
-        "url": "http://www.gzfriend.com/",
-        "stage": "公司新闻"
+        "url": "https://www.gzhpy.com/news.html",
+        "stage": "新闻资讯"
       }
     ],
     "include": [
@@ -833,7 +783,10 @@
       "品牌发布",
       "唐山像素"
     ],
-    "vendorName": "赣州好朋友科技股份有限公司"
+    "vendorName": "赣州好朋友科技股份有限公司",
+    "itemRegex": "href=\"(?<url>news-pages/(?<file>\\d{8})\\.html)\"[\\s\\S]{0,400}?alt=\"(?<title>[^\"]*)\"",
+    "urlBase": "https://www.gzhpy.com/",
+    "dateFromFile": true
   },
   {
     "id": "sub-vendor-chinataiho",
@@ -845,8 +798,8 @@
     "maxAgeDays": 180,
     "columns": [
       {
-        "url": "http://www.chinataiho.com/",
-        "stage": "新闻动态"
+        "url": "https://www.chinataiho.com/info.php?class_id=105",
+        "stage": "新闻中心"
       }
     ],
     "include": [
@@ -881,6 +834,145 @@
       "品牌发布",
       "唐山像素"
     ],
-    "vendorName": "合肥泰禾卓海智能科技有限公司"
+    "vendorName": "合肥泰禾卓海智能科技有限公司",
+    "hrefPattern": "/news/display/\\d+"
+  },
+  {
+    "id": "sub-vendor-meiteng",
+    "name": "美腾科技官网·美腾新闻（订阅）",
+    "adapter": "subscribe-list",
+    "sourceAuthority": "官方自宣",
+    "vendorName": "天津美腾科技股份有限公司",
+    "defaultRegion": "天津",
+    "maxPages": 2,
+    "maxAgeDays": 180,
+    "hrefPattern": "newsDetails\\?[^\"']*id=",
+    "columns": [
+      {
+        "url": "https://www.tjmeiteng.com/web/news?id=543dd3d859a849dca45b2445e76f7f38",
+        "stage": "新闻资讯"
+      }
+    ],
+    "include": [
+      "干选",
+      "干法选煤",
+      "干法分选",
+      "干法提质",
+      "复合干选",
+      "XRT",
+      "射线分选",
+      "光电分选",
+      "智能分选",
+      "智能选矸",
+      "选矸机",
+      "分选机",
+      "色选机"
+    ],
+    "exclude": [
+      "输送带",
+      "胶带输送",
+      "皮带输送",
+      "磁选机",
+      "浮选",
+      "展会",
+      "博览会",
+      "论坛",
+      "峰会",
+      "宣传",
+      "品牌发布",
+      "唐山像素"
+    ]
+  },
+  {
+    "id": "sub-vendor-holysort",
+    "name": "霍里思特·网易号官方订阅（订阅）",
+    "adapter": "subscribe-list",
+    "sourceAuthority": "官方自宣",
+    "vendorName": "霍里思特",
+    "defaultRegion": "北京",
+    "maxPages": 2,
+    "maxAgeDays": 180,
+    "hrefPattern": "/news/a/[A-Za-z0-9]+\\.html",
+    "columns": [
+      {
+        "url": "https://c.m.163.com/news/sub/T1772531517520.html",
+        "stage": "网易号订阅"
+      }
+    ],
+    "include": [
+      "干选",
+      "干法选煤",
+      "干法分选",
+      "干法提质",
+      "复合干选",
+      "XRT",
+      "射线分选",
+      "光电分选",
+      "智能分选",
+      "智能选矸",
+      "选矸机",
+      "分选机",
+      "色选机"
+    ],
+    "exclude": [
+      "输送带",
+      "胶带输送",
+      "皮带输送",
+      "磁选机",
+      "浮选",
+      "展会",
+      "博览会",
+      "论坛",
+      "峰会",
+      "宣传",
+      "品牌发布",
+      "唐山像素"
+    ]
+  },
+  {
+    "id": "sub-vendor-abtrobot",
+    "name": "合肥奥博特·新闻资讯（订阅）",
+    "adapter": "subscribe-list",
+    "sourceAuthority": "官方自宣",
+    "vendorName": "合肥奥博特自动化设备有限公司",
+    "defaultRegion": "安徽",
+    "maxPages": 2,
+    "maxAgeDays": 180,
+    "hrefPattern": "display\\.php\\?id=\\d+",
+    "columns": [
+      {
+        "url": "http://abtrobot.com/info.php?class_id=105",
+        "stage": "新闻资讯"
+      }
+    ],
+    "include": [
+      "干选",
+      "干法选煤",
+      "干法分选",
+      "干法提质",
+      "复合干选",
+      "XRT",
+      "射线分选",
+      "光电分选",
+      "智能分选",
+      "智能选矸",
+      "选矸机",
+      "分选机",
+      "色选机"
+    ],
+    "exclude": [
+      "输送带",
+      "胶带输送",
+      "皮带输送",
+      "磁选机",
+      "浮选",
+      "展会",
+      "博览会",
+      "论坛",
+      "峰会",
+      "宣传",
+      "品牌发布",
+      "唐山像素"
+    ]
   }
 ]

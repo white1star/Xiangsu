@@ -494,7 +494,7 @@ export async function runSubscribeAdapter(rule, window, limits = {}) {
       if (response.status !== 200) { if (page === 1) throw new Error(`列表页 HTTP ${response.status}`); break; }
       result.pagesScanned += 1;
 
-      const items = rule.itemRegex ? extractVendorItems(response.text, url, rule) : extractAnchors(response.text, url);
+      const items = (rule.itemRegex || rule.hrefPattern) ? extractVendorItems(response.text, url, rule) : extractAnchors(response.text, url);
       for (const anchor of items) {
         if (seen.has(anchor.url)) continue;
         seen.add(anchor.url);
@@ -693,13 +693,23 @@ export async function runJsonApiAdapter(rule, window, limits = {}) {
   for (const category of categories) {
   for (const keyword of rule.keywords) {
     for (let page = pageStart; page < pageStart + maxPages; page += 1) {
+      const pageValue = rule.pageOffsetMode ? (page - pageStart) * pageSize : page;
       const rawBody = {
         ...(rule.extraParams || {}),
-        [rule.pageParam || 'pageNo']: page,
+        [rule.pageParam || 'pageNo']: pageValue,
         [rule.sizeParam || 'pageSize']: pageSize,
-        [rule.keywordParam || 'keyword']: keyword,
       };
-      if (rule.categoryParam && category) rawBody[rule.categoryParam] = category;
+      if (rule.keywordParam !== null) rawBody[rule.keywordParam || 'keyword'] = keyword;
+      if (rule.categoryParam && category) {
+        // categoryParam 支持点路径（如 dto.categoryId），用于嵌套请求体
+        const keys = String(rule.categoryParam).split('.');
+        let target = rawBody;
+        for (let i = 0; i < keys.length - 1; i += 1) {
+          if (typeof target[keys[i]] !== 'object' || target[keys[i]] === null) target[keys[i]] = {};
+          target = target[keys[i]];
+        }
+        target[keys[keys.length - 1]] = category;
+      }
       let body;
       let headers = baseHeaders;
       if (rule.bodyFormat === 'form') {
@@ -722,6 +732,10 @@ export async function runJsonApiAdapter(rule, window, limits = {}) {
           break;
         }
         payload = JSON.parse(response.text);
+        // 部分政务平台（如陕西）把业务数据作为 JSON 字符串塞在 content 字段里，需二次解析。
+        if (conf.contentJson && typeof payload[conf.contentJson] === 'string') {
+          payload = JSON.parse(payload[conf.contentJson]);
+        }
       } catch (error) {
         if (page === 1) throw error;
         result.notes.push(`第${page}页抓取失败：${error.message}`);
