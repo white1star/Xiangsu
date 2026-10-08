@@ -112,7 +112,7 @@ export default function App() {
   const latestUpdate = useMemo(() => { const ds = rows.map(r => r.date).filter(Boolean).sort(); return ds.length ? ds[ds.length - 1] : '—'; }, []);
   const lastCrawl = (crawlStamp.lastCrawl || '').replace('T', ' ').slice(0, 16) || '—';
   const select = (value, setter, key) => <Dropdown value={value} options={filterOptions(key)} onChange={next => { setter(next); setPageNum(1); }} />;
-  const phaseSelect = <Dropdown value={stage} options={PHASE_OPTIONS} onChange={next => { setStage(next); setPageNum(1); }} />;
+  const stageSelect = <Dropdown value={stage} options={PHASE_OPTIONS} onChange={next => { setStage(next); setPageNum(1); }} />;
 
   return <main className="shell">
     <header className="topbar">
