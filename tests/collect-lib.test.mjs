@@ -1,6 +1,6 @@
 ﻿import assert from 'node:assert/strict';
 import test from 'node:test';
-import { applyDetailBody, buildWindow, canonicalLine, classifyLine, cleanVendorTitle, extractAmount, extractAnchors, extractBidOpenDate, extractDateFromUrl, extractVendorItems, extractWinner, fetchText, mapBidStatus, mapVendorSignal, normalizeDate, parseScraplingJsonRows, parseScraplingRenderedItems, VENDOR_AUTHORITY } from '../scripts/collect-lib.mjs';
+import { applyDetailBody, buildWindow, canonicalLine, classifyLine, cleanVendorTitle, extractAmount, extractAnchors, extractBidOpenDate, extractDateFromUrl, extractVendorItems, extractWinner, fetchText, mapBidStatus, mapVendorSignal, normalizeDate, parseScraplingJsonRows, parseScraplingRenderedItems, runSubscribeAdapter, VENDOR_AUTHORITY } from '../scripts/collect-lib.mjs';
 import { mergePendingLeads } from '../scripts/weekly-run.mjs';
 
 test('normalizeDate handles Chinese and dash formats', () => {
@@ -289,3 +289,51 @@ test('parseScraplingRenderedItems parses rendered SPA list HTML via itemRegex', 
 });
 
 
+
+// —— 订阅适配器：竞品官网须走交易信号词表（曾经误用招投标词表，25 条官网新闻全被拒） ——
+test('订阅适配器对竞品官网只收交易信号，产品页/展会新闻被过滤', async () => {
+  const original = globalThis.fetch;
+  const listHtml = [
+    '<a href="http://www.example-vendor.com/xinwen/20260723.html">蒙古国煤炭干法提质项目设备顺利发运</a>',
+    '<a href="http://www.example-vendor.com/fhs">复合式干法选煤系列产品</a>',
+    '<a href="http://www.example-vendor.com/xinwen/20260801.html">亮相上海世界煤博会 获各界高度认可</a>',
+  ].join('\n');
+  globalThis.fetch = async () => new Response(listHtml, { status: 200, headers: { 'content-type': 'text/html; charset=utf-8' } });
+  try {
+    const rule = {
+      id: 'sub-vendor-x', name: '测试竞品官网（订阅）', adapter: 'subscribe-list',
+      sourceAuthority: '官方自宣', vendorName: '测试竞品有限公司', defaultRegion: '河北',
+      maxPages: 1, columns: [{ url: 'http://www.example-vendor.com/xinwen/', stage: '公司新闻' }],
+      include: ['干选', '干法选煤', '干法提质', '分选'],
+      exclude: ['博览会', '展会'],
+    };
+    const r = await runSubscribeAdapter(rule, { from: '2026-04-01', to: '2026-10-08' }, { maxPages: 1, maxDetails: 0 });
+    assert.equal(r.candidates.length, 1, '产品页与展会新闻不该进入候选');
+    const c = r.candidates[0];
+    assert.equal(c.bidStatus, '已交付', '官网新闻须走交易信号词表（发运→已交付）');
+    assert.equal(c.sourceAuthority, VENDOR_AUTHORITY);
+    assert.equal(c.competitor, '测试竞品有限公司', '竞品名来自 vendorName');
+    assert.equal(c.publishDate, '2026-07-23', '日期从 URL 回退解析');
+  } finally {
+    globalThis.fetch = original;
+  }
+});
+
+test('订阅适配器对招采平台仍走招投标词表（中标结果→已中标）', async () => {
+  const original = globalThis.fetch;
+  const listHtml = '<a href="https://bid.example.com/1.html">某矿智能干选系统采购中标结果公告</a>';
+  globalThis.fetch = async () => new Response(listHtml, { status: 200, headers: { 'content-type': 'text/html; charset=utf-8' } });
+  try {
+    const rule = {
+      id: 'sub-coal-x', name: '测试煤企平台（订阅）', adapter: 'subscribe-list',
+      sourceAuthority: 'official', maxPages: 1,
+      columns: [{ url: 'https://bid.example.com/list/', stage: '中标结果' }],
+      include: ['干选', '分选'], exclude: ['废标'],
+    };
+    const r = await runSubscribeAdapter(rule, { from: '2026-04-01', to: '2026-10-08' }, { maxPages: 1, maxDetails: 0 });
+    assert.equal(r.candidates.length, 1);
+    assert.equal(r.candidates[0].bidStatus, '已中标');
+  } finally {
+    globalThis.fetch = original;
+  }
+});

@@ -462,6 +462,9 @@ export async function runSubscribeAdapter(rule, window, limits = {}) {
   const maxAgeDays = rule.maxAgeDays ?? 45;
   const result = { pagesScanned: 0, discovered: 0, candidates: [], notes: [] };
   const seen = new Set();
+  // 竞品官网/官方自媒体：走交易信号词表（中标/签约/交付/投运），与 vendor-news 适配器同口径；
+  // 招采平台（煤企）：走招投标状态词表。
+  const isVendorRule = (rule.sourceAuthority || 'official') === VENDOR_AUTHORITY;
 
   // 事后筛选用的词表：include 命中其一且 exclude 未命中才算相关
   const include = new RegExp((rule.include || []).join('|'), 'i');
@@ -498,6 +501,31 @@ export async function runSubscribeAdapter(rule, window, limits = {}) {
         // 订阅制的"筛"在这里做：先按时间窗砍掉旧的，再按 include/exclude 判相关
         const date = anchor.date || (rule.dateFromUrl ? extractDateFromUrl(anchor.url) : null);
         if (date && date < oldest.toISOString().slice(0, 10)) continue;
+        if (isVendorRule) {
+          // 官网新闻标题先清洗（去掉日期前后缀/分隔符），只收命中设备词且带交易信号的条目
+          const title = cleanVendorTitle(anchor.title);
+          if (!title || title.length < 8) continue;
+          if (rule.include?.length && !include.test(title)) continue;
+          if (exclude.test(title)) continue;
+          const line = canonicalLine(classifyLine(title));
+          const signal = mapVendorSignal(title);
+          if (!line || !signal) continue;
+          result.discovered += 1;
+          result.candidates.push({
+            title,
+            url: anchor.url,
+            source: rule.name,
+            publishDate: date || extractDateFromUrl(anchor.url) || undefined,
+            line,
+            bidStatus: signal,
+            bid: signal,
+            region: rule.defaultRegion || '未披露',
+            mineral: rule.defaultMineral || '未披露',
+            competitor: rule.vendorName || '未披露',
+            sourceAuthority: VENDOR_AUTHORITY,
+          });
+          continue;
+        }
         if (rule.include?.length && !include.test(anchor.title)) continue;
         if (exclude.test(anchor.title)) continue;
         result.discovered += 1;
@@ -520,7 +548,8 @@ export async function runSubscribeAdapter(rule, window, limits = {}) {
   for (const candidate of result.candidates) {
     if (!candidate.line || !candidate.bidStatus) continue;
     if (enriched >= maxDetails) { result.notes.push('已达单次详情抓取上限，剩余候选下次运行继续'); break; }
-    await enrichFromOfficialDetail(candidate, candidate.url);
+    if (candidate.sourceAuthority === VENDOR_AUTHORITY) await enrichVendorDetail(candidate);
+    else await enrichFromOfficialDetail(candidate, candidate.url);
     enriched += 1;
     await sleep(600);
   }
