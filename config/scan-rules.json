@@ -82,7 +82,8 @@
     "columns": "业务公告-结果公告-货物（ywgg4hw）",
     "maxPages": 6,
     "coverNote": "官方栏目静态分页可匿名浏览；命中标题后回取公告详情提取金额。",
-    "minDiscover": 1
+    "minDiscover": 0,
+    "zeroReason": "低频道源：中煤科工相关公告平均每月 1-2 条，大多数抓取日自然零产出；由 3 天静默告警监控，不阻塞发布"
   },
   {
     "id": "ccteg-all",

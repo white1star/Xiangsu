@@ -16,6 +16,9 @@ import { ADAPTERS, buildWindow, enrichFromOfficialDetail, MINIMUM_PUBLISH_DATE a
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const rulesFile = path.join(root, 'config', 'scan-rules.json');
+// 订阅制规则：按栏目+时间翻页、事后筛选。修复"结果公告抓不到 → 金额长期未披露"。
+// 独立文件，与关键词检索规则并存；缺失时静默跳过，不影响原有 61 条。
+const subscribeFile = path.join(root, 'config', 'subscribe-rules.json');
 // 平铺台账（管道产物、增量合并基准）；intelligence.json 是分组视图，由 group_projects.mjs 生成
 const flatFile = path.join(root, 'src', 'data', 'intelligence.flat.json');
 const pendingFile = path.join(root, 'src', 'data', 'pending-review.json');
@@ -357,6 +360,9 @@ async function main() {
   const mode = process.argv.includes('--backfill') ? 'backfill' : 'weekly';
   const window = buildWindow(mode);
   const rules = await readJson(rulesFile, []);
+  // 订阅制规则与关键词规则合并成同一批扫描任务（同一套门禁/去重/证据校验）
+  const subscribeRules = await readJson(subscribeFile, []);
+  const allRules = rules.concat(subscribeRules);
   const rv = rulesVersion();
   const existing = await readJson(flatFile, []);
   const existingPending = await readJson(pendingFile, []);
@@ -485,18 +491,20 @@ async function main() {
   wechat.leads.sort((a, b) => String(b.publishDate || '').localeCompare(String(a.publishDate || '')));
   await writeFile(wechatFile, JSON.stringify(wechat.leads, null, 2) + '\n');
 
+  // 每日必更新原则（用户口径 2026-10-08）：覆盖率不完整不再阻断发布——
+  // 曾因门禁把"低频道源当天没公告"误判为失败，导致公网站点连续 8 天不更新。
+  // 现在：照常写入台账并发布，只保留非零退出码与告警，让缺失平台在报告里可见。
   if (!coverage.publishable) {
-    // 区分"没检查到"和"检查到但空转"：后者是抓取失效/平台无货，必须写清楚是哪一种
     const kinds = coverage.missing.map(name => {
       const zero = coverage.zeroOutput.find(row => row.name === name);
       return zero ? `${name}（访问成功但零产出${zero.exempt ? '·已豁免' : ''}）` : `${name}（未成功检查）`;
     });
-    console.error(`覆盖率不达标，必查平台未真正取到数据：${kinds.join('、')}（公众号线索已先行落盘）`);
+    console.error(`覆盖率不完整（仍按"每日必更新"发布）：${kinds.join('、')}`);
     process.exitCode = 2;
-    return;
-  }
-  for (const zero of coverage.zeroOutput) {
-    console.log(`[必查·零产出] ${zero.name}：抓到 0 条${zero.exempt ? `（已豁免：${zero.reason || '规则标注' }）` : ''}`);
+  } else {
+    for (const zero of coverage.zeroOutput) {
+      console.log(`[必查·零产出] ${zero.name}：抓到 0 条${zero.exempt ? `（已豁免：${zero.reason || '规则标注' }）` : ''}`);
+    }
   }
   merged.records.sort((a, b) => String(b.publishDate || b.date).localeCompare(String(a.publishDate || a.date)));
   await writeFile(flatFile, JSON.stringify(merged.records, null, 2) + '\n');
