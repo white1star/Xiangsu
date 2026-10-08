@@ -456,6 +456,77 @@ export async function runHtmlListAdapter(rule, window, limits = {}) {
   return result;
 }
 
+export async function runSubscribeAdapter(rule, window, limits = {}) {
+  const maxPages = limits.maxPages ?? rule.maxPages ?? 3;
+  const maxDetails = limits.maxDetails ?? 20;
+  const maxAgeDays = rule.maxAgeDays ?? 45;
+  const result = { pagesScanned: 0, discovered: 0, candidates: [], notes: [] };
+  const seen = new Set();
+
+  // 事后筛选用的词表：include 命中其一且 exclude 未命中才算相关
+  const include = new RegExp((rule.include || []).join('|'), 'i');
+  const exclude = new RegExp((rule.exclude || []).join('|'), 'i');
+
+  // 栏目：一条规则可订阅多个（招标公告 / 候选人公示 / 中标结果）
+  const columns = Array.isArray(rule.columns) ? rule.columns : [{ url: rule.listingUrl, pages: rule.pageTemplate, stage: rule.defaultTypeText }];
+  const oldest = new Date(`${window.to}T00:00:00Z`);
+  oldest.setUTCDate(oldest.getUTCDate() - maxAgeDays);
+
+  for (const col of columns) {
+    if (!col || !col.url) continue;
+    for (let page = 1; page <= maxPages; page += 1) {
+      const url = page === 1 ? col.url
+        : String(col.pages || col.url).replace('{n}', String(page));
+      let response;
+      try {
+        const options = { headers: {} };
+        if (rule.headers) options.headers = rule.headers;
+        response = await fetchText(url, options);
+      } catch (error) {
+        if (page === 1) throw error;
+        result.notes.push(`栏目 ${col.stage || ''} 第${page}页抓取失败：${error.message}`);
+        break;
+      }
+      if (response.status === 404) { if (page === 1) throw new Error('列表页 404'); break; }
+      if (response.status !== 200) { if (page === 1) throw new Error(`列表页 HTTP ${response.status}`); break; }
+      result.pagesScanned += 1;
+
+      const items = rule.itemRegex ? extractVendorItems(response.text, url, rule) : extractAnchors(response.text, url);
+      for (const anchor of items) {
+        if (seen.has(anchor.url)) continue;
+        seen.add(anchor.url);
+        // 订阅制的"筛"在这里做：先按时间窗砍掉旧的，再按 include/exclude 判相关
+        const date = anchor.date || (rule.dateFromUrl ? extractDateFromUrl(anchor.url) : null);
+        if (date && date < oldest.toISOString().slice(0, 10)) continue;
+        if (rule.include?.length && !include.test(anchor.title)) continue;
+        if (exclude.test(anchor.title)) continue;
+        result.discovered += 1;
+        result.candidates.push(makeCandidate({
+          title: anchor.title,
+          url: anchor.url,
+          source: rule.name,
+          publishDate: date || undefined,
+          typeText: col.stage || rule.defaultTypeText || '',
+          region: rule.defaultRegion,
+          sourceAuthority: rule.sourceAuthority || 'official',
+        }));
+      }
+      await sleep(rule.requestDelayMs ?? 900);
+    }
+  }
+
+  // 只对"判定相关"的候选回详情页补金额/采购人/中标人（省掉无关公告的抓取）
+  let enriched = 0;
+  for (const candidate of result.candidates) {
+    if (!candidate.line || !candidate.bidStatus) continue;
+    if (enriched >= maxDetails) { result.notes.push('已达单次详情抓取上限，剩余候选下次运行继续'); break; }
+    await enrichFromOfficialDetail(candidate, candidate.url);
+    enriched += 1;
+    await sleep(600);
+  }
+  return result;
+}
+
 // —— 适配器：单页浅扫（首页动态渲染平台的可及部分；覆盖有限，如实标注） ——
 export async function runHomeScanAdapter(rule) {
   const keyword = new RegExp(rule.keywords.join('|'), 'i');
@@ -1327,4 +1398,5 @@ export const ADAPTERS = {
   cninfo: runCninfoAdapter,
   probe: runProbeAdapter,
   scrapling: runScraplingAdapter,
+  'subscribe-list': runSubscribeAdapter,
 };

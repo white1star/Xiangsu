@@ -8,10 +8,11 @@ import './table-fix.css';
 import './intelligence.css';
 import './platform-library.css';
 import './wechat.css';
+import { projectPhase, PROJECT_PHASES } from './project-phase.js';
 
 const PAGE_SIZE = 10;
-const PHASE_OPTIONS = ['全部', '待开标', '已开标', '未披露', '中标候选人', '已中标', '流标'];
-const LEDGER_COLUMNS = ['客户', '矿种', '产品线', '竞品', '金额', '成交方式', '发布日期', '来源', '置信度'];
+const PHASE_OPTIONS = ['全部', '招标中', '待定标', '已中标', '已完成', '已终止'];
+const LEDGER_COLUMNS = ['客户', '矿种', '产品线', '竞品', '金额', '项目阶段', '发布日期', '来源'];
 const WECHAT_COLUMNS = ['发布日期', '公众号', '标题（点击看原文）', '产品线', '信号', '检索路径'];
 
 // 金额列：已披露带阶段标签；未披露带出复核原因（避免表格看起来一片空白）
@@ -28,6 +29,12 @@ function amountCell(item) {
 function phaseOf(item) {
   if (item.bid === '招标公告') return item.openStatus || '未披露';
   return item.bid;
+}
+
+// 项目阶段列：六档。终止/完成/中标优先，其次按开标日判"待定标"。
+function stageCell(item) {
+  const phase = projectPhase(item);
+  return <span className={`stage stage-${phase}`}>{phase}</span>;
 }
 
 // 反馈按钮：与矿业资讯站样式/行为一致（web3forms 提交）
@@ -94,19 +101,18 @@ function Feedback() {
 export default function App() {
   const [line, setLine] = useState('全部');
   const [competitor, setCompetitor] = useState('全部');
-  const [confidence, setConfidence] = useState('全部');
-  const [phase, setPhase] = useState('全部');
+  const [stage, setStage] = useState('全部');
   const [page, setPage] = useState('情报台账');
   const [pageNum, setPageNum] = useState(1);
   const [selected, setSelected] = useState(null);
-  const filtered = useMemo(() => rows.filter(item => (line === '全部' || item.line === line) && (competitor === '全部' || item.competitor === competitor) && (confidence === '全部' || item.confidence === confidence) && (phase === '全部' || phaseOf(item) === phase)), [line, competitor, confidence, phase]);
+  const filtered = useMemo(() => rows.filter(item => (line === '全部' || item.line === line) && (competitor === '全部' || item.competitor === competitor) && (stage === '全部' || projectPhase(item) === stage)), [line, competitor, stage]);
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const current = Math.min(Math.max(1, pageNum), totalPages);
   const pageRows = filtered.slice((current - 1) * PAGE_SIZE, current * PAGE_SIZE);
   const latestUpdate = useMemo(() => { const ds = rows.map(r => r.date).filter(Boolean).sort(); return ds.length ? ds[ds.length - 1] : '—'; }, []);
   const lastCrawl = (crawlStamp.lastCrawl || '').replace('T', ' ').slice(0, 16) || '—';
   const select = (value, setter, key) => <Dropdown value={value} options={filterOptions(key)} onChange={next => { setter(next); setPageNum(1); }} />;
-  const phaseSelect = <Dropdown value={phase} options={PHASE_OPTIONS} onChange={next => { setPhase(next); setPageNum(1); }} />;
+  const phaseSelect = <Dropdown value={stage} options={PHASE_OPTIONS} onChange={next => { setStage(next); setPageNum(1); }} />;
 
   return <main className="shell">
     <header className="topbar">
@@ -121,10 +127,9 @@ export default function App() {
         <div className="filters">
           <div className="f-item"><span>产品线</span>{select(line, setLine, 'line')}</div>
           <div className="f-item"><span>竞品</span>{select(competitor, setCompetitor, 'competitor')}</div>
-          <div className="f-item"><span>招标状态</span>{phaseSelect}</div>
-          <div className="f-item"><span>置信度</span>{select(confidence, setConfidence, 'confidence')}</div>
+          <div className="f-item"><span>项目阶段</span>{stageSelect}</div>
         </div>
-        <div className="tablebox"><table><thead><tr>{LEDGER_COLUMNS.map(item => <th key={item}>{item}</th>)}</tr></thead><tbody>{pageRows.map(item => <tr key={item.url} onClick={() => setSelected(item)}>{[item.buyer || '未披露', item.mineral || '未披露', item.line, item.competitor, amountCell(item), dealTypeCell(item), item.date, <a href={item.url} target="_blank" rel="noreferrer" onClick={event => event.stopPropagation()}>{item.source} ↗</a>, item.confidence].map((value, index) => { const cls = index === 4 ? 'amt' : index === 5 ? 'deal' : index === 8 ? `confidence ${item.confidence}` : ''; return <td className={cls} key={index} data-label={LEDGER_COLUMNS[index]}>{value}</td>; })}</tr>)}</tbody></table></div>
+        <div className="tablebox"><table><thead><tr>{LEDGER_COLUMNS.map(item => <th key={item}>{item}</th>)}</tr></thead><tbody>{pageRows.map(item => <tr key={item.url} onClick={() => setSelected(item)}>{[item.buyer || '未披露', item.mineral || '未披露', item.line, item.competitor, amountCell(item), stageCell(item), item.date, <a href={item.url} target="_blank" rel="noreferrer" onClick={event => event.stopPropagation()}>{item.source} ↗</a>].map((value, index) => { const cls = index === 4 ? 'amt' : index === 5 ? 'stage-col' : ''; return <td className={cls} key={index} data-label={LEDGER_COLUMNS[index]}>{value}</td>; })}</tr>)}</tbody></table></div>
         <footer><span>共 {filtered.length} 个项目（同项目招标/候选/中标公告已合并）　|　最近抓取：{lastCrawl}　|　第 {current}/{totalPages} 页</span><span className="pager"><button disabled={current <= 1} onClick={() => setPageNum(current - 1)}>上一页</button><button disabled={current >= totalPages} onClick={() => setPageNum(current + 1)}>下一页</button></span><span>点击任意记录查看证据摘要</span></footer>
         {selected && <Detail item={selected} onClose={() => setSelected(null)} />}
       </> : page === '公众号线索' ? <WechatPage /> : <SourcePage />}
@@ -160,11 +165,10 @@ function Dropdown({ value, options, onChange }) {
   </div>;
 }
 
-// 筛选选项排序：产品线按固定语义序；竞品按项目数降序、占位值（未披露/未定标）排最后；置信度按 高→中→低
+// 筛选选项排序：产品线按固定语义序；竞品按项目数降序、占位值（未披露/未定标）排最后
 const ALL_OPTION = '全部';
 const PLACEHOLDER_VALUES = new Set(['未披露', '未定标', '待核实']);
 const LINE_ORDER = { '煤炭智能干选设备': 0, '矿石XRT光电分选设备': 1 };
-const CONFIDENCE_ORDER = { 高: 0, 中: 1, 低: 2 };
 function filterOptions(key) {
   const values = [...new Set(rows.map(item => item[key]).filter(Boolean))].filter(value => value !== ALL_OPTION);
   if (key === 'competitor') {
@@ -173,8 +177,6 @@ function filterOptions(key) {
     values.sort((a, b) => (Number(PLACEHOLDER_VALUES.has(a)) - Number(PLACEHOLDER_VALUES.has(b))) || (counts.get(b) - counts.get(a)) || a.localeCompare(b, 'zh'));
   } else if (key === 'line') {
     values.sort((a, b) => (LINE_ORDER[a] ?? 9) - (LINE_ORDER[b] ?? 9));
-  } else if (key === 'confidence') {
-    values.sort((a, b) => (CONFIDENCE_ORDER[a] ?? 9) - (CONFIDENCE_ORDER[b] ?? 9));
   }
   return [ALL_OPTION, ...values];
 }
