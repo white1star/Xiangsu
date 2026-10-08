@@ -376,10 +376,10 @@ async function main() {
   if (skillScript && wechatRule) wechatRule.vendorKeywords = [];
   let skillNote = skillScript ? '待执行' : '未检测到公众号搜索技能脚本，竞品名并入适配器检索';
 
-  console.log(`模式：${mode}，时间窗：${window.from} ~ ${window.to}，规则数：${rules.length}`);
+  console.log(`模式：${mode}，时间窗：${window.from} ~ ${window.to}，规则数：${allRules.length}（关键词 ${rules.length} + 订阅 ${subscribeRules.length}）`);
   console.log(`规则版本 ${rv}`);
   const checks = [];
-  for (const rule of rules) {
+  for (const rule of allRules) {
     console.log(`扫描 ${rule.name} …`);
     const check = await runRule(rule, window, mode);
     console.log(`  → ${check.status}，页数 ${check.pagesScanned}，发现 ${check.discovered}${check.error ? '，失败原因：' + check.error : ''}`);
@@ -391,7 +391,7 @@ async function main() {
   const aggregatorLeads = [];
   const wechatCandidates = [];
   for (const check of checks) {
-    const rule = rules.find(item => item.id === check.sourceId);
+    const rule = allRules.find(item => item.id === check.sourceId);
     for (const candidate of check.candidates) {
       if (candidate.sourceAuthority === VENDOR_AUTHORITY) { vendorCandidates.push(candidate); continue; }
       if (candidate.sourceAuthority === WECHAT_AUTHORITY) { wechatCandidates.push(candidate); continue; }

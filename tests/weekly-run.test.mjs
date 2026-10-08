@@ -262,3 +262,33 @@ test('rulesVersion 同内容同版本、改内容即变', () => {
   fs.writeFileSync(path.join(dir, 'scan-rules.json'), '[{}]');
   assert.notStrictEqual(v1, rulesVersion(dir));         // 改内容即变
 });
+
+// —— 订阅制规则接入（防止"规则文件存在但没接进主流程"之类的静默漏接） ——
+test('订阅规则文件可加载且与关键词规则合并成 78 条', () => {
+  const scan = JSON.parse(fs.readFileSync(path.join('config', 'scan-rules.json'), 'utf8'));
+  const subscribe = JSON.parse(fs.readFileSync(path.join('config', 'subscribe-rules.json'), 'utf8'));
+  const keyword = Array.isArray(scan) ? scan : scan.rules;
+  assert.equal(keyword.length, 59, '关键词规则数变化需同步更新此断言');
+  assert.equal(subscribe.length, 19, '订阅规则数变化需同步更新此断言');
+  assert.equal(keyword.length + subscribe.length, 78);
+});
+
+test('每条订阅规则都能被 runSubscribeAdapter 处理（结构与适配器契约一致）', () => {
+  const subscribe = JSON.parse(fs.readFileSync(path.join('config', 'subscribe-rules.json'), 'utf8'));
+  for (const rule of subscribe) {
+    assert.ok(rule.id, `${rule.name || '?'} 缺 id`);
+    assert.equal(rule.adapter, 'subscribe-list', `${rule.id} adapter 必须是 subscribe-list`);
+    assert.ok(Array.isArray(rule.columns) && rule.columns.length > 0, `${rule.id} 必须定义 columns（订阅的栏目）`);
+    assert.ok(Array.isArray(rule.include) && rule.include.length > 0, `${rule.id} 必须定义 include 词表`);
+    assert.ok(Array.isArray(rule.exclude) && rule.exclude.length > 0, `${rule.id} 必须定义 exclude 词表`);
+    for (const col of rule.columns) {
+      assert.ok(col.url && /^https?:/.test(col.url), `${rule.id} 栏目 URL 不合法`);
+    }
+  }
+});
+
+test('订阅规则不参与覆盖率门禁（required 未设置，不阻塞发布）', () => {
+  const subscribe = JSON.parse(fs.readFileSync(path.join('config', 'subscribe-rules.json'), 'utf8'));
+  const bad = subscribe.filter(rule => rule.required);
+  assert.deepEqual(bad, [], '订阅规则不应带 required（会阻塞发布）');
+});
