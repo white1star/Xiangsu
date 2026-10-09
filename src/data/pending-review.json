@@ -1398,5 +1398,17 @@
     "status": "待复核",
     "note": "仅公开聚合索引，须反查官方原文后才能入高置信台账",
     "firstSeenAt": "2026-10-08T10:48:59.908Z"
+  },
+  {
+    "title": "内蒙采购部G202610-2干选机配件采购公告",
+    "line": "煤炭智能干选设备",
+    "bidStatus": "招标公告",
+    "source": "乙方宝招标网（招标/采购检索·线索）",
+    "publishDate": "2026-10-09",
+    "url": "https://www.yfbzb.com/inviteBid/detail/20261009_636716897.html",
+    "confidence": "中",
+    "status": "待复核",
+    "note": "仅公开聚合索引，须反查官方原文后才能入高置信台账",
+    "firstSeenAt": "2026-10-09T04:53:14.203Z"
   }
 ]
