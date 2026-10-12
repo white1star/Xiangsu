@@ -83,7 +83,10 @@
     "maxPages": 6,
     "coverNote": "官方栏目静态分页可匿名浏览；命中标题后回取公告详情提取金额。",
     "minDiscover": 0,
-    "zeroReason": "低频道源：中煤科工相关公告平均每月 1-2 条，大多数抓取日自然零产出；由 3 天静默告警监控，不阻塞发布"
+    "zeroReason": "低频道源：中煤科工相关公告平均每月 1-2 条，大多数抓取日自然零产出；由 3 天静默告警监控，不阻塞发布",
+    "titleBlocklist": [
+      "除尘"
+    ]
   },
   {
     "id": "ccteg-all",
@@ -111,7 +114,10 @@
     ],
     "columns": "业务公告-结果公告-全部（ywgg4qb）",
     "maxPages": 8,
-    "coverNote": "结果公告全量栏目，用于补充货物栏目遗漏。"
+    "coverNote": "结果公告全量栏目，用于补充货物栏目遗漏。",
+    "titleBlocklist": [
+      "除尘"
+    ]
   },
   {
     "id": "gsei-results",
@@ -1687,7 +1693,10 @@
     "defaultRegion": "全国",
     "coverNote": "物资招标公告栏目（ywgg1hw），?pageNo=N 分页；2026-09-17 复核发现此前只扫结果栏目导致多条干选整机采购漏抓（神东保德 EPC 两阶段、贵州白布 EPC），本规则补接入；标题以“项目公告”结尾时按 defaultTypeText=招标公告 判型。",
     "urlBase": "https://cg.ccteg.cn",
-    "itemRegex": "href=\"(?<url>/cms/channel/ywgg1hw/\\d+\\.htm)\"[^>]*title=\"(?<title>[^\"]+)\"[\\s\\S]{0,900}?<em>\\s*(?<date>20\\d{2}-\\d{2}-\\d{2})"
+    "itemRegex": "href=\"(?<url>/cms/channel/ywgg1hw/\\d+\\.htm)\"[^>]*title=\"(?<title>[^\"]+)\"[\\s\\S]{0,900}?<em>\\s*(?<date>20\\d{2}-\\d{2}-\\d{2})",
+    "titleBlocklist": [
+      "除尘"
+    ]
   },
   {
     "id": "hbcoal-notice",
