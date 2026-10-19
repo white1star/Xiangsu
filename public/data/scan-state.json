@@ -1,18 +1,18 @@
 {
   "national-ggzy": {
     "name": "全国公共资源交易平台",
-    "lastScanAt": "2026-10-19T10:38:36.928Z",
+    "lastScanAt": "2026-10-19T23:39:09.744Z",
     "lastStatus": "ok",
     "pagesScanned": 22,
-    "discovered": 5,
+    "discovered": 8,
     "firstSeenAt": "2026-09-30T21:30:03.861Z",
-    "lastNonZeroAt": "2026-10-19T10:38:36.928Z",
+    "lastNonZeroAt": "2026-10-19T23:39:09.744Z",
     "failReason": null,
     "notes": []
   },
   "ccteg-goods": {
     "name": "中国煤科电子采购平台",
-    "lastScanAt": "2026-10-19T10:39:13.819Z",
+    "lastScanAt": "2026-10-19T23:39:46.275Z",
     "lastStatus": "ok",
     "pagesScanned": 5,
     "discovered": 0,
@@ -23,7 +23,7 @@
   },
   "ccteg-all": {
     "name": "中国煤科电子采购平台（全部结果公告）",
-    "lastScanAt": "2026-10-19T10:39:21.098Z",
+    "lastScanAt": "2026-10-19T23:39:53.437Z",
     "lastStatus": "ok",
     "pagesScanned": 5,
     "discovered": 0,
@@ -34,12 +34,12 @@
   },
   "gsei-results": {
     "name": "甘肃经济信息网（中标结果栏目）",
-    "lastScanAt": "2026-10-19T10:39:27.961Z",
+    "lastScanAt": "2026-10-19T23:40:00.254Z",
     "lastStatus": "ok",
     "pagesScanned": 5,
     "discovered": 1,
     "firstSeenAt": "2026-09-30T21:30:54.246Z",
-    "lastNonZeroAt": "2026-10-19T10:39:27.961Z",
+    "lastNonZeroAt": "2026-10-19T23:40:00.254Z",
     "failReason": null,
     "notes": []
   },
@@ -67,7 +67,7 @@
   },
   "mtzbw-leads": {
     "name": "中国煤炭招标网（聚合线索）",
-    "lastScanAt": "2026-10-19T10:39:38.238Z",
+    "lastScanAt": "2026-10-19T23:40:10.355Z",
     "lastStatus": "failed",
     "pagesScanned": 0,
     "discovered": 0,
@@ -78,7 +78,7 @@
   },
   "ccgp-search": {
     "name": "中国政府采购网",
-    "lastScanAt": "2026-10-19T10:40:29.229Z",
+    "lastScanAt": "2026-10-19T23:41:01.348Z",
     "lastStatus": "failed",
     "pagesScanned": 0,
     "discovered": 0,
@@ -89,7 +89,7 @@
   },
   "chnenergy-zbgg": {
     "name": "国能e招（招标公告栏目）",
-    "lastScanAt": "2026-10-19T10:39:32.197Z",
+    "lastScanAt": "2026-10-19T23:40:04.490Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -100,7 +100,7 @@
   },
   "zmzb-hw": {
     "name": "中煤招标与采购网（货物招标栏目）",
-    "lastScanAt": "2026-10-19T10:39:33.982Z",
+    "lastScanAt": "2026-10-19T23:40:05.902Z",
     "lastStatus": "ok",
     "pagesScanned": 3,
     "discovered": 0,
@@ -111,7 +111,7 @@
   },
   "gsnhcg-zbgg": {
     "name": "甘肃能化数字化采购管理平台（招标预审公告）",
-    "lastScanAt": "2026-10-19T10:40:29.270Z",
+    "lastScanAt": "2026-10-19T23:41:01.376Z",
     "lastStatus": "ok",
     "pagesScanned": 5,
     "discovered": 0,
@@ -122,7 +122,7 @@
   },
   "gsnhcg-zhb": {
     "name": "甘肃能化数字化采购管理平台（中标候选人公示）",
-    "lastScanAt": "2026-10-19T10:40:34.163Z",
+    "lastScanAt": "2026-10-19T23:41:05.639Z",
     "lastStatus": "ok",
     "pagesScanned": 5,
     "discovered": 0,
@@ -133,7 +133,7 @@
   },
   "gsnhcg-zjgg": {
     "name": "甘肃能化数字化采购管理平台（中标结果公告）",
-    "lastScanAt": "2026-10-19T10:40:38.549Z",
+    "lastScanAt": "2026-10-19T23:41:09.816Z",
     "lastStatus": "ok",
     "pagesScanned": 5,
     "discovered": 0,
@@ -144,7 +144,7 @@
   },
   "shanxi-ggzy-gc": {
     "name": "山西公共资源交易平台（工程建设）",
-    "lastScanAt": "2026-10-19T10:40:43.097Z",
+    "lastScanAt": "2026-10-19T23:41:13.991Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -155,7 +155,7 @@
   },
   "shaanxi-ggzy-zb": {
     "name": "陕西公共资源交易平台（招标/资审公告）",
-    "lastScanAt": "2026-10-19T10:40:44.829Z",
+    "lastScanAt": "2026-10-19T23:41:15.402Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -166,7 +166,7 @@
   },
   "shaanxi-ggzy-zj": {
     "name": "陕西公共资源交易平台（中标/成交公示）",
-    "lastScanAt": "2026-10-19T10:40:45.676Z",
+    "lastScanAt": "2026-10-19T23:41:16.255Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -177,7 +177,7 @@
   },
   "nmg-ggzy-jy": {
     "name": "内蒙古公共资源交易网（交易信息）",
-    "lastScanAt": "2026-10-19T10:40:46.500Z",
+    "lastScanAt": "2026-10-19T23:41:17.079Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -188,7 +188,7 @@
   },
   "xinjiang-ggzy-jy": {
     "name": "新疆公共资源交易网（交易信息）",
-    "lastScanAt": "2026-10-19T10:40:47.454Z",
+    "lastScanAt": "2026-10-19T23:41:18.063Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -199,7 +199,7 @@
   },
   "guizhou-ggzy-gc": {
     "name": "贵州公共资源交易中心（工程建设交易公告）",
-    "lastScanAt": "2026-10-19T10:40:48.449Z",
+    "lastScanAt": "2026-10-19T23:41:19.056Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -210,7 +210,7 @@
   },
   "hlj-ggzy-zb": {
     "name": "黑龙江公共资源交易网（招标/资审公告）",
-    "lastScanAt": "2026-10-19T10:40:49.433Z",
+    "lastScanAt": "2026-10-19T23:41:20.030Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -221,7 +221,7 @@
   },
   "hlj-ggzy-zj": {
     "name": "黑龙江公共资源交易网（中标结果公示）",
-    "lastScanAt": "2026-10-19T10:40:50.310Z",
+    "lastScanAt": "2026-10-19T23:41:20.956Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -232,7 +232,7 @@
   },
   "sichuan-ggzy-jy": {
     "name": "四川公共资源交易平台（交易信息）",
-    "lastScanAt": "2026-10-19T10:40:51.134Z",
+    "lastScanAt": "2026-10-19T23:41:21.785Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -243,7 +243,7 @@
   },
   "liaoning-ggzy-jy": {
     "name": "辽宁公共资源交易平台（交易信息）",
-    "lastScanAt": "2026-10-19T10:40:52.052Z",
+    "lastScanAt": "2026-10-19T23:41:22.722Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -254,7 +254,7 @@
   },
   "qinghai-ggzy-jy": {
     "name": "青海公共资源交易网（交易信息）",
-    "lastScanAt": "2026-10-19T10:40:53.108Z",
+    "lastScanAt": "2026-10-19T23:41:23.726Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -265,7 +265,7 @@
   },
   "jinneng-ggzy-gg": {
     "name": "晋能控股招标采购平台（公告公示）",
-    "lastScanAt": "2026-10-19T10:40:53.997Z",
+    "lastScanAt": "2026-10-19T23:41:24.616Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -276,7 +276,7 @@
   },
   "xjyg-ggzy-zb": {
     "name": "新疆阳光采购平台（招标预审公告）",
-    "lastScanAt": "2026-10-19T10:40:54.867Z",
+    "lastScanAt": "2026-10-19T23:41:25.484Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -287,7 +287,7 @@
   },
   "xjyg-ggzy-zj": {
     "name": "新疆阳光采购平台（中标公告）",
-    "lastScanAt": "2026-10-19T10:40:55.899Z",
+    "lastScanAt": "2026-10-19T23:41:26.522Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -298,40 +298,40 @@
   },
   "ego-chinacoal-notice": {
     "name": "中煤易购采购一体化平台（公告查询）",
-    "lastScanAt": "2026-10-19T10:40:56.757Z",
+    "lastScanAt": "2026-10-19T23:41:27.382Z",
     "lastStatus": "ok",
     "pagesScanned": 14,
     "discovered": 24,
     "firstSeenAt": "2026-09-30T21:31:55.321Z",
-    "lastNonZeroAt": "2026-10-19T10:40:56.757Z",
+    "lastNonZeroAt": "2026-10-19T23:41:27.382Z",
     "failReason": null,
     "notes": []
   },
   "powerchina-notice": {
     "name": "中国电建采购招标数智化平台（招采公告）",
-    "lastScanAt": "2026-10-19T10:42:15.332Z",
+    "lastScanAt": "2026-10-19T23:42:43.391Z",
     "lastStatus": "ok",
     "pagesScanned": 15,
     "discovered": 6,
     "firstSeenAt": "2026-09-30T21:33:06.806Z",
-    "lastNonZeroAt": "2026-10-19T10:42:15.332Z",
+    "lastNonZeroAt": "2026-10-19T23:42:43.391Z",
     "failReason": null,
     "notes": []
   },
   "powerchina-result": {
     "name": "中国电建采购招标数智化平台（中标/成交公示）",
-    "lastScanAt": "2026-10-19T10:43:06.157Z",
+    "lastScanAt": "2026-10-19T23:43:34.591Z",
     "lastStatus": "ok",
     "pagesScanned": 15,
     "discovered": 4,
     "firstSeenAt": "2026-09-30T21:33:57.471Z",
-    "lastNonZeroAt": "2026-10-19T10:43:06.157Z",
+    "lastNonZeroAt": "2026-10-19T23:43:34.591Z",
     "failReason": null,
     "notes": []
   },
   "cgs-zabxx": {
     "name": "中国地质调查局（招标信息）",
-    "lastScanAt": "2026-10-19T10:43:56.133Z",
+    "lastScanAt": "2026-10-19T23:44:24.854Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -342,7 +342,7 @@
   },
   "cgs-zobxx": {
     "name": "中国地质调查局（中标信息）",
-    "lastScanAt": "2026-10-19T10:43:57.101Z",
+    "lastScanAt": "2026-10-19T23:44:25.747Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 0,
@@ -474,29 +474,29 @@
   },
   "yfbzb-invite": {
     "name": "乙方宝招标网（招标/采购检索·线索）",
-    "lastScanAt": "2026-10-19T10:49:26.815Z",
+    "lastScanAt": "2026-10-19T23:49:13.736Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 30,
     "firstSeenAt": "2026-09-30T21:41:16.075Z",
-    "lastNonZeroAt": "2026-10-19T10:49:26.815Z",
+    "lastNonZeroAt": "2026-10-19T23:49:13.736Z",
     "failReason": null,
     "notes": []
   },
   "yfbzb-win": {
     "name": "乙方宝招标网（中标结果检索·线索）",
-    "lastScanAt": "2026-10-19T10:49:27.841Z",
+    "lastScanAt": "2026-10-19T23:49:14.711Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 5,
     "firstSeenAt": "2026-09-30T21:41:17.063Z",
-    "lastNonZeroAt": "2026-10-19T10:49:27.841Z",
+    "lastNonZeroAt": "2026-10-19T23:49:14.711Z",
     "failReason": null,
     "notes": []
   },
   "datang-coal-bulletin": {
     "name": "大唐煤炭电子购销平台（竞价/采购公告）",
-    "lastScanAt": "2026-10-19T10:49:28.981Z",
+    "lastScanAt": "2026-10-19T23:49:15.797Z",
     "lastStatus": "ok",
     "pagesScanned": 3,
     "discovered": 0,
@@ -507,7 +507,7 @@
   },
   "sdny-xunjia": {
     "name": "山东能源集团在线询比价平台（询价公告）",
-    "lastScanAt": "2026-10-19T10:49:31.876Z",
+    "lastScanAt": "2026-10-19T23:49:18.534Z",
     "lastStatus": "ok",
     "pagesScanned": 5,
     "discovered": 0,
@@ -518,7 +518,7 @@
   },
   "sdny-result": {
     "name": "山东能源集团在线询比价平台（询价结果公示）",
-    "lastScanAt": "2026-10-19T10:49:36.694Z",
+    "lastScanAt": "2026-10-19T23:49:23.425Z",
     "lastStatus": "ok",
     "pagesScanned": 5,
     "discovered": 0,
@@ -529,12 +529,12 @@
   },
   "sogou-wechat": {
     "name": "微信公众号线索雷达（搜狗微信收录 + 公众号直搜）",
-    "lastScanAt": "2026-10-19T10:49:41.132Z",
+    "lastScanAt": "2026-10-19T23:49:28.791Z",
     "lastStatus": "ok",
     "pagesScanned": 19,
-    "discovered": 0,
+    "discovered": 14,
     "firstSeenAt": "2026-09-30T21:41:26.696Z",
-    "lastNonZeroAt": "2026-10-19T05:08:36.286Z",
+    "lastNonZeroAt": "2026-10-19T23:49:28.791Z",
     "failReason": null,
     "notes": [
       "回看窗口：2026-01-01 ~ 2026-10-19"
@@ -542,7 +542,7 @@
   },
   "qinyuan-invite": {
     "name": "秦源招标电子招标平台（陕煤·招标/非招标/变更公告）",
-    "lastScanAt": "2026-10-19T10:52:12.584Z",
+    "lastScanAt": "2026-10-19T23:49:58.126Z",
     "lastStatus": "ok",
     "pagesScanned": 4,
     "discovered": 0,
@@ -553,7 +553,7 @@
   },
   "qinyuan-result": {
     "name": "秦源招标电子招标平台（陕煤·中标公示/中标公告）",
-    "lastScanAt": "2026-10-19T10:52:16.719Z",
+    "lastScanAt": "2026-10-19T23:50:00.766Z",
     "lastStatus": "ok",
     "pagesScanned": 4,
     "discovered": 0,
@@ -564,7 +564,7 @@
   },
   "ceec-zbgg": {
     "name": "中国能建电子采购平台（招标公告 / 资格预审公告）",
-    "lastScanAt": "2026-10-19T10:52:24.290Z",
+    "lastScanAt": "2026-10-19T23:50:03.869Z",
     "lastStatus": "ok",
     "pagesScanned": 2,
     "discovered": 0,
@@ -575,29 +575,29 @@
   },
   "baohua-invite": {
     "name": "宝华智慧招标共享平台（招标公告）",
-    "lastScanAt": "2026-10-19T10:43:57.976Z",
+    "lastScanAt": "2026-10-19T23:44:26.632Z",
     "lastStatus": "ok",
     "pagesScanned": 45,
     "discovered": 12,
     "firstSeenAt": "2026-09-30T21:34:49.112Z",
-    "lastNonZeroAt": "2026-10-19T10:43:57.976Z",
+    "lastNonZeroAt": "2026-10-19T23:44:26.632Z",
     "failReason": null,
     "notes": []
   },
   "baohua-result": {
     "name": "宝华智慧招标共享平台（中标候选人/结果公示）",
-    "lastScanAt": "2026-10-19T10:46:42.106Z",
+    "lastScanAt": "2026-10-19T23:46:51.080Z",
     "lastStatus": "ok",
     "pagesScanned": 45,
     "discovered": 8,
     "firstSeenAt": "2026-09-30T21:37:16.767Z",
-    "lastNonZeroAt": "2026-10-19T10:46:42.106Z",
+    "lastNonZeroAt": "2026-10-19T23:46:51.080Z",
     "failReason": null,
     "notes": []
   },
   "cninfo-listed": {
     "name": "巨潮资讯网（上市公司公告·美腾/泰禾）",
-    "lastScanAt": "2026-10-19T10:52:24.426Z",
+    "lastScanAt": "2026-10-19T23:50:03.981Z",
     "lastStatus": "ok",
     "pagesScanned": 2,
     "discovered": 0,
@@ -608,18 +608,18 @@
   },
   "ebnew-search": {
     "name": "必联网（关键词检索）",
-    "lastScanAt": "2026-10-19T10:52:24.717Z",
+    "lastScanAt": "2026-10-19T23:50:04.294Z",
     "lastStatus": "ok",
     "pagesScanned": 14,
     "discovered": 53,
     "firstSeenAt": "2026-09-30T21:42:09.091Z",
-    "lastNonZeroAt": "2026-10-19T10:52:24.717Z",
+    "lastNonZeroAt": "2026-10-19T23:50:04.294Z",
     "failReason": null,
     "notes": []
   },
   "huaneng-search": {
     "name": "华能电子商务平台（采购专栏检索）",
-    "lastScanAt": "2026-10-19T10:53:10.308Z",
+    "lastScanAt": "2026-10-19T23:50:51.114Z",
     "lastStatus": "ok",
     "pagesScanned": 0,
     "discovered": 0,
@@ -632,18 +632,18 @@
   },
   "ccteg-invite-goods": {
     "name": "中国煤科电子采购平台（物资招标公告）",
-    "lastScanAt": "2026-10-19T10:53:10.309Z",
+    "lastScanAt": "2026-10-19T23:50:51.114Z",
     "lastStatus": "ok",
     "pagesScanned": 5,
     "discovered": 1,
     "firstSeenAt": "2026-09-30T21:42:34.263Z",
-    "lastNonZeroAt": "2026-10-19T10:53:10.309Z",
+    "lastNonZeroAt": "2026-10-19T23:50:51.114Z",
     "failReason": null,
     "notes": []
   },
   "hbcoal-notice": {
     "name": "淮北矿业电子招标采购平台（交易信息·线索）",
-    "lastScanAt": "2026-10-19T10:53:19.147Z",
+    "lastScanAt": "2026-10-19T23:51:00.066Z",
     "lastStatus": "ok",
     "pagesScanned": 36,
     "discovered": 0,
@@ -654,7 +654,7 @@
   },
   "ebidding-search": {
     "name": "国信e采招标投标交易平台（关键词检索）",
-    "lastScanAt": "2026-10-19T10:54:06.753Z",
+    "lastScanAt": "2026-10-19T23:51:48.903Z",
     "lastStatus": "ok",
     "pagesScanned": 22,
     "discovered": 0,
@@ -665,18 +665,18 @@
   },
   "shihuan-search": {
     "name": "十环招标网（关键词检索·线索）",
-    "lastScanAt": "2026-10-19T10:54:39.012Z",
+    "lastScanAt": "2026-10-19T23:52:21.390Z",
     "lastStatus": "ok",
     "pagesScanned": 11,
     "discovered": 12,
     "firstSeenAt": "2026-09-30T21:44:00.227Z",
-    "lastNonZeroAt": "2026-10-19T10:54:39.012Z",
+    "lastNonZeroAt": "2026-10-19T23:52:21.390Z",
     "failReason": null,
     "notes": []
   },
   "sub-chnenergy": {
     "name": "国家能源·国能e招（订阅）",
-    "lastScanAt": "2026-10-19T10:55:08.578Z",
+    "lastScanAt": "2026-10-19T23:52:50.553Z",
     "lastStatus": "ok",
     "pagesScanned": 6,
     "discovered": 0,
@@ -687,7 +687,7 @@
   },
   "sub-zmzb": {
     "name": "中煤集团·中煤招标网（订阅）",
-    "lastScanAt": "2026-10-19T10:55:17.259Z",
+    "lastScanAt": "2026-10-19T23:52:57.587Z",
     "lastStatus": "ok",
     "pagesScanned": 6,
     "discovered": 0,
@@ -698,18 +698,18 @@
   },
   "sub-ccteg": {
     "name": "中国煤科电子采购平台（订阅）",
-    "lastScanAt": "2026-10-19T10:55:26.004Z",
+    "lastScanAt": "2026-10-19T23:53:06.592Z",
     "lastStatus": "ok",
     "pagesScanned": 8,
     "discovered": 1,
     "firstSeenAt": "2026-10-08T06:23:16.491Z",
-    "lastNonZeroAt": "2026-10-19T10:55:26.004Z",
+    "lastNonZeroAt": "2026-10-19T23:53:06.592Z",
     "failReason": null,
     "notes": []
   },
   "sub-jzbidding": {
     "name": "冀中能源电子招标（订阅）",
-    "lastScanAt": "2026-10-19T10:55:39.342Z",
+    "lastScanAt": "2026-10-19T23:53:19.973Z",
     "lastStatus": "ok",
     "pagesScanned": 8,
     "discovered": 0,
@@ -720,7 +720,7 @@
   },
   "sub-gsnhcg": {
     "name": "甘肃煤炭交易中心（订阅）",
-    "lastScanAt": "2026-10-19T10:56:10.739Z",
+    "lastScanAt": "2026-10-19T23:53:51.385Z",
     "lastStatus": "ok",
     "pagesScanned": 12,
     "discovered": 0,
@@ -731,7 +731,7 @@
   },
   "sub-gsei": {
     "name": "甘肃经济信息网（订阅）",
-    "lastScanAt": "2026-10-19T10:56:22.026Z",
+    "lastScanAt": "2026-10-19T23:54:02.682Z",
     "lastStatus": "ok",
     "pagesScanned": 3,
     "discovered": 0,
@@ -742,7 +742,7 @@
   },
   "sub-sxzwfw": {
     "name": "山西公共资源·工程建设（订阅）",
-    "lastScanAt": "2026-10-19T10:56:24.895Z",
+    "lastScanAt": "2026-10-19T23:54:05.573Z",
     "lastStatus": "ok",
     "pagesScanned": 5,
     "discovered": 0,
@@ -753,7 +753,7 @@
   },
   "sub-sxbid": {
     "name": "陕西公共资源交易网（订阅）",
-    "lastScanAt": "2026-10-19T10:56:31.241Z",
+    "lastScanAt": "2026-10-19T23:54:12.037Z",
     "lastStatus": "ok",
     "pagesScanned": 2,
     "discovered": 0,
@@ -764,29 +764,29 @@
   },
   "sub-ebnew": {
     "name": "必联网（订阅）",
-    "lastScanAt": "2026-10-19T10:56:39.291Z",
+    "lastScanAt": "2026-10-19T23:54:20.552Z",
     "lastStatus": "ok",
     "pagesScanned": 1,
     "discovered": 2,
     "firstSeenAt": "2026-10-08T06:23:41.716Z",
-    "lastNonZeroAt": "2026-10-19T10:56:39.291Z",
+    "lastNonZeroAt": "2026-10-19T23:54:20.552Z",
     "failReason": null,
     "notes": []
   },
   "sub-vendor-tsshenzhou": {
     "name": "唐山神州机械·新闻中心（订阅）",
-    "lastScanAt": "2026-10-19T10:56:43.168Z",
+    "lastScanAt": "2026-10-19T23:54:25.138Z",
     "lastStatus": "ok",
     "pagesScanned": 3,
     "discovered": 1,
     "firstSeenAt": "2026-10-08T06:23:44.854Z",
-    "lastNonZeroAt": "2026-10-19T10:56:43.168Z",
+    "lastNonZeroAt": "2026-10-19T23:54:25.138Z",
     "failReason": null,
     "notes": []
   },
   "sub-vendor-haiwang": {
     "name": "威海海王科技（订阅）",
-    "lastScanAt": "2026-10-19T10:56:47.306Z",
+    "lastScanAt": "2026-10-19T23:54:29.088Z",
     "lastStatus": "failed",
     "pagesScanned": 0,
     "discovered": 0,
@@ -797,7 +797,7 @@
   },
   "sub-vendor-haina": {
     "name": "枣庄海纳（订阅）",
-    "lastScanAt": "2026-10-19T10:57:17.641Z",
+    "lastScanAt": "2026-10-19T23:54:59.458Z",
     "lastStatus": "ok",
     "pagesScanned": 3,
     "discovered": 0,
@@ -808,7 +808,7 @@
   },
   "sub-vendor-dfmc": {
     "name": "丹东东方测控（订阅）",
-    "lastScanAt": "2026-10-19T10:57:21.233Z",
+    "lastScanAt": "2026-10-19T23:55:03.168Z",
     "lastStatus": "ok",
     "pagesScanned": 3,
     "discovered": 0,
@@ -819,12 +819,12 @@
   },
   "sub-vendor-jinshi": {
     "name": "湖北金石智能装备（订阅）",
-    "lastScanAt": "2026-10-19T10:57:24.235Z",
+    "lastScanAt": "2026-10-19T23:55:06.175Z",
     "lastStatus": "ok",
     "pagesScanned": 3,
     "discovered": 2,
     "firstSeenAt": "2026-10-08T06:24:02.777Z",
-    "lastNonZeroAt": "2026-10-19T10:57:24.235Z",
+    "lastNonZeroAt": "2026-10-19T23:55:06.175Z",
     "failReason": null,
     "notes": []
   },
@@ -841,7 +841,7 @@
   },
   "sub-vendor-nuctech": {
     "name": "同方威视（订阅）",
-    "lastScanAt": "2026-10-19T10:57:30.151Z",
+    "lastScanAt": "2026-10-19T23:55:12.019Z",
     "lastStatus": "ok",
     "pagesScanned": 3,
     "discovered": 0,
@@ -863,7 +863,7 @@
   },
   "sub-vendor-gzfriend": {
     "name": "赣州好朋友科技（订阅）",
-    "lastScanAt": "2026-10-19T10:57:35.872Z",
+    "lastScanAt": "2026-10-19T23:55:16.486Z",
     "lastStatus": "ok",
     "pagesScanned": 3,
     "discovered": 0,
@@ -874,7 +874,7 @@
   },
   "sub-vendor-chinataiho": {
     "name": "合肥泰禾卓海（订阅）",
-    "lastScanAt": "2026-10-19T10:57:38.974Z",
+    "lastScanAt": "2026-10-19T23:55:19.616Z",
     "lastStatus": "ok",
     "pagesScanned": 3,
     "discovered": 0,
@@ -885,7 +885,7 @@
   },
   "sub-vendor-meiteng": {
     "name": "美腾科技官网·美腾新闻（订阅）",
-    "lastScanAt": "2026-10-19T10:57:42.033Z",
+    "lastScanAt": "2026-10-19T23:55:22.726Z",
     "lastStatus": "ok",
     "pagesScanned": 2,
     "discovered": 0,
@@ -896,18 +896,18 @@
   },
   "sub-vendor-holysort": {
     "name": "霍里思特·网易号官方订阅（订阅）",
-    "lastScanAt": "2026-10-19T10:57:44.447Z",
+    "lastScanAt": "2026-10-19T23:55:25.157Z",
     "lastStatus": "ok",
     "pagesScanned": 2,
     "discovered": 2,
     "firstSeenAt": "2026-10-08T09:19:30.731Z",
-    "lastNonZeroAt": "2026-10-19T10:57:44.447Z",
+    "lastNonZeroAt": "2026-10-19T23:55:25.157Z",
     "failReason": null,
     "notes": []
   },
   "sub-vendor-abtrobot": {
     "name": "合肥奥博特·新闻资讯（订阅）",
-    "lastScanAt": "2026-10-19T10:57:48.508Z",
+    "lastScanAt": "2026-10-19T23:55:29.009Z",
     "lastStatus": "ok",
     "pagesScanned": 2,
     "discovered": 0,
