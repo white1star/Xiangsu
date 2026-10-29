@@ -1,6 +1,43 @@
 [
   {
     "id": "auto-aHR0cHM6Ly93d3",
+    "title": "白云铁矿干选系统新增固定式破碎系统项目",
+    "line": "煤炭智能干选设备",
+    "competitor": "河南富顺实业集团有限公司",
+    "winner": "河南富顺实业集团有限公司",
+    "region": "内蒙古自治区",
+    "mineral": "未披露",
+    "amount": "1419.09万元",
+    "budget": null,
+    "buyer": null,
+    "procurement": "全国公共资源交易平台 白云铁矿干选系统新增固定式破碎系统项目 发布时间：2026-10-29 00:00 信息来源： 包头市公共资源交易系统 原文链接地址 白",
+    "bidOpenDate": null,
+    "bid": "已中标",
+    "bidStatus": "已中标",
+    "source": "全国公共资源交易平台（包头市公共资源交易系统）",
+    "sourceAuthority": "官方公开",
+    "date": "2026-10-29",
+    "publishDate": "2026-10-29",
+    "confidence": "高",
+    "url": "https://www.ggzy.gov.cn/information/deal/html/b/150000/0104/20261029/0015d3c850ba96184b9782e86bbbe4388584.html",
+    "evidence": "标段名称 白云铁矿干选系统新增固定式破碎系统项目施工招标 中标人 河南富顺实业集团有限公司 统一社会信用代码 914101007191824900 中标金额 壹仟肆佰壹拾玖万零玖佰零陆元肆角捌分(14190906.48元) 工期/供货期/服务期 199日历天 项目负责人 耿攀攀 标段内容 工程-工程施工-矿山工程-采矿工程 2.监督部门 包头市白云鄂博矿区发展和改革委员会 3.联系方式 招 标 人： 包头钢铁（集团）有限责任公司 联",
+    "projectKey": "白云铁矿干选系统新增固定式破碎系统项目",
+    "amountStage": "中标/签约价",
+    "timeline": [
+      {
+        "date": "2026-10-29",
+        "bid": "已中标",
+        "title": "白云铁矿干选系统新增固定式破碎系统项目",
+        "amount": "1419.09万元",
+        "url": "https://www.ggzy.gov.cn/information/deal/html/b/150000/0104/20261029/0015d3c850ba96184b9782e86bbbe4388584.html",
+        "source": "全国公共资源交易平台（包头市公共资源交易系统）"
+      }
+    ],
+    "stages": 1,
+    "resultGap": false
+  },
+  {
+    "id": "auto-aHR0cHM6Ly93d3",
     "title": "白云铁矿干选系统新增固定式破碎系统项目监理服务招标公告",
     "line": "煤炭智能干选设备",
     "competitor": "未披露",
@@ -90,7 +127,7 @@
     "amountNote": "官网/官方自媒体正文未披露金额，按未披露处理",
     "budget": null,
     "buyer": null,
-    "procurement": null,
+    "procurement": "美腾新闻 --> 首页 --> 产品中心 智能装备 TDS智能干选机 TGS智能梯流干选机 XRT智能光电分选机 TCS智能粗煤泥分选机 MDS智能小粒级干选机 DCG数变旋流器 智能系",
     "bidOpenDate": null,
     "bid": "已签约",
     "bidStatus": "已签约",
