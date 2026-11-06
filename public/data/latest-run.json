@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-06T10:48:08.759Z",
+  "generatedAt": "2026-11-06T23:50:10.319Z",
   "mode": "weekly",
   "rulesVersion": "rv-329636b690",
   "window": {
@@ -7,10 +7,12 @@
     "to": "2026-11-06"
   },
   "coverage": {
-    "publishable": true,
-    "checked": 62,
+    "publishable": false,
+    "checked": 60,
     "required": 5,
-    "missing": [],
+    "missing": [
+      "中煤招标与采购网（货物招标栏目）"
+    ],
     "zeroOutput": [
       {
         "name": "中国煤科电子采购平台",
@@ -32,13 +34,6 @@
         "discovered": 0,
         "exempt": true,
         "reason": "国能e招公告接口当期返回 0 条相关记录（平台侧无相关公告，非抓取失效）"
-      },
-      {
-        "name": "中煤招标与采购网（货物招标栏目）",
-        "id": "zmzb-hw",
-        "discovered": 0,
-        "exempt": true,
-        "reason": "中煤招标网当期公告中无智能干选/XRT 相关记录（平台侧无货，非抓取失效）"
       }
     ],
     "silent": [
@@ -76,12 +71,11 @@
       "sichuan-ggzy-jy",
       "xinjiang-ggzy-jy",
       "xjyg-ggzy-zb",
-      "xjyg-ggzy-zj",
-      "zmzb-hw"
+      "xjyg-ggzy-zj"
     ]
   },
   "bidOpenAudit": {
-    "generatedAt": "2026-11-06T10:48:08.759Z",
+    "generatedAt": "2026-11-06T23:50:10.319Z",
     "today": "2026-11-06",
     "backfilledOpenDates": 0,
     "summary": {
@@ -450,11 +444,11 @@
       "name": "全国公共资源交易平台",
       "status": "ok",
       "pagesScanned": 22,
-      "discovered": 27,
+      "discovered": 30,
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:30:03.328Z"
+      "checkedAt": "2026-11-06T23:30:03.003Z"
     },
     {
       "id": "ccteg-goods",
@@ -465,7 +459,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:31:20.244Z"
+      "checkedAt": "2026-11-06T23:30:48.556Z"
     },
     {
       "id": "ccteg-all",
@@ -476,7 +470,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:31:27.734Z"
+      "checkedAt": "2026-11-06T23:30:55.935Z"
     },
     {
       "id": "gsei-results",
@@ -487,7 +481,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:31:34.588Z"
+      "checkedAt": "2026-11-06T23:31:02.818Z"
     },
     {
       "id": "chnenergy-zbgg",
@@ -498,18 +492,18 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:31:38.842Z"
+      "checkedAt": "2026-11-06T23:31:07.073Z"
     },
     {
       "id": "zmzb-hw",
       "name": "中煤招标与采购网（货物招标栏目）",
-      "status": "ok",
-      "pagesScanned": 3,
+      "status": "failed",
+      "pagesScanned": 0,
       "discovered": 0,
       "accepted": 0,
-      "failReason": null,
+      "failReason": "fetch failed",
       "notes": [],
-      "checkedAt": "2026-11-06T10:31:39.958Z"
+      "checkedAt": "2026-11-06T23:31:14.542Z"
     },
     {
       "id": "mtzbw-leads",
@@ -520,7 +514,7 @@
       "accepted": 0,
       "failReason": "fetch failed",
       "notes": [],
-      "checkedAt": "2026-11-06T10:31:44.223Z"
+      "checkedAt": "2026-11-06T23:32:05.528Z"
     },
     {
       "id": "ccgp-search",
@@ -531,7 +525,7 @@
       "accepted": 0,
       "failReason": "平台反爬拦截（频繁访问/验证提示），未绕过，等待下次重试",
       "notes": [],
-      "checkedAt": "2026-11-06T10:32:35.212Z"
+      "checkedAt": "2026-11-06T23:32:56.514Z"
     },
     {
       "id": "gsnhcg-zbgg",
@@ -542,7 +536,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:32:35.441Z"
+      "checkedAt": "2026-11-06T23:32:56.538Z"
     },
     {
       "id": "gsnhcg-zhb",
@@ -553,7 +547,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:32:39.688Z"
+      "checkedAt": "2026-11-06T23:33:00.801Z"
     },
     {
       "id": "gsnhcg-zjgg",
@@ -564,7 +558,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:32:43.863Z"
+      "checkedAt": "2026-11-06T23:33:04.983Z"
     },
     {
       "id": "shanxi-ggzy-gc",
@@ -575,7 +569,7 @@
       "accepted": 0,
       "failReason": "列表页 HTTP 502",
       "notes": [],
-      "checkedAt": "2026-11-06T10:32:48.038Z"
+      "checkedAt": "2026-11-06T23:33:09.165Z"
     },
     {
       "id": "shaanxi-ggzy-zb",
@@ -586,7 +580,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:32:48.384Z"
+      "checkedAt": "2026-11-06T23:33:09.517Z"
     },
     {
       "id": "shaanxi-ggzy-zj",
@@ -597,7 +591,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:32:49.236Z"
+      "checkedAt": "2026-11-06T23:33:10.365Z"
     },
     {
       "id": "nmg-ggzy-jy",
@@ -608,7 +602,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:32:50.063Z"
+      "checkedAt": "2026-11-06T23:33:11.191Z"
     },
     {
       "id": "xinjiang-ggzy-jy",
@@ -619,7 +613,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:32:51.015Z"
+      "checkedAt": "2026-11-06T23:33:12.161Z"
     },
     {
       "id": "guizhou-ggzy-gc",
@@ -630,7 +624,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:32:52.116Z"
+      "checkedAt": "2026-11-06T23:33:13.233Z"
     },
     {
       "id": "hlj-ggzy-zb",
@@ -641,7 +635,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:32:53.090Z"
+      "checkedAt": "2026-11-06T23:33:14.204Z"
     },
     {
       "id": "hlj-ggzy-zj",
@@ -652,7 +646,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:32:54.005Z"
+      "checkedAt": "2026-11-06T23:33:15.146Z"
     },
     {
       "id": "sichuan-ggzy-jy",
@@ -663,7 +657,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:32:54.830Z"
+      "checkedAt": "2026-11-06T23:33:15.971Z"
     },
     {
       "id": "liaoning-ggzy-jy",
@@ -674,7 +668,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:32:55.782Z"
+      "checkedAt": "2026-11-06T23:33:16.909Z"
     },
     {
       "id": "qinghai-ggzy-jy",
@@ -685,7 +679,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:32:56.823Z"
+      "checkedAt": "2026-11-06T23:33:17.899Z"
     },
     {
       "id": "jinneng-ggzy-gg",
@@ -696,7 +690,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:32:57.720Z"
+      "checkedAt": "2026-11-06T23:33:18.808Z"
     },
     {
       "id": "xjyg-ggzy-zb",
@@ -707,7 +701,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:32:58.585Z"
+      "checkedAt": "2026-11-06T23:33:19.671Z"
     },
     {
       "id": "xjyg-ggzy-zj",
@@ -718,18 +712,18 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:32:59.678Z"
+      "checkedAt": "2026-11-06T23:33:20.760Z"
     },
     {
       "id": "ego-chinacoal-notice",
       "name": "中煤易购采购一体化平台（公告查询）",
-      "status": "ok",
-      "pagesScanned": 14,
-      "discovered": 24,
+      "status": "failed",
+      "pagesScanned": 0,
+      "discovered": 0,
       "accepted": 0,
-      "failReason": null,
+      "failReason": "fetch failed",
       "notes": [],
-      "checkedAt": "2026-11-06T10:33:00.544Z"
+      "checkedAt": "2026-11-06T23:33:21.626Z"
     },
     {
       "id": "powerchina-notice",
@@ -740,7 +734,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:34:19.802Z"
+      "checkedAt": "2026-11-06T23:34:12.614Z"
     },
     {
       "id": "powerchina-result",
@@ -751,7 +745,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:35:11.070Z"
+      "checkedAt": "2026-11-06T23:35:28.822Z"
     },
     {
       "id": "cgs-zabxx",
@@ -762,7 +756,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:35:59.897Z"
+      "checkedAt": "2026-11-06T23:37:08.176Z"
     },
     {
       "id": "cgs-zobxx",
@@ -773,7 +767,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:36:00.907Z"
+      "checkedAt": "2026-11-06T23:37:09.163Z"
     },
     {
       "id": "baohua-invite",
@@ -784,7 +778,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:36:01.774Z"
+      "checkedAt": "2026-11-06T23:37:10.040Z"
     },
     {
       "id": "baohua-result",
@@ -795,7 +789,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:37:15.644Z"
+      "checkedAt": "2026-11-06T23:38:24.021Z"
     },
     {
       "id": "yfbzb-invite",
@@ -806,18 +800,18 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:38:29.413Z"
+      "checkedAt": "2026-11-06T23:39:37.877Z"
     },
     {
       "id": "yfbzb-win",
       "name": "乙方宝招标网（中标结果检索·线索）",
-      "status": "failed",
-      "pagesScanned": 0,
-      "discovered": 0,
+      "status": "ok",
+      "pagesScanned": 1,
+      "discovered": 4,
       "accepted": 0,
-      "failReason": "The operation was aborted due to timeout",
+      "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:38:30.397Z"
+      "checkedAt": "2026-11-06T23:39:38.937Z"
     },
     {
       "id": "datang-coal-bulletin",
@@ -828,7 +822,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:39:00.398Z"
+      "checkedAt": "2026-11-06T23:39:40.073Z"
     },
     {
       "id": "sdny-xunjia",
@@ -839,7 +833,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:39:03.331Z"
+      "checkedAt": "2026-11-06T23:39:43.008Z"
     },
     {
       "id": "sdny-result",
@@ -850,7 +844,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:39:08.158Z"
+      "checkedAt": "2026-11-06T23:39:47.810Z"
     },
     {
       "id": "sogou-wechat",
@@ -863,7 +857,7 @@
       "notes": [
         "回看窗口：2026-01-01 ~ 2026-11-06"
       ],
-      "checkedAt": "2026-11-06T10:39:12.664Z"
+      "checkedAt": "2026-11-06T23:39:52.160Z"
     },
     {
       "id": "qinyuan-invite",
@@ -874,7 +868,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:39:41.525Z"
+      "checkedAt": "2026-11-06T23:40:21.136Z"
     },
     {
       "id": "qinyuan-result",
@@ -885,18 +879,18 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:39:50.474Z"
+      "checkedAt": "2026-11-06T23:40:26.737Z"
     },
     {
       "id": "ceec-zbgg",
       "name": "中国能建电子采购平台（招标公告 / 资格预审公告）",
       "status": "ok",
-      "pagesScanned": 5,
+      "pagesScanned": 6,
       "discovered": 0,
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:39:54.924Z"
+      "checkedAt": "2026-11-06T23:40:29.685Z"
     },
     {
       "id": "cninfo-listed",
@@ -907,7 +901,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:39:57.841Z"
+      "checkedAt": "2026-11-06T23:40:33.484Z"
     },
     {
       "id": "ebnew-search",
@@ -918,7 +912,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:39:58.089Z"
+      "checkedAt": "2026-11-06T23:40:33.747Z"
     },
     {
       "id": "huaneng-search",
@@ -931,7 +925,7 @@
       "notes": [
         "未找到 Scrapling 运行环境（本地 .venv），本规则跳过（CI 环境预期）"
       ],
-      "checkedAt": "2026-11-06T10:40:43.562Z"
+      "checkedAt": "2026-11-06T23:41:21.033Z"
     },
     {
       "id": "ccteg-invite-goods",
@@ -942,7 +936,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:40:43.563Z"
+      "checkedAt": "2026-11-06T23:41:21.034Z"
     },
     {
       "id": "hbcoal-notice",
@@ -953,7 +947,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:40:51.218Z"
+      "checkedAt": "2026-11-06T23:41:28.842Z"
     },
     {
       "id": "ebidding-search",
@@ -964,7 +958,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:41:38.753Z"
+      "checkedAt": "2026-11-06T23:42:16.442Z"
     },
     {
       "id": "shihuan-search",
@@ -975,7 +969,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:42:11.074Z"
+      "checkedAt": "2026-11-06T23:42:49.107Z"
     },
     {
       "id": "sub-chnenergy",
@@ -986,18 +980,18 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:42:49.877Z"
+      "checkedAt": "2026-11-06T23:44:12.207Z"
     },
     {
       "id": "sub-zmzb",
       "name": "中煤集团·中煤招标网（订阅）",
-      "status": "ok",
-      "pagesScanned": 6,
+      "status": "failed",
+      "pagesScanned": 0,
       "discovered": 0,
       "accepted": 0,
-      "failReason": null,
+      "failReason": "fetch failed",
       "notes": [],
-      "checkedAt": "2026-11-06T10:43:06.847Z"
+      "checkedAt": "2026-11-06T23:44:23.188Z"
     },
     {
       "id": "sub-ccteg",
@@ -1008,7 +1002,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:43:16.321Z"
+      "checkedAt": "2026-11-06T23:45:14.185Z"
     },
     {
       "id": "sub-jzbidding",
@@ -1019,7 +1013,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:43:28.631Z"
+      "checkedAt": "2026-11-06T23:45:26.632Z"
     },
     {
       "id": "sub-gsnhcg",
@@ -1030,7 +1024,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:43:59.878Z"
+      "checkedAt": "2026-11-06T23:45:57.984Z"
     },
     {
       "id": "sub-gsei",
@@ -1041,7 +1035,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:44:11.165Z"
+      "checkedAt": "2026-11-06T23:46:09.260Z"
     },
     {
       "id": "sub-sxzwfw",
@@ -1052,7 +1046,7 @@
       "accepted": 0,
       "failReason": "列表页 HTTP 502",
       "notes": [],
-      "checkedAt": "2026-11-06T10:44:14.036Z"
+      "checkedAt": "2026-11-06T23:46:12.128Z"
     },
     {
       "id": "sub-sxbid",
@@ -1063,7 +1057,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:44:14.378Z"
+      "checkedAt": "2026-11-06T23:46:12.248Z"
     },
     {
       "id": "sub-ebnew",
@@ -1074,7 +1068,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:44:23.564Z"
+      "checkedAt": "2026-11-06T23:46:24.886Z"
     },
     {
       "id": "sub-vendor-tsshenzhou",
@@ -1085,7 +1079,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:44:25.705Z"
+      "checkedAt": "2026-11-06T23:46:26.958Z"
     },
     {
       "id": "sub-vendor-haiwang",
@@ -1096,7 +1090,7 @@
       "accepted": 0,
       "failReason": "fetch failed",
       "notes": [],
-      "checkedAt": "2026-11-06T10:44:29.874Z"
+      "checkedAt": "2026-11-06T23:46:31.085Z"
     },
     {
       "id": "sub-vendor-haina",
@@ -1107,7 +1101,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:45:00.334Z"
+      "checkedAt": "2026-11-06T23:47:01.349Z"
     },
     {
       "id": "sub-vendor-dfmc",
@@ -1118,7 +1112,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:45:04.708Z"
+      "checkedAt": "2026-11-06T23:47:06.234Z"
     },
     {
       "id": "sub-vendor-jinshi",
@@ -1129,7 +1123,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:45:07.582Z"
+      "checkedAt": "2026-11-06T23:47:09.073Z"
     },
     {
       "id": "sub-vendor-nuctech",
@@ -1140,7 +1134,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:45:13.690Z"
+      "checkedAt": "2026-11-06T23:47:15.238Z"
     },
     {
       "id": "sub-vendor-gzfriend",
@@ -1151,7 +1145,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:45:19.000Z"
+      "checkedAt": "2026-11-06T23:47:19.216Z"
     },
     {
       "id": "sub-vendor-chinataiho",
@@ -1162,7 +1156,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:45:22.133Z"
+      "checkedAt": "2026-11-06T23:47:22.498Z"
     },
     {
       "id": "sub-vendor-meiteng",
@@ -1173,7 +1167,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:45:25.528Z"
+      "checkedAt": "2026-11-06T23:47:25.544Z"
     },
     {
       "id": "sub-vendor-holysort",
@@ -1184,7 +1178,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:45:28.723Z"
+      "checkedAt": "2026-11-06T23:47:28.399Z"
     },
     {
       "id": "sub-vendor-abtrobot",
@@ -1195,7 +1189,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-06T10:45:32.905Z"
+      "checkedAt": "2026-11-06T23:47:32.211Z"
     }
   ],
   "coveredByNational": [
@@ -1223,58 +1217,16 @@
     "total": 29
   },
   "totals": {
-    "discovered": 179,
+    "discovered": 162,
     "accepted": 0,
     "acceptedWithAmount": 0,
     "vendorAccepted": 0,
-    "pendingReviewAdded": 2,
+    "pendingReviewAdded": 1,
     "wechatLeadAdded": 0,
-    "rejected": 101,
+    "rejected": 80,
     "reEnriched": 80
   },
   "rejected": [
-    {
-      "title": "干选机维修采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1042963542258708480",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "发布日期早于2026-01-01"
-    },
-    {
-      "title": "智能干选机电磁阀询价通知",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1068605966003179520",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "发布日期早于2026-01-01"
-    },
-    {
-      "title": "智能干选机修理采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1042343114592722944",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "发布日期早于2026-01-01"
-    },
-    {
-      "title": "XRT矿石分选机X射线辐射检测服务询价通知",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1172548367011704832",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "发布日期早于2026-01-01"
-    },
-    {
-      "title": "TDS智能干选机射线装置修理采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1042288186539298816",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "发布日期早于2026-01-01"
-    },
-    {
-      "title": "TDS智能干选机射线装置等配件采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1042924686753845248",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "发布日期早于2026-01-01"
-    },
-    {
-      "title": "TDS智能干选机电磁阀采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1042323451913183232",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "发布日期早于2026-01-01"
-    },
     {
       "title": "平凉新安煤业有限责任公司智能选矸初步设计（二次）招标公告",
       "url": "https://www.ebnew.com/businessShow/685943250.html",
@@ -1432,6 +1384,18 @@
       "reason": "与两类设备无关或命中排除规则"
     },
     {
+      "title": "中国电子科技集团公司第十三研究所全自动PD分选机采购流标公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/0067/0101/20261106/0067e25c9c98185c4a9cb2096283beb2a837.html",
+      "source": "全国公共资源交易平台（中国远东国际招标有限公司电科招采平台）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
+      "title": "螺栓成型加热分选机构设备螺栓成型加热分选机构设备螺栓成型加热分选机构设备开标记录",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/0067/0102/20261105/006751f8c3712be2439e8ababc3a1a31b45e.html",
+      "source": "全国公共资源交易平台（铁建云链）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
       "title": "中国电子科技集团公司第十三研究所全自动分选机采购招标公告",
       "url": "https://www.ggzy.gov.cn/information/deal/html/b/0067/0101/20261102/00676d8ce0d944294d99b486f92bd3fb95cd.html",
       "source": "全国公共资源交易平台（中国远东国际招标有限公司电科招采平台）",
@@ -1462,6 +1426,12 @@
       "reason": "与两类设备无关或命中排除规则"
     },
     {
+      "title": "太原理工大学公开招标金属激光选区熔粉增材制造设备的公开招标公告",
+      "url": "https://www.ggzy.gov.cn/information/deal/html/b/140000/0201/20261106/00148b443289a0044659b58da2d065f43a77.html",
+      "source": "全国公共资源交易平台（山西省）",
+      "reason": "与两类设备无关或命中排除规则"
+    },
+    {
       "title": "西安建筑科技大学激光选区熔化成形设备(二次)中标（成交）结果公告",
       "url": "https://www.ggzy.gov.cn/information/deal/html/b/610000/0201/20261030/3f18180d24ad25a8f423b6ada4e98bf6.html",
       "source": "全国公共资源交易平台（陕西省）",
@@ -1477,108 +1447,6 @@
       "title": "西安建筑科技大学激光选区熔化成形设备(二次)采购更正公告（第一次）",
       "url": "https://www.ggzy.gov.cn/information/deal/html/b/610000/0201/20261026/43feb3623c3e41b0654842115c653a25.html",
       "source": "全国公共资源交易平台（陕西省）",
-      "reason": "与两类设备无关或命中排除规则"
-    },
-    {
-      "title": "分选机浅槽机尾底轴总成询价通知",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1135215650888069120",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "与两类设备无关或命中排除规则"
-    },
-    {
-      "title": "分选机配件询价通知",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1079085115493183488",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "与两类设备无关或命中排除规则"
-    },
-    {
-      "title": "分选机配件采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1042281064518832128",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "与两类设备无关或命中排除规则"
-    },
-    {
-      "title": "分选机配件采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1042290438020714496",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "与两类设备无关或命中排除规则"
-    },
-    {
-      "title": "分选机后轴机械密封采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1042289675778498560",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "与两类设备无关或命中排除规则"
-    },
-    {
-      "title": "分选机配件采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1042922256189321216",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "与两类设备无关或命中排除规则"
-    },
-    {
-      "title": "分选机配件采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1042922317812035584",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "与两类设备无关或命中排除规则"
-    },
-    {
-      "title": "分选机配件采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1042313605976084480",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "与两类设备无关或命中排除规则"
-    },
-    {
-      "title": "分选机配件采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1042316437152256000",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "与两类设备无关或命中排除规则"
-    },
-    {
-      "title": "分选机配件采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1042332082931474432",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "与两类设备无关或命中排除规则"
-    },
-    {
-      "title": "分选机配件（山西地区）采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1042960651211952128",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "与两类设备无关或命中排除规则"
-    },
-    {
-      "title": "分选机配件采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1042965726294626304",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "与两类设备无关或命中排除规则"
-    },
-    {
-      "title": "分选机配件（四川川工密封科技公司）采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1042982854398799872",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "与两类设备无关或命中排除规则"
-    },
-    {
-      "title": "分选机配件采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1042982892687511552",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "与两类设备无关或命中排除规则"
-    },
-    {
-      "title": "分选机配件采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1043135302806458368",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "与两类设备无关或命中排除规则"
-    },
-    {
-      "title": "分选机配件（四川川工密封科技公司）采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1043959348180299776",
-      "source": "中煤易购采购一体化平台（公告查询）",
-      "reason": "与两类设备无关或命中排除规则"
-    },
-    {
-      "title": "分选机配件采购公告",
-      "url": "https://ego.chinacoal.com/announcementInquiryDetail?id=1043973688075862016",
-      "source": "中煤易购采购一体化平台（公告查询）",
       "reason": "与两类设备无关或命中排除规则"
     },
     {
