@@ -1,6 +1,42 @@
 [
   {
     "id": "auto-aHR0cHM6Ly93d3",
+    "title": "东庞矿北井9224工作面智能选矸系统安装服务项目招标公告",
+    "line": "煤炭智能干选设备",
+    "competitor": "未披露",
+    "region": "河北",
+    "mineral": "未披露",
+    "amount": "未披露",
+    "budget": null,
+    "buyer": null,
+    "procurement": null,
+    "bidOpenDate": null,
+    "bid": "招标公告",
+    "bidStatus": "招标公告",
+    "source": "冀中能源电子招标（订阅）",
+    "sourceAuthority": "官方公开",
+    "date": "2026-11-09",
+    "publishDate": "2026-11-09",
+    "confidence": "高",
+    "url": "https://www.jzbidding.com/zd20=jsgcgg/20261109/1304457993986768896.html",
+    "evidence": "东庞矿北井9224工作面智能选矸系统安装服务项目招标公告｜来源:冀中能源电子招标（订阅）｜发布:2026-11-09｜官方接口:https://www.jzbidding.com/cms/api/dynamicData/queryContentPage",
+    "openStatus": "未披露",
+    "resultGap": false,
+    "projectKey": "东庞矿北井9224工作面智能选矸系统安装服务项目",
+    "timeline": [
+      {
+        "date": "2026-11-09",
+        "bid": "招标公告",
+        "title": "东庞矿北井9224工作面智能选矸系统安装服务项目招标公告",
+        "amount": "未披露",
+        "url": "https://www.jzbidding.com/zd20=jsgcgg/20261109/1304457993986768896.html",
+        "source": "冀中能源电子招标（订阅）"
+      }
+    ],
+    "stages": 1
+  },
+  {
+    "id": "auto-aHR0cHM6Ly93d3",
     "title": "安沟钼多金属矿选矿工程智能抛废（X射线智能分选）工艺运营合作项目招标中标候选人公示",
     "line": "XRT矿石分选设备",
     "competitor": "霍里思特科技（浙江）有限公司（第一候选人）",
