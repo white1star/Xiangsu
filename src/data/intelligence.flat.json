@@ -1069,8 +1069,9 @@
     "evidenceCapturedAt": "2026-08-24T00:54:26.000Z",
     "mineral": "煤",
     "id": "auto-aHR0cDovL3pjLmdobnlnZi",
-    "openStatus": "未披露",
-    "resultGap": false
+    "openStatus": "已开标",
+    "resultGap": true,
+    "bidOpenDate": "2026-11-09"
   },
   {
     "id": "auto-aHR0cHM6Ly93d3",
