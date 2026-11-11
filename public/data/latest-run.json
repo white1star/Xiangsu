@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T04:47:15.111Z",
+  "generatedAt": "2026-11-11T10:47:21.819Z",
   "mode": "weekly",
   "rulesVersion": "rv-329636b690",
   "window": {
@@ -8,7 +8,7 @@
   },
   "coverage": {
     "publishable": true,
-    "checked": 65,
+    "checked": 64,
     "required": 5,
     "missing": [],
     "zeroOutput": [
@@ -73,7 +73,6 @@
       "sdny-xunjia",
       "shaanxi-ggzy-zb",
       "shaanxi-ggzy-zj",
-      "shanxi-ggzy-gc",
       "sichuan-ggzy-jy",
       "xinjiang-ggzy-jy",
       "xjyg-ggzy-zb",
@@ -82,7 +81,7 @@
     ]
   },
   "bidOpenAudit": {
-    "generatedAt": "2026-11-11T04:47:15.111Z",
+    "generatedAt": "2026-11-11T10:47:21.819Z",
     "today": "2026-11-11",
     "backfilledOpenDates": 0,
     "summary": {
@@ -459,10 +458,10 @@
       "status": "ok",
       "pagesScanned": 22,
       "discovered": 34,
-      "accepted": 1,
+      "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:30:03.398Z"
+      "checkedAt": "2026-11-11T10:30:04.696Z"
     },
     {
       "id": "ccteg-goods",
@@ -473,7 +472,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:30:43.910Z"
+      "checkedAt": "2026-11-11T10:30:45.818Z"
     },
     {
       "id": "ccteg-all",
@@ -484,7 +483,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:30:51.170Z"
+      "checkedAt": "2026-11-11T10:30:53.044Z"
     },
     {
       "id": "gsei-results",
@@ -495,7 +494,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:30:58.051Z"
+      "checkedAt": "2026-11-11T10:30:59.998Z"
     },
     {
       "id": "chnenergy-zbgg",
@@ -506,7 +505,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:31:02.326Z"
+      "checkedAt": "2026-11-11T10:31:04.286Z"
     },
     {
       "id": "zmzb-hw",
@@ -517,7 +516,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:31:03.755Z"
+      "checkedAt": "2026-11-11T10:31:05.755Z"
     },
     {
       "id": "mtzbw-leads",
@@ -528,7 +527,7 @@
       "accepted": 0,
       "failReason": "fetch failed",
       "notes": [],
-      "checkedAt": "2026-11-11T04:31:08.161Z"
+      "checkedAt": "2026-11-11T10:31:10.153Z"
     },
     {
       "id": "ccgp-search",
@@ -539,7 +538,7 @@
       "accepted": 0,
       "failReason": "平台反爬拦截（频繁访问/验证提示），未绕过，等待下次重试",
       "notes": [],
-      "checkedAt": "2026-11-11T04:31:59.150Z"
+      "checkedAt": "2026-11-11T10:32:01.140Z"
     },
     {
       "id": "gsnhcg-zbgg",
@@ -550,7 +549,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:31:59.220Z"
+      "checkedAt": "2026-11-11T10:32:01.254Z"
     },
     {
       "id": "gsnhcg-zhb",
@@ -561,7 +560,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:32:03.524Z"
+      "checkedAt": "2026-11-11T10:32:05.514Z"
     },
     {
       "id": "gsnhcg-zjgg",
@@ -572,18 +571,18 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:32:07.715Z"
+      "checkedAt": "2026-11-11T10:32:09.692Z"
     },
     {
       "id": "shanxi-ggzy-gc",
       "name": "山西公共资源交易平台（工程建设）",
-      "status": "ok",
-      "pagesScanned": 1,
+      "status": "failed",
+      "pagesScanned": 0,
       "discovered": 0,
       "accepted": 0,
-      "failReason": null,
+      "failReason": "fetch failed",
       "notes": [],
-      "checkedAt": "2026-11-11T04:32:11.901Z"
+      "checkedAt": "2026-11-11T10:32:13.867Z"
     },
     {
       "id": "shaanxi-ggzy-zb",
@@ -594,7 +593,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:32:12.932Z"
+      "checkedAt": "2026-11-11T10:32:48.953Z"
     },
     {
       "id": "shaanxi-ggzy-zj",
@@ -605,7 +604,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:32:13.783Z"
+      "checkedAt": "2026-11-11T10:32:49.805Z"
     },
     {
       "id": "nmg-ggzy-jy",
@@ -616,7 +615,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:32:14.609Z"
+      "checkedAt": "2026-11-11T10:32:50.642Z"
     },
     {
       "id": "xinjiang-ggzy-jy",
@@ -627,7 +626,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:32:15.615Z"
+      "checkedAt": "2026-11-11T10:32:51.614Z"
     },
     {
       "id": "guizhou-ggzy-gc",
@@ -638,7 +637,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:32:16.622Z"
+      "checkedAt": "2026-11-11T10:32:52.704Z"
     },
     {
       "id": "hlj-ggzy-zb",
@@ -649,7 +648,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:32:17.611Z"
+      "checkedAt": "2026-11-11T10:32:53.681Z"
     },
     {
       "id": "hlj-ggzy-zj",
@@ -660,7 +659,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:32:18.500Z"
+      "checkedAt": "2026-11-11T10:32:54.594Z"
     },
     {
       "id": "sichuan-ggzy-jy",
@@ -671,7 +670,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:32:19.329Z"
+      "checkedAt": "2026-11-11T10:32:55.429Z"
     },
     {
       "id": "liaoning-ggzy-jy",
@@ -682,7 +681,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:32:20.290Z"
+      "checkedAt": "2026-11-11T10:32:56.359Z"
     },
     {
       "id": "qinghai-ggzy-jy",
@@ -693,7 +692,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:32:21.298Z"
+      "checkedAt": "2026-11-11T10:32:57.417Z"
     },
     {
       "id": "jinneng-ggzy-gg",
@@ -704,7 +703,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:32:22.192Z"
+      "checkedAt": "2026-11-11T10:32:58.312Z"
     },
     {
       "id": "xjyg-ggzy-zb",
@@ -715,7 +714,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:32:23.051Z"
+      "checkedAt": "2026-11-11T10:32:59.192Z"
     },
     {
       "id": "xjyg-ggzy-zj",
@@ -726,7 +725,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:32:24.108Z"
+      "checkedAt": "2026-11-11T10:33:00.251Z"
     },
     {
       "id": "ego-chinacoal-notice",
@@ -737,7 +736,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:32:24.973Z"
+      "checkedAt": "2026-11-11T10:33:01.109Z"
     },
     {
       "id": "powerchina-notice",
@@ -748,7 +747,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:33:43.390Z"
+      "checkedAt": "2026-11-11T10:34:26.550Z"
     },
     {
       "id": "powerchina-result",
@@ -759,7 +758,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:34:34.660Z"
+      "checkedAt": "2026-11-11T10:35:18.007Z"
     },
     {
       "id": "cgs-zabxx",
@@ -770,7 +769,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:35:25.328Z"
+      "checkedAt": "2026-11-11T10:36:08.388Z"
     },
     {
       "id": "cgs-zobxx",
@@ -781,7 +780,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:35:56.404Z"
+      "checkedAt": "2026-11-11T10:36:09.392Z"
     },
     {
       "id": "baohua-invite",
@@ -792,7 +791,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:35:57.280Z"
+      "checkedAt": "2026-11-11T10:36:10.269Z"
     },
     {
       "id": "baohua-result",
@@ -803,7 +802,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:37:11.241Z"
+      "checkedAt": "2026-11-11T10:37:24.109Z"
     },
     {
       "id": "yfbzb-invite",
@@ -814,7 +813,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:38:25.101Z"
+      "checkedAt": "2026-11-11T10:38:37.869Z"
     },
     {
       "id": "yfbzb-win",
@@ -825,7 +824,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:38:26.198Z"
+      "checkedAt": "2026-11-11T10:38:38.942Z"
     },
     {
       "id": "datang-coal-bulletin",
@@ -836,7 +835,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:38:27.394Z"
+      "checkedAt": "2026-11-11T10:38:40.156Z"
     },
     {
       "id": "sdny-xunjia",
@@ -847,7 +846,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:38:30.303Z"
+      "checkedAt": "2026-11-11T10:38:43.117Z"
     },
     {
       "id": "sdny-result",
@@ -858,7 +857,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:38:35.195Z"
+      "checkedAt": "2026-11-11T10:38:48.114Z"
     },
     {
       "id": "sogou-wechat",
@@ -871,7 +870,7 @@
       "notes": [
         "回看窗口：2026-01-01 ~ 2026-11-11"
       ],
-      "checkedAt": "2026-11-11T04:38:39.685Z"
+      "checkedAt": "2026-11-11T10:38:52.568Z"
     },
     {
       "id": "qinyuan-invite",
@@ -882,7 +881,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:39:09.393Z"
+      "checkedAt": "2026-11-11T10:39:22.691Z"
     },
     {
       "id": "qinyuan-result",
@@ -893,7 +892,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:39:17.749Z"
+      "checkedAt": "2026-11-11T10:39:27.656Z"
     },
     {
       "id": "ceec-zbgg",
@@ -904,7 +903,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:39:21.142Z"
+      "checkedAt": "2026-11-11T10:39:30.860Z"
     },
     {
       "id": "cninfo-listed",
@@ -915,7 +914,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:39:25.859Z"
+      "checkedAt": "2026-11-11T10:39:34.764Z"
     },
     {
       "id": "ebnew-search",
@@ -926,7 +925,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:39:26.054Z"
+      "checkedAt": "2026-11-11T10:39:34.990Z"
     },
     {
       "id": "huaneng-search",
@@ -939,7 +938,7 @@
       "notes": [
         "未找到 Scrapling 运行环境（本地 .venv），本规则跳过（CI 环境预期）"
       ],
-      "checkedAt": "2026-11-11T04:40:10.972Z"
+      "checkedAt": "2026-11-11T10:40:19.838Z"
     },
     {
       "id": "ccteg-invite-goods",
@@ -950,7 +949,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:40:10.972Z"
+      "checkedAt": "2026-11-11T10:40:19.839Z"
     },
     {
       "id": "hbcoal-notice",
@@ -961,7 +960,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:40:18.608Z"
+      "checkedAt": "2026-11-11T10:40:27.585Z"
     },
     {
       "id": "ebidding-search",
@@ -972,7 +971,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:41:06.598Z"
+      "checkedAt": "2026-11-11T10:41:15.199Z"
     },
     {
       "id": "shihuan-search",
@@ -983,7 +982,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:41:39.303Z"
+      "checkedAt": "2026-11-11T10:41:47.787Z"
     },
     {
       "id": "sub-chnenergy",
@@ -994,7 +993,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:42:08.733Z"
+      "checkedAt": "2026-11-11T10:42:17.354Z"
     },
     {
       "id": "sub-zmzb",
@@ -1005,7 +1004,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:42:16.405Z"
+      "checkedAt": "2026-11-11T10:42:25.149Z"
     },
     {
       "id": "sub-ccteg",
@@ -1016,7 +1015,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:42:25.569Z"
+      "checkedAt": "2026-11-11T10:42:33.990Z"
     },
     {
       "id": "sub-jzbidding",
@@ -1027,7 +1026,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:42:37.875Z"
+      "checkedAt": "2026-11-11T10:42:46.219Z"
     },
     {
       "id": "sub-gsnhcg",
@@ -1038,7 +1037,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:43:09.158Z"
+      "checkedAt": "2026-11-11T10:43:17.482Z"
     },
     {
       "id": "sub-gsei",
@@ -1049,7 +1048,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:43:20.447Z"
+      "checkedAt": "2026-11-11T10:43:28.800Z"
     },
     {
       "id": "sub-sxzwfw",
@@ -1060,7 +1059,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:43:23.319Z"
+      "checkedAt": "2026-11-11T10:43:31.665Z"
     },
     {
       "id": "sub-sxbid",
@@ -1071,7 +1070,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:43:28.419Z"
+      "checkedAt": "2026-11-11T10:43:36.525Z"
     },
     {
       "id": "sub-ebnew",
@@ -1082,7 +1081,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:43:36.282Z"
+      "checkedAt": "2026-11-11T10:43:44.440Z"
     },
     {
       "id": "sub-vendor-tsshenzhou",
@@ -1093,7 +1092,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:43:38.186Z"
+      "checkedAt": "2026-11-11T10:43:46.352Z"
     },
     {
       "id": "sub-vendor-haiwang",
@@ -1104,7 +1103,7 @@
       "accepted": 0,
       "failReason": "fetch failed",
       "notes": [],
-      "checkedAt": "2026-11-11T04:43:42.320Z"
+      "checkedAt": "2026-11-11T10:43:50.356Z"
     },
     {
       "id": "sub-vendor-haina",
@@ -1115,7 +1114,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:44:12.739Z"
+      "checkedAt": "2026-11-11T10:44:20.693Z"
     },
     {
       "id": "sub-vendor-dfmc",
@@ -1126,7 +1125,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:44:17.284Z"
+      "checkedAt": "2026-11-11T10:44:24.865Z"
     },
     {
       "id": "sub-vendor-jinshi",
@@ -1137,7 +1136,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:44:20.123Z"
+      "checkedAt": "2026-11-11T10:44:27.848Z"
     },
     {
       "id": "sub-vendor-nuctech",
@@ -1148,7 +1147,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:44:26.564Z"
+      "checkedAt": "2026-11-11T10:44:33.792Z"
     },
     {
       "id": "sub-vendor-gzfriend",
@@ -1159,7 +1158,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:44:32.882Z"
+      "checkedAt": "2026-11-11T10:44:41.392Z"
     },
     {
       "id": "sub-vendor-chinataiho",
@@ -1170,7 +1169,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:44:36.009Z"
+      "checkedAt": "2026-11-11T10:44:44.643Z"
     },
     {
       "id": "sub-vendor-meiteng",
@@ -1181,7 +1180,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:44:39.149Z"
+      "checkedAt": "2026-11-11T10:44:48.291Z"
     },
     {
       "id": "sub-vendor-holysort",
@@ -1192,7 +1191,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:44:44.345Z"
+      "checkedAt": "2026-11-11T10:44:51.196Z"
     },
     {
       "id": "sub-vendor-abtrobot",
@@ -1203,7 +1202,7 @@
       "accepted": 0,
       "failReason": null,
       "notes": [],
-      "checkedAt": "2026-11-11T04:44:48.335Z"
+      "checkedAt": "2026-11-11T10:44:55.183Z"
     }
   ],
   "coveredByNational": [
@@ -1232,7 +1231,7 @@
   },
   "totals": {
     "discovered": 192,
-    "accepted": 1,
+    "accepted": 0,
     "acceptedWithAmount": 0,
     "vendorAccepted": 0,
     "pendingReviewAdded": 0,
