@@ -35,6 +35,41 @@
     "resultGap": false
   },
   {
+    "id": "auto-aHR0cHM6Ly9zdG",
+    "title": "天津美腾科技股份有限公司关于控股子公司日常经营重大合同的进展公告",
+    "line": "煤炭智能干选设备",
+    "competitor": "天津美腾科技股份有限公司",
+    "region": "全国",
+    "mineral": "未披露",
+    "amount": "未披露",
+    "budget": null,
+    "buyer": null,
+    "procurement": null,
+    "bidOpenDate": null,
+    "bid": "已签约",
+    "bidStatus": "已签约",
+    "source": "巨潮资讯网（上市公司公告·美腾/泰禾）（美腾科技）",
+    "sourceAuthority": "官方自宣",
+    "date": "2026-11-26",
+    "publishDate": "2026-11-26",
+    "confidence": "中",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-11-27/1225689907.PDF",
+    "evidence": "第1页共1页 证券代码：688420证券简称：美腾科技公告编号：2026-035 天津美腾科技股份有限公司 关于控股子公司日常经营重大合同的进展公告 本公司董事会及全体董事保证公告内容不存在任何虚假记载、误导性陈述或 者重大遗漏，并对其内容的真实性、准确性和完整性依法承担法律责任。 一、合同的基本情况及补充协议的签订 天津美腾科技股份有限公司（以下简称“公司”）控股子公司山东莱芜煤机 智能科技有限公司（以下简称“莱煤智能”）于2026",
+    "projectKey": "天津美腾科技股份有限公司关于控股子公司日常经营重大合同的进展",
+    "timeline": [
+      {
+        "date": "2026-11-26",
+        "bid": "已签约",
+        "title": "天津美腾科技股份有限公司关于控股子公司日常经营重大合同的进展公告",
+        "amount": "未披露",
+        "url": "https://static.cninfo.com.cn/finalpage/2026-11-27/1225689907.PDF",
+        "source": "巨潮资讯网（上市公司公告·美腾/泰禾）（美腾科技）"
+      }
+    ],
+    "stages": 1,
+    "resultGap": false
+  },
+  {
     "id": "auto-aHR0cHM6Ly93d3",
     "title": "内蒙古山金昶泰矿业有限责任公司智能分选系统项目结果公告",
     "line": "XRT矿石分选设备",
